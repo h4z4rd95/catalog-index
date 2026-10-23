@@ -13,7 +13,7 @@ jobs:
         env:
           DOKPLOY_URL: https://dokploy.ppsj.ir
           DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
-          DOKPLOY_APP_ID: "Eu8VyxaODVZPJe_XIR2MW"
+          DOKPLOY_APP_ID: "Np84wLGJtXVyod_N-CK_L"
         run: |
           for i in 1 2 3; do
             if curl -sS -f -m 90 -X POST "$DOKPLOY_URL/api/application.deploy" \
