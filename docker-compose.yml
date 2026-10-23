@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: catalog-index-app
+    container_name: compose-navigate-back-end-interface-9fvfz7
     restart: unless-stopped
     expose:
       - "80"
