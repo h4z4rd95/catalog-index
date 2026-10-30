@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هیرو، اسلایدر و اسکرول انیمیشن — کیت UI فارسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg: #0d0f17;
+  --bg2: #151821;
+  --bg3: #1c1f2e;
+  --card: #1a1d2b;
+  --text: #e8eaf0;
+  --text2: #9ea0b0;
+  --text3: #5f6278;
+  --border: #252839;
+  --accent: #6c5ce7;
+  --accent2: #fd79a8;
+  --accent3: #00cec9;
+  --success: #00b894;
+  --danger: #e17055;
+  --warning: #fdcb6e;
+  --info: #0984e3;
+  --font: 'Vazirmatn', sans-serif;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; }
+::selection { background: var(--accent); color: white; }
+.container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== STICKY HEADER ===== */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(13,15,23,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo { font-weight: 800; color: var(--accent); display:flex; align-items:center; gap:8px; }
+.logo i { font-size:1.4rem; }
+.nav-links { display:flex; gap:4px; overflow-x:auto; }
+.nav-links a {
+  padding:6px 14px; border-radius:20px; font-size:0.78rem; font-weight:500;
+  color:var(--text2); white-space:nowrap; transition:var(--transition); border:1px solid transparent;
+}
+.nav-links a:hover, .nav-links a.active { background:rgba(108,92,231,0.15); color:var(--accent); border-color:var(--accent); }
+
+/* ===== SECTION BASE ===== */
+.section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+.section-header { text-align:center; margin-bottom: 48px; }
+.section-header .badge {
+  display:inline-block; background:rgba(108,92,231,0.15); color:var(--accent);
+  padding:4px 16px; border-radius:20px; font-size:0.75rem; font-weight:600; margin-bottom:12px;
+}
+.section-header h2 { font-size:2rem; font-weight:800; margin-bottom:8px; }
+.section-header p { color:var(--text2); font-size:0.95rem; max-width:600px; margin:0 auto; }
+
+/* =============================================================== */
+/*  HERO 1 — Full-Screen Split Hero with Scroll Animation          */
+/* =============================================================== */
+.hero-split {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px 80px;
+}
+.hero-split-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  width:100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-split-content h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.hero-split-content h1 .highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-split-content p { font-size:1.05rem; color:var(--text2); margin-bottom: 32px; max-width: 480px; }
+.hero-split-content .btns { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-split-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-split-visual .floating-elements {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+}
+.floating-elements .elem {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+  animation: float 6s ease-in-out infinite;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.floating-elements .elem:nth-child(1) { background: linear-gradient(135deg, var(--accent), #a29bfe); top:0; right:10%; animation-delay:0s; }
+.floating-elements .elem:nth-child(2) { background: linear-gradient(135deg, var(--accent2), #e84393); bottom:10%; left:0; animation-delay:2s; width:100px; height:100px; }
+.floating-elements .elem:nth-child(3) { background: linear-gradient(135deg, var(--accent3), #00b894); bottom:30%; right:0; animation-delay:4s; width:90px; height:90px; border-radius:50%; }
+.floating-elements .elem:nth-child(4) { background: linear-gradient(135deg, var(--warning), #e17055); top:40%; left:10%; animation-delay:1s; width:70px; height:70px; border-radius:16px; font-size:1.8rem; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(5deg); }
+}
+
+/* Buttons */
+.btn {
+  display:inline-flex; align-items:center; gap:8px; padding:12px 28px;
+  border-radius:var(--radius); font-family:var(--font); font-weight:600; font-size:0.9rem;
+  border:none; cursor:pointer; transition:var(--transition); text-decoration:none;
+}
+.btn-primary { background:var(--accent); color:white; }
+.btn-primary:hover { background:#5a4bd1; transform:translateY(-2px); box-shadow:0 8px 25px rgba(108,92,231,0.3); }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+.btn-lg { padding:16px 36px; font-size:1rem; }
+
+/* =============================================================== */
+/*  HERO 2 — Center Hero with Particles / Scroll Reveal            */
+/* =============================================================== */
+.hero-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-center::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(108,92,231,0.08), transparent 70%);
+  top: -200px;
+  left: -200px;
+  pointer-events: none;
+}
+.hero-center::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(253,121,168,0.06), transparent 70%);
+  bottom: -100px;
+  right: -100px;
+  pointer-events: none;
+}
+.hero-center .tagline {
+  display:inline-block; padding:6px 20px; border-radius:20px;
+  background:rgba(108,92,231,0.1); color:var(--accent); font-size:0.85rem; font-weight:500;
+  border:1px solid rgba(108,92,231,0.2); margin-bottom:20px;
+}
+.hero-center h1 { font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; line-height:1.15; margin-bottom:20px; }
+.hero-center h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-center p { font-size:1.1rem; color:var(--text2); max-width:550px; margin:0 auto 36px; }
+.hero-center .hero-stats {
+  display:flex; gap:40px; margin-top:48px; flex-wrap:wrap; justify-content:center;
+}
+.hero-center .hero-stats .stat { text-align:center; }
+.hero-center .hero-stats .stat .num { font-size:2.2rem; font-weight:800; color:var(--accent); }
+.hero-center .hero-stats .stat .label { font-size:0.85rem; color:var(--text3); }
+
+/* =============================================================== */
+/*  HERO 3 — Sticky Cover Card Hero (Scroll-Driven)               */
+/* =============================================================== */
+.hero-cover-sticky {
+  position: relative;
+}
+.hero-cover-card {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  background: linear-gradient(135deg, #1a1d2b, #151821);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.hero-cover-card h1 { font-size:clamp(2rem,5vw,3.5rem); font-weight:900; max-width:800px; }
+.hero-cover-card .cover-icon {
+  width: 80px; height:80px; border-radius:20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; color:white; margin-bottom:24px;
+}
+
+/* Spacer after cover hero */
+.cover-spacer { height: 200vh; background: var(--bg2); padding: 60px 24px; display:flex; align-items:center; justify-content:center; }
+.cover-spacer p { font-size:1.2rem; color:var(--text2); max-width:600px; text-align:center; }
+
+/* =============================================================== */
+/*  CAROUSEL / SLIDER — Swiper-based                              */
+/* =============================================================== */
+.slider-section { padding: 80px 0; }
+
+/* Pure CSS Carousel with Scroll Snap */
+.carousel-css {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 20px 0 40px;
+  -webkit-overflow-scrolling: touch;
+}
+.carousel-css::-webkit-scrollbar { height: 6px; }
+.carousel-css::-webkit-scrollbar-track { background: var(--bg3); border-radius: 10px; }
+.carousel-css::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+.carousel-css .slide {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  transition: var(--transition);
+}
+.carousel-css .slide:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.carousel-css .slide .slide-icon {
+  width: 56px; height:56px; border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem; color:white; margin-bottom:16px;
+}
+.carousel-css .slide h4 { font-size:1.1rem; font-weight:700; margin-bottom:8px; }
+.carousel-css .slide p { font-size:0.85rem; color:var(--text2); }
+
+/* =============================================================== */
+/*  SCROLL-DRIVEN ANIMATIONS                                      */
+/* =============================================================== */
+.scroll-section { padding: 100px 0; }
+
+/* Progress bar at top of page */
+.scroll-progress {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 999;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* Reveal cards */
+.reveal-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-card.visible { opacity: 1; transform: translateY(0); }
+.reveal-card:nth-child(2) { transition-delay: 0.1s; }
+.reveal-card:nth-child(3) { transition-delay: 0.2s; }
+.reveal-card .rc-icon {
+  width: 64px; height:64px; border-radius:18px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; color:white; margin-bottom:16px;
+}
+.reveal-card h3 { font-size:1.4rem; font-weight:700; margin-bottom:8px; }
+.reveal-card p { color:var(--text2); font-size:0.9rem; max-width:600px; }
+
+/* Parallax Section */
+.parallax-scroll {
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+.parallax-scroll .parallax-bg {
+  position: absolute;
+  inset: -100px;
+  background: linear-gradient(135deg, #1a1d2b, #2d1b69);
+  transform: translateY(0);
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+.parallax-scroll .parallax-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.parallax-scroll .parallax-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+.parallax-scroll .parallax-content h2 { font-size:2.4rem; font-weight:800; }
+.parallax-scroll .parallax-content p { font-size:1rem; opacity:0.8; }
+
+/* Scroll-triggered horizontal scroll */
+.horizontal-scroll-wrap {
+  position: relative;
+  height: 800px;
+}
+.horizontal-scroll-inner {
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.horizontal-track {
+  display: flex;
+  gap: 24px;
+  padding: 0 24px;
+  will-change: transform;
+}
+.horizontal-track .h-card {
+  flex: 0 0 360px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  min-height: 320px;
+}
+.horizontal-track .h-card .h-num {
+  font-size:3rem; font-weight:900; color:rgba(108,92,231,0.15); margin-bottom:16px;
+}
+.horizontal-track .h-card h4 { font-size:1.2rem; font-weight:700; margin-bottom:8px; }
+.horizontal-track .h-card p { font-size:0.85rem; color:var(--text2); }
+
+/* =============================================================== */
+/*  STACKING CARDS (Scroll-Driven)                                */
+/* =============================================================== */
+.stacking-cards-section { position: relative; }
+.stacking-card {
+  position: sticky;
+  top: 80px;
+  height: 400px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 24px;
+  transform-origin: center top;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+.stacking-card:last-child { margin-bottom: 0; }
+.stacking-card.scrolled {
+  transform: scale(0.95);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+}
+.stacking-card .sc-num {
+  font-size:4rem; font-weight:900; color:rgba(108,92,231,0.1);
+  position:absolute; top:20px; right:24px;
+}
+.stacking-card .sc-icon {
+  width:80px; height:80px; border-radius:20px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; color:white; flex-shrink:0;
+}
+.stacking-card .sc-text h3 { font-size:1.5rem; font-weight:700; margin-bottom:8px; }
+.stacking-card .sc-text p { color:var(--text2); font-size:0.9rem; }
+
+/* =============================================================== */
+/*  IMAGE REVEAL ON SCROLL                                        */
+/* =============================================================== */
+.img-reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.img-reveal-item {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 280px;
+}
+.img-reveal-item .reveal-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateY(0);
+  transition: transform 1.2s cubic-bezier(0.77,0,0.18,1);
+}
+.img-reveal-item.revealed .reveal-overlay { transform: translateY(100%); }
+.img-reveal-item .reveal-bg {
+  width:100%; height:100%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-size:1.2rem; font-weight:700; text-align:center; padding:20px;
+}
+.img-reveal-item:nth-child(2) .reveal-bg { background: linear-gradient(135deg, var(--accent3), var(--info)); }
+.img-reveal-item:nth-child(3) .reveal-bg { background: linear-gradient(135deg, var(--warning), var(--danger)); }
+
+/* =============================================================== */
+/*  TESTIMONIAL CAROUSEL                                          */
+/* =============================================================== */
+.testimonial-slider {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 20px 0 40px;
+  scroll-behavior: smooth;
+}
+.testimonial-slider::-webkit-scrollbar { height: 6px; }
+.testimonial-slider::-webkit-scrollbar-track { background: var(--bg3); border-radius:10px; }
+.testimonial-slider::-webkit-scrollbar-thumb { background: var(--accent); border-radius:10px; }
+.testimonial-slider .tslide {
+  flex: 0 0 380px;
+  scroll-snap-align: start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+}
+.testimonial-slider .tslide .stars { color: var(--warning); margin-bottom:12px; }
+.testimonial-slider .tslide blockquote { font-size:0.9rem; color:var(--text2); line-height:1.8; margin-bottom:20px; }
+.testimonial-slider .tslide .author { display:flex; align-items:center; gap:12px; }
+.testimonial-slider .tslide .author .avatar {
+  width:44px; height:44px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-weight:700; font-size:1rem;
+}
+
+/* =============================================================== */
+/*  ZOOM PARALLAX HERO                                            */
+/* =============================================================== */
+.hero-zoom-parallax {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-zoom-parallax .zoom-bg {
+  position: absolute;
+  inset: -200px;
+  background: linear-gradient(135deg, #0d0f17 0%, #1a1d2b 30%, #2d1b69 60%, #151821 100%);
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+.hero-zoom-parallax .zoom-content {
+  position: relative;
+  z-index:2;
+  text-align:center;
+  color:white;
+  padding:0 24px;
+}
+.hero-zoom-parallax .zoom-content h1 { font-size:clamp(2rem,5vw,4rem); font-weight:900; margin-bottom:16px; }
+.hero-zoom-parallax .zoom-content .mouse-indicator {
+  width:30px; height:50px; border-radius:15px;
+  border:2px solid rgba(255,255,255,0.3);
+  margin:40px auto 0;
+  position:relative;
+}
+.hero-zoom-parallax .zoom-content .mouse-indicator::after {
+  content:''; width:4px; height:12px; border-radius:2px;
+  background:rgba(255,255,255,0.6);
+  position:absolute; left:50%; transform:translateX(-50%);
+  top:8px;
+  animation: scrollMouse 2s ease infinite;
+}
+@keyframes scrollMouse {
+  0% { opacity:1; transform:translateX(-50%) translateY(0); }
+  100% { opacity:0; transform:translateX(-50%) translateY(20px); }
+}
+
+/* =============================================================== */
+/*  RESPONSIVE                                                    */
+/* =============================================================== */
+@media(max-width:768px) {
+  .hero-split-inner { grid-template-columns:1fr; gap:32px; }
+  .hero-split-visual .floating-elements { max-width:280px; }
+  .floating-elements .elem { width:80px; height:80px; font-size:1.6rem; }
+  .floating-elements .elem:nth-child(2) { width:70px; height:70px; }
+  .floating-elements .elem:nth-child(3) { width:60px; height:60px; }
+  .floating-elements .elem:nth-child(4) { width:50px; height:50px; font-size:1.2rem; }
+  .section-header h2 { font-size:1.5rem; }
+  .horizontal-track .h-card { flex:0 0 280px; }
+  .stacking-card { flex-direction:column; height:auto; padding:32px 24px; gap:16px; }
+  .stacking-card .sc-icon { width:60px; height:60px; font-size:1.4rem; }
+  .hero-center .hero-stats { gap:24px; }
+  .testimonial-slider .tslide { flex:0 0 300px; }
+  .carousel-css .slide { flex:0 0 260px; }
+}
+@media(max-width:480px) {
+  .nav-links a { font-size:0.7rem; padding:4px 10px; }
+  .btn { padding:10px 20px; font-size:0.82rem; }
+  .btn-lg { padding:12px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== STICKY HEADER ===== -->
+<header class="sticky-header">
+  <div class="header-inner">
+    <div class="logo"><i class="fas fa-crown"></i> هیرو و اسلایدر</div>
+    <nav class="nav-links">
+      <a href="#hero-split" class="active">هیرو اسپلیت</a>
+      <a href="#hero-center">هیرو سنتر</a>
+      <a href="#hero-cover">کاور استیکی</a>
+      <a href="#carousel">اسلایدر</a>
+      <a href="#scroll-effects">اسکرول</a>
+      <a href="#parallax">پارالاکس</a>
+      <a href="#stacking">استکینگ</a>
+      <a href="#testimonials">نظرات</a>
+      <a href="#zoom-parallax">زوم</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== SCROLL PROGRESS BAR ===== -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- =============================================================== -->
+<!-- HERO 1: SPLIT LAYOUT WITH FLOATING ELEMENTS                     -->
+<!-- =============================================================== -->
+<section class="hero-split" id="hero-split">
+  <div class="hero-split-inner">
+    <div class="hero-split-content">
+      <div style="display:inline-block;padding:6px 16px;border-radius:20px;background:rgba(108,92,231,0.1);color:var(--accent);font-size:0.8rem;font-weight:500;margin-bottom:16px;">
+        <i class="fas fa-bolt"></i> جدیدترین مجموعه کامپوننت
+      </div>
+      <h1>طراحی مدرن با <span class="highlight">طعم ایرانی</span> 🇮🇷</h1>
+      <p>مجموعه‌ای از مدرن‌ترین و جذاب‌ترین المان‌های هیرو، اسلایدر و انیمیشن‌های اسکرولی برای وب‌سایت‌های فارسی</p>
+      <div class="btns">
+        <a href="#carousel" class="btn btn-primary btn-lg"><i class="fas fa-arrow-down"></i> مشاهده نمونه‌ها</a>
+        <a href="#scroll-effects" class="btn btn-ghost btn-lg">انیمیشن‌ها <i class="fas fa-magic"></i></a>
+      </div>
+    </div>
+    <div class="hero-split-visual">
+      <div class="floating-elements">
+        <div class="elem"><i class="fas fa-palette"></i></div>
+        <div class="elem"><i class="fas fa-rocket"></i></div>
+        <div class="elem"><i class="fas fa-bolt"></i></div>
+        <div class="elem"><i class="fas fa-crown"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- HERO 2: CENTER ALIGNED WITH GRADIENT TEXT                       -->
+<!-- =============================================================== -->
+<section class="hero-center" id="hero-center">
+  <span class="tagline"><i class="fas fa-sparkles"></i> الهام گرفته از بهترین‌ها</span>
+  <h1>کتابخانه <span class="gradient-text">کامپوننت‌های فارسی</span><br>برای توسعه‌دهندگان حرفه‌ای</h1>
+  <p>بیش از ۱۰۰ کامپوننت آماده با طراحی ایرانی — کاملاً واکنش‌گرا، RTL و دارای پشتیبانی از تم تاریک</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+    <a href="#carousel" class="btn btn-primary btn-lg"><i class="fas fa-play"></i> شروع کنید</a>
+    <a href="#scroll-effects" class="btn btn-ghost btn-lg"><i class="fas fa-code"></i> مستندات</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">۱۰۰+</div><div class="label">کامپوننت</div></div>
+    <div class="stat"><div class="num">۱۴</div><div class="label">دسته‌بندی</div></div>
+    <div class="stat"><div class="num">۱۰K+</div><div class="label">خط کد</div></div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- HERO 3: STICKY COVER CARD                                      -->
+<!-- =============================================================== -->
+<section class="hero-cover-sticky" id="hero-cover">
+  <div class="hero-cover-card">
+    <div class="cover-icon"><i class="fas fa-layer-group"></i></div>
+    <h1>هیرو با افکت استیکی —<br>کاوری که در حین اسکرول ثابت می‌ماند</h1>
+    <p style="color:var(--text2);max-width:600px;margin:16px auto 32px;font-size:1rem;">
+      این هیرو هنگام اسکرول ثابت می‌ماند و محتوای زیر آن از پشت نمایان می‌شود. افکتی حرفه‌ای و مدرن.
+    </p>
+    <a href="#carousel" class="btn btn-primary"><i class="fas fa-arrow-down"></i> اسکرول کنید</a>
+  </div>
+  <div class="cover-spacer">
+    <div>
+      <i class="fas fa-arrow-up" style="font-size:2rem;color:var(--accent);margin-bottom:16px;"></i>
+      <p>این محتوا پس از اسکرول از زیر هیرو نمایان می‌شود. هیرو همچنان در بالای صفحه ثابت می‌ماند تا زمانی که به طور کامل از دید خارج شود.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- CAROUSEL / SLIDER                                              -->
+<!-- =============================================================== -->
+<section class="slider-section" id="carousel">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge"><i class="fas fa-sliders-h"></i> اسلایدر و کاروسل</span>
+      <h2>اسلایدرهای مدرن</h2>
+      <p>کاروسل‌های CSS با اسکرول اسنپ، اسلایدرهای افقی و عمودی با قابلیت حرکت لمسی</p>
+    </div>
+
+    <!-- Carousel 1: Feature Cards -->
+    <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:16px;color:var(--text2);"><i class="fas fa-chevron-left"></i> اسلایدر کارت‌های ویژگی</h3>
+    <div class="carousel-css">
+      <div class="slide">
+        <div class="slide-icon" style="background:linear-gradient(135deg,var(--accent),#a29bfe);"><i class="fas fa-bolt"></i></div>
+        <h4>سرعت بالا</h4>
+        <p>بارگذاری صفحات در کسری از ثانیه با بهینه‌سازی پیشرفته و کش هوشمند.</p>
+      </div>
+      <div class="slide">
+        <div class="slide-icon" style="background:linear-gradient(135deg,var(--accent2),#e84393);"><i class="fas fa-shield-alt"></i></div>
+        <h4>امنیت کامل</h4>
+        <p>رمزگذاری پیشرفته SSL و محافظت در برابر حملات سایبری.</p>
+      </div>
+      <div class="slide">
+        <div class="slide-icon" style="background:linear-gradient(135deg,var(--accent3),#00b894);"><i class="fas fa-mobile-alt"></i></div>
+        <h4>واکنش‌گرا</h4>
+        <p>طراحی شده برای تمام دستگاه‌ها از موبایل تا دسکتاپ با تجربه یکپارچه.</p>
+      </div>
+      <div class="slide">
+        <div class="slide-icon" style="background:linear-gradient(135deg,var(--warning),#e17055);"><i class="fas fa-headset"></i></div>
+        <h4>پشتیبانی ۲۴/۷</h4>
+        <p>تیم پشتیبانی همیشه آماده پاسخگویی به سوالات شما.</p>
+      </div>
+      <div class="slide">
+        <div class="slide-icon" style="background:linear-gradient(135deg,var(--info),var(--accent3));"><i class="fas fa-chart-line"></i></div>
+        <h4>آمار پیشرفته</h4>
+        <p>داشبوردهای تحلیلی قدرتمند با نمودارهای تعاملی.</p>
+      </div>
+      <div class="slide">
+        <div class="slide-icon" style="background:linear-gradient(135deg,#a29bfe,var(--accent));"><i class="fas fa-cog"></i></div>
+        <h4>شخصی‌سازی</h4>
+        <p>تمامی کامپوننت‌ها قابل شخصی‌سازی با سلیقه شما هستند.</p>
+      </div>
+    </div>
+
+    <!-- Carousel 2: Image Cards -->
+    <h3 style="font-size:1.2rem;font-weight:700;margin:48px 0 16px;color:var(--text2);"><i class="fas fa-chevron-left"></i> اسلایرد تصاویر با اوورلی</h3>
+    <div class="carousel-css">
+      <div class="slide" style="padding:0;overflow:hidden;">
+        <div style="height:180px;background:linear-gradient(135deg,var(--accent),#a29bfe);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;"><i class="fas fa-mountain"></i></div>
+        <div style="padding:24px;">
+          <h4>طبیعت ایران</h4>
+          <p>مناظر بکر و زیبای چهارفصل ایران زمین</p>
+        </div>
+      </div>
+      <div class="slide" style="padding:0;overflow:hidden;">
+        <div style="height:180px;background:linear-gradient(135deg,var(--accent2),#e84393);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;"><i class="fas fa-city"></i></div>
+        <div style="padding:24px;">
+          <h4>شهرهای ایران</h4>
+          <p>کلانشهرهای مدرن و شهرهای تاریخی</p>
+        </div>
+      </div>
+      <div class="slide" style="padding:0;overflow:hidden;">
+        <div style="height:180px;background:linear-gradient(135deg,var(--accent3),#00b894);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;"><i class="fas fa-umbrella-beach"></i></div>
+        <div style="padding:24px;">
+          <h4>سواحل جنوب</h4>
+          <p>سواحل نیلگون خلیج فارس و دریای عمان</p>
+        </div>
+      </div>
+      <div class="slide" style="padding:0;overflow:hidden;">
+        <div style="height:180px;background:linear-gradient(135deg,var(--warning),#e17055);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem;"><i class="fas fa-tree"></i></div>
+        <div style="padding:24px;">
+          <h4>جنگل‌های شمال</h4>
+          <p>جنگل‌های انبوه و سرسبز شمال کشور</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel 3: Testimonial Slider (inline) -->
+    <h3 style="font-size:1.2rem;font-weight:700;margin:48px 0 16px;color:var(--text2);"><i class="fas fa-chevron-left"></i> اسلایدر نظرات کاربران</h3>
+    <div class="testimonial-slider">
+      <div class="tslide">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote>"این مجموعه واقعاً فوق‌العاده است. تمام کامپوننت‌هایی که نیاز داشتم در یک جا جمع شده."</blockquote>
+        <div class="author">
+          <div class="avatar" style="background:var(--accent);">م</div>
+          <div><div style="font-weight:700;font-size:0.9rem;">محمد رضایی</div><div style="font-size:0.75rem;color:var(--text3);">توسعه‌دهنده فرانت‌اند</div></div>
+        </div>
+      </div>
+      <div class="tslide">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote>"طراحی RTL عالی و کاملاً مطابق با استانداردهای فارسی. دقیقاً همان چیزی که دنبالش بودم."</blockquote>
+        <div class="author">
+          <div class="avatar" style="background:var(--success);">س</div>
+          <div><div style="font-weight:700;font-size:0.9rem;">سارا احمدی</div><div style="font-size:0.75rem;color:var(--text3);">UI/UX دیزاینر</div></div>
+        </div>
+      </div>
+      <div class="tslide">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <blockquote>"انیمیشن‌های اسکرول و پارالاکس این مجموعه بسیار حرفه‌ای و روان هستند."</blockquote>
+        <div class="author">
+          <div class="avatar" style="background:var(--danger);">ر</div>
+          <div><div style="font-weight:700;font-size:0.9rem;">رضا کریمی</div><div style="font-size:0.75rem;color:var(--text3);">برنامه‌نویس Full Stack</div></div>
+        </div>
+      </div>
+      <div class="tslide">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote>"کامپوننت‌های داشبورد و آماری این مجموعه در پروژه‌های ادمین من بسیار کاربردی بوده."</blockquote>
+        <div class="author">
+          <div class="avatar" style="background:var(--info);">ن</div>
+          <div><div style="font-weight:700;font-size:0.9rem;">نوید حسینی</div><div style="font-size:0.75rem;color:var(--text3);">مدیر فنی</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- SCROLL EFFECTS                                                  -->
+<!-- =============================================================== -->
+<section class="scroll-section" id="scroll-effects">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge"><i class="fas fa-scroll"></i> انیمیشن‌های اسکرولی</span>
+      <h2>جلوه‌های حرکتی بر اساس اسکرول</h2>
+      <p>مجموعه‌ای از انیمیشن‌های مدرن که با حرکت کاربر در صفحه فعال می‌شوند</p>
+    </div>
+
+    <!-- Reveal Cards -->
+    <div class="reveal-card" data-reveal>
+      <div class="rc-icon"><i class="fas fa-gem"></i></div>
+      <h3>۱. نمایش تدریجی با اسکرول (Scroll Reveal)</h3>
+      <p>کارت‌ها و المان‌ها هنگام ورود به نمای کاربر با انیمیشن نرمی ظاهر می‌شوند. این افکت با استفاده از Intersection Observer پیاده‌سازی شده و در تمام مرورگرهای مدرن کار می‌کند.</p>
+    </div>
+    <div class="reveal-card" data-reveal>
+      <div class="rc-icon" style="background:linear-gradient(135deg,var(--accent3),var(--info));"><i class="fas fa-arrows-alt-h"></i></div>
+      <h3>۲. اسکرول افقی خودکار (Horizontal Scroll)</h3>
+      <p>کارت‌ها به صورت افقی حرکت می‌کنند در حالی که کاربر به صورت عمودی اسکرول می‌کند. این افکت با استفاده از موقعیت sticky و transform پیاده‌سازی شده است.</p>
+    </div>
+    <div class="reveal-card" data-reveal>
+      <div class="rc-icon" style="background:linear-gradient(135deg,var(--warning),var(--danger));"><i class="fas fa-image"></i></div>
+      <h3>۳. نمایش تصاویر با افکت پرده (Image Reveal)</h3>
+      <p>تصاویر با افکت پارچه‌ای و پرده‌ای نمایان می‌شوند. یک لایه رنگی ابتدا تصویر را می‌پوشاند و سپس با اسکرول کنار می‌رود.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- IMAGE REVEAL GRID                                              -->
+<!-- =============================================================== -->
+<section style="padding:40px 0 80px;">
+  <div class="container">
+    <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:24px;color:var(--text2);"><i class="fas fa-chevron-left"></i> گالری تصاویر با افکت نمایان‌شدن</h3>
+    <div class="img-reveal-grid">
+      <div class="img-reveal-item" data-img-reveal>
+        <div class="reveal-overlay"></div>
+        <div class="reveal-bg"><span>طبیعت <br>ایران</span></div>
+      </div>
+      <div class="img-reveal-item" data-img-reveal>
+        <div class="reveal-overlay"></div>
+        <div class="reveal-bg"><span>معماری <br>ایرانی</span></div>
+      </div>
+      <div class="img-reveal-item" data-img-reveal>
+        <div class="reveal-overlay"></div>
+        <div class="reveal-bg"><span>هنر <br>اسلامی</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARALLAX                                                       -->
+<!-- =============================================================== -->
+<section class="scroll-section" id="parallax">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge"><i class="fas fa-mountain"></i> پارالاکس</span>
+      <h2>افکت عمق و پارالاکس</h2>
+      <p>پس‌زمینه‌هایی که با سرعت متفاوتی نسبت به محتوا حرکت می‌کنند</p>
+    </div>
+
+    <div class="parallax-scroll" id="parallaxDemo">
+      <div class="parallax-bg" id="parallaxBg"></div>
+      <div class="parallax-content">
+        <h2>پارالاکس در عمل</h2>
+        <p>پس‌زمینه با سرعت متفاوتی حرکت می‌کند — حس عمق و سه‌بعدی</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- STACKING CARDS                                                 -->
+<!-- =============================================================== -->
+<section class="stacking-cards-section scroll-section" id="stacking">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge"><i class="fas fa-layer-group"></i> استکینگ کارت</span>
+      <h2>کارت‌های روی هم چیده</h2>
+      <p>کارت‌هایی که با اسکرول به صورت پله‌ای روی هم قرار می‌گیرند</p>
+    </div>
+
+    <div class="stacking-card" data-stack>
+      <div class="sc-num">۰۱</div>
+      <div class="sc-icon" style="background:linear-gradient(135deg,var(--accent),#a29bfe);"><i class="fas fa-lightbulb"></i></div>
+      <div class="sc-text">
+        <h3>ایده‌پردازی</h3>
+        <p>هر پروژه با یک ایده عالی شروع می‌شود. تیم ما با خلاقیت و نوآوری بهترین راه‌حل‌ها را طراحی می‌کند.</p>
+      </div>
+    </div>
+    <div class="stacking-card" data-stack>
+      <div class="sc-num">۰۲</div>
+      <div class="sc-icon" style="background:linear-gradient(135deg,var(--accent2),#e84393);"><i class="fas fa-paint-brush"></i></div>
+      <div class="sc-text">
+        <h3>طراحی</h3>
+        <p>طراحی رابط کاربری با آخرین متدهای روز دنیا و مطابق با سلیقه مخاطب ایرانی.</p>
+      </div>
+    </div>
+    <div class="stacking-card" data-stack>
+      <div class="sc-num">۰۳</div>
+      <div class="sc-icon" style="background:linear-gradient(135deg,var(--accent3),#00b894);"><i class="fas fa-code"></i></div>
+      <div class="sc-text">
+        <h3>توسعه</h3>
+        <p>کدنویسی تمیز و بهینه با استفاده از مدرن‌ترین تکنولوژی‌های روز دنیا.</p>
+      </div>
+    </div>
+    <div class="stacking-card" data-stack>
+      <div class="sc-num">۰۴</div>
+      <div class="sc-icon" style="background:linear-gradient(135deg,var(--warning),var(--danger));"><i class="fas fa-rocket"></i></div>
+      <div class="sc-text">
+        <h3>راه‌اندازی</h3>
+        <p>استقرار و راه‌اندازی پروژه با بالاترین استانداردهای کیفیت و امنیت.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- ZOOM PARALLAX HERO                                             -->
+<!-- =============================================================== -->
+<section class="hero-zoom-parallax" id="zoom-parallax">
+  <div class="zoom-bg" id="zoomBg"></div>
+  <div class="zoom-content">
+    <h1>آماده پیاده‌سازی<br>در پروژه خود هستید؟</h1>
+    <p style="font-size:1.05rem;opacity:0.8;max-width:500px;margin:0 auto 24px;">
+      تمام کدهای این صفحه را می‌توانید در IDE خود کپی و استفاده کنید
+    </p>
+    <a href="#" class="btn btn-primary btn-lg" style="background:white;color:var(--accent);">
+      <i class="fas fa-download"></i> شروع کنید
+    </a>
+    <div class="mouse-indicator"></div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- HORIZONTAL SCROLL SECTION                                       -->
+<!-- =============================================================== -->
+<section class="scroll-section" style="padding-bottom:0;">
+  <div class="container" style="margin-bottom:24px;">
+    <div class="section-header">
+      <span class="badge"><i class="fas fa-arrows-alt-h"></i> اسکرول افقی</span>
+      <h2>اسکرول افقی با محتوای عمودی</h2>
+      <p>کارت‌ها به صورت افقی جابه‌جا می‌شوند در حالی که کاربر به صورت عادی به پایین اسکرول می‌کند</p>
+    </div>
+  </div>
+  <div class="horizontal-scroll-wrap" id="horizontalScroll">
+    <div class="horizontal-scroll-inner">
+      <div class="horizontal-track" id="horizontalTrack">
+        <div class="h-card">
+          <div class="h-num">۰۱</div>
+          <h4>تحلیل بازار</h4>
+          <p>بررسی دقیق بازار هدف و رقبا برای تدوین بهترین استراتژی ورود به بازار.</p>
+        </div>
+        <div class="h-card">
+          <div class="h-num">۰۲</div>
+          <h4>تدوین استراتژی</h4>
+          <p>طراحی نقشه راه جامع بر اساس تحلیل‌های دقیق و اهداف تجاری.</p>
+        </div>
+        <div class="h-card">
+          <div class="h-num">۰۳</div>
+          <h4>اجرا و پیاده‌سازی</h4>
+          <p>اجرای گام به گام پروژه با تیم مجرب و استفاده از متدولوژی چابک.</p>
+        </div>
+        <div class="h-card">
+          <div class="h-num">۰۴</div>
+          <h4>بهینه‌سازی</h4>
+          <p>بهبود مستمر عملکرد و بهینه‌سازی بر اساس بازخوردهای کاربران.</p>
+        </div>
+        <div class="h-card">
+          <div class="h-num">۰۵</div>
+          <h4>مقیاس‌پذیری</h4>
+          <p>طراحی سیستم‌هایی که با رشد کسب‌وکار شما مقیاس‌پذیر باشند.</p>
+        </div>
+        <div class="h-card">
+          <div class="h-num">۰۶</div>
+          <h4>پشتیبانی</h4>
+          <p>پشتیبانی مستمر و به‌روزرسانی منظم برای حفظ کیفیت.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- JAVASCRIPT                                                     -->
+<!-- =============================================================== -->
+<script>
+// ===== Scroll Progress Bar =====
+const progressBar = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+
+// ===== Scroll Reveal with Intersection Observer =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+// ===== Image Reveal =====
+const imgRevealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('[data-img-reveal]').forEach(el => imgRevealObserver.observe(el));
+
+// ===== Parallax Background =====
+const parallaxBg = document.getElementById('parallaxBg');
+const parallaxDemo = document.getElementById('parallaxDemo');
+
+window.addEventListener('scroll', () => {
+  if (!parallaxDemo) return;
+  const rect = parallaxDemo.getBoundingClientRect();
+  const center = rect.top + rect.height / 2;
+  const viewportCenter = window.innerHeight / 2;
+  const offset = (center - viewportCenter) * 0.15;
+  if (parallaxBg) {
+    parallaxBg.style.transform = `translateY(${offset}px)`;
+  }
+});
+
+// ===== Stacking Cards =====
+const stackObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = Array.from(entry.target.parentElement.children).indexOf(entry.target);
+      const total = entry.target.parentElement.children.length;
+      const progress = 1 - (index / total);
+      entry.target.style.transform = `scale(${0.85 + progress * 0.15})`;
+      entry.target.style.boxShadow = `0 ${-10 + progress * 10}px ${20 + progress * 20}px rgba(0,0,0,${0.1 + progress * 0.3})`;
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('[data-stack]').forEach((el, i) => {
+  stackObserver.observe(el);
+});
+
+// ===== Horizontal Scroll =====
+const horizontalTrack = document.getElementById('horizontalTrack');
+const horizontalWrap = document.getElementById('horizontalScroll');
+
+if (horizontalTrack && horizontalWrap) {
+  const trackWidth = horizontalTrack.scrollWidth;
+  const containerWidth = horizontalWrap.offsetWidth;
+  const maxScroll = trackWidth - containerWidth;
+
+  window.addEventListener('scroll', () => {
+    const wrapRect = horizontalWrap.getBoundingClientRect();
+    const progress = (window.innerHeight - wrapRect.top) / (window.innerHeight + wrapRect.height);
+    const clampedProgress = Math.max(0, Math.min(1, progress));
+    const translateX = clampedProgress * maxScroll;
+    horizontalTrack.style.transform = `translateX(${-translateX}px)`;
+  });
+}
+
+// ===== Zoom Parallax Hero =====
+const zoomBg = document.getElementById('zoomBg');
+const zoomSection = document.getElementById('zoom-parallax');
+
+window.addEventListener('scroll', () => {
+  if (!zoomSection) return;
+  const rect = zoomSection.getBoundingClientRect();
+  const progress = 1 - (rect.top / window.innerHeight);
+  if (progress > 0 && progress < 2) {
+    const scale = 1 + progress * 0.1;
+    const translateY = progress * 80;
+    if (zoomBg) {
+      zoomBg.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+    }
+  }
+});
+
+// ===== Active Nav Link on Scroll =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 100;
+    if (window.scrollY >= top) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current.substring(0, 10));
+  });
+});
+
+console.log('🇮🇷 کیت UI فارسی — Heroes, Sliders & Scroll Effects');
+console.log('✨ ۶ نوع هیرو + ۳ نوع اسلایدر + ۵ نوع انیمیشن اسکرولی');
+</script>
+
+</body>
+</html>

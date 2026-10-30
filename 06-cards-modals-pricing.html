@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کارت، مودال و قیمت — کیت UI فارسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg: #f4f6f9; --bg2: #ffffff; --bg3: #eef0f5;
+  --card: #ffffff; --text: #1a1d29; --text2: #4a4d5e; --text3: #888b9b;
+  --border: #e2e5ed;
+  --accent: #6c5ce7; --accent2: #fd79a8; --accent3: #00cec9;
+  --success: #00b894; --danger: #e17055; --warning: #fdcb6e; --info: #0984e3;
+  --font: 'Vazirmatn', sans-serif;
+  --radius: 12px; --radius-lg: 20px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,0.12);
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg: #0d0f17; --bg2: #151821; --bg3: #1c1f2e;
+  --card: #1a1d2b; --text: #e8eaf0; --text2: #9ea0b0; --text3: #5f6278;
+  --border: #252839;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  line-height: 1.8; transition: background var(--transition), color var(--transition);
+}
+a { color: var(--accent); text-decoration: none; }
+::selection { background: var(--accent); color: white; }
+.container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+.btn {
+  display:inline-flex; align-items:center; gap:8px; padding:10px 22px;
+  border-radius:var(--radius); font-family:var(--font); font-weight:600; font-size:0.88rem;
+  border:none; cursor:pointer; transition:var(--transition);
+}
+.btn-primary { background:var(--accent); color:white; }
+.btn-primary:hover { background:#5a4bd1; transform:translateY(-1px); }
+.btn-secondary { background:var(--bg3); color:var(--text); border:1px solid var(--border); }
+.btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
+.btn-sm { padding:6px 14px; font-size:0.78rem; }
+
+.section-title {
+  text-align:center; padding:60px 0 40px;
+}
+.section-title .tag {
+  display:inline-block; background:rgba(108,92,231,0.1); color:var(--accent);
+  padding:4px 16px; border-radius:20px; font-size:0.75rem; font-weight:600; margin-bottom:12px;
+}
+.section-title h2 { font-size:2rem; font-weight:800; }
+.section-title p { color:var(--text2); font-size:0.9rem; }
+
+/* ===== CARD GRID ===== */
+.card-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:24px; margin-bottom:48px;
+}
+.card-grid-4 {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:20px; margin-bottom:48px;
+}
+
+/* ===== BASE CARD ===== */
+.c-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden;
+  transition:var(--transition);
+}
+.c-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+.c-card .cc-img {
+  height:180px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg, var(--bg3), var(--bg2)); font-size:3rem; color:var(--text3);
+}
+.c-card .cc-body { padding:20px 22px; }
+.c-card .cc-body h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+.c-card .cc-body p { font-size:0.82rem; color:var(--text2); margin-bottom:12px; }
+
+/* ===== GLASS CARD ===== */
+.glass-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px 24px;
+  backdrop-filter:blur(12px); text-align:center;
+}
+.glass-card .gc-icon {
+  width:56px; height:56px; border-radius:16px;
+  margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
+  color:white; font-size:1.4rem;
+}
+
+/* ===== TESTIMONIAL ===== */
+.t-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px 24px;
+}
+.t-card .tc-stars { color:var(--warning); margin-bottom:10px; }
+.t-card .tc-text { font-size:0.88rem; color:var(--text2); line-height:1.8; margin-bottom:16px; }
+.t-card .tc-author { display:flex; align-items:center; gap:12px; }
+.t-card .tc-author .tc-avatar {
+  width:44px; height:44px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-weight:700; font-size:1rem;
+}
+
+/* ===== PRICING ===== */
+.p-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:36px 28px;
+  text-align:center; transition:var(--transition);
+  position:relative; overflow:hidden;
+}
+.p-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.p-card.featured { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent), var(--shadow-xl); }
+.p-card .p-popular {
+  position:absolute; top:16px; left:-28px;
+  background:var(--accent); color:white; padding:4px 32px;
+  font-size:0.7rem; font-weight:600; transform:rotate(45deg);
+}
+.p-card .p-name { font-size:1rem; font-weight:600; color:var(--text2); margin-bottom:4px; }
+.p-card .p-price { font-size:2.8rem; font-weight:900; color:var(--accent); margin-bottom:4px; }
+.p-card .p-price span { font-size:0.9rem; color:var(--text3); font-weight:400; }
+.p-card .p-desc { font-size:0.82rem; color:var(--text3); margin-bottom:24px; }
+.p-card ul { list-style:none; text-align:right; margin-bottom:28px; }
+.p-card ul li {
+  padding:8px 0; font-size:0.85rem; color:var(--text2);
+  display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--border);
+}
+.p-card ul li:last-child { border-bottom:none; }
+.p-card ul li i:first-child { color:var(--success); }
+.p-card ul li i.fa-times { color:var(--text3); }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(4px); display:none;
+  align-items:center; justify-content:center;
+  z-index:2000; padding:24px;
+}
+.modal-overlay.open { display:flex; }
+.modal-box {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); max-width:500px; width:100%;
+  padding:32px; box-shadow:var(--shadow-xl);
+  animation:modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { transform:scale(0.9) translateY(20px); opacity:0; }
+  to { transform:scale(1) translateY(0); opacity:1; }
+}
+.modal-box .modal-close {
+  float:left; background:none; border:none; color:var(--text3);
+  font-size:1.4rem; cursor:pointer; transition:var(--transition);
+}
+.modal-box .modal-close:hover { color:var(--text); }
+.modal-box h3 { font-size:1.3rem; font-weight:700; margin-bottom:12px; }
+.modal-box p { color:var(--text2); font-size:0.9rem; margin-bottom:24px; line-height:1.8; }
+.modal-box .modal-icon {
+  width:64px; height:64px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; margin-bottom:16px;
+}
+
+/* ===== TOAST ===== */
+.toast-demo {
+  display:flex; flex-direction:column; gap:12px; max-width:400px;
+}
+.toast-item {
+  display:flex; align-items:center; gap:12px;
+  padding:14px 18px; background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow-lg);
+  animation:slideIn 0.4s ease;
+}
+@keyframes slideIn {
+  from { transform:translateX(30px); opacity:0; }
+  to { transform:translateX(0); opacity:1; }
+}
+.toast-item .toast-icon {
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:white; flex-shrink:0;
+}
+.toast-item .toast-body { flex:1; }
+.toast-item .toast-title { font-weight:700; font-size:0.88rem; }
+.toast-item .toast-desc { font-size:0.78rem; color:var(--text2); }
+.toast-item .toast-close {
+  background:none; border:none; color:var(--text3);
+  cursor:pointer; font-size:1rem; padding:4px; transition:var(--transition);
+}
+.toast-item .toast-close:hover { color:var(--danger); }
+
+/* ===== ALERT ===== */
+.alert-demo { display:flex; flex-direction:column; gap:10px; }
+.alert-item {
+  padding:14px 18px; border-radius:var(--radius);
+  display:flex; align-items:flex-start; gap:12px; font-size:0.88rem;
+  border-right:4px solid;
+}
+.alert-item.success { background:rgba(0,184,148,0.08); color:var(--success); border-color:var(--success); }
+.alert-item.danger { background:rgba(225,112,85,0.08); color:var(--danger); border-color:var(--danger); }
+.alert-item.warning { background:rgba(253,203,110,0.08); color:#b8860b; border-color:var(--warning); }
+.alert-item.info { background:rgba(9,132,227,0.08); color:var(--info); border-color:var(--info); }
+.alert-item i { margin-top:2px; font-size:1.1rem; }
+
+/* ===== STAT CARD ===== */
+.stat-row {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:16px;
+}
+.stat-mini {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:20px;
+  display:flex; align-items:center; gap:16px;
+}
+.stat-mini .sm-icon {
+  width:48px; height:48px; border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem;
+}
+.stat-mini .sm-info h4 { font-size:1.4rem; font-weight:800; }
+.stat-mini .sm-info p { font-size:0.78rem; color:var(--text2); }
+
+/* ===== LOADER/SPINNER INLINE ===== */
+.loader-group {
+  display:flex; gap:24px; align-items:center; flex-wrap:wrap;
+}
+.sp { width:36px; height:36px; border:3px solid var(--bg3); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; }
+.sp.ring { border:3px solid transparent; border-top-color:var(--accent); border-right-color:var(--accent2); }
+.sp.dots { display:flex; gap:4px; border:none; width:auto; height:auto; }
+.sp.dots span { width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse-mini 1s ease infinite; }
+.sp.dots span:nth-child(2) { animation-delay:0.2s; }
+.sp.dots span:nth-child(3) { animation-delay:0.4s; }
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes pulse-mini {
+  0%,100% { transform:scale(0.5); opacity:0.4; }
+  50% { transform:scale(1); opacity:1; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px) {
+  .card-grid, .card-grid-4 { grid-template-columns:1fr; }
+  .stat-row { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:480px) {
+  .stat-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="section-title">
+    <span class="tag">کارت، مودال، قیمت</span>
+    <h2>کامپوننت‌های نمایشی</h2>
+    <p>انواع کارت، مودال، دیالوگ، قیمت‌گذاری و آماری</p>
+  </div>
+
+  <!-- ====== CARDS ===== -->
+  <div class="section-title" style="padding-top:0;">
+    <span class="tag" style="background:var(--accent);color:white;">کارت</span>
+    <h3 style="font-size:1.5rem;font-weight:700;">انواع کارت</h3>
+  </div>
+
+  <!-- Cards - Grid -->
+  <div class="card-grid">
+    <div class="c-card">
+      <div class="cc-img" style="background:linear-gradient(135deg,var(--accent),#a29bfe);color:white;"><i class="fas fa-mountain"></i></div>
+      <div class="cc-body">
+        <span style="font-size:0.7rem;color:var(--text3);">طبیعت</span>
+        <h4>کوه‌های البرز</h4>
+        <p>زیباترین مسیرهای کوهنوردی در رشته کوه البرز با مناظر خیره‌کننده</p>
+        <button class="btn btn-primary btn-sm">بیشتر بدانید</button>
+      </div>
+    </div>
+    <div class="c-card">
+      <div class="cc-img" style="background:linear-gradient(135deg,var(--success),var(--accent3));color:white;"><i class="fas fa-city"></i></div>
+      <div class="cc-body">
+        <span style="font-size:0.7rem;color:var(--text3);">شهری</span>
+        <h4>تهران مدرن</h4>
+        <p>کلانشهر تهران با آسمانخراش‌ها و مراکز خرید مدرن و دیدنی</p>
+        <button class="btn btn-primary btn-sm">بیشتر بدانید</button>
+      </div>
+    </div>
+    <div class="c-card">
+      <div class="cc-img" style="background:linear-gradient(135deg,var(--danger),var(--accent2));color:white;"><i class="fas fa-umbrella-beach"></i></div>
+      <div class="cc-body">
+        <span style="font-size:0.7rem;color:var(--text3);">ساحل</span>
+        <h4>جزیره کیش</h4>
+        <p>سواحل نیلگون و تفریحات آبی در جزیره زیبای کیش در خلیج فارس</p>
+        <button class="btn btn-primary btn-sm">بیشتر بدانید</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glass Cards -->
+  <div class="card-grid">
+    <div class="glass-card">
+      <div class="gc-icon" style="background:linear-gradient(135deg,var(--accent),#a29bfe);"><i class="fas fa-bolt"></i></div>
+      <h4 style="font-weight:700;margin-bottom:6px;">سرعت بالا</h4>
+      <p style="font-size:0.85rem;color:var(--text2);">بهینه‌سازی شده برای بارگذاری سریعتر با کش هوشمند و CDN.</p>
+    </div>
+    <div class="glass-card">
+      <div class="gc-icon" style="background:linear-gradient(135deg,var(--success),var(--accent3));"><i class="fas fa-shield-alt"></i></div>
+      <h4 style="font-weight:700;margin-bottom:6px;">امنیت کامل</h4>
+      <p style="font-size:0.85rem;color:var(--text2);">رمزگذاری SSL و محافظت در برابر حملات DDoS و XSS.</p>
+    </div>
+    <div class="glass-card">
+      <div class="gc-icon" style="background:linear-gradient(135deg,var(--warning),var(--danger));"><i class="fas fa-headset"></i></div>
+      <h4 style="font-weight:700;margin-bottom:6px;">پشتیبانی ۲۴/۷</h4>
+      <p style="font-size:0.85rem;color:var(--text2);">تیم پشتیبانی حرفه‌ای در تمام ساعات شبانه‌روز آماده کمک است.</p>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="card-grid-4">
+    <div class="t-card">
+      <div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <p class="tc-text">"این مجموعه کامپوننت‌ها سرعت کار من رو چند برابر کرد. واقعاً کاربردی و حرفه‌ای."</p>
+      <div class="tc-author">
+        <div class="tc-avatar" style="background:var(--accent);">م</div>
+        <div><div style="font-weight:600;font-size:0.88rem;">محمد رضایی</div><div style="font-size:0.72rem;color:var(--text3);">توسعه‌دهنده</div></div>
+      </div>
+    </div>
+    <div class="t-card">
+      <div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <p class="tc-text">"طراحی RTL عالی و دقیقاً مطابق با نیاز بازار ایران. از خریدم راضی هستم."</p>
+      <div class="tc-author">
+        <div class="tc-avatar" style="background:var(--success);">س</div>
+        <div><div style="font-weight:600;font-size:0.88rem;">سارا احمدی</div><div style="font-size:0.72rem;color:var(--text3);">طراح UI</div></div>
+      </div>
+    </div>
+    <div class="t-card">
+      <div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      <p class="tc-text">"انیمیشن‌ها وトラنزیشن‌های این مجموعه بسیار روان و جذاب هستند. پیشنهاد می‌کنم."</p>
+      <div class="tc-author">
+        <div class="tc-avatar" style="background:var(--info);">ر</div>
+        <div><div style="font-weight:600;font-size:0.88rem;">رضا کریمی</div><div style="font-size:0.72rem;color:var(--text3);">برنامه‌نویس</div></div>
+      </div>
+    </div>
+    <div class="t-card">
+      <div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <p class="tc-text">"کامپوننت‌های داشبورد خیلی حرفه‌ای هستند. توی پروژه‌های ادمین عالی جواب می‌دهند."</p>
+      <div class="tc-author">
+        <div class="tc-avatar" style="background:var(--warning);color:#333;">ن</div>
+        <div><div style="font-weight:600;font-size:0.88rem;">نوید حسینی</div><div style="font-size:0.72rem;color:var(--text3);">مدیر فنی</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== PRICING ====== -->
+  <div class="section-title">
+    <span class="tag" style="background:var(--accent);color:white;">قیمت‌گذاری</span>
+    <h3 style="font-size:1.5rem;font-weight:700;">جدول تعرفه‌ها</h3>
+  </div>
+
+  <div class="card-grid-4" style="margin-bottom:48px;">
+    <div class="p-card">
+      <div class="p-name">شروع</div>
+      <div class="p-price">رایگان</div>
+      <div class="p-desc">مناسب برای پروژه‌های شخصی و آزمایشی</div>
+      <ul>
+        <li><i class="fas fa-check"></i> ۱ پروژه</li>
+        <li><i class="fas fa-check"></i> ۵۰ مگابایت فضا</li>
+        <li><i class="fas fa-check"></i> پشتیبانی ایمیل</li>
+        <li><i class="fas fa-times"></i> دامنه اختصاصی</li>
+        <li><i class="fas fa-times"></i> تیم اختصاصی</li>
+      </ul>
+      <button class="btn btn-secondary" style="width:100%;">شروع رایگان</button>
+    </div>
+    <div class="p-card featured">
+      <div class="p-popular">محبوب</div>
+      <div class="p-name">حرفه‌ای</div>
+      <div class="p-price">۲۹۹,۰۰۰ <span>تومان/ماه</span></div>
+      <div class="p-desc">مناسب برای تیم‌های کوچک و استارتاپ‌ها</div>
+      <ul>
+        <li><i class="fas fa-check"></i> ۱۰ پروژه</li>
+        <li><i class="fas fa-check"></i> ۵ گیگابایت فضا</li>
+        <li><i class="fas fa-check"></i> پشتیبانی اولویت‌دار</li>
+        <li><i class="fas fa-check"></i> دامنه اختصاصی</li>
+        <li><i class="fas fa-check"></i> SSL رایگان</li>
+      </ul>
+      <button class="btn btn-primary" style="width:100%;">شروع کنید</button>
+    </div>
+    <div class="p-card">
+      <div class="p-name">سازمانی</div>
+      <div class="p-price">۷۹۹,۰۰۰ <span>تومان/ماه</span></div>
+      <div class="p-desc">مناسب برای سازمان‌ها و شرکت‌های بزرگ</div>
+      <ul>
+        <li><i class="fas fa-check"></i> پروژه نامحدود</li>
+        <li><i class="fas fa-check"></i> ۵۰ گیگابایت فضا</li>
+        <li><i class="fas fa-check"></i> پشتیبانی ۲۴/۷ تلفنی</li>
+        <li><i class="fas fa-check"></i> همه امکانات ویژه</li>
+      </ul>
+      <button class="btn btn-secondary" style="width:100%;">تماس بگیرید</button>
+    </div>
+    <div class="p-card">
+      <div class="p-name">پلاس</div>
+      <div class="p-price">۴۹۹,۰۰۰ <span>تومان/ماه</span></div>
+      <div class="p-desc">مناسب برای فریلنسرهای حرفه‌ای</div>
+      <ul>
+        <li><i class="fas fa-check"></i> ۵ پروژه</li>
+        <li><i class="fas fa-check"></i> ۲۰ گیگابایت فضا</li>
+        <li><i class="fas fa-check"></i> پشتیبانی ۱۲ ساعته</li>
+        <li><i class="fas fa-check"></i> دامنه اختصاصی</li>
+        <li><i class="fas fa-times"></i> تیم اختصاصی</li>
+      </ul>
+      <button class="btn btn-secondary" style="width:100%;">شروع کنید</button>
+    </div>
+  </div>
+
+  <!-- ====== MODALS ====== -->
+  <div class="section-title">
+    <span class="tag" style="background:var(--accent);color:white;">مودال</span>
+    <h3 style="font-size:1.5rem;font-weight:700;">مودال‌ها و دیالوگ‌ها</h3>
+  </div>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;justify-content:center;">
+    <button class="btn btn-primary" onclick="openModal('confirmModal')"><i class="fas fa-check-circle"></i> تأیید</button>
+    <button class="btn btn-secondary" onclick="openModal('infoModal')"><i class="fas fa-info-circle"></i> اطلاعات</button>
+    <button class="btn btn-secondary" onclick="openModal('warningModal')"><i class="fas fa-exclamation-triangle"></i> هشدار</button>
+    <button class="btn btn-secondary" onclick="openModal('formModal')"><i class="fas fa-file"></i> فرم</button>
+  </div>
+
+  <!-- ====== TOASTS ====== -->
+  <div class="section-title">
+    <span class="tag" style="background:var(--accent);color:white;">تست و نوتیفیکیشن</span>
+    <h3 style="font-size:1.5rem;font-weight:700;">تست نوتیفیکیشن و آلرت</h3>
+  </div>
+
+  <div class="card-grid">
+    <div class="c-card">
+      <div class="cc-body">
+        <h4>تست نوتیفیکیشن</h4>
+        <p>پیام‌های کشویی با انیمیشن</p>
+        <div class="toast-demo">
+          <div class="toast-item">
+            <div class="toast-icon" style="background:var(--success);"><i class="fas fa-check"></i></div>
+            <div class="toast-body"><div class="toast-title">موفقیت</div><div class="toast-desc">عملیات با موفقیت انجام شد</div></div>
+            <button class="toast-close"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="toast-item">
+            <div class="toast-icon" style="background:var(--danger);"><i class="fas fa-exclamation"></i></div>
+            <div class="toast-body"><div class="toast-title">خطا</div><div class="toast-desc">مشکلی در پردازش رخ داد</div></div>
+            <button class="toast-close"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="toast-item">
+            <div class="toast-icon" style="background:var(--info);"><i class="fas fa-info"></i></div>
+            <div class="toast-body"><div class="toast-title">اطلاعیه</div><div class="toast-desc">به‌روزرسانی جدید موجود است</div></div>
+            <button class="toast-close"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="toast-item">
+            <div class="toast-icon" style="background:var(--warning);color:#333;"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="toast-body"><div class="toast-title">هشدار</div><div class="toast-desc">فضای ذخیره‌سازی رو به اتمام است</div></div>
+            <button class="toast-close"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="cc-body">
+        <h4>آلرت‌ها</h4>
+        <p>پیام‌های هشدار با رنگ‌های Semantics</p>
+        <div class="alert-demo">
+          <div class="alert-item success"><i class="fas fa-check-circle"></i> عملیات با موفقیت انجام شد. دیتا ذخیره گردید.</div>
+          <div class="alert-item danger"><i class="fas fa-exclamation-circle"></i> خطا در اتصال به سرور. لطفاً مجدداً تلاش کنید.</div>
+          <div class="alert-item warning"><i class="fas fa-exclamation-triangle"></i> هشدار: اعتبار حساب شما در ۳ روز آینده به پایان می‌رسد.</div>
+          <div class="alert-item info"><i class="fas fa-info-circle"></i> اطلاعیه: سیستم در ساعت ۲ بامداد به‌روزرسانی می‌شود.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== STATS ====== -->
+  <div class="section-title">
+    <span class="tag" style="background:var(--accent);color:white;">آمار</span>
+    <h3 style="font-size:1.5rem;font-weight:700;">کارت‌های آماری</h3>
+  </div>
+
+  <div class="stat-row" style="margin-bottom:48px;">
+    <div class="stat-mini">
+      <div class="sm-icon" style="background:linear-gradient(135deg,var(--accent),#a29bfe);"><i class="fas fa-users"></i></div>
+      <div class="sm-info"><h4>۱۲,۴۵۰</h4><p>کاربران فعال</p></div>
+    </div>
+    <div class="stat-mini">
+      <div class="sm-icon" style="background:linear-gradient(135deg,var(--success),#00d2a0);"><i class="fas fa-dollar-sign"></i></div>
+      <div class="sm-info"><h4>$۴۸,۵۲۰</h4><p>درآمد ماهانه</p></div>
+    </div>
+    <div class="stat-mini">
+      <div class="sm-icon" style="background:linear-gradient(135deg,var(--info),var(--accent3));"><i class="fas fa-shopping-bag"></i></div>
+      <div class="sm-info"><h4>۳۸۹</h4><p>سفارشات جدید</p></div>
+    </div>
+    <div class="stat-mini">
+      <div class="sm-icon" style="background:linear-gradient(135deg,var(--danger),var(--accent2));"><i class="fas fa-ticket-alt"></i></div>
+      <div class="sm-info"><h4>۱۲</h4><p>تیکت باز</p></div>
+    </div>
+    <div class="stat-mini">
+      <div class="sm-icon" style="background:linear-gradient(135deg,var(--warning),#e17055);"><i class="fas fa-star"></i></div>
+      <div class="sm-info"><h4>۴.۸</h4><p>امتیاز کاربران</p></div>
+    </div>
+  </div>
+
+  <!-- ====== LOADERS ====== -->
+  <div class="section-title">
+    <span class="tag" style="background:var(--accent);color:white;">لودر</span>
+    <h3 style="font-size:1.5rem;font-weight:700;">لودرها و اسپینرها</h3>
+  </div>
+
+  <div style="display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:48px;padding:40px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);">
+    <div style="text-align:center;"><div class="sp"></div><p style="font-size:0.7rem;color:var(--text3);margin-top:6px;">Spinner</p></div>
+    <div style="text-align:center;"><div class="sp ring"></div><p style="font-size:0.7rem;color:var(--text3);margin-top:6px;">Ring</p></div>
+    <div style="text-align:center;"><div class="sp dots"><span></span><span></span><span></span></div><p style="font-size:0.7rem;color:var(--text3);margin-top:6px;">Dots</p></div>
+    <div style="text-align:center;">
+      <div style="width:36px;height:36px;border:3px solid transparent;border-top-color:var(--accent);border-radius:50%;position:relative;animation:spin 1s linear infinite;"></div>
+      <p style="font-size:0.7rem;color:var(--text3);margin-top:6px;">Dual Ring</p>
+    </div>
+    <div style="text-align:center;">
+      <div style="display:flex;gap:3px;">
+        <div style="width:6px;height:20px;background:var(--accent);border-radius:3px;animation:spin 0.6s ease infinite;"></div>
+        <div style="width:6px;height:28px;background:var(--accent2);border-radius:3px;animation:spin 0.6s ease 0.1s infinite;"></div>
+        <div style="width:6px;height:36px;background:var(--accent3);border-radius:3px;animation:spin 0.6s ease 0.2s infinite;"></div>
+      </div>
+      <p style="font-size:0.7rem;color:var(--text3);margin-top:6px;">Bars</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODALS ===== -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('confirmModal')">&times;</button>
+    <div class="modal-icon" style="background:rgba(0,184,148,0.1);color:var(--success);margin:0 auto 16px;"><i class="fas fa-check-circle"></i></div>
+    <h3 style="text-align:center;">تأیید عملیات</h3>
+    <p style="text-align:center;">آیا از حذف این آیتم اطمینان دارید؟ این عملیات غیرقابل بازگشت است و تمامی داده‌های مرتبط حذف خواهند شد.</p>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button class="btn btn-secondary" onclick="closeModal('confirmModal')">انصراف</button>
+      <button class="btn btn-primary" onclick="closeModal('confirmModal');showToast()">تأیید می‌کنم</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="infoModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('infoModal')">&times;</button>
+    <div class="modal-icon" style="background:rgba(9,132,227,0.1);color:var(--info);margin:0 auto 16px;"><i class="fas fa-info-circle"></i></div>
+    <h3 style="text-align:center;">درباره کیت UI فارسی</h3>
+    <p style="text-align:center;">این مجموعه شامل بیش از ۱۰۰ کامپوننت آماده با طراحی ایرانی است. تمامی کامپوننت‌ها با فونت وزیرمتن، طراحی RTL و قابلیت شخصی‌سازی ساخته شده‌اند. نسخه ۱.۰ — مرداد ۱۴۰۴</p>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button class="btn btn-primary" onclick="closeModal('infoModal')">متوجه شدم</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="warningModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('warningModal')">&times;</button>
+    <div class="modal-icon" style="background:rgba(253,203,110,0.1);color:#b8860b;margin:0 auto 16px;"><i class="fas fa-exclamation-triangle"></i></div>
+    <h3 style="text-align:center;">فضای ذخیره‌سازی</h3>
+    <p style="text-align:center;">شما ۸۵٪ از فضای ذخیره‌سازی خود را استفاده کرده‌اید. برای ادامه کار بدون مشکل، لطفاً فضای خود را افزایش دهید یا فایل‌های غیرضروری را حذف کنید.</p>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button class="btn btn-secondary" onclick="closeModal('warningModal')">بعداً</button>
+      <button class="btn btn-primary" onclick="closeModal('warningModal')">افزایش فضا</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="formModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('formModal')">&times;</button>
+    <h3>فرم تماس سریع</h3>
+    <p>پیام خود را ارسال کنید. در اسرع وقت پاسخ خواهیم داد.</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <input placeholder="نام شما" style="padding:10px 16px;border:2px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:0.88rem;background:var(--bg2);color:var(--text);outline:none;">
+      <input placeholder="ایمیل" type="email" style="padding:10px 16px;border:2px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:0.88rem;background:var(--bg2);color:var(--text);outline:none;">
+      <textarea placeholder="متن پیام" style="padding:10px 16px;border:2px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:0.88rem;background:var(--bg2);color:var(--text);outline:none;min-height:80px;resize:vertical;"></textarea>
+      <button class="btn btn-primary" onclick="closeModal('formModal')"><i class="fas fa-paper-plane"></i> ارسال</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Theme =====
+const saved = localStorage.getItem('theme');
+if (saved) document.documentElement.setAttribute('data-theme', saved);
+
+// ===== Modal =====
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', function(e) {
+    if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; }
+  });
+});
+
+// ===== Toast Close =====
+document.querySelectorAll('.toast-close').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.toast-item').remove();
+  });
+});
+
+// ===== Toast Creator =====
+function showToast() {
+  const container = document.querySelector('.toast-demo');
+  if (container) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-item';
+    toast.innerHTML = `
+      <div class="toast-icon" style="background:var(--success);"><i class="fas fa-check"></i></div>
+      <div class="toast-body"><div class="toast-title">تأیید شد</div><div class="toast-desc">آیتم با موفقیت حذف گردید</div></div>
+      <button class="toast-close" onclick="this.closest('.toast-item').remove()"><i class="fas fa-times"></i></button>
+    `;
+    container.prepend(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+}
+
+console.log('🇮🇷 کیت UI فارسی — Cards, Modals, Pricing');
+console.log('📦 ۳ نوع کارت + ۴ مودال + ۴ پلن قیمت + ۴ تست + ۴ آلرت + ۵ آمار + ۵ لودر');
+</script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2b5d7d9dbe497dd',t:'MTc4Njc3MjIwMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

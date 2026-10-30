@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A standalone searchable UI component reference with light mode, dark mode, sticky header, categories, motion patterns and Persian typography examples.">
+  <title>Component Atlas - Standalone HTML Reference</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap");
+    @import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+    @import url("https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css");
+    @import url("https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/font-face.css");
+
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-strong: #ffffff;
+      --text: #020617;
+      --muted: #64748b;
+      --soft: #f1f5f9;
+      --line: #e2e8f0;
+      --primary: #4f46e5;
+      --primary-2: #d946ef;
+      --success: #10b981;
+      --danger: #e11d48;
+      --warning: #f59e0b;
+      --shadow: 0 22px 70px rgba(15, 23, 42, 0.12);
+      --radius: 28px;
+      font-family: Inter, Vazirmatn, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    :root.dark {
+      color-scheme: dark;
+      --bg: #020617;
+      --surface: rgba(15, 23, 42, 0.82);
+      --surface-strong: #0f172a;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --soft: rgba(255, 255, 255, 0.07);
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    ::selection { background: rgba(79, 70, 229, 0.22); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .skip-link:focus { position: fixed; z-index: 100; top: 14px; left: 14px; width: auto; height: auto; padding: 10px 14px; clip: auto; border-radius: 999px; background: var(--surface-strong); box-shadow: var(--shadow); color: var(--text); font-weight: 800; }
+
+    .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface-strong) 82%, transparent); backdrop-filter: blur(22px); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); }
+    .scroll-track { height: 4px; background: var(--soft); }
+    .scroll-progress { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-2), var(--success)); transition: width 120ms linear; }
+    .header-inner { max-width: 1500px; margin: 0 auto; padding: 12px 18px 14px; display: grid; gap: 12px; }
+    .top-row { display: grid; gap: 12px; grid-template-columns: 1fr; align-items: center; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 18px; background: var(--text); color: var(--bg); box-shadow: var(--shadow); }
+    .brand-title { display: block; font-size: 16px; font-weight: 950; letter-spacing: -0.03em; }
+    .brand-subtitle { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; font-weight: 750; }
+    .header-tools { display: flex; flex-direction: column; gap: 10px; }
+    .search-wrap { position: relative; flex: 1; }
+    .search-wrap svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+    .search-input { width: 100%; border: 1px solid var(--line); outline: none; background: var(--soft); color: var(--text); border-radius: 999px; padding: 13px 95px 13px 44px; transition: border-color 180ms, background 180ms; }
+    .search-input:focus { border-color: var(--primary); background: var(--surface-strong); }
+    .kbd-button { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); border: 1px solid var(--line); background: var(--surface-strong); color: var(--muted); border-radius: 999px; padding: 7px 12px; font-size: 12px; font-weight: 900; cursor: pointer; }
+    .theme-button, .button { border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 11px 16px; background: var(--text); color: var(--bg); font-size: 14px; font-weight: 900; transition: transform 180ms, background 180ms, border-color 180ms; text-decoration: none; }
+    .button:hover, .theme-button:hover { transform: translateY(-2px); }
+    .button.secondary, .theme-button { border: 1px solid var(--line); background: var(--surface-strong); color: var(--text); }
+    .button.ghost { background: transparent; color: var(--muted); }
+    .button.danger { background: var(--danger); color: white; }
+    .button.small { padding: 8px 12px; font-size: 12px; }
+    .category-nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+    .category-button { flex: 0 0 auto; border: 0; border-radius: 999px; padding: 9px 14px; background: var(--soft); color: var(--muted); cursor: pointer; font-size: 13px; font-weight: 900; transition: background 160ms, color 160ms, transform 160ms; }
+    .category-button:hover { transform: translateY(-1px); color: var(--text); }
+    .category-button.active { background: var(--primary); color: white; }
+    .category-button[data-id="all"].active { background: var(--text); color: var(--bg); }
+
+    .hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); min-height: 74vh; display: grid; align-items: center; }
+    .hero::before, .hero::after { content: ""; position: absolute; z-index: -2; width: 44rem; height: 44rem; border-radius: 999px; filter: blur(72px); opacity: 0.45; animation: aurora 15s ease-in-out infinite alternate; }
+    .hero::before { top: -15rem; right: -10rem; background: #a855f7; }
+    .hero::after { left: -12rem; bottom: -16rem; background: #38bdf8; animation-delay: -7s; }
+    .grid-bg { position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(99,102,241,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,.12) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, #000, transparent 85%); }
+    .hero-inner { max-width: 1500px; margin: 0 auto; width: 100%; padding: 78px 18px 60px; }
+    .eyebrow { color: var(--primary); text-transform: uppercase; letter-spacing: .32em; font-size: 13px; font-weight: 950; }
+    .hero h1 { max-width: 980px; margin: 22px 0 0; font-size: clamp(48px, 10vw, 118px); line-height: .88; letter-spacing: -0.075em; }
+    .hero p { max-width: 820px; margin: 24px 0 0; color: var(--muted); font-size: clamp(17px, 2vw, 21px); line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .marquee { margin-top: 66px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 18px 0; }
+    .marquee-track { display: flex; min-width: max-content; gap: 32px; animation: marquee 28s linear infinite; color: var(--muted); font-size: 13px; font-weight: 950; letter-spacing: .24em; text-transform: uppercase; }
+
+    .catalog { max-width: 1500px; margin: 0 auto; padding: 54px 18px 80px; }
+    .catalog-head { display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 44px; }
+    .catalog-head h2 { margin: 8px 0 0; font-size: clamp(34px, 4vw, 56px); line-height: 1; letter-spacing: -0.05em; }
+    .catalog-head p { max-width: 860px; margin: 12px 0 0; color: var(--muted); line-height: 1.7; }
+    .count-pill { align-self: flex-start; border: 1px solid var(--line); background: var(--surface-strong); color: var(--muted); padding: 12px 16px; border-radius: 18px; font-weight: 900; }
+    .field-section { margin-top: 56px; scroll-margin-top: 155px; }
+    .field-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .field-head h2 { margin: 0; font-size: clamp(26px, 3vw, 38px); letter-spacing: -0.04em; }
+    .field-head p { margin: 0; color: var(--muted); max-width: 760px; line-height: 1.65; }
+    .component-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .component-card { border: 1px solid var(--line); background: var(--surface); backdrop-filter: blur(16px); border-radius: var(--radius); padding: 20px; box-shadow: 0 10px 36px rgba(15, 23, 42, 0.05); scroll-margin-top: 170px; animation: reveal-up .7s ease both; }
+    .component-meta { display: flex; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 18px; }
+    .component-meta small { display: block; color: var(--primary); text-transform: uppercase; letter-spacing: .22em; font-weight: 950; }
+    .component-meta h3 { margin: 8px 0 0; font-size: 21px; letter-spacing: -0.03em; }
+    .component-meta p { margin: 8px 0 0; color: var(--muted); line-height: 1.65; font-size: 14px; max-width: 820px; }
+    .anchor-link { color: var(--primary); text-decoration: none; font-weight: 900; white-space: nowrap; }
+    .demo { min-width: 0; }
+    .wide { grid-column: span 1; }
+    .soft-panel { border-radius: 24px; background: var(--soft); padding: 16px; }
+    .dark-panel { border-radius: 24px; background: #020617; color: white; padding: 18px; }
+    .mini-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); }
+    .token { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); background: var(--surface-strong); border-radius: 18px; padding: 12px; }
+    .swatch { width: 48px; height: 48px; border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); }
+    .muted { color: var(--muted); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .font-vazirmatn { font-family: Vazirmatn, ui-sans-serif, system-ui, sans-serif; }
+    .font-sahel { font-family: Sahel, Vazirmatn, sans-serif; }
+    .font-shabnam { font-family: Shabnam, Vazirmatn, sans-serif; }
+    .font-naskh { font-family: "Noto Naskh Arabic", Vazirmatn, serif; }
+    .font-nastaliq { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; }
+    .persian-line { font-size: 25px; line-height: 2; text-align: right; }
+    .form-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .input, .select, .textarea { width: 100%; border: 1px solid var(--line); background: var(--surface-strong); color: var(--text); border-radius: 18px; outline: none; padding: 13px 14px; transition: border-color 160ms, box-shadow 160ms; }
+    .input:focus, .select:focus, .textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79,70,229,.13); }
+    .label { display: block; margin-bottom: 8px; color: var(--text); font-size: 13px; font-weight: 900; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 7px 11px; background: rgba(79, 70, 229, 0.1); color: var(--primary); font-size: 12px; font-weight: 900; }
+    .tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--soft); }
+    .tab-button, .seg-button { border: 0; border-radius: 999px; padding: 9px 14px; background: transparent; color: var(--muted); cursor: pointer; font-size: 13px; font-weight: 900; }
+    .tab-button.active, .seg-button.active { background: var(--surface-strong); color: var(--text); box-shadow: 0 8px 20px rgba(15,23,42,.08); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 24px; }
+    table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px; }
+    th { text-align: left; color: var(--muted); background: var(--soft); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    th, td { padding: 13px 15px; border-bottom: 1px solid var(--line); }
+    tr:last-child td { border-bottom: 0; }
+    .bar-chart { display: flex; align-items: end; gap: 12px; height: 220px; padding: 18px; border-radius: 24px; background: var(--soft); }
+    .bar { flex: 1; min-width: 24px; border-radius: 16px 16px 4px 4px; background: linear-gradient(180deg, var(--primary-2), var(--primary)); }
+    .donut { width: 132px; height: 132px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--primary) 0 64%, var(--primary-2) 64% 82%, var(--line) 82% 100%); }
+    .donut span { width: 86px; height: 86px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-strong); color: var(--text); font-weight: 950; }
+    .avatar-stack { display: flex; align-items: center; }
+    .avatar { width: 46px; height: 46px; border-radius: 999px; display: grid; place-items: center; border: 3px solid var(--surface-strong); margin-left: -10px; color: white; font-size: 13px; font-weight: 950; }
+    .avatar:first-child { margin-left: 0; }
+    .modal-backdrop, .command-backdrop { position: fixed; inset: 0; z-index: 80; display: none; place-items: center; padding: 18px; background: rgba(2,6,23,.66); backdrop-filter: blur(10px); }
+    .modal-backdrop.open, .command-backdrop.open { display: grid; }
+    .modal-box, .command-box { width: min(100%, 520px); border: 1px solid var(--line); border-radius: 30px; background: var(--surface-strong); color: var(--text); box-shadow: var(--shadow); padding: 24px; }
+    .command-box { width: min(100%, 760px); padding: 0; overflow: hidden; align-self: start; margin-top: 10vh; }
+    .command-top { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); padding: 15px 18px; }
+    .command-top input { flex: 1; border: 0; outline: 0; background: transparent; color: var(--text); }
+    .command-list { max-height: 430px; overflow-y: auto; padding: 10px; }
+    .command-item { display: block; width: 100%; text-align: left; border: 0; background: transparent; color: var(--text); cursor: pointer; border-radius: 18px; padding: 13px 14px; }
+    .command-item:hover { background: var(--soft); }
+    .toast-zone { position: fixed; right: 18px; bottom: 18px; z-index: 90; display: grid; gap: 10px; width: min(380px, calc(100vw - 36px)); }
+    .toast { border: 1px solid var(--line); border-radius: 20px; background: var(--surface-strong); color: var(--text); box-shadow: var(--shadow); padding: 14px 16px; animation: toast-in 220ms ease both; }
+    .progress { height: 11px; border-radius: 999px; overflow: hidden; background: var(--soft); }
+    .progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--primary-2)); }
+    .skeleton { animation: pulse 1.2s ease-in-out infinite; background: color-mix(in srgb, var(--muted) 18%, transparent); border-radius: 18px; }
+    .mega { position: relative; display: inline-block; }
+    .mega-menu { position: absolute; top: calc(100% + 10px); left: 0; width: min(540px, calc(100vw - 54px)); display: none; grid-template-columns: repeat(2, 1fr); gap: 8px; border: 1px solid var(--line); border-radius: 26px; background: var(--surface-strong); box-shadow: var(--shadow); padding: 12px; }
+    .mega:hover .mega-menu, .mega:focus-within .mega-menu { display: grid; }
+    .calendar { max-width: 420px; border: 1px solid var(--line); border-radius: 24px; padding: 15px; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; text-align: center; }
+    .calendar-grid button, .calendar-grid span { border: 0; border-radius: 12px; padding: 9px 0; background: transparent; color: var(--muted); font-weight: 850; }
+    .calendar-grid button.active { background: var(--primary); color: white; }
+    .timeline { border-left: 1px solid var(--line); padding-left: 20px; display: grid; gap: 18px; }
+    .timeline-item { position: relative; }
+    .timeline-item::before { content: ""; position: absolute; left: -27px; top: 3px; width: 13px; height: 13px; border-radius: 999px; border: 3px solid var(--surface-strong); background: var(--primary); }
+    .pricing { border-radius: 28px; padding: 24px; color: white; background: linear-gradient(135deg, var(--primary), var(--primary-2)); }
+    .spotlight { position: relative; overflow: hidden; min-height: 220px; border-radius: 28px; background: #020617; color: white; padding: 34px; }
+    .spotlight::before { content: ""; position: absolute; inset: -30%; background: radial-gradient(circle at 35% 35%, rgba(217,70,239,.66), transparent 28%), radial-gradient(circle at 70% 60%, rgba(79,70,229,.72), transparent 30%); animation: spotlight 9s ease-in-out infinite alternate; }
+    .spotlight > * { position: relative; z-index: 1; }
+    .tilt { display: inline-flex; border: 0; border-radius: 32px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: white; padding: 34px 44px; font-size: 22px; font-weight: 950; box-shadow: var(--shadow); cursor: pointer; transition: transform 260ms; }
+    .tilt:hover { transform: translateY(-8px) rotate(1.5deg); }
+    .snap-row { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 12px; background: var(--soft); border-radius: 28px; }
+    .snap-panel { min-width: 78%; height: 176px; border-radius: 24px; scroll-snap-align: center; display: grid; place-items: center; color: white; font-size: 28px; font-weight: 950; }
+    .map { position: relative; min-height: 260px; border-radius: 28px; overflow: hidden; background: linear-gradient(135deg, #dbeafe, #f5d0fe); }
+    .dark .map { background: linear-gradient(135deg, #1e1b4b, #312e81); }
+    .pin { position: absolute; width: 42px; height: 42px; border: 0; border-radius: 999px; background: var(--text); color: var(--bg); font-weight: 950; box-shadow: var(--shadow); cursor: pointer; }
+    .hidden { display: none !important; }
+
+    @keyframes aurora { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(70px,42px,0) scale(1.14); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes reveal-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes spotlight { from { transform: translate3d(-4%, -2%, 0) rotate(0deg); } to { transform: translate3d(5%, 3%, 0) rotate(12deg); } }
+    @keyframes pulse { 50% { opacity: .46; } }
+    @keyframes toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    @supports (animation-timeline: view()) {
+      .component-card { animation-timeline: view(); animation-range: entry 8% cover 24%; }
+    }
+
+    @media (min-width: 760px) {
+      .top-row { grid-template-columns: auto 1fr; }
+      .header-tools { flex-direction: row; justify-content: end; }
+      .catalog-head { flex-direction: row; justify-content: space-between; align-items: end; }
+      .field-head { flex-direction: row; justify-content: space-between; align-items: end; }
+      .component-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .wide { grid-column: span 2; }
+    }
+
+    @media (max-width: 620px) {
+      .component-meta { flex-direction: column; }
+      .mega-menu { grid-template-columns: 1fr; }
+      .hero h1 { letter-spacing: -0.055em; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link sr-only" href="#catalog">Skip to component catalog</a>
+  <header class="site-header">
+    <div class="scroll-track"><div id="scrollProgress" class="scroll-progress"></div></div>
+    <div class="header-inner">
+      <div class="top-row">
+        <a class="brand" href="#top" aria-label="Component Atlas home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"></path><path d="M12 12 4.4 7.7"></path><path d="M12 12v8.4"></path><path d="m12 12 7.6-4.3"></path></svg>
+          </span>
+          <span><span class="brand-title">Component Atlas</span><span id="resultCount" class="brand-subtitle">Standalone HTML demos</span></span>
+        </a>
+        <div class="header-tools">
+          <label class="search-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path></svg>
+            <input id="searchInput" class="search-input" type="search" placeholder="Search components, category, RTL, dashboard, Persian font...">
+            <button id="openCommand" class="kbd-button" type="button">Ctrl K</button>
+          </label>
+          <button id="themeToggle" class="theme-button" type="button">Dark mode</button>
+        </div>
+      </div>
+      <nav id="categoryNav" class="category-nav" aria-label="Component categories"></nav>
+    </div>
+  </header>
+
+  <section id="top" class="hero">
+    <div class="grid-bg"></div>
+    <div class="hero-inner">
+      <div class="eyebrow">Single-page HTML component reference</div>
+      <h1>Component Atlas for web pages</h1>
+      <p>A plain HTML, CSS and JavaScript reference file with sticky category filters, light and dark mode, searchable component names, motion patterns, dashboard ideas, hard-to-build UI and Persian open-source typography.</p>
+      <div class="hero-actions">
+        <a class="button" href="#catalog">Browse components</a>
+        <a class="button secondary" href="#persian-open-source-font-specimens">Persian typography</a>
+      </div>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="heroMarquee"></div></div>
+    </div>
+  </section>
+
+  <main id="catalog" class="catalog">
+    <div class="catalog-head">
+      <div>
+        <div class="eyebrow">Searchable catalog</div>
+        <h2>Categories and named components</h2>
+        <p>Every item includes a subject category, a component name, a short description and searchable data attributes. Search this HTML source for names like Modal Dialog, Data Table, Persian Open Source Font Specimens, Pricing Toggle, Kanban Board or Scroll Snap Showcase.</p>
+      </div>
+      <div id="showingCount" class="count-pill"></div>
+    </div>
+    <div id="catalogMount"></div>
+  </main>
+
+  <footer class="catalog" style="padding-top:0">
+    <div class="soft-panel">
+      <strong>Reference coverage:</strong>
+      This standalone file is inspired by common patterns from Shadcn UI, ReadyMadeUI, Framer-style landing structures, SaaS templates, DashUI/admin templates, Motion and scroll-driven animation techniques, whimsical UI effects, icon systems, animated-vector patterns and Persian typography requirements.
+    </div>
+  </footer>
+
+  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h3 style="margin-top:0">Confirm publish</h3>
+      <p class="muted">Modal dialogs focus attention on a decision. They need a clear title, concise copy and obvious exits.</p>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px">
+        <button class="button ghost" data-close-modal type="button">Cancel</button>
+        <button class="button" data-close-modal type="button">Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="command" class="command-backdrop" role="dialog" aria-modal="true">
+    <div class="command-box">
+      <div class="command-top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path></svg>
+        <input id="commandInput" type="search" placeholder="Search by component, category, Persian typography, dashboard...">
+        <button id="closeCommand" class="button small secondary" type="button">Esc</button>
+      </div>
+      <div id="commandList" class="command-list"></div>
+    </div>
+  </div>
+
+  <div id="toastZone" class="toast-zone" aria-live="polite"></div>
+
+  <script>
+    const categories = [
+      { id: "foundation", label: "Foundations", summary: "Tokens, Persian typography, layout primitives and focus states." },
+      { id: "navigation", label: "Navigation", summary: "Headers, menus, tabs, sidebars, command palette and pagination." },
+      { id: "forms", label: "Forms", summary: "Inputs, validation, pickers, tags, upload and rich editing controls." },
+      { id: "actions", label: "Actions & Feedback", summary: "Buttons, dialogs, toasts, progress, loading and copy patterns." },
+      { id: "data", label: "Data Display", summary: "Tables, charts, timelines, trees, accordions, avatars and empty states." },
+      { id: "dashboard", label: "Dashboards", summary: "Admin metrics, kanban, calendar schedules, feeds and notifications." },
+      { id: "commerce", label: "Commerce & SaaS", summary: "Pricing, cart, product, comparison and conversion blocks." },
+      { id: "motion", label: "Motion & Effects", summary: "Scroll progress, marquee, spotlight, hover tilt and snap sections." },
+      { id: "advanced", label: "Advanced Patterns", summary: "Consent, direction switching, chat, media and map-like directory UI." }
+    ];
+
+    const components = [
+      { category: "foundation", name: "Color Tokens", description: "Semantic palette for primary, accent, success, warning, danger and ink colors.", keywords: "design system theme palette", demo: `
+        <div class="mini-grid">
+          ${token("Primary", "#4f46e5")} ${token("Accent", "#d946ef")} ${token("Success", "#10b981")} ${token("Warning", "#f59e0b")} ${token("Danger", "#e11d48")} ${token("Ink", "#020617")}
+        </div>` },
+      { category: "foundation", name: "Typography Scale", description: "Display, heading, body and caption styles for readable pages.", keywords: "type scale heading body caption", demo: `
+        <div class="soft-panel">
+          <div class="eyebrow">Display</div><h2 style="font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.07em;margin:12px 0">Build interfaces with rhythm</h2>
+          <p class="muted">Readable content with balanced line-height, contrast and spacing.</p>
+        </div>` },
+      { category: "foundation", name: "Persian Open Source Font Specimens", description: "Iranian and Persian typography using Vazirmatn, Sahel, Shabnam, Naskh and Nastaliq fonts.", keywords: "fa farsi iranian rtl font Vazirmatn Sahel Shabnam Nastaliq", wide: true, demo: `
+        <div class="form-grid" dir="rtl" lang="fa">
+          <div class="soft-panel"><div class="mono muted" dir="ltr">Vazirmatn</div><p class="font-vazirmatn persian-line">طراحی رابط کاربری باید خوانا، سریع و قابل اعتماد باشد.</p></div>
+          <div class="soft-panel"><div class="mono muted" dir="ltr">Sahel</div><p class="font-sahel persian-line">صفحه های وب فارسی با فاصله گذاری دقیق زیباتر دیده می شوند.</p></div>
+          <div class="soft-panel"><div class="mono muted" dir="ltr">Shabnam</div><p class="font-shabnam persian-line">یک متن نمونه برای دکمه ها، فرم ها و داشبوردهای فارسی.</p></div>
+          <div class="soft-panel"><div class="mono muted" dir="ltr">Noto Naskh Arabic</div><p class="font-naskh persian-line">تجربه خواندن متن بلند فارسی با قلم نسخ و سطرهای آرام.</p></div>
+          <div class="soft-panel"><div class="mono muted" dir="ltr">Noto Nastaliq Urdu</div><p class="font-nastaliq persian-line">هنر تایپوگرافی فارسی در تیترهای ویژه و نقل قول ها.</p></div>
+        </div>` },
+      { category: "foundation", name: "RTL Editorial Layout", description: "Right-to-left article pattern for Persian content pages.", keywords: "rtl persian article editorial", wide: true, demo: `
+        <div class="form-grid" dir="rtl" lang="fa">
+          <div class="pricing"><p class="font-nastaliq" style="font-size:36px;line-height:1.8;margin:0">جزئیات کوچک، تجربه بزرگ می سازند.</p></div>
+          <div class="font-vazirmatn"><div class="eyebrow">الگوی مقاله</div><h3 style="font-size:32px;margin:10px 0">خوانایی برای کاربران فارسی زبان</h3><p class="muted" style="line-height:2">این نمونه جهت راست به چپ، فاصله خط، اندازه تیتر و وزن قلم را برای محتوای فارسی نمایش می دهد.</p></div>
+        </div>` },
+      { category: "foundation", name: "Responsive Layout Grid", description: "Responsive grid primitive with adaptive column spans.", keywords: "grid responsive layout", demo: `
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px" class="soft-panel">
+          <div class="soft-panel" style="grid-column:span 3;background:var(--surface-strong)">span 3</div><div class="soft-panel" style="grid-column:span 3;background:var(--surface-strong)">span 3</div><div class="soft-panel" style="grid-column:span 2;background:var(--surface-strong)">span 2</div><div class="soft-panel" style="grid-column:span 2;background:var(--surface-strong)">span 2</div><div class="soft-panel" style="grid-column:span 2;background:var(--surface-strong)">span 2</div>
+        </div>` },
+      { category: "foundation", name: "Accessible Focus States", description: "Keyboard-visible focus rings and skip targets.", keywords: "a11y focus keyboard", demo: `
+        <div style="display:flex;flex-wrap:wrap;gap:12px"><button class="button">Keyboard focus</button><button class="button secondary">Ring pattern</button><a class="button ghost" href="#catalog">Skip target</a></div>` },
+
+      { category: "navigation", name: "Sticky Header", description: "A sticky navigation pattern that remains attached to the top while scrolling.", keywords: "sticky header nav", demo: `
+        <div style="height:180px;overflow:auto;border:1px solid var(--line);border-radius:24px;background:var(--soft)"><div style="position:sticky;top:0;background:var(--surface-strong);border-bottom:1px solid var(--line);padding:14px;font-weight:900">Sticky local nav</div><div style="padding:14px;line-height:2" class="muted">Scrollable row 1<br>Scrollable row 2<br>Scrollable row 3<br>Scrollable row 4<br>Scrollable row 5<br>Scrollable row 6</div></div>` },
+      { category: "navigation", name: "Breadcrumbs", description: "Hierarchical links that clarify page location.", keywords: "breadcrumb path hierarchy", demo: `<nav style="display:flex;gap:10px;flex-wrap:wrap;font-weight:850"><a href="#">Home</a><span class="muted">/</span><a href="#catalog">Design System</a><span class="muted">/</span><strong>Components</strong></nav>` },
+      { category: "navigation", name: "Tabs", description: "Stateful tabs for preview, code and props.", keywords: "tabs segmented state", demo: `
+        <div data-tabs><div class="tabs"><button class="tab-button active" data-tab="preview">Preview</button><button class="tab-button" data-tab="code">Code</button><button class="tab-button" data-tab="props">Props</button></div><div class="soft-panel" style="margin-top:14px"><p data-panel="preview">Interactive previews help designers verify behavior.</p><p data-panel="code" class="hidden">Searchable names and descriptions help find snippets.</p><p data-panel="props" class="hidden">Expose label, variant, size and state props.</p></div></div>` },
+      { category: "navigation", name: "Sidebar App Shell", description: "Dashboard-style sidebar navigation with main content.", keywords: "sidebar dashboard admin", wide: true, demo: `
+        <div style="display:grid;grid-template-columns:minmax(150px,210px) 1fr;border:1px solid var(--line);border-radius:26px;overflow:hidden"><aside class="dark-panel" style="border-radius:0"><strong>Admin shell</strong><nav style="display:grid;gap:6px;margin-top:16px"><a class="chip" href="#">Overview</a><a class="chip" href="#">Customers</a><a class="chip" href="#">Invoices</a></nav></aside><div class="soft-panel" style="border-radius:0"><strong>Content area</strong><div class="soft-panel" style="margin-top:14px;background:var(--surface-strong);height:92px"></div></div></div>` },
+      { category: "navigation", name: "Mega Menu", description: "Large hover menu for grouped product or documentation links.", keywords: "mega menu dropdown navigation", demo: `
+        <div class="mega"><button class="button secondary">Products</button><div class="mega-menu"><a class="soft-panel" href="#"><strong>Dashboard</strong><br><span class="muted">Charts and feeds</span></a><a class="soft-panel" href="#"><strong>Commerce</strong><br><span class="muted">Checkout and cart</span></a><a class="soft-panel" href="#"><strong>Marketing</strong><br><span class="muted">Landing sections</span></a><a class="soft-panel" href="#"><strong>Content</strong><br><span class="muted">CMS blocks</span></a></div></div>` },
+      { category: "navigation", name: "Command Palette", description: "A Ctrl K search overlay for commands, pages and reusable components.", keywords: "command palette search keyboard", demo: `<div class="dark-panel"><button class="button secondary" data-action="command">Open searchable command palette</button><span class="chip" style="margin-left:10px">Ctrl K</span></div>` },
+      { category: "navigation", name: "Pagination", description: "Page navigation controls for tables, feeds and search results.", keywords: "pagination pages", demo: `<div class="pagination" style="display:flex;flex-wrap:wrap;gap:8px"><button class="button secondary small">Previous</button><button class="button small">1</button><button class="button secondary small">2</button><button class="button secondary small">3</button><button class="button secondary small">Next</button></div>` },
+      { category: "navigation", name: "Stepper", description: "Multi-step progress pattern for onboarding and checkout.", keywords: "wizard steps onboarding", demo: `<div class="form-grid"><div><span class="chip">1 Done</span><strong> Account</strong></div><div><span class="chip">2 Done</span><strong> Profile</strong></div><div><span class="chip">3 Active</span><strong> Billing</strong></div><div><span class="chip">4</span><strong> Launch</strong></div></div>` },
+
+      { category: "forms", name: "Text Inputs and Floating Labels", description: "Text, email and validated input examples.", keywords: "input label validation form", demo: `<div class="form-grid"><label><span class="label">Project name</span><input class="input" value="Nika Studio"></label><label><span class="label">Validated email</span><input class="input" type="email" value="hello@example.com" style="border-color:var(--success)"></label></div>` },
+      { category: "forms", name: "Combobox Search", description: "Searchable option picker for large select lists.", keywords: "combobox autocomplete search", demo: `<div><input class="input" list="combo-options" placeholder="Search components"><datalist id="combo-options"><option value="Command palette"><option value="Data table"><option value="Persian typography"><option value="Pricing toggle"></datalist><p class="muted">Native datalist keeps this standalone file dependency-free.</p></div>` },
+      { category: "forms", name: "Select Menus", description: "Native and segmented selects for choosing one value.", keywords: "select segment dropdown", demo: `<div class="form-grid"><label><span class="label">Native select</span><select class="select"><option>Landing page</option><option>Admin dashboard</option><option>E-commerce</option></select></label><div><span class="label">Segmented select</span><div class="tabs"><button class="seg-button">S</button><button class="seg-button active">M</button><button class="seg-button">L</button></div></div></div>` },
+      { category: "forms", name: "Checkbox Radio Switch", description: "Common binary and single-choice controls with visible states.", keywords: "checkbox radio switch", demo: `<div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center"><label><input type="checkbox" checked> Checkbox</label><label><input type="radio" name="radio-demo" checked> Radio</label><button class="button secondary small" data-action="toggle-label">Switch on</button></div>` },
+      { category: "forms", name: "Range Slider", description: "Controlled range input paired with a visual meter.", keywords: "slider range progress", demo: `<div data-range><div style="display:flex;justify-content:space-between;font-weight:900"><span>Completion</span><span data-range-value>64%</span></div><input type="range" min="0" max="100" value="64" style="width:100%;accent-color:var(--primary);margin:14px 0"><div class="progress"><span style="width:64%"></span></div></div>` },
+      { category: "forms", name: "File Upload Dropzone", description: "Drag-friendly upload target with file type guidance.", keywords: "upload file dropzone", demo: `<label class="soft-panel" style="display:grid;place-items:center;text-align:center;border:2px dashed var(--line);cursor:pointer;min-height:150px"><strong>Drop files or browse</strong><span class="muted">PDF, PNG, SVG up to 10 MB</span><input type="file" class="sr-only"></label>` },
+      { category: "forms", name: "OTP Code Inputs", description: "One-time passcode fields for verification flows.", keywords: "otp verification security", demo: `<div style="display:flex;gap:8px;flex-wrap:wrap">${Array.from({length:6}).map((_,i)=>`<input class="input" inputmode="numeric" maxlength="1" value="${i<3?i+2:""}" aria-label="Digit ${i+1}" style="width:48px;text-align:center;font-weight:950;font-size:18px">`).join("")}</div>` },
+      { category: "forms", name: "Tag Input", description: "Tokenized input that adds and removes labels.", keywords: "tags chips metadata", demo: `<div data-tags><div class="soft-panel" data-tag-list><button class="chip" data-remove-tag>React x</button><button class="chip" data-remove-tag>Tailwind x</button><button class="chip" data-remove-tag>RTL x</button><input class="input" data-tag-input placeholder="Add tag and press Enter" style="margin-top:10px"></div><button class="button secondary small" data-add-tag style="margin-top:10px">Add tag</button></div>` },
+      { category: "forms", name: "Date Picker Calendar", description: "Compact calendar grid for booking and scheduling.", keywords: "date calendar picker", demo: `<div class="calendar"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><button class="button ghost small">Prev</button><strong>March 2026</strong><button class="button ghost small">Next</button></div><div class="calendar-grid"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>${Array.from({length:35}).map((_,i)=>`<button class="${i===17?"active":""}">${i<5?24+i:i-4}</button>`).join("")}</div></div>` },
+      { category: "forms", name: "Rich Text Toolbar", description: "Formatting toolbar for CMS editors and composers.", keywords: "editor rich text toolbar", demo: `<div style="border:1px solid var(--line);border-radius:24px;overflow:hidden"><div style="display:flex;gap:4px;flex-wrap:wrap;background:var(--soft);padding:8px">${["B","I","U","H1","Link","List"].map(t=>`<button class="button secondary small">${t}</button>`).join("")}</div><div style="min-height:112px;padding:16px" class="muted">Write, format and preview content with a compact editing toolbar.</div></div>` },
+
+      { category: "actions", name: "Button System", description: "Primary, secondary, ghost, danger and disabled button states.", keywords: "button cta variant", demo: `<div style="display:flex;flex-wrap:wrap;gap:10px"><button class="button">Primary</button><button class="button secondary">Secondary</button><button class="button ghost">Ghost</button><button class="button danger">Danger</button><button class="button" disabled style="opacity:.45;cursor:not-allowed">Disabled</button></div>` },
+      { category: "actions", name: "Dropdown Menu", description: "Compact action menu for edit, duplicate, archive and delete actions.", keywords: "dropdown menu actions", demo: `<details style="position:relative;display:inline-block"><summary class="button secondary" style="list-style:none">Open menu</summary><div style="position:absolute;z-index:4;top:50px;left:0;width:220px;background:var(--surface-strong);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:8px"><button class="button ghost" style="width:100%;justify-content:flex-start">Edit</button><button class="button ghost" style="width:100%;justify-content:flex-start">Duplicate</button><button class="button ghost" style="width:100%;justify-content:flex-start">Archive</button><button class="button ghost" style="width:100%;justify-content:flex-start;color:var(--danger)">Delete</button></div></details>` },
+      { category: "actions", name: "Tooltip and Popover", description: "Small contextual overlays for explanations and rich secondary controls.", keywords: "tooltip popover overlay", demo: `<div style="display:flex;gap:12px;flex-wrap:wrap"><span style="position:relative" class="tooltip-wrap"><button class="button secondary">Hover tooltip</button><span style="position:absolute;left:50%;top:50px;transform:translateX(-50%);width:190px;background:var(--text);color:var(--bg);border-radius:14px;padding:10px;text-align:center;font-size:12px;opacity:0;pointer-events:none">Tooltips explain small actions.</span></span><details><summary class="button" style="list-style:none">Click popover</summary><div class="soft-panel" style="margin-top:10px;max-width:260px">Popovers can include text, links and controls.</div></details></div><style>.tooltip-wrap:hover span{opacity:1!important}</style>` },
+      { category: "actions", name: "Modal Dialog", description: "Blocking dialog pattern for confirmations and focused workflows.", keywords: "modal dialog confirmation", demo: `<button class="button" data-action="modal">Open dialog</button>` },
+      { category: "actions", name: "Toast Notifications", description: "Non-blocking feedback messages for save, publish and sync events.", keywords: "toast notification feedback", demo: `<button class="button" data-action="toast">Show toast</button>` },
+      { category: "actions", name: "Progress Indicators", description: "Progress bars and spinners for background work.", keywords: "progress loading spinner", demo: `<div><div style="display:flex;justify-content:space-between;font-weight:900"><span>Importing components</span><span>72%</span></div><div class="progress" style="margin:10px 0 18px"><span style="width:72%"></span></div><span style="display:inline-block;width:26px;height:26px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--primary);animation:spin 800ms linear infinite"></span><style>@keyframes spin{to{transform:rotate(360deg)}}</style></div>` },
+      { category: "actions", name: "Skeleton Loading", description: "Placeholder shapes that preserve layout while content loads.", keywords: "skeleton placeholder loading", demo: `<div style="display:grid;gap:12px"><div class="skeleton" style="height:20px;width:35%"></div><div class="skeleton" style="height:88px"></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><div class="skeleton" style="height:42px"></div><div class="skeleton" style="height:42px"></div><div class="skeleton" style="height:42px"></div></div></div>` },
+      { category: "actions", name: "Copy Code Snippet", description: "Clipboard-ready code block for documentation and developer portals.", keywords: "copy code clipboard", wide: true, demo: `<div style="border:1px solid var(--line);border-radius:24px;overflow:hidden"><pre class="dark-panel" style="border-radius:0;margin:0;overflow:auto"><code>&lt;button class=&quot;button&quot;&gt;Save&lt;/button&gt;</code></pre><div style="display:flex;justify-content:space-between;align-items:center;padding:12px"><span class="muted">Reusable code snippet</span><button class="button secondary small" data-action="copy">Copy</button></div></div>` },
+
+      { category: "data", name: "Data Table", description: "Sortable and selectable table rows for admin dashboards.", keywords: "table sort select", wide: true, demo: `<div class="table-wrap"><table><thead><tr><th><input type="checkbox"></th><th>Project</th><th>Type</th><th><button class="button ghost small" data-action="sort-table">Score</button></th></tr></thead><tbody><tr><td><input type="checkbox"></td><td><strong>Nova</strong></td><td class="muted">SaaS</td><td>82%</td></tr><tr><td><input type="checkbox"></td><td><strong>Rayan</strong></td><td class="muted">Commerce</td><td>96%</td></tr><tr><td><input type="checkbox"></td><td><strong>Atlas</strong></td><td class="muted">Dashboard</td><td>74%</td></tr></tbody></table></div>` },
+      { category: "data", name: "Charts", description: "Bar and donut chart patterns made with CSS.", keywords: "chart bar donut analytics", wide: true, demo: `<div class="form-grid"><div class="bar-chart"><div class="bar" style="height:54%"></div><div class="bar" style="height:82%"></div><div class="bar" style="height:63%"></div><div class="bar" style="height:91%"></div><div class="bar" style="height:72%"></div></div><div class="dark-panel" style="display:grid;place-items:center"><div class="donut"><span>82%</span></div></div></div>` },
+      { category: "data", name: "Accordion", description: "Expandable disclosure sections for FAQ and settings.", keywords: "accordion disclosure faq", demo: `<div style="display:grid;gap:8px"><details class="soft-panel" open><summary><strong>When to use</strong></summary><p class="muted">Use accordions for dense supporting content.</p></details><details class="soft-panel"><summary><strong>Accessibility</strong></summary><p class="muted">Keep headings semantic and buttons reachable.</p></details></div>` },
+      { category: "data", name: "Timeline", description: "Chronological milestones with status markers.", keywords: "timeline milestone history", demo: `<div class="timeline"><div class="timeline-item"><strong>Brief</strong><p class="muted">Milestone 1</p></div><div class="timeline-item"><strong>Prototype</strong><p class="muted">Milestone 2</p></div><div class="timeline-item"><strong>Launch</strong><p class="muted">Milestone 3</p></div></div>` },
+      { category: "data", name: "Tree View", description: "Nested hierarchy display for files, permissions and categories.", keywords: "tree files hierarchy", demo: `<div class="dark-panel mono">src<br>&nbsp;|- components<br>&nbsp;&nbsp;&nbsp;|- Button.html<br>&nbsp;&nbsp;&nbsp;|- DataTable.html<br>&nbsp;|- app<br>&nbsp;&nbsp;&nbsp;|- index.html</div>` },
+      { category: "data", name: "Avatar Stack", description: "Stacked collaborators with initials.", keywords: "avatar users team", demo: `<div style="display:flex;align-items:center;gap:16px"><div class="avatar-stack"><span class="avatar" style="background:#4f46e5">NA</span><span class="avatar" style="background:#d946ef">RS</span><span class="avatar" style="background:#10b981">AT</span></div><div><strong>3 collaborators</strong><p class="muted">Presence-friendly spacing.</p></div></div>` },
+      { category: "data", name: "Empty State", description: "No-data pattern with explanation and next action.", keywords: "empty zero state no data", demo: `<div class="soft-panel" style="display:grid;place-items:center;text-align:center;min-height:220px"><strong>No components selected</strong><p class="muted">Explain what happened and offer the next action.</p><button class="button">Create first item</button></div>` },
+      { category: "data", name: "Media Carousel", description: "Simple carousel with previous, next and dot indicators.", keywords: "carousel slider gallery", demo: `<div data-carousel><div class="pricing" data-slide style="min-height:190px;display:grid;place-items:center;font-size:30px;font-weight:950">Slide 1</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><button class="button secondary small" data-prev>Previous</button><span class="muted" data-dots>1 / 3</span><button class="button secondary small" data-next>Next</button></div></div>` },
+
+      { category: "dashboard", name: "KPI Row", description: "Dashboard metrics with labels, values and trend deltas.", keywords: "kpi metric dashboard", wide: true, demo: `<div class="mini-grid"><div class="soft-panel"><span class="muted">Revenue</span><h3>$128k</h3><span class="chip">+18%</span></div><div class="soft-panel"><span class="muted">Orders</span><h3>3,420</h3><span class="chip">+9%</span></div><div class="soft-panel"><span class="muted">Churn</span><h3>2.1%</h3><span class="chip">-4%</span></div></div>` },
+      { category: "dashboard", name: "Kanban Board", description: "Column-based task board for workflows and projects.", keywords: "kanban board tasks", wide: true, demo: `<div class="form-grid"><div class="soft-panel"><strong>Backlog</strong><p class="soft-panel" style="background:var(--surface-strong)">Audit components</p><p class="soft-panel" style="background:var(--surface-strong)">Write specs</p></div><div class="soft-panel"><strong>Doing</strong><p class="soft-panel" style="background:var(--surface-strong)">Prototype filters</p><p class="soft-panel" style="background:var(--surface-strong)">Test dark mode</p></div><div class="soft-panel"><strong>Done</strong><p class="soft-panel" style="background:var(--surface-strong)">Font samples</p></div></div>` },
+      { category: "dashboard", name: "Calendar Schedule", description: "Compact agenda rows for admin dashboards.", keywords: "calendar schedule agenda", demo: `<div style="display:grid;gap:10px"><div class="soft-panel"><span class="mono" style="color:var(--primary)">09:30</span> <strong>Design review</strong></div><div class="soft-panel"><span class="mono" style="color:var(--primary)">11:00</span> <strong>Dashboard QA</strong></div><div class="soft-panel"><span class="mono" style="color:var(--primary)">14:15</span> <strong>Release notes</strong></div></div>` },
+      { category: "dashboard", name: "Notification Center", description: "Grouped notifications with status dots.", keywords: "notifications bell updates", demo: `<div style="display:grid;gap:10px"><div class="soft-panel"><span class="chip">new</span> <strong>Deployment finished</strong><p class="muted">Just now</p></div><div class="soft-panel"><span class="chip">team</span> <strong>New comment</strong><p class="muted">2 minutes ago</p></div></div>` },
+      { category: "dashboard", name: "Activity Feed", description: "Recent product activity with actors and time context.", keywords: "feed activity history", demo: `<div style="display:grid;gap:14px"><div><strong>Mina updated typography</strong><p class="muted">2 hours ago</p></div><div><strong>Arash approved invoice</strong><p class="muted">3 hours ago</p></div><div><strong>Sara merged pull request</strong><p class="muted">Yesterday</p></div></div>` },
+
+      { category: "commerce", name: "Pricing Toggle", description: "Monthly and annual pricing switcher for SaaS plans.", keywords: "pricing toggle saas", demo: `<div data-pricing><div class="tabs"><button class="seg-button">Monthly</button><button class="seg-button active">Annual</button></div><div class="pricing" style="margin-top:14px"><span>Pro workspace</span><h3 style="font-size:52px;margin:8px 0" data-price>$19</h3><p>per seat, per month</p><button class="button secondary">Start trial</button></div></div>` },
+      { category: "commerce", name: "Product Quick View", description: "Product preview with visual, price and add-to-cart action.", keywords: "product commerce cart", wide: true, demo: `<div class="form-grid"><div style="aspect-ratio:1;border-radius:28px;background:radial-gradient(circle at 40% 30%,#f5d0fe,transparent 35%),linear-gradient(135deg,#4f46e5,#0f172a)"></div><div><div class="eyebrow">Featured</div><h3>Aurora UI kit</h3><p class="muted">Quick view panels summarize product visuals, price, ratings and action.</p><div style="display:flex;justify-content:space-between;align-items:center"><strong style="font-size:28px">$48</strong><button class="button">Add to cart</button></div></div></div>` },
+      { category: "commerce", name: "Cart Summary", description: "Order total breakdown with subtotal, tax and discount.", keywords: "cart checkout summary", demo: `<div class="soft-panel"><p><span>Subtotal</span><strong style="float:right">$96</strong></p><p><span>Tax</span><strong style="float:right">$7</strong></p><p><span>Discount</span><strong style="float:right">-$12</strong></p><hr style="border:0;border-top:1px solid var(--line)"><p><strong>Total</strong><strong style="float:right">$91</strong></p><button class="button" style="width:100%">Checkout</button></div>` },
+      { category: "commerce", name: "Feature Comparison", description: "Plan comparison matrix for SaaS upgrade flows.", keywords: "comparison pricing table", wide: true, demo: `<div class="table-wrap"><table><thead><tr><th>Feature</th><th>Free</th><th>Pro</th></tr></thead><tbody><tr><td>Unlimited projects</td><td>Yes</td><td>Yes</td></tr><tr><td>Team roles</td><td>No</td><td>Yes</td></tr><tr><td>Audit logs</td><td>No</td><td>Yes</td></tr></tbody></table></div>` },
+      { category: "commerce", name: "Testimonial", description: "Social proof block for landing pages and case studies.", keywords: "testimonial quote landing", demo: `<figure class="dark-panel"><blockquote style="font-size:21px;line-height:1.55;margin:0"><strong>This reference page lets our team search for common UI patterns without leaving the project.</strong></blockquote><figcaption class="muted" style="margin-top:18px">A design systems lead</figcaption></figure>` },
+
+      { category: "motion", name: "Scroll Progress", description: "Page-progress indicator inspired by scroll-driven animation techniques.", keywords: "scroll progress animation", demo: `<div><div class="progress"><span style="width:75%"></span></div><p class="muted">The real page has a sticky top progress bar driven by window scroll.</p></div>` },
+      { category: "motion", name: "Infinite Marquee", description: "Continuous horizontal motion for logos, tags or features.", keywords: "marquee loop motion", demo: `<div class="dark-panel" style="overflow:hidden"><div class="marquee-track"><span>Cards</span><span>Forms</span><span>Charts</span><span>Dialogs</span><span>RTL</span><span>Motion</span><span>Tables</span><span>Pricing</span><span>Cards</span><span>Forms</span><span>Charts</span><span>Dialogs</span></div></div>` },
+      { category: "motion", name: "Animated Spotlight", description: "Moving radial light effect for hero and premium panels.", keywords: "spotlight gradient motion", wide: true, demo: `<div class="spotlight"><div class="eyebrow" style="color:#c7d2fe">Animated spotlight</div><h3 style="font-size:34px;max-width:520px">A moving radial glow adds depth without extra markup.</h3></div>` },
+      { category: "motion", name: "Hover Tilt Interaction", description: "Tactile hover transform for buttons and product previews.", keywords: "hover tilt transform", demo: `<div style="display:grid;place-items:center;padding:18px"><button class="tilt">Hover tilt card</button></div>` },
+      { category: "motion", name: "Scroll Snap Showcase", description: "Horizontal snap sections for mobile tours and galleries.", keywords: "scroll snap carousel mobile", demo: `<div class="snap-row"><section class="snap-panel" style="background:#4f46e5">Intro</section><section class="snap-panel" style="background:#d946ef">Details</section><section class="snap-panel" style="background:#10b981">Confirm</section></div>` },
+
+      { category: "advanced", name: "Consent Banner", description: "Cookie and privacy preference banner with equal choices.", keywords: "privacy cookie consent", demo: `<div data-consent class="soft-panel"><strong>Privacy preferences</strong><p class="muted">Explain cookie use clearly and give users equal choices.</p><button class="button small" data-action="consent">Accept</button> <button class="button secondary small" data-action="consent">Manage</button> <button class="button ghost small" data-action="consent">Reject</button></div>` },
+      { category: "advanced", name: "Language Direction Switcher", description: "Bidirectional interface pattern for Persian RTL and English LTR content.", keywords: "i18n rtl ltr persian", demo: `<div data-dir-demo><button class="button secondary small" data-action="toggle-dir">Switch to LTR</button><div class="soft-panel font-vazirmatn" dir="rtl" lang="fa" style="margin-top:12px;text-align:right"><strong>راست به چپ</strong><p>کامپوننت ها باید برای زبان فارسی هم درست کار کنند.</p></div></div>` },
+      { category: "advanced", name: "Chat Widget", description: "Support widget with open, close and message input states.", keywords: "chat support widget", wide: true, demo: `<div data-chat class="soft-panel" style="min-height:220px"><div class="soft-panel" style="margin-left:auto;max-width:330px;background:var(--surface-strong)"><div style="display:flex;justify-content:space-between"><strong>Support</strong><button class="button ghost small" data-action="toggle-chat">Close</button></div><p class="soft-panel">How can we help you build faster?</p><input class="input" placeholder="Type a message"></div></div>` },
+      { category: "advanced", name: "Audio Player", description: "Compact media controls with play state and progress.", keywords: "audio media player", demo: `<div class="dark-panel" style="display:flex;align-items:center;gap:14px"><button class="button secondary" data-action="play">Play</button><div style="flex:1"><strong>Audio preview control</strong><div class="progress" style="margin-top:8px;background:rgba(255,255,255,.15)"><span style="width:34%"></span></div></div><span class="mono muted">01:24</span></div>` },
+      { category: "advanced", name: "Map Pin Directory", description: "Map-like location pins paired with a directory list.", keywords: "map pins directory locations", wide: true, demo: `<div class="form-grid"><div class="map"><button class="pin" style="left:20%;top:35%">A</button><button class="pin" style="left:54%;top:22%">B</button><button class="pin" style="left:70%;top:62%">C</button></div><div style="display:grid;gap:10px"><button class="button secondary">Tehran Studio</button><button class="button secondary">Shiraz Lab</button><button class="button secondary">Tabriz Hub</button></div></div>` }
+    ];
+
+    const state = { category: "all", query: "", commandQuery: "" };
+
+    function token(name, color) {
+      return `<div class="token"><span class="swatch" style="background:${color}"></span><span><strong>${name}</strong><br><span class="mono muted">${color}</span></span></div>`;
+    }
+
+    function slug(value) {
+      return value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[char]));
+    }
+
+    function filteredComponents() {
+      const q = state.query.trim().toLowerCase();
+      return components.filter(item => {
+        const inCategory = state.category === "all" || item.category === state.category;
+        const searchable = [item.name, item.description, item.keywords, categoryLabel(item.category)].join(" ").toLowerCase();
+        return inCategory && (!q || searchable.includes(q));
+      });
+    }
+
+    function categoryLabel(id) {
+      return (categories.find(category => category.id === id) || {}).label || id;
+    }
+
+    function renderCategories() {
+      const nav = document.getElementById("categoryNav");
+      const buttons = [{ id: "all", label: "All categories" }, ...categories].map(category => `<button class="category-button ${state.category === category.id ? "active" : ""}" data-category="${category.id}" data-id="${category.id}" type="button">${category.label}</button>`).join("");
+      nav.innerHTML = buttons;
+    }
+
+    function renderCatalog() {
+      const visible = filteredComponents();
+      document.getElementById("resultCount").textContent = `${visible.length} searchable demos`;
+      document.getElementById("showingCount").textContent = `Showing ${visible.length} of ${components.length} components`;
+      const mount = document.getElementById("catalogMount");
+      const html = categories.map(category => {
+        const items = visible.filter(item => item.category === category.id);
+        if (!items.length) return "";
+        return `<section id="field-${category.id}" class="field-section">
+          <div class="field-head"><div><div class="eyebrow">Component field</div><h2>${category.label}</h2><p>${category.summary}</p></div><strong class="muted">${items.length} items</strong></div>
+          <div class="component-grid">${items.map(componentCard).join("")}</div>
+        </section>`;
+      }).join("");
+      mount.innerHTML = html || `<div class="soft-panel" style="text-align:center;padding:52px"><h3>No matching components</h3><p class="muted">Try searching for table, modal, Persian, dashboard, motion or checkout.</p><button class="button" data-action="reset-filters">Reset filters</button></div>`;
+    }
+
+    function componentCard(item) {
+      const category = categoryLabel(item.category);
+      const id = slug(item.name);
+      return `<article id="${id}" class="component-card ${item.wide ? "wide" : ""}" data-subject-category="${escapeHtml(category)}" data-component-name="${escapeHtml(item.name)}" data-component-description="${escapeHtml(item.description)}" data-keywords="${escapeHtml(item.keywords)}">
+        <div class="component-meta"><div><small>Subject category: ${category}</small><h3>Component name: ${item.name}</h3><p>Short description: ${item.description}</p></div><a class="anchor-link" href="#${id}">Anchor #</a></div>
+        <div class="demo">${item.demo}</div>
+      </article>`;
+    }
+
+    function renderCommandList() {
+      const q = state.commandQuery.trim().toLowerCase();
+      const list = document.getElementById("commandList");
+      const matches = components.filter(item => [item.name, item.description, item.keywords, categoryLabel(item.category)].join(" ").toLowerCase().includes(q)).slice(0, 10);
+      list.innerHTML = matches.length ? matches.map(item => `<button class="command-item" data-jump="${slug(item.name)}" type="button"><small class="eyebrow">${categoryLabel(item.category)}</small><strong style="display:block;margin-top:4px">${item.name}</strong><span class="muted">${item.description}</span></button>`).join("") : `<p class="muted" style="text-align:center;padding:28px">No components found.</p>`;
+    }
+
+    function openCommand() {
+      document.getElementById("command").classList.add("open");
+      state.commandQuery = "";
+      document.getElementById("commandInput").value = "";
+      renderCommandList();
+      setTimeout(() => document.getElementById("commandInput").focus(), 30);
+    }
+
+    function closeCommand() {
+      document.getElementById("command").classList.remove("open");
+    }
+
+    function toast(message) {
+      const zone = document.getElementById("toastZone");
+      const el = document.createElement("div");
+      el.className = "toast";
+      el.innerHTML = `<strong>${message}</strong><br><span class="muted">Toast notification demo</span>`;
+      zone.appendChild(el);
+      setTimeout(() => el.remove(), 3200);
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.getElementById("themeToggle").textContent = theme === "dark" ? "Light mode" : "Dark mode";
+      localStorage.setItem("component-atlas-theme", theme);
+    }
+
+    function wireInteractions() {
+      document.addEventListener("click", event => {
+        const target = event.target.closest("button, a");
+        if (!target) return;
+        const category = target.dataset.category;
+        if (category) {
+          state.category = category;
+          renderCategories();
+          renderCatalog();
+          return;
+        }
+        const action = target.dataset.action;
+        if (action === "command") openCommand();
+        if (action === "modal") document.getElementById("modal").classList.add("open");
+        if (action === "toast") toast("Saved to component reference");
+        if (action === "copy") {
+          const code = "<button class='button'>Save</button>";
+          if (navigator.clipboard) navigator.clipboard.writeText(code);
+          target.textContent = "Copied";
+          setTimeout(() => target.textContent = "Copy", 1200);
+        }
+        if (action === "reset-filters") { state.query = ""; state.category = "all"; document.getElementById("searchInput").value = ""; renderCategories(); renderCatalog(); }
+        if (action === "toggle-label") target.textContent = target.textContent.includes("on") ? "Switch off" : "Switch on";
+        if (action === "consent") {
+          const box = target.closest("[data-consent]");
+          box.innerHTML = `<strong>Preference saved.</strong> <button class="button secondary small" data-action="reset-consent">Reset consent banner</button>`;
+        }
+        if (action === "reset-consent") {
+          target.closest("[data-consent]").innerHTML = `<strong>Privacy preferences</strong><p class="muted">Explain cookie use clearly and give users equal choices.</p><button class="button small" data-action="consent">Accept</button> <button class="button secondary small" data-action="consent">Manage</button> <button class="button ghost small" data-action="consent">Reject</button>`;
+        }
+        if (action === "toggle-dir") {
+          const box = target.closest("[data-dir-demo]").querySelector(".soft-panel");
+          const rtl = box.getAttribute("dir") === "rtl";
+          box.setAttribute("dir", rtl ? "ltr" : "rtl");
+          box.style.textAlign = rtl ? "left" : "right";
+          box.innerHTML = rtl ? `<strong>Left to right</strong><p>Components should adapt to direction changes.</p>` : `<strong>راست به چپ</strong><p>کامپوننت ها باید برای زبان فارسی هم درست کار کنند.</p>`;
+          target.textContent = rtl ? "Switch to RTL" : "Switch to LTR";
+        }
+        if (action === "toggle-chat") {
+          const chat = target.closest("[data-chat]");
+          chat.innerHTML = `<button class="button" data-action="open-chat">Open chat</button>`;
+        }
+        if (action === "open-chat") {
+          target.closest("[data-chat]").innerHTML = `<div class="soft-panel" style="margin-left:auto;max-width:330px;background:var(--surface-strong)"><div style="display:flex;justify-content:space-between"><strong>Support</strong><button class="button ghost small" data-action="toggle-chat">Close</button></div><p class="soft-panel">How can we help you build faster?</p><input class="input" placeholder="Type a message"></div>`;
+        }
+        if (action === "play") target.textContent = target.textContent === "Play" ? "Pause" : "Play";
+        if (target.hasAttribute("data-close-modal")) document.getElementById("modal").classList.remove("open");
+        if (target.hasAttribute("data-jump")) {
+          const id = target.dataset.jump;
+          closeCommand();
+          setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
+        }
+      });
+
+      document.addEventListener("click", event => {
+        const tab = event.target.closest("[data-tab]");
+        if (tab) {
+          const root = tab.closest("[data-tabs]");
+          root.querySelectorAll(".tab-button").forEach(btn => btn.classList.toggle("active", btn === tab));
+          root.querySelectorAll("[data-panel]").forEach(panel => panel.classList.toggle("hidden", panel.dataset.panel !== tab.dataset.tab));
+        }
+        const seg = event.target.closest(".seg-button");
+        if (seg && !seg.hasAttribute("data-tab")) {
+          seg.parentElement.querySelectorAll(".seg-button").forEach(btn => btn.classList.toggle("active", btn === seg));
+          const price = seg.closest("[data-pricing]")?.querySelector("[data-price]");
+          if (price) price.textContent = seg.textContent.trim() === "Annual" ? "$19" : "$24";
+        }
+      });
+
+      document.addEventListener("input", event => {
+        const range = event.target.closest("[data-range] input[type='range']");
+        if (range) {
+          const root = range.closest("[data-range]");
+          root.querySelector("[data-range-value]").textContent = `${range.value}%`;
+          root.querySelector(".progress span").style.width = `${range.value}%`;
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openCommand(); }
+        if (event.key === "Escape") { closeCommand(); document.getElementById("modal").classList.remove("open"); }
+        const tagInput = event.target.closest("[data-tag-input]");
+        if (tagInput && event.key === "Enter") { event.preventDefault(); addTag(tagInput); }
+        if (event.key === "/" && !["INPUT", "TEXTAREA"].includes(event.target.tagName)) { event.preventDefault(); document.getElementById("searchInput").focus(); }
+      });
+
+      document.addEventListener("click", event => {
+        const add = event.target.closest("[data-add-tag]");
+        if (add) addTag(add.closest("[data-tags]").querySelector("[data-tag-input]"));
+        const remove = event.target.closest("[data-remove-tag]");
+        if (remove) remove.remove();
+        const carouselButton = event.target.closest("[data-carousel] [data-prev], [data-carousel] [data-next]");
+        if (carouselButton) updateCarousel(carouselButton.closest("[data-carousel]"), carouselButton.hasAttribute("data-next") ? 1 : -1);
+      });
+    }
+
+    function addTag(input) {
+      const value = input.value.trim();
+      if (!value) return;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "chip";
+      button.dataset.removeTag = "";
+      button.textContent = `${value} x`;
+      input.parentElement.insertBefore(button, input);
+      input.value = "";
+    }
+
+    function updateCarousel(root, dir) {
+      const colors = ["linear-gradient(135deg,#4f46e5,#d946ef)", "linear-gradient(135deg,#d946ef,#e11d48)", "linear-gradient(135deg,#10b981,#84cc16)"];
+      const current = Number(root.dataset.index || 0);
+      const next = (current + dir + 3) % 3;
+      root.dataset.index = next;
+      root.querySelector("[data-slide]").style.background = colors[next];
+      root.querySelector("[data-slide]").textContent = `Slide ${next + 1}`;
+      root.querySelector("[data-dots]").textContent = `${next + 1} / 3`;
+    }
+
+    function updateScrollProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0;
+      document.getElementById("scrollProgress").style.width = `${progress}%`;
+    }
+
+    function init() {
+      const savedTheme = localStorage.getItem("component-atlas-theme");
+      applyTheme(savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+      document.getElementById("themeToggle").addEventListener("click", () => applyTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"));
+      document.getElementById("searchInput").addEventListener("input", event => { state.query = event.target.value; renderCatalog(); });
+      document.getElementById("openCommand").addEventListener("click", openCommand);
+      document.getElementById("closeCommand").addEventListener("click", closeCommand);
+      document.getElementById("commandInput").addEventListener("input", event => { state.commandQuery = event.target.value; renderCommandList(); });
+      document.getElementById("heroMarquee").innerHTML = ["Shadcn-style primitives", "ReadyMadeUI patterns", "Dashboard templates", "Motion effects", "Persian fonts", "SaaS sections", "Admin components", "Hard-to-build UI", "Shadcn-style primitives", "ReadyMadeUI patterns", "Dashboard templates", "Motion effects"].map(item => `<span>${item}</span>`).join("");
+      renderCategories();
+      renderCatalog();
+      renderCommandList();
+      wireInteractions();
+      updateScrollProgress();
+      window.addEventListener("scroll", updateScrollProgress, { passive: true });
+      window.addEventListener("resize", updateScrollProgress);
+    }
+
+    init();
+  </script>
+</body>
+</html>

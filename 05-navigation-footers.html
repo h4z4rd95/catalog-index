@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ناوبری و فوتر — کیت UI فارسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg: #0d0f17; --bg2: #151821; --bg3: #1c1f2e;
+  --card: #1a1d2b; --text: #e8eaf0; --text2: #9ea0b0; --text3: #5f6278;
+  --border: #252839;
+  --accent: #6c5ce7; --accent2: #fd79a8; --accent3: #00cec9;
+  --success: #00b894; --danger: #e17055; --warning: #fdcb6e; --info: #0984e3;
+  --font: 'Vazirmatn', sans-serif;
+  --radius: 12px; --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  line-height: 1.8;
+}
+a { color: var(--accent); text-decoration: none; }
+::selection { background: var(--accent); color: white; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.section-title {
+  text-align:center; padding:60px 24px 40px;
+}
+.section-title .tag {
+  display:inline-block; background:rgba(108,92,231,0.15); color:var(--accent);
+  padding:4px 16px; border-radius:20px; font-size:0.75rem; font-weight:600; margin-bottom:12px;
+}
+.section-title h2 { font-size:2rem; font-weight:800; margin-bottom:8px; }
+.section-title p { color:var(--text2); font-size:0.9rem; }
+
+/* Demo Box */
+.demo-wrap {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--radius-lg); margin-bottom:40px; overflow:hidden;
+}
+.demo-wrap .demo-header {
+  padding:16px 24px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.demo-wrap .demo-header h3 { font-size:1rem; font-weight:700; }
+.demo-wrap .demo-header span { font-size:0.78rem; color:var(--text3); }
+.demo-body { padding:24px; }
+
+/* ========= NAV 1: MEGA MENU ========= */
+.mega-menu {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+}
+.mega-menu nav {
+  display:flex; align-items:center; padding:0 24px; height:60px;
+  gap:4px; border-bottom:1px solid var(--border);
+}
+.mega-menu nav a {
+  padding:8px 18px; border-radius:8px; font-size:0.85rem; font-weight:500;
+  color:var(--text2); transition:var(--transition);
+}
+.mega-menu nav a:hover, .mega-menu nav a.active {
+  background:rgba(108,92,231,0.1); color:var(--accent);
+}
+.mega-menu .mega-content {
+  display:none; grid-template-columns:repeat(4,1fr);
+  gap:24px; padding:32px 24px;
+}
+.mega-menu .mega-content.open { display:grid; }
+.mega-menu .mega-col h5 {
+  font-size:0.82rem; font-weight:700; color:var(--text);
+  margin-bottom:12px;
+}
+.mega-menu .mega-col a {
+  display:block; padding:6px 0; font-size:0.82rem; color:var(--text2);
+  transition:var(--transition);
+}
+.mega-menu .mega-col a:hover { color:var(--accent); padding-right:4px; }
+
+/* ========= NAV 2: STICKY SHRINK ========= */
+.nav-shrink {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); transition:var(--transition);
+}
+.nav-shrink.scrolled {
+  position:sticky; top:0; z-index:100;
+  border-radius:0; border-left:none; border-right:none;
+}
+.nav-shrink .ns-inner {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 24px; height:70px; transition:height var(--transition);
+}
+.nav-shrink.scrolled .ns-inner { height:56px; }
+.nav-shrink .ns-logo { font-weight:800; color:var(--accent); font-size:1.2rem; }
+.nav-shrink .ns-links { display:flex; gap:4px; }
+.nav-shrink .ns-links a {
+  padding:6px 16px; border-radius:8px; font-size:0.85rem; color:var(--text2); transition:var(--transition);
+}
+.nav-shrink .ns-links a:hover { background:rgba(108,92,231,0.1); color:var(--accent); }
+.nav-shrink .ns-cta { padding:8px 20px; border-radius:8px; background:var(--accent); color:white; font-size:0.82rem; }
+
+/* ========= NAV 3: DROPDOWN ========= */
+.dropdown-nav {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+}
+.dropdown-nav .dn-inner {
+  display:flex; align-items:center; gap:24px; padding:0 24px; height:60px;
+}
+.dropdown-nav .dn-links { display:flex; gap:4px; flex:1; }
+.dropdown-nav .dn-links a {
+  padding:8px 16px; border-radius:8px; font-size:0.85rem; color:var(--text2); transition:var(--transition);
+  position:relative;
+}
+.dropdown-nav .dn-links a:hover { background:rgba(108,92,231,0.1); color:var(--accent); }
+.dropdown-nav .dn-links a .arrow { font-size:0.6rem; margin-right:4px; }
+.dropdown-nav .dn-dropdown {
+  display:none; position:absolute; top:100%; right:0;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:12px; min-width:200px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.3); z-index:100;
+}
+.dropdown-nav .dn-links a:hover .dn-dropdown { display:block; }
+.dropdown-nav .dn-dropdown a {
+  display:block; padding:8px 12px; border-radius:8px;
+}
+.dropdown-nav .dn-right { display:flex; align-items:center; gap:12px; }
+
+/* ========= NAV 4: TABS NAV ========= */
+.tabs-nav {
+  display:flex; gap:0; border-bottom:2px solid var(--border);
+  margin-bottom:16px;
+}
+.tabs-nav button {
+  padding:10px 22px; background:none; border:none; font-family:var(--font);
+  font-size:0.88rem; font-weight:600; color:var(--text3);
+  cursor:pointer; transition:var(--transition);
+  border-bottom:2px solid transparent; margin-bottom:-2px;
+}
+.tabs-nav button.active { color:var(--accent); border-bottom-color:var(--accent); }
+.tabs-nav button:hover { color:var(--text); }
+
+/* ========= BREADCRUMB ========= */
+.breadcrumb-demo {
+  display:flex; align-items:center; gap:8px; font-size:0.85rem;
+  color:var(--text3); flex-wrap:wrap;
+}
+.breadcrumb-demo a { color:var(--text2); }
+.breadcrumb-demo a:hover { color:var(--accent); }
+.breadcrumb-demo .sep { color:var(--text3); font-size:0.7rem; }
+
+/* ========= PAGINATION ========= */
+.pagination-demo {
+  display:flex; gap:4px; align-items:center; flex-wrap:wrap;
+}
+.pagination-demo a {
+  display:flex; align-items:center; justify-content:center;
+  width:38px; height:38px; border-radius:8px;
+  border:1px solid var(--border); color:var(--text2);
+  font-size:0.85rem; font-weight:500; transition:var(--transition);
+}
+.pagination-demo a:hover, .pagination-demo a.active {
+  background:var(--accent); color:white; border-color:var(--accent);
+}
+.pagination-demo .dots { color:var(--text3); padding:0 4px; }
+
+/* ========= SIDEBAR MENU ========= */
+.sidebar-menu {
+  display:flex; border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden; min-height:300px;
+}
+.sidebar-menu .sm-side {
+  width:220px; background:var(--bg3); padding:16px;
+  border-left:1px solid var(--border); flex-shrink:0;
+}
+.sidebar-menu .sm-side .sm-section {
+  font-size:0.65rem; font-weight:600; color:var(--text3);
+  text-transform:uppercase; letter-spacing:1px;
+  padding:8px 12px 4px; margin-top:8px;
+}
+.sidebar-menu .sm-side a {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px; border-radius:8px; font-size:0.85rem;
+  color:var(--text2); transition:var(--transition);
+  margin-bottom:2px;
+}
+.sidebar-menu .sm-side a:hover, .sidebar-menu .sm-side a.active {
+  background:rgba(108,92,231,0.1); color:var(--accent);
+}
+.sidebar-menu .sm-main {
+  flex:1; padding:32px; display:flex;
+  align-items:center; justify-content:center;
+  color:var(--text3); font-size:0.9rem;
+}
+
+/* ========= FOOTER 1: FULL ========= */
+.footer-full {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:48px 32px 24px;
+}
+.footer-full .fgrid {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:32px; margin-bottom:32px;
+}
+.footer-full h5 { font-size:0.9rem; font-weight:700; margin-bottom:16px; }
+.footer-full p { font-size:0.82rem; color:var(--text2); line-height:1.8; }
+.footer-full ul { list-style:none; }
+.footer-full ul li { margin-bottom:8px; }
+.footer-full ul li a { font-size:0.82rem; color:var(--text2); transition:var(--transition); }
+.footer-full ul li a:hover { color:var(--accent); }
+.footer-full .social-links { display:flex; gap:8px; margin-top:16px; }
+.footer-full .social-links a {
+  width:38px; height:38px; border-radius:50%;
+  background:var(--bg3); display:flex; align-items:center;
+  justify-content:center; color:var(--text2); transition:var(--transition);
+}
+.footer-full .social-links a:hover { background:var(--accent); color:white; }
+.footer-full .fbottom {
+  border-top:1px solid var(--border); padding-top:20px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:0.8rem; color:var(--text3); flex-wrap:wrap; gap:12px;
+}
+
+/* ========= FOOTER 2: SIMPLE ========= */
+.footer-simple {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:24px;
+  text-align:center;
+}
+.footer-simple .fs-logo { font-size:1.2rem; font-weight:800; color:var(--accent); margin-bottom:8px; }
+.footer-simple .fs-links { display:flex; gap:16px; justify-content:center; margin-bottom:12px; flex-wrap:wrap; }
+.footer-simple .fs-links a { font-size:0.85rem; color:var(--text2); }
+.footer-simple .fs-links a:hover { color:var(--accent); }
+.footer-simple .fs-copy { font-size:0.78rem; color:var(--text3); }
+
+/* ========= FOOTER 3: DARK WITH NEWSLETTER ========= */
+.footer-newsletter {
+  background:linear-gradient(135deg, var(--bg), #1a1d2b);
+  border:1px solid var(--border); border-radius:var(--radius-lg); padding:48px 32px;
+  position:relative; overflow:hidden;
+}
+.footer-newsletter::before {
+  content:''; position:absolute; width:300px; height:300px;
+  background:radial-gradient(circle, rgba(108,92,231,0.08), transparent);
+  left:-100px; top:-100px;
+}
+.footer-newsletter .fn-inner {
+  position:relative; max-width:500px; margin:0 auto; text-align:center;
+}
+.footer-newsletter h3 { font-size:1.4rem; font-weight:800; margin-bottom:8px; }
+.footer-newsletter p { color:var(--text2); font-size:0.88rem; margin-bottom:20px; }
+.footer-newsletter .fn-form {
+  display:flex; gap:8px; max-width:420px; margin:0 auto;
+}
+.footer-newsletter .fn-form input {
+  flex:1; padding:12px 16px; border-radius:var(--radius);
+  border:1px solid var(--border); background:var(--bg2);
+  font-family:var(--font); font-size:0.88rem; color:var(--text); outline:none;
+}
+.footer-newsletter .fn-form input:focus { border-color:var(--accent); }
+.footer-newsletter .fn-form button {
+  padding:12px 24px; border-radius:var(--radius);
+  background:var(--accent); color:white; border:none;
+  font-family:var(--font); font-weight:600; cursor:pointer; transition:var(--transition);
+}
+.footer-newsletter .fn-form button:hover { background:#5a4bd1; }
+.footer-newsletter .fn-bottom {
+  margin-top:32px; padding-top:20px; border-top:1px solid var(--border);
+  display:flex; justify-content:center; gap:24px; font-size:0.78rem; color:var(--text3); flex-wrap:wrap;
+}
+
+/* ========= RESPONSIVE ========= */
+@media(max-width:768px) {
+  .mega-menu .mega-content { grid-template-columns:1fr 1fr; }
+  .footer-full .fgrid { grid-template-columns:1fr 1fr; }
+  .sidebar-menu .sm-side { width:60px; }
+  .sidebar-menu .sm-side a span { display:none; }
+  .sidebar-menu .sm-side .sm-section { display:none; }
+  .sidebar-menu .sm-side a { justify-content:center; }
+  .nav-shrink .ns-links { display:none; }
+}
+@media(max-width:480px) {
+  .mega-menu .mega-content { grid-template-columns:1fr; }
+  .footer-full .fgrid { grid-template-columns:1fr; }
+  .footer-newsletter .fn-form { flex-direction:column; }
+  .pagination-demo a { width:32px; height:32px; font-size:0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="section-title">
+    <span class="tag">ناوبری</span>
+    <h2>منوها و ناوبری</h2>
+    <p>۶ نوع منوی ناوبری مختلف برای وب‌سایت و اپلیکیشن</p>
+  </div>
+
+  <!-- NAV 1: Classic Nav with simple style -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>ناوبری کلاسیک</h3><span>Classic Nav</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--card);border-radius:0;">
+        <span style="font-weight:800;color:var(--accent);font-size:1.1rem;"><i class="fas fa-crown"></i> لوگو</span>
+        <div style="display:flex;gap:2px;">
+          <a href="#" style="padding:8px 18px;border-radius:8px;font-size:0.85rem;color:var(--text2);">خانه</a>
+          <a href="#" style="padding:8px 18px;border-radius:8px;font-size:0.85rem;color:var(--text2);">محصولات</a>
+          <a href="#" style="padding:8px 18px;border-radius:8px;font-size:0.85rem;color:var(--accent);background:rgba(108,92,231,0.1);">خدمات</a>
+          <a href="#" style="padding:8px 18px;border-radius:8px;font-size:0.85rem;color:var(--text2);">بلاگ</a>
+          <a href="#" style="padding:8px 18px;border-radius:8px;font-size:0.85rem;color:var(--text2);">تماس</a>
+        </div>
+        <button style="padding:8px 22px;border-radius:8px;background:var(--accent);color:white;border:none;font-family:var(--font);font-weight:600;font-size:0.82rem;cursor:pointer;">ورود</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV 2: Mega Menu -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>مگا منو (Mega Menu)</h3><span>با زیرمنوهای گروه‌بندی شده</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="mega-menu">
+        <nav>
+          <a href="#" class="active" onclick="showMega(event, 'm1')">داشبورد</a>
+          <a href="#" onclick="showMega(event, 'm2')">فروشگاه</a>
+          <a href="#" onclick="showMega(event, 'm3')">ابزارها</a>
+          <a href="#" onclick="showMega(event, 'm4')">تنظیمات</a>
+        </nav>
+        <div class="mega-content open" id="m1">
+          <div class="mega-col"><h5>آمار</h5><a href="#">نمودار فروش</a><a href="#">گزارشات</a><a href="#">تحلیل داده</a><a href="#">پیش‌بینی</a></div>
+          <div class="mega-col"><h5>کاربران</h5><a href="#">لیست کاربران</a><a href="#">مدیریت نقش‌ها</a><a href="#">دسترسی‌ها</a><a href="#">فعالیت‌ها</a></div>
+          <div class="mega-col"><h5>محصولات</h5><a href="#">مدیریت محصولات</a><a href="#">دسته‌بندی</a><a href="#">برندها</a><a href="#">تخفیف‌ها</a></div>
+          <div class="mega-col"><h5>سیستم</h5><a href="#">لاگ سیستم</a><a href="#">پشتیبان‌گیری</a><a href="#">به‌روزرسانی</a><a href="#">تنظیمات</a></div>
+        </div>
+        <div class="mega-content" id="m2">
+          <div class="mega-col"><h5>فروشگاه</h5><a href="#">سفارشات</a><a href="#">پرداخت‌ها</a><a href="#">حمل و نقل</a><a href="#">مرجوعی</a></div>
+          <div class="mega-col"><h5>کاتالوگ</h5><a href="#">محصولات جدید</a><a href="#">پرفروش‌ترین</a><a href="#">تخفیف‌دار</a><a href="#">پیشنهادات</a></div>
+        </div>
+        <div class="mega-content" id="m3">
+          <div class="mega-col"><h5>ابزارها</h5><a href="#">ویرایشگر</a><a href="#">تولید محتوا</a><a href="#">SEO</a><a href="#">آنالیز</a></div>
+          <div class="mega-col"><h5>یکپارچه‌سازی</h5><a href="#">API</a><a href="#">Webhook</a><a href="#">اتصالات</a><a href="#">افزونه‌ها</a></div>
+        </div>
+        <div class="mega-content" id="m4">
+          <div class="mega-col"><h5>عمومی</h5><a href="#">پروفایل</a><a href="#">تنظیمات حساب</a><a href="#">اعلان‌ها</a><a href="#">حریم خصوصی</a></div>
+          <div class="mega-col"><h5>پیشرفته</h5><a href="#">تنظیمات ایمیل</a><a href="#">Logs</a><a href="#">محدودیت‌ها</a><a href="#">Backup</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV 3: Sticky Shrink Nav -->
+  <div class="demo-wrap" id="shrinkDemo">
+    <div class="demo-header"><h3>ناوبری جمع‌شونده</h3><span>Sticky Shrink Nav — هنگام اسکرول کوچک می‌شود</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="nav-shrink" id="shrinkNav">
+        <div class="ns-inner">
+          <span class="ns-logo"><i class="fas fa-crown"></i> برند من</span>
+          <div class="ns-links">
+            <a href="#">خانه</a>
+            <a href="#">ویژگی‌ها</a>
+            <a href="#">قیمت‌گذاری</a>
+            <a href="#">مستندات</a>
+          </div>
+          <a href="#" class="ns-cta">شروع کنید</a>
+        </div>
+      </div>
+      <div style="height:120px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:0.85rem;">
+        برای دیدن افکت جمع‌شدن، صفحه را اسکرول کنید ↑
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV 4: Tabs -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>ناوبری تب‌ها</h3><span>Tabs Navigation</span></div>
+    <div class="demo-body">
+      <div class="tabs-nav">
+        <button class="active" onclick="switchT(this,'tabA')">محبوب‌ترین</button>
+        <button onclick="switchT(this,'tabB')">جدیدترین</button>
+        <button onclick="switchT(this,'tabC')">پربازدیدترین</button>
+      </div>
+      <div id="tabA" class="tab-c active"><p style="color:var(--text2);">محتوای تب محبوب‌ترین‌ها — محصولات پرفروش این ماه.</p></div>
+      <div id="tabB" class="tab-c" style="display:none;"><p style="color:var(--text2);">محتوای تب جدیدترین‌ها — آخرین محصولات اضافه شده.</p></div>
+      <div id="tabC" class="tab-c" style="display:none;"><p style="color:var(--text2);">محتوای تب پربازدیدترین‌ها — محصولات با بیشترین بازدید.</p></div>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB & PAGINATION ===== -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px;">
+    <div class="demo-wrap" style="margin-bottom:0;">
+      <div class="demo-header"><h3>مسیریاب (Breadcrumb)</h3></div>
+      <div class="demo-body">
+        <div class="breadcrumb-demo">
+          <a href="#"><i class="fas fa-home"></i> خانه</a>
+          <span class="sep"><i class="fas fa-chevron-left"></i></span>
+          <a href="#">محصولات</a>
+          <span class="sep"><i class="fas fa-chevron-left"></i></span>
+          <a href="#">الکترونیک</a>
+          <span class="sep"><i class="fas fa-chevron-left"></i></span>
+          <span style="color:var(--accent);">هدفون</span>
+        </div>
+      </div>
+    </div>
+    <div class="demo-wrap" style="margin-bottom:0;">
+      <div class="demo-header"><h3>صفحه‌بندی (Pagination)</h3></div>
+      <div class="demo-body">
+        <div class="pagination-demo">
+          <a href="#"><i class="fas fa-chevron-right"></i></a>
+          <a href="#">۱</a>
+          <a href="#" class="active">۲</a>
+          <a href="#">۳</a>
+          <a href="#">۴</a>
+          <span class="dots">...</span>
+          <a href="#">۱۰</a>
+          <a href="#"><i class="fas fa-chevron-left"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>منوی کناری (Sidebar)</h3><span>با دسته‌بندی</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="sidebar-menu">
+        <div class="sm-side">
+          <div class="sm-section">اصلی</div>
+          <a href="#" class="active"><i class="fas fa-home"></i><span>خانه</span></a>
+          <a href="#"><i class="fas fa-chart-bar"></i><span>آمار</span></a>
+          <a href="#"><i class="fas fa-users"></i><span>کاربران</span></a>
+          <div class="sm-section">مدیریت</div>
+          <a href="#"><i class="fas fa-folder"></i><span>پروژه‌ها</span></a>
+          <a href="#"><i class="fas fa-tasks"></i><span>وظایف</span></a>
+          <a href="#"><i class="fas fa-cog"></i><span>تنظیمات</span></a>
+        </div>
+        <div class="sm-main">محتوای اصلی صفحه</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTERS ============ -->
+  <div class="section-title" style="padding-top:40px;">
+    <span class="tag">فوتر</span>
+    <h2>انواع فوتر</h2>
+    <p>۳ مدل فوتر مختلف برای وب‌سایت‌های فارسی</p>
+  </div>
+
+  <!-- Footer 1: Full -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>فوتر کامل</h3><span>Full Footer با لینک‌ها و شبکه‌های اجتماعی</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="footer-full">
+        <div class="fgrid">
+          <div>
+            <h5><i class="fas fa-crown" style="color:var(--accent);"></i> کیت UI فارسی</h5>
+            <p>مجموعه کاملی از کامپوننت‌های مدرن با طراحی ایرانی برای توسعه‌دهندگان وب. تمامی محصولات با فونت وزیرمتن و طراحی RTL ساخته شده‌اند.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+          </div>
+          <div>
+            <h5>محصولات</h5>
+            <ul>
+              <li><a href="#">قالب‌های سایت</a></li>
+              <li><a href="#">کامپوننت‌های UI</a></li>
+              <li><a href="#">آیکون‌ها</a></li>
+              <li><a href="#">فونت‌ها</a></li>
+              <li><a href="#">پلاگین‌ها</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>منابع</h5>
+            <ul>
+              <li><a href="#">مستندات</a></li>
+              <li><a href="#">راهنما</a></li>
+              <li><a href="#">بلاگ</a></li>
+              <li><a href="#">API</a></li>
+              <li><a href="#">تغییرات</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>ارتباط</h5>
+            <ul>
+              <li><a href="#">تماس با ما</a></li>
+              <li><a href="#">پشتیبانی</a></li>
+              <li><a href="#">حریم خصوصی</a></li>
+              <li><a href="#">شرایط استفاده</a></li>
+              <li><a href="#">درباره ما</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="fbottom">
+          <span>© ۱۴۰۴ کیت UI فارسی — تمامی حقوق محفوظ است 🇮🇷</span>
+          <div style="display:flex;gap:16px;">
+            <a href="#" style="color:var(--text3);font-size:0.78rem;">حریم خصوصی</a>
+            <a href="#" style="color:var(--text3);font-size:0.78rem;">شرایط</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer 2: Simple -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>فوتر ساده</h3><span>Simple Centered Footer</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="footer-simple">
+        <div class="fs-logo"><i class="fas fa-crown"></i> کیت UI فارسی</div>
+        <div class="fs-links">
+          <a href="#">خانه</a>
+          <a href="#">محصولات</a>
+          <a href="#">درباره ما</a>
+          <a href="#">بلاگ</a>
+          <a href="#">تماس</a>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;margin-bottom:12px;">
+          <a href="#" style="color:var(--text3);"><i class="fab fa-twitter"></i></a>
+          <a href="#" style="color:var(--text3);"><i class="fab fa-github"></i></a>
+          <a href="#" style="color:var(--text3);"><i class="fab fa-linkedin"></i></a>
+          <a href="#" style="color:var(--text3);"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="fs-copy">© ۱۴۰۴ کیت UI فارسی. با عشق از ایران 🇮🇷</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer 3: Newsletter -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>فوتر با خبرنامه</h3><span>Newsletter Footer با فرم عضویت</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="footer-newsletter">
+        <div class="fn-inner">
+          <h3>عضویت در خبرنامه</h3>
+          <p>اولین نفری باشید که از محصولات جدید و تخفیف‌های ویژه مطلع می‌شوید.</p>
+          <div class="fn-form">
+            <input type="email" placeholder="ایمیل خود را وارد کنید...">
+            <button>عضویت</button>
+          </div>
+          <div class="fn-bottom">
+            <span><i class="fas fa-lock" style="color:var(--accent);"></i> اطلاعات شما محفوظ است</span>
+            <span><i class="fas fa-envelope" style="color:var(--accent);"></i> ارسال هفتگی</span>
+            <a href="#" style="color:var(--text3);">لغو عضویت در هر زمان</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional: Simple Header with Dropdown -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>هدر با منوی کشویی</h3><span>Dropdown Menu</span></div>
+    <div class="demo-body" style="padding:0;">
+      <div class="dropdown-nav">
+        <div class="dn-inner">
+          <span style="font-weight:800;color:var(--accent);"><i class="fas fa-store"></i> فروشگاه من</span>
+          <div class="dn-links">
+            <a href="#">خانه</a>
+            <a href="#" style="position:relative;">
+              محصولات <i class="fas fa-chevron-down arrow"></i>
+              <div class="dn-dropdown">
+                <a href="#">موبایل</a>
+                <a href="#">لپ‌تاپ</a>
+                <a href="#">هدفون</a>
+                <a href="#">ساعت هوشمند</a>
+              </div>
+            </a>
+            <a href="#" style="position:relative;">
+              صفحات <i class="fas fa-chevron-down arrow"></i>
+              <div class="dn-dropdown">
+                <a href="#">درباره ما</a>
+                <a href="#">تماس</a>
+                <a href="#">سوالات متداول</a>
+              </div>
+            </a>
+            <a href="#">بلاگ</a>
+          </div>
+          <div class="dn-right">
+            <i class="fas fa-search" style="color:var(--text3);cursor:pointer;"></i>
+            <i class="fas fa-shopping-bag" style="color:var(--text3);cursor:pointer;"></i>
+            <button style="padding:8px 20px;border-radius:8px;background:var(--accent);color:white;border:none;font-family:var(--font);font-weight:600;font-size:0.82rem;cursor:pointer;">ورود</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <div class="demo-wrap">
+    <div class="demo-header"><h3>ناوبری پایین موبایل</h3><span>Mobile Bottom Navigation</span></div>
+    <div class="demo-body">
+      <div style="display:flex;justify-content:space-around;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 8px;max-width:400px;margin:0 auto;">
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--accent);font-size:0.65rem;"><i class="fas fa-home" style="font-size:1.2rem;"></i> خانه</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text3);font-size:0.65rem;"><i class="fas fa-search" style="font-size:1.2rem;"></i> جستجو</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text3);font-size:0.65rem;"><i class="fas fa-shopping-bag" style="font-size:1.2rem;"></i> سبد خرید</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text3);font-size:0.65rem;"><i class="fas fa-user" style="font-size:1.2rem;"></i> حساب</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Mega Menu
+function showMega(e, id) {
+  e.preventDefault();
+  document.querySelectorAll('.mega-content').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.mega-menu nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('open');
+  e.target.classList.add('active');
+}
+
+// Tabs
+function switchT(btn, id) {
+  document.querySelectorAll('.tabs-nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-c').forEach(c => c.style.display = 'none');
+  btn.classList.add('active');
+  document.getElementById(id).style.display = 'block';
+}
+
+// Shrink Nav on scroll
+const shrinkNav = document.getElementById('shrinkNav');
+const shrinkDemo = document.getElementById('shrinkDemo');
+
+window.addEventListener('scroll', () => {
+  if (!shrinkDemo) return;
+  const rect = shrinkDemo.getBoundingClientRect();
+  if (rect.top < 0) {
+    shrinkNav.classList.add('scrolled');
+  } else {
+    shrinkNav.classList.remove('scrolled');
+  }
+});
+
+console.log('🇮🇷 کیت UI فارسی — Navigation & Footers');
+console.log('🧭 ۶ ناوبری + ۳ فوتر + مسیریاب + صفحه‌بندی + سایدبار + ناوبری موبایل');
+</script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2b5d7d0eb7397dd',t:'MTc4Njc3MjIwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

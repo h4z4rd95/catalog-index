@@ -1,0 +1,3175 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کیت کامل UI فارسی | Persian UI Component Library</title>
+<!-- Vazirmatn Font from Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===== CSS CUSTOM PROPERTIES (THEME) ===== */
+:root {
+  /* 🌞 Light Mode Colors */
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f2f7;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(255,255,255,0.92);
+  --bg-code: #f4f6f9;
+  --bg-input: #ffffff;
+  --bg-badge: #e8ecf4;
+
+  --text-primary: #1a1d29;
+  --text-secondary: #4a4d5e;
+  --text-muted: #888b9b;
+  --text-inverse: #ffffff;
+  --text-code: #2d3748;
+
+  --border-color: #e2e5ed;
+  --border-light: #eef0f5;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.12);
+
+  --accent: #6c5ce7;
+  --accent-hover: #5a4bd1;
+  --accent-light: #e8e5ff;
+  --success: #00b894;
+  --warning: #fdcb6e;
+  --danger: #e17055;
+  --info: #0984e3;
+  --orange: #e17055;
+  --pink: #fd79a8;
+  --teal: #00cec9;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 50%;
+
+  --font-main: 'Vazirmatn', 'Tahoma', sans-serif;
+  --font-mono: 'Courier New', monospace;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-height: 70px;
+}
+
+/* 🌙 Dark Mode Colors */
+[data-theme="dark"] {
+  --bg-primary: #0d0f17;
+  --bg-secondary: #151821;
+  --bg-tertiary: #1c1f2e;
+  --bg-card: #1a1d2b;
+  --bg-nav: rgba(13,15,23,0.92);
+  --bg-code: #1e2130;
+  --bg-input: #1c1f2e;
+  --bg-badge: #252839;
+
+  --text-primary: #e8eaf0;
+  --text-secondary: #9ea0b0;
+  --text-muted: #5f6278;
+  --text-inverse: #0d0f17;
+  --text-code: #c4c8d8;
+
+  --border-color: #252839;
+  --border-light: #1c1f2e;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.6);
+
+  --accent: #7c6cf0;
+  --accent-hover: #6c5ce7;
+  --accent-light: #252242;
+  --success: #00d2a0;
+  --warning: #fdcb6e;
+  --danger: #ff6b6b;
+  --info: #54a0ff;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.8;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--accent-hover); }
+img { max-width: 100%; display: block; }
+::selection { background: var(--accent); color: white; }
+
+/* ===== SCROLLBAR STYLING ===== */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+/* ===== STICKY HEADER ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border-color);
+  transition: background var(--transition), border-color var(--transition);
+}
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.logo i { font-size: 1.6rem; }
+.logo span { color: var(--text-primary); }
+
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 40px;
+  padding: 4px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+.theme-btn.active {
+  background: var(--accent);
+  color: white;
+}
+.theme-btn:hover { color: var(--text-primary); }
+
+/* Category Nav */
+.category-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 0 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
+  justify-content: center;
+}
+.category-nav::-webkit-scrollbar { display: none; }
+.category-nav a {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+.category-nav a:hover,
+.category-nav a.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Menu Toggle for Mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 8px;
+}
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-secondary);
+  z-index: 999;
+  padding: 24px;
+  overflow-y: auto;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border-color);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  border: 1px solid var(--border-light);
+}
+.mobile-nav a:hover,
+.mobile-nav a.active {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* ===== MAIN LAYOUT ===== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Section Styles */
+.section {
+  margin-bottom: 60px;
+  scroll-margin-top: 80px;
+}
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--accent);
+}
+.section-header .cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: fit-content;
+  letter-spacing: 0.3px;
+}
+.section-header h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Component Grid */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+}
+.comp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.comp-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.comp-card-header {
+  padding: 20px 20px 12px;
+}
+.comp-card-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.comp-card-header .comp-tag {
+  display: inline-block;
+  background: var(--bg-badge);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.comp-card-header p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+.comp-preview {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  min-height: 60px;
+  border-top: 1px solid var(--border-light);
+}
+.comp-preview.column { flex-direction: column; align-items: stretch; }
+.comp-preview.center { justify-content: center; text-align: center; }
+.comp-preview.wrap-center { justify-content: center; }
+
+.comp-code {
+  background: var(--bg-code);
+  border-top: 1px solid var(--border-light);
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.comp-code.open {
+  max-height: 800px;
+  padding: 16px 20px;
+}
+.comp-code pre {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--text-code);
+  white-space: pre-wrap;
+  direction: ltr;
+  text-align: left;
+}
+.code-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 8px;
+  font-family: var(--font-main);
+}
+.code-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ===== COMPONENT STYLES ===== */
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.btn-sm { padding: 6px 16px; font-size: 0.78rem; }
+.btn-lg { padding: 14px 32px; font-size: 1rem; }
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(108,92,231,0.35); }
+.btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.btn-success { background: var(--success); color: white; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-warning { background: var(--warning); color: #2d3436; }
+.btn-info { background: var(--info); color: white; }
+.btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+.btn-outline:hover { background: var(--accent); color: white; }
+.btn-ghost { background: transparent; color: var(--text-primary); }
+.btn-ghost:hover { background: var(--bg-tertiary); }
+.btn-gradient { background: linear-gradient(135deg, var(--accent), var(--pink)); color: white; }
+.btn-gradient:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(108,92,231,0.4); }
+.btn-glow { background: var(--accent); color: white; box-shadow: 0 0 20px rgba(108,92,231,0.3); }
+.btn-glow:hover { box-shadow: 0 0 40px rgba(108,92,231,0.5); transform: translateY(-1px); }
+.btn-icon { width: 44px; height: 44px; padding: 0; border-radius: var(--radius-full); }
+.btn-icon.btn-sm { width: 36px; height: 36px; }
+.btn-icon.btn-lg { width: 56px; height: 56px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+/* Button Group */
+.btn-group {
+  display: inline-flex;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+.btn-group .btn {
+  border-radius: 0;
+  border: none;
+  border-left: 1px solid var(--border-color);
+}
+.btn-group .btn:last-child { border-left: none; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 20px;
+  font-family: var(--font-main);
+}
+.badge-primary { background: var(--accent-light); color: var(--accent); }
+.badge-success { background: #d4edda; color: #155724; }
+.badge-danger { background: #f8d7da; color: #721c24; }
+.badge-warning { background: #fff3cd; color: #856404; }
+.badge-info { background: #d1ecf1; color: #0c5460; }
+[data-theme="dark"] .badge-success { background: #0a2e1e; color: #4ade80; }
+[data-theme="dark"] .badge-danger { background: #3b1c1e; color: #f87171; }
+[data-theme="dark"] .badge-warning { background: #3b2f0a; color: #fbbf24; }
+[data-theme="dark"] .badge-info { background: #0a2a3b; color: #60a5fa; }
+
+/* --- Forms --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.form-input, .form-select, .form-textarea {
+  padding: 10px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: var(--transition);
+  width: 100%;
+  outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-light);
+}
+.form-input.error { border-color: var(--danger); }
+.form-input.success { border-color: var(--success); }
+.form-textarea { min-height: 100px; resize: vertical; }
+.form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888b9b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: left 12px center; padding-left: 36px; }
+
+/* Checkbox & Radio */
+.checkbox-group, .radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.checkbox-label, .radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+}
+.checkbox-label input, .radio-label input { display: none; }
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.radio-label .checkmark { border-radius: 50%; }
+.checkbox-label input:checked + .checkmark,
+.radio-label input:checked + .checkmark {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.checkbox-label input:checked + .checkmark::after { content: '✓'; font-size: 0.7rem; font-weight: 700; }
+.radio-label input:checked + .checkmark::after { content: '●'; font-size: 0.7rem; }
+
+/* Toggle Switch */
+.toggle {
+  width: 48px;
+  height: 26px;
+  background: var(--border-color);
+  border-radius: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.toggle.active { background: var(--accent); }
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  right: 2px;
+  transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.toggle.active::after { right: 24px; }
+
+/* --- Cards --- */
+.demo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  width: 100%;
+  max-width: 320px;
+}
+.demo-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.demo-card-img { width: 100%; height: 160px; background: linear-gradient(135deg, var(--accent), var(--pink)); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; }
+.demo-card-img.gradient2 { background: linear-gradient(135deg, var(--info), var(--teal)); }
+.demo-card-img.gradient3 { background: linear-gradient(135deg, var(--orange), var(--warning)); }
+.demo-card-body { padding: 20px; }
+.demo-card-body h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.demo-card-body p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; }
+
+/* Glass Card */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  transition: var(--transition);
+}
+.glass-card:hover { box-shadow: var(--shadow-lg); }
+
+/* --- Alerts --- */
+.alert {
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.88rem;
+  width: 100%;
+  border-right: 4px solid;
+}
+.alert-success { background: #d4edda; color: #155724; border-color: var(--success); }
+.alert-danger { background: #f8d7da; color: #721c24; border-color: var(--danger); }
+.alert-warning { background: #fff3cd; color: #856404; border-color: var(--warning); }
+.alert-info { background: #d1ecf1; color: #0c5460; border-color: var(--info); }
+[data-theme="dark"] .alert-success { background: #0a2e1e; color: #4ade80; }
+[data-theme="dark"] .alert-danger { background: #3b1c1e; color: #f87171; }
+[data-theme="dark"] .alert-warning { background: #3b2f0a; color: #fbbf24; }
+[data-theme="dark"] .alert-info { background: #0a2a3b; color: #60a5fa; }
+.alert i { margin-top: 2px; font-size: 1.1rem; }
+.alert-content { flex: 1; }
+.alert-title { font-weight: 700; margin-bottom: 2px; }
+
+/* Toast Notification */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  max-width: 380px;
+  animation: slideInLeft 0.4s ease;
+  position: relative;
+}
+@keyframes slideInLeft {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+.toast-icon.success { background: var(--success); }
+.toast-icon.error { background: var(--danger); }
+.toast-icon.info { background: var(--info); }
+.toast-icon.warning { background: var(--warning); color: #2d3436; }
+.toast-body { flex: 1; }
+.toast-title { font-weight: 700; font-size: 0.88rem; }
+.toast-desc { font-size: 0.8rem; color: var(--text-secondary); }
+.toast-close { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem; padding: 4px; }
+
+/* --- Progress --- */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-bar.sm { height: 4px; }
+.progress-bar.lg { height: 16px; }
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--accent), var(--pink));
+  transition: width 0.8s ease;
+  position: relative;
+}
+.progress-fill.striped {
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
+  animation: progress-stripes 1s linear infinite;
+}
+@keyframes progress-stripes {
+  from { background-position: 1rem 0; }
+  to { background-position: 0 0; }
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+/* Spinner */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.spinner.sm { width: 20px; height: 20px; border-width: 2px; }
+.spinner.lg { width: 48px; height: 48px; border-width: 4px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Pulse */
+.pulse {
+  width: 16px;
+  height: 16px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse-anim 1.5s ease infinite;
+}
+@keyframes pulse-anim {
+  0% { box-shadow: 0 0 0 0 rgba(0,184,148,0.5); }
+  100% { box-shadow: 0 0 0 16px rgba(0,184,148,0); }
+}
+
+/* --- Table --- */
+.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.demo-table th, .demo-table td {
+  padding: 12px 16px;
+  text-align: right;
+  border-bottom: 1px solid var(--border-color);
+}
+.demo-table th {
+  background: var(--bg-tertiary);
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.demo-table tbody tr:hover { background: var(--bg-tertiary); }
+.demo-table-striped tbody tr:nth-child(even) { background: var(--bg-tertiary); }
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pagination a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.pagination a:hover, .pagination a.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* --- Breadcrumb --- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--text-secondary); }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { color: var(--text-muted); }
+
+/* --- Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+.modal-box h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.modal-box p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; }
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
+
+/* --- Tabs --- */
+.tabs {
+  width: 100%;
+}
+.tab-nav {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  gap: 0;
+}
+.tab-nav button {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+.tab-nav button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab-nav button:hover { color: var(--text-primary); }
+.tab-content { padding: 20px 0; display: none; }
+.tab-content.active { display: block; }
+
+/* --- Accordion --- */
+.accordion { width: 100%; }
+.accordion-item {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+.accordion-header:hover { background: var(--bg-tertiary); }
+.accordion-header i { transition: var(--transition); font-size: 0.8rem; }
+.accordion-item.open .accordion-header i { transform: rotate(180deg); }
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 18px;
+}
+.accordion-item.open .accordion-body {
+  max-height: 300px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border-color);
+}
+.accordion-body p { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* --- Tooltip --- */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+.tooltip-wrapper .tooltip-text {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 100;
+}
+.tooltip-wrapper:hover .tooltip-text { opacity: 1; }
+.tooltip-wrapper .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--text-primary);
+}
+
+/* --- Avatar --- */
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  flex-shrink: 0;
+}
+.avatar.sm { width: 32px; height: 32px; font-size: 0.8rem; }
+.avatar.lg { width: 64px; height: 64px; font-size: 1.4rem; }
+.avatar.xl { width: 80px; height: 80px; font-size: 1.8rem; }
+.avatar-group { display: flex; }
+.avatar-group .avatar { margin-right: -12px; border: 2px solid var(--bg-card); }
+.avatar-group .avatar:first-child { margin-right: 0; }
+
+/* --- Stat Card --- */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: var(--transition);
+  min-width: 180px;
+}
+.stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: white;
+  flex-shrink: 0;
+}
+.stat-info h4 { font-size: 1.6rem; font-weight: 800; }
+.stat-info p { font-size: 0.82rem; color: var(--text-secondary); }
+.stat-change { font-size: 0.78rem; font-weight: 600; }
+.stat-change.up { color: var(--success); }
+.stat-change.down { color: var(--danger); }
+
+/* --- Timeline --- */
+.timeline {
+  position: relative;
+  padding-right: 24px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 24px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  right: -18px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-card);
+}
+.timeline-item .time { font-size: 0.75rem; color: var(--text-muted); }
+.timeline-item h4 { font-size: 0.9rem; font-weight: 700; }
+.timeline-item p { font-size: 0.82rem; color: var(--text-secondary); }
+
+/* --- Pricing --- */
+.pricing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: var(--transition);
+  max-width: 280px;
+  width: 100%;
+}
+.pricing-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.pricing-card .price { font-size: 2.4rem; font-weight: 900; color: var(--accent); }
+.pricing-card .price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+.pricing-card ul { list-style: none; padding: 0; margin: 16px 0; text-align: right; }
+.pricing-card ul li { padding: 8px 0; font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; }
+.pricing-card ul li i { color: var(--success); }
+
+/* --- Animated Gradient Text --- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--pink), var(--info));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* --- Scroll animations --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax Section */
+.parallax-demo {
+  height: 200px;
+  background: linear-gradient(135deg, var(--accent), var(--pink));
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+.parallax-demo .bg-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.parallax-demo .bg-shapes span {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  animation: floatShape 6s ease-in-out infinite;
+}
+@keyframes floatShape {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+}
+
+/* --- Typography Demo --- */
+.typo-demo h1 { font-size: 2.5rem; font-weight: 900; }
+.typo-demo h2 { font-size: 2rem; font-weight: 800; }
+.typo-demo h3 { font-size: 1.6rem; font-weight: 700; }
+.typo-demo h4 { font-size: 1.3rem; font-weight: 600; }
+.typo-demo .weight-thin { font-weight: 100; }
+.typo-demo .weight-light { font-weight: 300; }
+.typo-demo .weight-regular { font-weight: 400; }
+.typo-demo .weight-medium { font-weight: 500; }
+.typo-demo .weight-bold { font-weight: 700; }
+.typo-demo .weight-black { font-weight: 900; }
+.typo-demo .persian-text { font-size: 1.2rem; line-height: 2; }
+
+/* --- Footer Preview --- */
+.footer-preview {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px 24px;
+  width: 100%;
+}
+.footer-preview .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.footer-preview h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; }
+.footer-preview ul { list-style: none; }
+.footer-preview ul li { margin-bottom: 8px; }
+.footer-preview ul li a { font-size: 0.82rem; color: var(--text-secondary); }
+.footer-preview ul li a:hover { color: var(--accent); }
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --- Hero Section Demo --- */
+.hero-demo {
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-demo h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 16px; }
+.hero-demo p { font-size: 1rem; color: var(--text-secondary); max-width: 500px; margin: 0 auto 24px; }
+.hero-demo .hero-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-demo .hero-shapes span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+.hero-demo .hero-shapes span:nth-child(1) { width: 200px; height: 200px; background: var(--accent); top: -50px; left: -50px; }
+.hero-demo .hero-shapes span:nth-child(2) { width: 150px; height: 150px; background: var(--pink); bottom: -30px; right: -30px; }
+.hero-demo .hero-shapes span:nth-child(3) { width: 100px; height: 100px; background: var(--info); top: 50%; right: 10%; }
+
+/* --- Image with Overlay --- */
+.img-overlay {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.img-overlay .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  color: white;
+}
+.img-overlay .overlay h4 { font-size: 1.1rem; font-weight: 700; }
+.img-overlay .overlay p { font-size: 0.82rem; opacity: 0.9; }
+
+/* --- Sidebar Demo --- */
+.sidebar-demo {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100%;
+  min-height: 300px;
+}
+.sidebar-demo .side {
+  width: 200px;
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-left: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+.sidebar-demo .side a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  transition: var(--transition);
+}
+.sidebar-demo .side a:hover, .sidebar-demo .side a.active {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+.sidebar-demo .main {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+/* --- Feature Grid --- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.feature-item {
+  text-align: center;
+  padding: 28px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+}
+.feature-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.feature-item .icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: var(--radius-md);
+  background: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.feature-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.feature-item p { font-size: 0.82rem; color: var(--text-secondary); }
+
+/* --- Comment / Testimonial --- */
+.testimonial {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  max-width: 340px;
+  transition: var(--transition);
+}
+.testimonial:hover { box-shadow: var(--shadow-md); }
+.testimonial-stars { color: var(--warning); margin-bottom: 12px; }
+.testimonial-text { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.7; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-author .name { font-weight: 700; font-size: 0.88rem; }
+.testimonial-author .title { font-size: 0.78rem; color: var(--text-muted); }
+
+/* --- Empty State --- */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--bg-card);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+}
+.empty-state i { font-size: 3rem; color: var(--text-muted); margin-bottom: 16px; }
+.empty-state h4 { font-size: 1.1rem; margin-bottom: 8px; }
+.empty-state p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .comp-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+}
+@media (max-width: 768px) {
+  .category-nav { display: none; }
+  .menu-toggle { display: block; }
+  .header-inner { padding: 0 16px; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .section-header h2 { font-size: 1.4rem; }
+  .hero-demo { padding: 40px 24px; }
+  .hero-demo h1 { font-size: 1.6rem; }
+  .sidebar-demo .side { width: 140px; }
+  .pricing-card { max-width: 100%; }
+  .stat-card { min-width: 140px; }
+  .container { padding: 16px; }
+  .logo span { display: none; }
+}
+@media (max-width: 480px) {
+  .sidebar-demo { flex-direction: column; }
+  .sidebar-demo .side { width: 100%; border-left: none; border-bottom: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 4px; }
+  .sidebar-demo .side a { flex: 1; min-width: 80px; justify-content: center; }
+  .badge { font-size: 0.65rem; padding: 2px 8px; }
+  .btn { padding: 8px 18px; font-size: 0.82rem; }
+  .modal-box { padding: 20px; }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-20 { gap: 20px; }
+.gap-24 { gap: 24px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.w-full { width: 100%; }
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
+.font-bold { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ===== STICKY HEADER ===== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="logo">
+      <i class="fas fa-crown"></i>
+      <span>کیت UI فارسی</span>
+    </div>
+
+    <nav class="category-nav" id="categoryNav">
+      <a href="#typo" class="active">تایپوگرافی</a>
+      <a href="#buttons">دکمه‌ها</a>
+      <a href="#forms">فرم‌ها</a>
+      <a href="#cards">کارت‌ها</a>
+      <a href="#alerts">هشدارها</a>
+      <a href="#tables">جدول</a>
+      <a href="#nav">ناوبری</a>
+      <a href="#progress">پیشرفت</a>
+      <a href="#modals">مودال</a>
+      <a href="#tabs">تب‌ها</a>
+      <a href="#dashboard">داشبورد</a>
+      <a href="#animations">انیمیشن</a>
+      <a href="#pricing">قیمت‌گذاری</a>
+      <a href="#footer">فوتر</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+      <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="تغییر تم">
+        <button class="theme-btn active" data-theme="light" aria-label="تم روشن"><i class="fas fa-sun"></i></button>
+        <button class="theme-btn" data-theme="dark" aria-label="تم تیره"><i class="fas fa-moon"></i></button>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="منو"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#typo">تایپوگرافی</a>
+  <a href="#buttons">دکمه‌ها</a>
+  <a href="#forms">فرم‌ها</a>
+  <a href="#cards">کارت‌ها</a>
+  <a href="#alerts">هشدارها</a>
+  <a href="#tables">جدول</a>
+  <a href="#nav">ناوبری</a>
+  <a href="#progress">پیشرفت</a>
+  <a href="#modals">مودال</a>
+  <a href="#tabs">تب‌ها</a>
+  <a href="#dashboard">داشبورد</a>
+  <a href="#animations">انیمیشن</a>
+  <a href="#pricing">قیمت‌گذاری</a>
+  <a href="#footer">فوتر</a>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<div class="container" style="padding-top:32px;">
+  <section class="scroll-reveal visible">
+    <div class="hero-demo">
+      <div class="hero-shapes"><span></span><span></span><span></span></div>
+      <h1 class="gradient-text">کتابخانه جامع کامپوننت‌های فارسی</h1>
+      <p>مجموعه‌ای کامل از المان‌های رابط کاربری با طراحی ایرانی 🇮🇷 — کاملاً واکنش‌گرا، دارای تم روشن/تیره و پشتیبانی از فونت وزیرمتن</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="#typo" class="btn btn-primary btn-lg">مشاهده کامپوننت‌ها <i class="fas fa-arrow-down"></i></a>
+        <button class="btn btn-secondary btn-lg" onclick="toggleTheme()"><i class="fas fa-moon"></i> تغییر تم</button>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:0.8rem;color:var(--text-muted);">
+        <span><i class="fas fa-check-circle" style="color:var(--success)"></i> ۵۰+ کامپوننت</span>
+        <span><i class="fas fa-check-circle" style="color:var(--success)"></i> واکنش‌گرا</span>
+        <span><i class="fas fa-check-circle" style="color:var(--success)"></i> RTL</span>
+        <span><i class="fas fa-check-circle" style="color:var(--success)"></i> تم تیره/روشن</span>
+        <span><i class="fas fa-check-circle" style="color:var(--success)"></i> فونت وزیرمتن</span>
+      </div>
+    </div>
+  </section>
+
+<!-- ======================================================================== -->
+<!-- 1. TYPOGRAPHY -->
+<!-- ======================================================================== -->
+<section class="section" id="typo">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-font"></i> دسته: تایپوگرافی</span>
+    <h2>تایپوگرافی فارسی</h2>
+    <p>نمایش انواع وزن‌ها، اندازه‌ها و سبک‌های تایپوگرافی با فونت وزیرمتن (Vazirmatn) — فونت اپن سورس فارسی</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Typography All Weights -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>وزن‌های فونت</h3>
+        <span class="comp-tag">Vazirmatn</span>
+        <p>نمایش ۹ وزن مختلف فونت وزیرمتن از نازک (Thin) تا سیاه (Black)</p>
+      </div>
+      <div class="comp-preview column typo-demo" style="gap:8px;">
+        <span style="font-weight:100;font-size:1.1rem;">وزن ۱۰۰ — نازک (Thin) — زبان فارسی</span>
+        <span style="font-weight:300;font-size:1.1rem;">وزن ۳۰۰ — سبک (Light) — زبان فارسی</span>
+        <span style="font-weight:400;font-size:1.1rem;">وزن ۴۰۰ — معمولی (Regular) — زبان فارسی</span>
+        <span style="font-weight:500;font-size:1.1rem;">وزن ۵۰۰ — متوسط (Medium) — زبان فارسی</span>
+        <span style="font-weight:600;font-size:1.1rem;">وزن ۶۰۰ — نیمه‌ضخیم (SemiBold) — زبان فارسی</span>
+        <span style="font-weight:700;font-size:1.1rem;">وزن ۷۰۰ — ضخیم (Bold) — زبان فارسی</span>
+        <span style="font-weight:800;font-size:1.1rem;">وزن ۸۰۰ — خیلی ضخیم (ExtraBold) — زبان فارسی</span>
+        <span style="font-weight:900;font-size:1.1rem;">وزن ۹۰۰ — سیاه (Black) — زبان فارسی</span>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;span style="font-weight:100"&gt;وزن ۱۰۰ — نازک (Thin)&lt;/span&gt;
+&lt;span style="font-weight:300"&gt;وزن ۳۰۰ — سبک (Light)&lt;/span&gt;
+&lt;span style="font-weight:400"&gt;وزن ۴۰۰ — معمولی (Regular)&lt;/span&gt;
+&lt;span style="font-weight:500"&gt;وزن ۵۰۰ — متوسط (Medium)&lt;/span&gt;
+&lt;span style="font-weight:600"&gt;وزن ۶۰۰ — نیمه‌ضخیم (SemiBold)&lt;/span&gt;
+&lt;span style="font-weight:700"&gt;وزن ۷۰۰ — ضخیم (Bold)&lt;/span&gt;
+&lt;span style="font-weight:800"&gt;وزن ۸۰۰ — خیلی ضخیم (ExtraBold)&lt;/span&gt;
+&lt;span style="font-weight:900"&gt;وزن ۹۰۰ — سیاه (Black)&lt;/span&gt;</pre></div>
+    </div>
+
+    <!-- Heading Sizes -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>سایزهای Heading</h3>
+        <span class="comp-tag">h1-h6</span>
+        <p>استاندارد سایزهای تیتر از بزرگ به کوچک</p>
+      </div>
+      <div class="comp-preview column typo-demo" style="gap:4px;">
+        <h1>تیتر درجه ۱ (H1)</h1>
+        <h2>تیتر درجه ۲ (H2)</h2>
+        <h3>تیتر درجه ۳ (H3)</h3>
+        <h4>تیتر درجه ۴ (H4)</h4>
+        <h5 style="font-size:1.1rem;font-weight:600;">تیتر درجه ۵ (H5)</h5>
+        <h6 style="font-size:1rem;font-weight:600;">تیتر درجه ۶ (H6)</h6>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;h1&gt;تیتر درجه ۱ (H1)&lt;/h1&gt;
+&lt;h2&gt;تیتر درجه ۲ (H2)&lt;/h2&gt;
+&lt;h3&gt;تیتر درجه ۳ (H3)&lt;/h3&gt;
+&lt;h4&gt;تیتر درجه ۴ (H4)&lt;/h4&gt;
+&lt;h5&gt;تیتر درجه ۵ (H5)&lt;/h5&gt;
+&lt;h6&gt;تیتر درجه ۶ (H6)&lt;/h6&gt;</pre></div>
+    </div>
+
+    <!-- Gradient & Special Text -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>متن‌های ویژه</h3>
+        <span class="comp-tag">Effects</span>
+        <p>گرادینت، سایه، استروک و افکت‌های متنی</p>
+      </div>
+      <div class="comp-preview column typo-demo" style="gap:12px;align-items:center;">
+        <span class="gradient-text" style="font-size:1.4rem;font-weight:900;">متن گرادینتی رنگین کمانی</span>
+        <span style="font-size:1.3rem;font-weight:800;color:var(--accent);">متن با رنگ اَکسنٛت</span>
+        <span style="font-size:1.2rem;font-weight:700;text-shadow:2px 2px 0 var(--border-color);">متن با سایه</span>
+        <span style="font-size:1.1rem;font-weight:600;letter-spacing:4px;">فاصله حروف بیشتر</span>
+        <span style="font-size:1.1rem;font-weight:600;text-decoration:line-through;color:var(--text-muted);">متن خط خورده</span>
+        <span style="font-size:1.1rem;font-weight:600;background:var(--accent-light);padding:2px 8px;border-radius:4px;">متن هایلایت شده</span>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;span class="gradient-text"&gt;متن گرادینتی&lt;/span&gt;
+&lt;span style="text-shadow:2px 2px 0 var(--border-color)"&gt;متن با سایه&lt;/span&gt;
+&lt;span style="letter-spacing:4px"&gt;فاصله حروف&lt;/span&gt;
+&lt;span style="text-decoration:line-through"&gt;خط خورده&lt;/span&gt;
+&lt;span style="background:var(--accent-light);padding:2px 8px"&gt;هایلایت&lt;/span&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 2. BUTTONS -->
+<!-- ======================================================================== -->
+<section class="section" id="buttons">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-square"></i> دسته: دکمه‌ها</span>
+    <h2>دکمه‌ها و بج‌ها</h2>
+    <p>انواع دکمه‌ها با استایل‌های مختلف — ساده، گرادینت، گلودار، آیکونیک، گروه دکمه و بج‌ها</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Button Variants -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>انواع دکمه</h3>
+        <span class="comp-tag">Variants</span>
+        <p>دکمه‌های Primary، Secondary، Success، Danger، Warning، Info، Outline، Ghost، Gradient، Glow</p>
+      </div>
+      <div class="comp-preview flex-wrap">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-warning">Warning</button>
+        <button class="btn btn-info">Info</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-gradient">Gradient</button>
+        <button class="btn btn-glow">Glow</button>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;Success&lt;/button&gt;
+&lt;button class="btn btn-danger"&gt;Danger&lt;/button&gt;
+&lt;button class="btn btn-warning"&gt;Warning&lt;/button&gt;
+&lt;button class="btn btn-info"&gt;Info&lt;/button&gt;
+&lt;button class="btn btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="btn btn-ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="btn btn-gradient"&gt;Gradient&lt;/button&gt;
+&lt;button class="btn btn-glow"&gt;Glow&lt;/button&gt;</pre></div>
+    </div>
+
+    <!-- Button Sizes -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>سایزهای دکمه</h3>
+        <span class="comp-tag">Sizes</span>
+        <p>دکمه در سه سایز کوچک (sm)، معمولی و بزرگ (lg)</p>
+      </div>
+      <div class="comp-preview flex-wrap">
+        <button class="btn btn-primary btn-sm">کوچک</button>
+        <button class="btn btn-primary">متوسط</button>
+        <button class="btn btn-primary btn-lg">بزرگ</button>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;button class="btn btn-primary btn-sm"&gt;کوچک&lt;/button&gt;
+&lt;button class="btn btn-primary"&gt;متوسط&lt;/button&gt;
+&lt;button class="btn btn-primary btn-lg"&gt;بزرگ&lt;/button&gt;</pre></div>
+    </div>
+
+    <!-- Icon Buttons -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>دکمه‌های آیکونیک</h3>
+        <span class="comp-tag">Icon</span>
+        <p>دکمه‌های با آیکون و دکمه‌های دایره‌ای شکل</p>
+      </div>
+      <div class="comp-preview flex-wrap">
+        <button class="btn btn-primary"><i class="fas fa-download"></i> دانلود</button>
+        <button class="btn btn-success"><i class="fas fa-check"></i> تایید</button>
+        <button class="btn btn-danger"><i class="fas fa-trash"></i> حذف</button>
+        <button class="btn btn-icon btn-primary"><i class="fas fa-heart"></i></button>
+        <button class="btn btn-icon btn-secondary"><i class="fas fa-bell"></i></button>
+        <button class="btn btn-icon btn-info btn-lg"><i class="fas fa-cog"></i></button>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;button class="btn btn-primary"&gt;&lt;i class="fas fa-download"&gt;&lt;/i&gt; دانلود&lt;/button&gt;
+&lt;button class="btn btn-icon btn-primary"&gt;&lt;i class="fas fa-heart"&gt;&lt;/i&gt;&lt;/button&gt;</pre></div>
+    </div>
+
+    <!-- Button Group -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>گروه دکمه</h3>
+        <span class="comp-tag">Button Group</span>
+        <p>دکمه‌های به هم چسبیده برای انتخاب‌های مرتبط</p>
+      </div>
+      <div class="comp-preview flex-wrap">
+        <div class="btn-group">
+          <button class="btn btn-primary">راست</button>
+          <button class="btn btn-primary">وسط</button>
+          <button class="btn btn-primary">چپ</button>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-secondary"><i class="fas fa-align-left"></i></button>
+          <button class="btn btn-secondary"><i class="fas fa-align-center"></i></button>
+          <button class="btn btn-secondary"><i class="fas fa-align-right"></i></button>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn-primary"&gt;راست&lt;/button&gt;
+  &lt;button class="btn btn-primary"&gt;وسط&lt;/button&gt;
+  &lt;button class="btn btn-primary"&gt;چپ&lt;/button&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Badges -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>بج‌ها (Badges)</h3>
+        <span class="comp-tag">Badge</span>
+        <p>برچسب‌های رنگی برای نمایش وضعیت، تعداد و برچسب‌گذاری</p>
+      </div>
+      <div class="comp-preview flex-wrap">
+        <span class="badge badge-primary">پیش‌فرض</span>
+        <span class="badge badge-success">موفق</span>
+        <span class="badge badge-danger">خطا</span>
+        <span class="badge badge-warning">هشدار</span>
+        <span class="badge badge-info">اطلاعات</span>
+        <span class="badge badge-primary"><i class="fas fa-star"></i> ویژه</span>
+        <span class="badge badge-danger"><i class="fas fa-bolt"></i> ۳+</span>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;span class="badge badge-primary"&gt;پیش‌فرض&lt;/span&gt;
+&lt;span class="badge badge-success"&gt;موفق&lt;/span&gt;
+&lt;span class="badge badge-danger"&gt;خطا&lt;/span&gt;
+&lt;span class="badge badge-warning"&gt;هشدار&lt;/span&gt;
+&lt;span class="badge badge-info"&gt;اطلاعات&lt;/span&gt;
+&lt;span class="badge badge-primary"&gt;&lt;i class="fas fa-star"&gt;&lt;/i&gt; ویژه&lt;/span&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 3. FORMS -->
+<!-- ======================================================================== -->
+<section class="section" id="forms">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-input-text"></i> دسته: فرم‌ها</span>
+    <h2>فرم‌ها و ورودی‌ها</h2>
+    <p>انواع فیلدهای ورودی، انتخابگرها، چک‌باکس، رادیو، سویچ و المان‌های فرم</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Input Fields -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>فیلدهای ورودی</h3>
+        <span class="comp-tag">Input</span>
+        <p>ورودی متن، ایمیل، رمز عبور با حالت‌های مختلف</p>
+      </div>
+      <div class="comp-preview column" style="gap:16px;">
+        <div class="form-group">
+          <label class="form-label">نام کاربری</label>
+          <input class="form-input" type="text" placeholder="نام کاربری خود را وارد کنید">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ایمیل</label>
+          <input class="form-input" type="email" placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رمز عبور</label>
+          <input class="form-input" type="password" placeholder="••••••••">
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;نام کاربری&lt;/label&gt;
+  &lt;input class="form-input" type="text" placeholder="..."&gt;
+&lt;/div&gt;
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;ایمیل&lt;/label&gt;
+  &lt;input class="form-input" type="email" placeholder="..."&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Input States -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>حالت‌های ورودی</h3>
+        <span class="comp-tag">States</span>
+        <p>حالت‌های فوکس، خطا، موفقیت و غیرفعال</p>
+      </div>
+      <div class="comp-preview column" style="gap:12px;">
+        <input class="form-input" type="text" placeholder="حالت عادی">
+        <input class="form-input success" type="text" placeholder="موفق ✓" value="متن صحیح">
+        <input class="form-input error" type="text" placeholder="خطا ⚠" value="متن نادرست">
+        <input class="form-input" type="text" placeholder="غیرفعال" disabled>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;input class="form-input" type="text" placeholder="عادی"&gt;
+&lt;input class="form-input success" type="text" value="متن صحیح"&gt;
+&lt;input class="form-input error" type="text" value="متن نادرست"&gt;
+&lt;input class="form-input" type="text" placeholder="غیرفعال" disabled&gt;</pre></div>
+    </div>
+
+    <!-- Select & Textarea -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>انتخابگر و متن بلند</h3>
+        <span class="comp-tag">Select / Textarea</span>
+        <p>منوی کشویی و ناحیه متن چندخطی</p>
+      </div>
+      <div class="comp-preview column" style="gap:16px;">
+        <div class="form-group">
+          <label class="form-label">استان</label>
+          <select class="form-select">
+            <option>تهران</option>
+            <option>اصفهان</option>
+            <option>شیراز</option>
+            <option>مشهد</option>
+            <option>تبریز</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">توضیحات</label>
+          <textarea class="form-textarea" placeholder="متن خود را بنویسید..."></textarea>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;select class="form-select"&gt;
+  &lt;option&gt;تهران&lt;/option&gt;
+  &lt;option&gt;اصفهان&lt;/option&gt;
+&lt;/select&gt;
+&lt;textarea class="form-textarea" placeholder="..."&gt;&lt;/textarea&gt;</pre></div>
+    </div>
+
+    <!-- Checkbox, Radio, Toggle -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>چک‌باکس، رادیو و سویچ</h3>
+        <span class="comp-tag">Selection</span>
+        <p>انتخابگرهای سفارشی با استایل فارسی</p>
+      </div>
+      <div class="comp-preview column" style="gap:16px;">
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" checked>
+            <span class="checkmark"></span>
+            گزینه اول
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            گزینه دوم
+          </label>
+        </div>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="radio" checked>
+            <span class="checkmark"></span>
+            مرد
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="radio">
+            <span class="checkmark"></span>
+            زن
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:0.88rem;">حالت پرواز</span>
+          <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;label class="checkbox-label"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="checkmark"&gt;&lt;/span&gt;
+  گزینه
+&lt;/label&gt;
+&lt;label class="radio-label"&gt;
+  &lt;input type="radio" name="r"&gt;
+  &lt;span class="checkmark"&gt;&lt;/span&gt;
+  گزینه
+&lt;/label&gt;
+&lt;div class="toggle active" onclick="this.classList.toggle('active')"&gt;&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 4. CARDS -->
+<!-- ======================================================================== -->
+<section class="section" id="cards">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-credit-card"></i> دسته: کارت‌ها</span>
+    <h2>کارت‌ها و کانتینرها</h2>
+    <p>انواع کارت‌های نمایشی، شیشه‌ای، تصویری و المان‌های کانتینری</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Basic Card -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>کارت پایه</h3>
+        <span class="comp-tag">Card</span>
+        <p>کارت ساده با تصویر، عنوان و توضیحات</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <div class="demo-card">
+          <div class="demo-card-img"><i class="fas fa-mountain"></i></div>
+          <div class="demo-card-body">
+            <h4>طبیعت ایران</h4>
+            <p>مناظر زیبای طبیعی ایران زمین با تنوع آب و هوایی چهار فصل</p>
+            <button class="btn btn-primary btn-sm">بیشتر بدانید</button>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="demo-card"&gt;
+  &lt;div class="demo-card-img"&gt;&lt;i class="fas fa-mountain"&gt;&lt;/i&gt;&lt;/div&gt;
+  &lt;div class="demo-card-body"&gt;
+    &lt;h4&gt;طبیعت ایران&lt;/h4&gt;
+    &lt;p&gt;مناظر زیبای طبیعی ایران زمین&lt;/p&gt;
+    &lt;button class="btn btn-primary btn-sm"&gt;بیشتر بدانید&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Glass Card -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>کارت شیشه‌ای</h3>
+        <span class="comp-tag">Glassmorphism</span>
+        <p>اثر شیشه‌ای (Glassmorphism) با پس‌زمینه مات</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <div class="glass-card" style="max-width:280px;text-align:center;">
+          <i class="fas fa-gem" style="font-size:2rem;color:var(--accent);margin-bottom:12px;"></i>
+          <h4 style="font-weight:700;">طراحی مدرن</h4>
+          <p style="font-size:0.85rem;color:var(--text-secondary);">کارت با افکت شیشه‌ای و حاشیه‌های نرم</p>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="glass-card" style="max-width:280px;text-align:center"&gt;
+  &lt;i class="fas fa-gem" style="font-size:2rem;color:var(--accent)"&gt;&lt;/i&gt;
+  &lt;h4&gt;طراحی مدرن&lt;/h4&gt;
+  &lt;p&gt;کارت با افکت شیشه‌ای&lt;/p&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Image Overlay Card -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>کارت با تصویر و اوورلی</h3>
+        <span class="comp-tag">Image Overlay</span>
+        <p>تصویر با لایه‌ی تیره و متن روی آن</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <div class="img-overlay">
+          <div style="width:100%;height:200px;background:linear-gradient(135deg,var(--info),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;"><i class="fas fa-city"></i></div>
+          <div class="overlay">
+            <div>
+              <h4>شهر تهران</h4>
+              <p>پایتخت ایران، کلانشهری با ۱۵ میلیون نفر جمعیت</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="img-overlay"&gt;
+  &lt;div style="height:200px;background:..."&gt;&lt;/div&gt;
+  &lt;div class="overlay"&gt;
+    &lt;h4&gt;شهر تهران&lt;/h4&gt;
+    &lt;p&gt;پایتخت ایران&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Testimonial Card -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>کارت نظرات</h3>
+        <span class="comp-tag">Testimonial</span>
+        <p>کارت نمایش نظرات کاربران با امتیاز</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <div class="testimonial">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <div class="testimonial-text">
+            "این محصول واقعاً فوق‌العاده است. طراحی زیبا و کاربری آسان باعث شده کار تیم ما بسیار سریع‌تر انجام شود."
+          </div>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:var(--accent);">م</div>
+            <div>
+              <div class="name">محمد رضایی</div>
+              <div class="title">مدیر محصول، دیجیکالا</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="testimonial"&gt;
+  &lt;div class="testimonial-stars"&gt;
+    &lt;i class="fas fa-star"&gt;&lt;/i&gt;...
+  &lt;/div&gt;
+  &lt;div class="testimonial-text"&gt;"متن نظر کاربر"&lt;/div&gt;
+  &lt;div class="testimonial-author"&gt;
+    &lt;div class="avatar"&gt;م&lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="name"&gt;محمد رضایی&lt;/div&gt;
+      &lt;div class="title"&gt;مدیر محصول&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>شبکه ویژگی‌ها</h3>
+        <span class="comp-tag">Feature Grid</span>
+        <p>نمایش گرید ویژگی‌های محصول یا خدمات</p>
+      </div>
+      <div class="comp-preview column">
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="icon"><i class="fas fa-bolt"></i></div>
+            <h4>سرعت بالا</h4>
+            <p>بارگذاری در کمتر از یک ثانیه</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon"><i class="fas fa-lock"></i></div>
+            <h4>امنیت کامل</h4>
+            <p>رمزگذاری پیشرفته اطلاعات</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon"><i class="fas fa-headset"></i></div>
+            <h4>پشتیبانی ۲۴/۷</h4>
+            <p>تیم پشتیبانی همیشه آماده</p>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="feature-grid"&gt;
+  &lt;div class="feature-item"&gt;
+    &lt;div class="icon"&gt;&lt;i class="fas fa-bolt"&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;h4&gt;سرعت بالا&lt;/h4&gt;
+    &lt;p&gt;بارگذاری در کمتر از یک ثانیه&lt;/p&gt;
+  &lt;/div&gt;
+  ...
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 5. ALERTS & NOTIFICATIONS -->
+<!-- ======================================================================== -->
+<section class="section" id="alerts">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-bell"></i> دسته: هشدارها</span>
+    <h2>هشدارها و اعلان‌ها</h2>
+    <p>الرت‌ها، نوتیفیکیشن‌ها و پیام‌های سیستمی با رنگ‌بندی مفهومی</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Alerts -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>الرت‌ها (هشدارها)</h3>
+        <span class="comp-tag">Alert</span>
+        <p>پیام‌های هشدار با رنگ‌های مختلف Semantic</p>
+      </div>
+      <div class="comp-preview column" style="gap:10px;">
+        <div class="alert alert-success"><i class="fas fa-check-circle"></i><div><div class="alert-title">موفقیت</div>عملیات با موفقیت انجام شد.</div></div>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i><div><div class="alert-title">خطا</div>مشکلی در پردازش درخواست پیش آمد.</div></div>
+        <div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i><div><div class="alert-title">هشدار</div>فضای ذخیره‌سازی رو به اتمام است.</div></div>
+        <div class="alert alert-info"><i class="fas fa-info-circle"></i><div><div class="alert-title">اطلاعیه</div>سیستم در ساعت ۲ بامداد به‌روزرسانی می‌شود.</div></div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="alert alert-success"&gt;
+  &lt;i class="fas fa-check-circle"&gt;&lt;/i&gt;
+  &lt;div&gt;
+    &lt;div class="alert-title"&gt;موفقیت&lt;/div&gt;
+    عملیات با موفقیت انجام شد.
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>تست نوتیفیکیشن</h3>
+        <span class="comp-tag">Toast</span>
+        <p>اعلان‌های کشویی با انیمیشن ورود</p>
+      </div>
+      <div class="comp-preview column" style="gap:10px;align-items:flex-start;">
+        <div class="toast">
+          <div class="toast-icon success"><i class="fas fa-check"></i></div>
+          <div class="toast-body">
+            <div class="toast-title">دانلود کامل شد</div>
+            <div class="toast-desc">فایل با موفقیت دریافت گردید</div>
+          </div>
+          <button class="toast-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="toast">
+          <div class="toast-icon error"><i class="fas fa-times"></i></div>
+          <div class="toast-body">
+            <div class="toast-title">خطا در اتصال</div>
+            <div class="toast-desc">لطفاً اتصال اینترنت خود را بررسی کنید</div>
+          </div>
+          <button class="toast-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="toast">
+          <div class="toast-icon info"><i class="fas fa-info"></i></div>
+          <div class="toast-body">
+            <div class="toast-title">نسخه جدید</div>
+            <div class="toast-desc">نسخه ۳.۰ منتشر شد</div>
+          </div>
+          <button class="toast-close"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="toast"&gt;
+  &lt;div class="toast-icon success"&gt;&lt;i class="fas fa-check"&gt;&lt;/i&gt;&lt;/div&gt;
+  &lt;div class="toast-body"&gt;
+    &lt;div class="toast-title"&gt;دانلود کامل شد&lt;/div&gt;
+    &lt;div class="toast-desc"&gt;فایل با موفقیت دریافت گردید&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="toast-close"&gt;&lt;i class="fas fa-times"&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>حالت خالی (Empty State)</h3>
+        <span class="comp-tag">Empty / 404</span>
+        <p>نمایش زمانی که داده‌ای وجود ندارد یا خطای ۴۰۴</p>
+      </div>
+      <div class="comp-preview column">
+        <div class="empty-state">
+          <i class="fas fa-inbox"></i>
+          <h4>پیامی وجود ندارد</h4>
+          <p>همه پیام‌های خود را خوانده‌اید. وقتی پیام جدیدی دریافت کنید اینجا نمایش داده می‌شود.</p>
+          <button class="btn btn-primary">رفتن به صفحه اصلی</button>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="empty-state"&gt;
+  &lt;i class="fas fa-inbox"&gt;&lt;/i&gt;
+  &lt;h4&gt;پیامی وجود ندارد&lt;/h4&gt;
+  &lt;p&gt;همه پیام‌های خود را خوانده‌اید.&lt;/p&gt;
+  &lt;button class="btn btn-primary"&gt;رفتن به صفحه اصلی&lt;/button&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 6. TABLES -->
+<!-- ======================================================================== -->
+<section class="section" id="tables">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-table"></i> دسته: جدول</span>
+    <h2>جدول‌های داده</h2>
+    <p>جدول‌های ساده و رنگی با قابلیت نمایش داده‌های ساختاریافته</p>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>جدول داده</h3>
+        <span class="comp-tag">Table</span>
+        <p>جدول با حاشیه‌های تفکیک‌شده و هدر تیره</p>
+      </div>
+      <div class="comp-preview column">
+        <table class="demo-table">
+          <thead>
+            <tr><th>نام محصول</th><th>دسته‌بندی</th><th>قیمت</th><th>وضعیت</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>هدفون بی‌سیم</td><td>الکترونیک</td><td>۲,۵۰۰,۰۰۰ تومان</td><td><span class="badge badge-success">موجود</span></td></tr>
+            <tr><td>کیبورد مکانیکی</td><td>کامپیوتر</td><td>۳,۸۰۰,۰۰۰ تومان</td><td><span class="badge badge-success">موجود</span></td></tr>
+            <tr><td>مانیتور ۲۷ اینچ</td><td>نمایشگر</td><td>۱۲,۵۰۰,۰۰۰ تومان</td><td><span class="badge badge-warning">محدود</span></td></tr>
+            <tr><td>ماوس گیمینگ</td><td>کامپیوتر</td><td>۱,۸۰۰,۰۰۰ تومان</td><td><span class="badge badge-danger">نا موجود</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;table class="demo-table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;نام محصول&lt;/th&gt;&lt;th&gt;قیمت&lt;/th&gt;&lt;th&gt;وضعیت&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;هدفون&lt;/td&gt;&lt;td&gt;۲,۵۰۰,۰۰۰&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-success"&gt;موجود&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre></div>
+    </div>
+
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>جدول رنگی (Striped)</h3>
+        <span class="comp-tag">Striped Table</span>
+        <p>جدول با ردیف‌های یک‌درمیان رنگی برای خوانایی بهتر</p>
+      </div>
+      <div class="comp-preview column">
+        <table class="demo-table demo-table-striped">
+          <thead>
+            <tr><th>کاربر</th><th>نقش</th><th>وضعیت</th><th>فعالیت</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>علی محمدی</td><td>مدیر</td><td><span class="badge badge-success">فعال</span></td><td>۲ ساعت پیش</td></tr>
+            <tr><td>سارا احمدی</td><td>ویرایشگر</td><td><span class="badge badge-success">فعال</span></td><td>۱۵ دقیقه پیش</td></tr>
+            <tr><td>رضا کریمی</td><td>نویسنده</td><td><span class="badge badge-warning">غیرفعال</span></td><td>۳ روز پیش</td></tr>
+            <tr><td>مریم حسینی</td><td>مدیر</td><td><span class="badge badge-success">فعال</span></td><td>۴۵ دقیقه پیش</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;table class="demo-table demo-table-striped"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;کاربر&lt;/th&gt;&lt;th&gt;نقش&lt;/th&gt;&lt;th&gt;وضعیت&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;علی محمدی&lt;/td&gt;&lt;td&gt;مدیر&lt;/td&gt;&lt;td&gt;فعال&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 7. NAVIGATION -->
+<!-- ======================================================================== -->
+<section class="section" id="nav">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-bars"></i> دسته: ناوبری</span>
+    <h2>المان‌های ناوبری</h2>
+    <p>صفحه‌بندی، مسیریاب، سایدبار و منوهای ناوبری</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Pagination -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>صفحه‌بندی (Pagination)</h3>
+        <span class="comp-tag">Pagination</span>
+        <p>صفحه‌بندی با قابلیت نمایش صفحات مختلف</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <div class="pagination">
+          <a href="#"><i class="fas fa-chevron-right"></i></a>
+          <a href="#" class="active">۱</a>
+          <a href="#">۲</a>
+          <a href="#">۳</a>
+          <a href="#">۴</a>
+          <a href="#">۵</a>
+          <a href="#"><i class="fas fa-chevron-left"></i></a>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="pagination"&gt;
+  &lt;a href="#"&gt;&lt;i class="fas fa-chevron-right"&gt;&lt;/i&gt;&lt;/a&gt;
+  &lt;a href="#" class="active"&gt;۱&lt;/a&gt;
+  &lt;a href="#"&gt;۲&lt;/a&gt;
+  &lt;a href="#"&gt;۳&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;i class="fas fa-chevron-left"&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>مسیریاب (Breadcrumb)</h3>
+        <span class="comp-tag">Breadcrumb</span>
+        <p>مسیر صفحات برای نمایش موقعیت کاربر در سایت</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <div class="breadcrumb">
+          <a href="#">خانه</a>
+          <span class="sep"><i class="fas fa-chevron-left"></i></span>
+          <a href="#">محصولات</a>
+          <span class="sep"><i class="fas fa-chevron-left"></i></span>
+          <span>الکترونیک</span>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="breadcrumb"&gt;
+  &lt;a href="#"&gt;خانه&lt;/a&gt;
+  &lt;span class="sep"&gt;&lt;i class="fas fa-chevron-left"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;a href="#"&gt;محصولات&lt;/a&gt;
+  &lt;span class="sep"&gt;&lt;i class="fas fa-chevron-left"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;span&gt;الکترونیک&lt;/span&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>سایدبار ناوبری</h3>
+        <span class="comp-tag">Sidebar</span>
+        <p>منوی کناری با آیکون و وضعیت فعال</p>
+      </div>
+      <div class="comp-preview column" style="padding:0;">
+        <div class="sidebar-demo" style="border-radius:0;border:none;">
+          <div class="side">
+            <a href="#" class="active"><i class="fas fa-home"></i> خانه</a>
+            <a href="#"><i class="fas fa-chart-bar"></i> آمار</a>
+            <a href="#"><i class="fas fa-users"></i> کاربران</a>
+            <a href="#"><i class="fas fa-cog"></i> تنظیمات</a>
+          </div>
+          <div class="main">محتوای اصلی صفحه</div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="sidebar-demo"&gt;
+  &lt;div class="side"&gt;
+    &lt;a href="#" class="active"&gt;&lt;i class="fas fa-home"&gt;&lt;/i&gt; خانه&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;i class="fas fa-chart-bar"&gt;&lt;/i&gt; آمار&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt; کاربران&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="main"&gt;محتوای اصلی&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Avatar Group -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>آواتار و گروه آواتار</h3>
+        <span class="comp-tag">Avatar</span>
+        <p>آواتارهای تکی و گروهی با سایزهای مختلف</p>
+      </div>
+      <div class="comp-preview flex-wrap">
+        <div class="avatar" style="background:var(--accent);">A</div>
+        <div class="avatar sm" style="background:var(--success);">B</div>
+        <div class="avatar lg" style="background:var(--danger);">C</div>
+        <div class="avatar xl" style="background:var(--info);">D</div>
+        <div class="avatar-group">
+          <div class="avatar" style="background:var(--accent);">م</div>
+          <div class="avatar" style="background:var(--success);">س</div>
+          <div class="avatar" style="background:var(--warning);color:#333;">ر</div>
+          <div class="avatar" style="background:var(--info);">ن</div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="avatar" style="background:var(--accent)"&gt;A&lt;/div&gt;
+&lt;div class="avatar lg" style="background:var(--danger)"&gt;C&lt;/div&gt;
+&lt;div class="avatar-group"&gt;
+  &lt;div class="avatar" style="background:var(--accent)"&gt;م&lt;/div&gt;
+  &lt;div class="avatar" style="background:var(--success)"&gt;س&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 8. PROGRESS & LOADING -->
+<!-- ======================================================================== -->
+<section class="section" id="progress">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-spinner"></i> دسته: پیشرفت و بارگذاری</span>
+    <h2>نوار پیشرفت و اسپینرها</h2>
+    <p>انواع نوار پیشرفت، اسپینرهای چرخان و انیمیشن‌های بارگذاری</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Progress Bars -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>نوار پیشرفت</h3>
+        <span class="comp-tag">Progress Bar</span>
+        <p>نوار پیشرفت ساده، رنگی و خط‌دار (striped)</p>
+      </div>
+      <div class="comp-preview column" style="gap:16px;">
+        <div>
+          <div class="progress-label"><span>پیشرفت پروژه</span><span>۷۵٪</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:75%;"></div></div>
+        </div>
+        <div>
+          <div class="progress-label"><span>دانلود فایل</span><span>۴۵٪</span></div>
+          <div class="progress-bar"><div class="progress-fill striped" style="width:45%;"></div></div>
+        </div>
+        <div>
+          <div class="progress-label"><span>بارگذاری</span><span>۱۰۰٪</span></div>
+          <div class="progress-bar lg"><div class="progress-fill" style="width:100%;background:var(--success);"></div></div>
+        </div>
+        <div>
+          <div class="progress-label"><span>ساده</span><span>۶۰٪</span></div>
+          <div class="progress-bar sm"><div class="progress-fill" style="width:60%;background:var(--info);"></div></div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div&gt;
+  &lt;div class="progress-label"&gt;&lt;span&gt;پیشرفت&lt;/span&gt;&lt;span&gt;۷۵٪&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="progress-bar"&gt;
+    &lt;div class="progress-fill" style="width:75%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="progress-bar lg"&gt;...&lt;/div&gt;
+&lt;div class="progress-bar sm"&gt;...&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Spinners -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>اسپینرها</h3>
+        <span class="comp-tag">Spinner / Loader</span>
+        <p>اسپینرهای چرخان در سایزهای مختلف</p>
+      </div>
+      <div class="comp-preview flex-wrap" style="gap:24px;">
+        <div style="text-align:center;">
+          <div class="spinner"></div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">معمولی</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="spinner sm"></div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">کوچک</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="spinner lg"></div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">بزرگ</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="pulse"></div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">پالس</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse-anim 1s ease infinite;"></div>
+            <div style="width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse-anim 1s ease 0.2s infinite;"></div>
+            <div style="width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse-anim 1s ease 0.4s infinite;"></div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;">نقطه</div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="spinner"&gt;&lt;/div&gt;
+&lt;div class="spinner sm"&gt;&lt;/div&gt;
+&lt;div class="spinner lg"&gt;&lt;/div&gt;
+&lt;div class="pulse"&gt;&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Skeleton Loading -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>اسکلت بارگذاری</h3>
+        <span class="comp-tag">Skeleton</span>
+        <p>نمایش محتوای در حال بارگذاری با افکت اسکلت</p>
+      </div>
+      <div class="comp-preview column" style="gap:12px;">
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--bg-tertiary);animation:pulse-anim 1.5s ease infinite;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+            <div style="height:12px;width:60%;background:var(--bg-tertiary);border-radius:4px;animation:pulse-anim 1.5s ease infinite;"></div>
+            <div style="height:8px;width:40%;background:var(--bg-tertiary);border-radius:4px;animation:pulse-anim 1.5s ease infinite;"></div>
+          </div>
+        </div>
+        <div style="height:80px;background:var(--bg-tertiary);border-radius:var(--radius-md);animation:pulse-anim 1.5s ease infinite;"></div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;height:10px;background:var(--bg-tertiary);border-radius:4px;animation:pulse-anim 1.5s ease infinite;"></div>
+          <div style="flex:1;height:10px;background:var(--bg-tertiary);border-radius:4px;animation:pulse-anim 1.5s ease infinite;"></div>
+          <div style="flex:2;height:10px;background:var(--bg-tertiary);border-radius:4px;animation:pulse-anim 1.5s ease infinite;"></div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;!-- Skeleton loading placeholders --&gt;
+&lt;div style="width:48px;height:48px;border-radius:50%;background:var(--bg-tertiary);animation:pulse-anim 1.5s ease infinite;"&gt;&lt;/div&gt;
+&lt;div style="height:12px;width:60%;background:var(--bg-tertiary);border-radius:4px;animation:pulse-anim 1.5s ease infinite;"&gt;&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 9. MODALS -->
+<!-- ======================================================================== -->
+<section class="section" id="modals">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-window-maximize"></i> دسته: مودال و دیالوگ</span>
+    <h2>مودال‌ها و دیالوگ‌ها</h2>
+    <p>پنجره‌های مودال، دیالوگ تأیید و هم‌رسانی با انیمیشن</p>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>مودال تأیید</h3>
+        <span class="comp-tag">Confirm Dialog</span>
+        <p>دیالوگ تأیید عملیات با دکمه‌های کنسل و تأیید</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <button class="btn btn-primary" onclick="openModal('confirmModal')">
+          <i class="fas fa-window-maximize"></i> باز کردن مودال
+        </button>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;!-- Modal Trigger --&gt;
+&lt;button class="btn btn-primary" onclick="openModal('myModal')"&gt;
+  باز کردن مودال
+&lt;/button&gt;
+
+&lt;!-- Modal Overlay --&gt;
+&lt;div class="modal-overlay" id="myModal"&gt;
+  &lt;div class="modal-box"&gt;
+    &lt;h3&gt;عنوان مودال&lt;/h3&gt;
+    &lt;p&gt;توضیحات مودال...&lt;/p&gt;
+    &lt;div class="modal-actions"&gt;
+      &lt;button class="btn btn-secondary" onclick="closeModal('myModal')"&gt;انصراف&lt;/button&gt;
+      &lt;button class="btn btn-primary" onclick="closeModal('myModal')"&gt;تأیید&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>مودال اطلاعات</h3>
+        <span class="comp-tag">Info Modal</span>
+        <p>دیالوگ نمایش اطلاعات با دکمه بستن</p>
+      </div>
+      <div class="comp-preview wrap-center">
+        <button class="btn btn-info" onclick="openModal('infoModal')">
+          <i class="fas fa-info-circle"></i> نمایش اطلاعات
+        </button>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;button class="btn btn-info" onclick="openModal('infoModal')"&gt;
+  نمایش اطلاعات
+&lt;/button&gt;</pre></div>
+    </div>
+
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>Tooltip</h3>
+        <span class="comp-tag">Tooltip</span>
+        <p>راهنمای متنی با نمایش هاور</p>
+      </div>
+      <div class="comp-preview flex-wrap" style="gap:24px;">
+        <div class="tooltip-wrapper">
+          <button class="btn btn-primary btn-sm">هاور کنید</button>
+          <span class="tooltip-text">این یک راهنما است</span>
+        </div>
+        <div class="tooltip-wrapper">
+          <i class="fas fa-question-circle" style="font-size:1.4rem;color:var(--accent);cursor:pointer;"></i>
+          <span class="tooltip-text">راهنمای بیشتر</span>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="tooltip-wrapper"&gt;
+  &lt;button class="btn btn-primary"&gt;هاور کنید&lt;/button&gt;
+  &lt;span class="tooltip-text"&gt;این یک راهنما است&lt;/span&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 10. TABS & ACCORDION -->
+<!-- ======================================================================== -->
+<section class="section" id="tabs">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-layer-group"></i> دسته: تب‌ها و آکاردئون</span>
+    <h2>تب‌ها و آکاردئون</h2>
+    <p>المان‌های نمایش محتوای چندبخشی با قابلیت جابجایی</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Tabs -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>تب‌ها (Tabs)</h3>
+        <span class="comp-tag">Tabs</span>
+        <p>تب‌های ساده برای جابجایی بین محتوای مختلف</p>
+      </div>
+      <div class="comp-preview column">
+        <div class="tabs">
+          <div class="tab-nav">
+            <button class="active" onclick="switchTab(this,'tab1')">محصولات</button>
+            <button onclick="switchTab(this,'tab2')">خدمات</button>
+            <button onclick="switchTab(this,'tab3')">پشتیبانی</button>
+          </div>
+          <div class="tab-content active" id="tab1">
+            <p style="font-size:0.88rem;color:var(--text-secondary);">لیست محصولات دیجیتال شامل نرم‌افزار، اپلیکیشن و سرویس‌های ابری.</p>
+          </div>
+          <div class="tab-content" id="tab2">
+            <p style="font-size:0.88rem;color:var(--text-secondary);">خدمات مشاوره، طراحی وب، سئو و بهینه‌سازی سایت.</p>
+          </div>
+          <div class="tab-content" id="tab3">
+            <p style="font-size:0.88rem;color:var(--text-secondary);">پشتیبانی ۲۴ ساعته، تیکتینگ و چت آنلاین.</p>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="tabs"&gt;
+  &lt;div class="tab-nav"&gt;
+    &lt;button class="active" onclick="switchTab(this,'t1')"&gt;محصولات&lt;/button&gt;
+    &lt;button onclick="switchTab(this,'t2')"&gt;خدمات&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-content active" id="t1"&gt;محتوا...&lt;/div&gt;
+  &lt;div class="tab-content" id="t2"&gt;محتوا...&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Accordion -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>آکاردئون (Accordion)</h3>
+        <span class="comp-tag">Accordion</span>
+        <p>سوالات متداول با قابلیت باز و بسته شدن</p>
+      </div>
+      <div class="comp-preview column">
+        <div class="accordion">
+          <div class="accordion-item open">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>روش ثبت سفارش چگونه است؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-body">
+              <p>پس از انتخاب محصول مورد نظر، به سبد خرید اضافه کرده و مراحل ثبت سفارش را تکمیل کنید.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>مدت زمان تحویل چقدر است؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-body">
+              <p>مدت زمان تحویل بستگی به موقعیت مکانی شما دارد و معمولاً بین ۲ تا ۵ روز کاری است.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span>روش‌های پرداخت کدامند؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-body">
+              <p>شما می‌توانید از طریق کارت‌های بانکی عضو شتاب، پرداخت اینترنتی و یا کارت به کارت پرداخت کنید.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="accordion"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;div class="accordion-header" onclick="toggleAccordion(this)"&gt;
+      &lt;span&gt;سوال؟&lt;/span&gt;
+      &lt;i class="fas fa-chevron-down"&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-body"&gt;
+      &lt;p&gt;پاسخ...&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 11. DASHBOARD -->
+<!-- ======================================================================== -->
+<section class="section" id="dashboard">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-chart-pie"></i> دسته: داشبورد</span>
+    <h2>المان‌های داشبورد و آمار</h2>
+    <p>کارت‌های آماری، تایم‌لاین و المان‌های مدیریتی</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Stat Cards -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>کارت‌های آمار</h3>
+        <span class="comp-tag">Stats</span>
+        <p>نمایش آمار سریع با آیکون و درصد تغییرات</p>
+      </div>
+      <div class="comp-preview flex-wrap" style="gap:16px;">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--accent);"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <h4>۱۲,۴۵۰</h4>
+            <p>کاربران فعال</p>
+            <span class="stat-change up"><i class="fas fa-arrow-up"></i> +۱۲٪</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--success);"><i class="fas fa-dollar-sign"></i></div>
+          <div class="stat-info">
+            <h4>$۴۸,۵۰۰</h4>
+            <p>درآمد ماهانه</p>
+            <span class="stat-change up"><i class="fas fa-arrow-up"></i> +۸٪</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--warning);color:#333;"><i class="fas fa-shopping-cart"></i></div>
+          <div class="stat-info">
+            <h4>۳۸۹</h4>
+            <p>سفارشات جدید</p>
+            <span class="stat-change down"><i class="fas fa-arrow-down"></i> -۳٪</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--danger);"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="stat-info">
+            <h4>۱۲</h4>
+            <p>تیکت باز</p>
+            <span class="stat-change down"><i class="fas fa-arrow-down"></i> -۵٪</span>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="stat-card"&gt;
+  &lt;div class="stat-icon" style="background:var(--accent)"&gt;
+    &lt;i class="fas fa-users"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;div class="stat-info"&gt;
+    &lt;h4&gt;۱۲,۴۵۰&lt;/h4&gt;
+    &lt;p&gt;کاربران فعال&lt;/p&gt;
+    &lt;span class="stat-change up"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt; +۱۲٪&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>تایم‌لاین</h3>
+        <span class="comp-tag">Timeline</span>
+        <p>نمایش رویدادها به ترتیب زمانی</p>
+      </div>
+      <div class="comp-preview column">
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="time">۱۴:۳۰</span>
+            <h4>سفارش جدید ثبت شد</h4>
+            <p>سفارش شماره ۱۲۳۴ توسط محمد رضایی ثبت شد</p>
+          </div>
+          <div class="timeline-item">
+            <span class="time">۱۳:۱۵</span>
+            <h4>پرداخت تأیید شد</h4>
+            <p>پرداخت سفارش شماره ۱۲۳۰ تأیید گردید</p>
+          </div>
+          <div class="timeline-item">
+            <span class="time">۱۱:۴۵</span>
+            <h4>محصول ارسال شد</h4>
+            <p>سفارش شماره ۱۲۲۸ به پست تحویل داده شد</p>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="timeline"&gt;
+  &lt;div class="timeline-item"&gt;
+    &lt;span class="time"&gt;۱۴:۳۰&lt;/span&gt;
+    &lt;h4&gt;سفارش جدید ثبت شد&lt;/h4&gt;
+    &lt;p&gt;توضیحات...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Progress Dashboard -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>داشبورد وظایف</h3>
+        <span class="comp-tag">Tasks</span>
+        <p>مدیریت وظایف با نوار پیشرفت هر وظیفه</p>
+      </div>
+      <div class="comp-preview column" style="gap:16px;">
+        <div>
+          <div class="flex justify-between mb-8" style="font-size:0.82rem;">
+            <span>طراحی رابط کاربری</span>
+            <span style="color:var(--text-muted);">۸۰٪</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:80%;background:var(--accent);"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-8" style="font-size:0.82rem;">
+            <span>توسعه بک‌اند</span>
+            <span style="color:var(--text-muted);">۶۰٪</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:60%;background:var(--info);"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-8" style="font-size:0.82rem;">
+            <span>تست و QA</span>
+            <span style="color:var(--text-muted);">۳۵٪</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:35%;background:var(--warning);"></div></div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;">
+          <span class="badge badge-primary"><i class="fas fa-check"></i> ۱۲ انجام شده</span>
+          <span class="badge badge-warning"><i class="fas fa-spinner"></i> ۵ در حال انجام</span>
+          <span class="badge badge-danger"><i class="fas fa-clock"></i> ۳ عقب افتاده</span>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div&gt;
+  &lt;div class="flex justify-between mb-8"&gt;
+    &lt;span&gt;طراحی UI&lt;/span&gt;
+    &lt;span&gt;۸۰٪&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="progress-bar"&gt;
+    &lt;div class="progress-fill" style="width:80%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 12. ANIMATIONS -->
+<!-- ======================================================================== -->
+<section class="section" id="animations">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-film"></i> دسته: انیمیشن‌ها</span>
+    <h2>انیمیشن‌ها و افکت‌های حرکتی</h2>
+    <p>اسکرول انیمیشن‌ها، پارالاکس، هاور افکت‌ها و جلوه‌های بصری</p>
+  </div>
+
+  <div class="comp-grid">
+    <!-- Scroll Reveal -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>نمایش با اسکرول</h3>
+        <span class="comp-tag">Scroll Reveal</span>
+        <p>المان‌ها با حرکت به سمت بالا ظاهر می‌شوند</p>
+      </div>
+      <div class="comp-preview column center">
+        <div style="padding:32px;">
+          <i class="fas fa-arrow-down" style="font-size:2rem;color:var(--accent);animation:bounce 2s ease infinite;"></i>
+          <p style="color:var(--text-muted);margin-top:8px;">اسکرول کنید تا انیمیشن را ببینید</p>
+          <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:8px;">تمامی کارت‌های این صفحه از Scroll Reveal استفاده می‌کنند</p>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>/* CSS */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* JS - Intersection Observer */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+});
+document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));</pre></div>
+    </div>
+
+    <!-- Hover Effects -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>افکت‌های هاور</h3>
+        <span class="comp-tag">Hover Effects</span>
+        <p>جلوه‌های بصری هنگام بردن ماوس روی المان</p>
+      </div>
+      <div class="comp-preview flex-wrap" style="gap:16px;">
+        <div style="width:80px;height:80px;background:var(--accent);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;transition:var(--transition);cursor:pointer;" onmouseover="this.style.transform='scale(1.2) rotate(10deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+          <i class="fas fa-magic"></i>
+        </div>
+        <div style="width:80px;height:80px;background:var(--success);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;transition:var(--transition);cursor:pointer;" onmouseover="this.style.transform='scale(1.15)';this.style.boxShadow='0 0 30px rgba(0,184,148,0.4)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='none'">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--accent),var(--pink));border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;transition:var(--transition);cursor:pointer;" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 12px 30px rgba(108,92,231,0.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+          <i class="fas fa-rocket"></i>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div onmouseover="this.style.transform='scale(1.2) rotate(10deg)'"
+     onmouseout="this.style.transform='scale(1) rotate(0deg)'"&gt;
+  &lt;i class="fas fa-magic"&gt;&lt;/i&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+
+    <!-- Parallax Demo -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>پارالاکس</h3>
+        <span class="comp-tag">Parallax</span>
+        <p>نمایش افکت پارالاکس با المان‌های شناور</p>
+      </div>
+      <div class="comp-preview column">
+        <div class="parallax-demo">
+          <div class="bg-shapes">
+            <span style="top:20%;right:15%;animation-delay:0s;"></span>
+            <span style="top:50%;right:70%;animation-delay:1s;width:40px;height:40px;border-radius:50%;"></span>
+            <span style="top:70%;right:30%;animation-delay:2s;width:30px;height:30px;border-radius:8px;"></span>
+          </div>
+          <span style="position:relative;z-index:1;">پارالاکس — <span style="font-weight:300;">حرکت در عمق</span></span>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:8px;">با اسکرول کردن، عناصر پس‌زمینه با سرعت متفاوتی حرکت می‌کنند</p>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>.parallax-demo {
+  height: 200px;
+  background: linear-gradient(135deg, var(--accent), var(--pink));
+  position: relative;
+  overflow: hidden;
+}
+.parallax-demo .bg-shapes span {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  animation: floatShape 6s ease-in-out infinite;
+}
+@keyframes floatShape {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+}</pre></div>
+    </div>
+
+    <!-- Bounce Animation -->
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>انیمیشن‌های کی‌فریم</h3>
+        <span class="comp-tag">Keyframes</span>
+        <p>مجموعه‌ای از انیمیشن‌های CSS کاربردی</p>
+      </div>
+      <div class="comp-preview flex-wrap" style="gap:20px;">
+        <div style="text-align:center;">
+          <div style="width:40px;height:40px;background:var(--accent);border-radius:var(--radius-sm);margin:0 auto;animation:bounce 1s ease infinite;"></div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">bounce</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:40px;height:40px;background:var(--success);border-radius:50%;margin:0 auto;animation:pulse-anim 1.5s ease infinite;"></div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">pulse</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:40px;height:40px;background:var(--info);border-radius:var(--radius-sm);margin:0 auto;animation:spin 1s linear infinite;"></div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">spin</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:40px;height:40px;background:var(--danger);border-radius:var(--radius-sm);margin:0 auto;animation:shimmer 2s ease infinite;background:linear-gradient(90deg,var(--danger),var(--pink),var(--danger));background-size:200%;"></div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">shimmer</div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 13. PRICING -->
+<!-- ======================================================================== -->
+<section class="section" id="pricing">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-tag"></i> دسته: قیمت‌گذاری</span>
+    <h2>کارت‌های قیمت‌گذاری</h2>
+    <p>جدول تعرفه‌ها و پلن‌های اشتراک با قابلیت مقایسه</p>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card scroll-reveal">
+      <div class="comp-card-header">
+        <h3>پلن‌های اشتراک</h3>
+        <span class="comp-tag">Pricing</span>
+        <p>سه پلن مختلف با ویژگی‌های متفاوت</p>
+      </div>
+      <div class="comp-preview flex-wrap" style="gap:16px;justify-content:center;">
+        <div class="pricing-card">
+          <h4 style="font-size:1.1rem;margin-bottom:8px;">شروع</h4>
+          <div class="price">رایگان</div>
+          <ul>
+            <li><i class="fas fa-check"></i> ۱ پروژه</li>
+            <li><i class="fas fa-check"></i> ۵۰ مگابایت فضا</li>
+            <li><i class="fas fa-check"></i> پشتیبانی ایمیل</li>
+            <li><i class="fas fa-times" style="color:var(--text-muted);"></i> تیم اختصاصی</li>
+          </ul>
+          <button class="btn btn-secondary w-full">شروع رایگان</button>
+        </div>
+        <div class="pricing-card featured">
+          <span class="badge badge-primary" style="margin-bottom:8px;">محبوب‌ترین</span>
+          <h4 style="font-size:1.1rem;margin-bottom:8px;">حرفه‌ای</h4>
+          <div class="price">۲۹۹,۰۰۰ <span>تومان/ماه</span></div>
+          <ul>
+            <li><i class="fas fa-check"></i> ۱۰ پروژه</li>
+            <li><i class="fas fa-check"></i> ۵ گیگابایت فضا</li>
+            <li><i class="fas fa-check"></i> پشتیبانی اولویت‌دار</li>
+            <li><i class="fas fa-check"></i> دامنه اختصاصی</li>
+          </ul>
+          <button class="btn btn-primary w-full">شروع کن</button>
+        </div>
+        <div class="pricing-card">
+          <h4 style="font-size:1.1rem;margin-bottom:8px;">سازمانی</h4>
+          <div class="price">۷۹۹,۰۰۰ <span>تومان/ماه</span></div>
+          <ul>
+            <li><i class="fas fa-check"></i> پروژه نامحدود</li>
+            <li><i class="fas fa-check"></i> ۵۰ گیگابایت فضا</li>
+            <li><i class="fas fa-check"></i> پشتیبانی ۲۴/۷</li>
+            <li><i class="fas fa-check"></i> همه امکانات</li>
+          </ul>
+          <button class="btn btn-secondary w-full">تماس بگیرید</button>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;div class="pricing-card"&gt;
+  &lt;h4&gt;شروع&lt;/h4&gt;
+  &lt;div class="price"&gt;رایگان&lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;i class="fas fa-check"&gt;&lt;/i&gt; ۱ پروژه&lt;/li&gt;
+    ...
+  &lt;/ul&gt;
+  &lt;button class="btn btn-primary w-full"&gt;شروع کن&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="pricing-card featured"&gt;
+  &lt;!-- featured plan --&gt;
+&lt;/div&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================== -->
+<!-- 14. FOOTER -->
+<!-- ======================================================================== -->
+<section class="section" id="footer">
+  <div class="section-header scroll-reveal">
+    <span class="cat-badge"><i class="fas fa-shoe-prints"></i> دسته: فوتر</span>
+    <h2>نمونه فوتر</h2>
+    <p>فوتر کامل با لینک‌ها، شبکه‌های اجتماعی و اطلاعات تماس</p>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card scroll-reveal" style="grid-column:1/-1;">
+      <div class="comp-card-header">
+        <h3>فوتر کامل</h3>
+        <span class="comp-tag">Footer</span>
+        <p>فوتر با ستون‌های چندبخشی، لینک‌ها و شبکه‌های اجتماعی</p>
+      </div>
+      <div class="comp-preview column" style="padding:0;">
+        <div class="footer-preview">
+          <div class="footer-grid">
+            <div>
+              <h5>درباره ما</h5>
+              <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.8;">کیت UI فارسی مجموعه‌ای از کامپوننت‌های مدرن با طراحی ایرانی برای توسعه‌دهندگان وب است.</p>
+              <div style="display:flex;gap:8px;margin-top:12px;">
+                <a href="#" style="width:36px;height:36px;border-radius:50%;background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="width:36px;height:36px;border-radius:50%;background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);"><i class="fab fa-github"></i></a>
+                <a href="#" style="width:36px;height:36px;border-radius:50%;background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" style="width:36px;height:36px;border-radius:50%;background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);"><i class="fab fa-dribbble"></i></a>
+              </div>
+            </div>
+            <div>
+              <h5>محصولات</h5>
+              <ul>
+                <li><a href="#">قالب‌های سایت</a></li>
+                <li><a href="#">کامپوننت‌های UI</a></li>
+                <li><a href="#">آیکون‌ها</a></li>
+                <li><a href="#">فونت‌ها</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>منابع</h5>
+              <ul>
+                <li><a href="#">مستندات</a></li>
+                <li><a href="#">راهنما</a></li>
+                <li><a href="#">بلاگ</a></li>
+                <li><a href="#">API</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>ارتباط</h5>
+              <ul>
+                <li><a href="#">تماس با ما</a></li>
+                <li><a href="#">پشتیبانی</a></li>
+                <li><a href="#">حریم خصوصی</a></li>
+                <li><a href="#">شرایط استفاده</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>© ۱۴۰۴ کیت UI فارسی — تمامی حقوق محفوظ است 🇮🇷</p>
+          </div>
+        </div>
+      </div>
+      <button class="code-toggle" onclick="toggleCode(this)"><i class="fas fa-code"></i> نمایش کد</button>
+      <div class="comp-code"><pre>&lt;footer class="footer-preview"&gt;
+  &lt;div class="footer-grid"&gt;
+    &lt;div&gt;
+      &lt;h5&gt;درباره ما&lt;/h5&gt;
+      &lt;p&gt;متن توضیحات...&lt;/p&gt;
+      &lt;div class="flex gap-8"&gt;
+        &lt;a href="#"&gt;&lt;i class="fab fa-twitter"&gt;&lt;/i&gt;&lt;/a&gt;
+        ...
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h5&gt;محصولات&lt;/h5&gt;
+      &lt;ul&gt;&lt;li&gt;&lt;a href="#"&gt;قالب‌ها&lt;/a&gt;&lt;/li&gt;...&lt;/ul&gt;
+    &lt;/div&gt;
+    ...
+  &lt;/div&gt;
+  &lt;div class="footer-bottom"&gt;
+    &lt;p&gt;© ۱۴۰۴ کیت UI فارسی&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</pre></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- ===== MODALS ===== -->
+<!-- Confirm Modal -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <h3>تأیید حذف</h3>
+    <p>آیا از حذف این آیتم اطمینان دارید؟ این عملیات قابل بازگشت نیست.</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('confirmModal')">انصراف</button>
+      <button class="btn btn-danger" onclick="closeModal('confirmModal')"><i class="fas fa-trash"></i> حذف</button>
+    </div>
+  </div>
+</div>
+
+<!-- Info Modal -->
+<div class="modal-overlay" id="infoModal">
+  <div class="modal-box">
+    <h3>نسخه ۱.۰</h3>
+    <p>این کتابخانه شامل بیش از ۵۰ کامپوننت آماده با طراحی ایرانی است. می‌توانید از کدهای HTML در پروژه‌های خود استفاده کنید. تمام کامپوننت‌ها با فونت وزیرمتن و طراحی RTL ساخته شده‌اند.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="closeModal('infoModal')">متوجه شدم</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ===== Theme Toggle =====
+const themeToggle = document.getElementById('themeToggle');
+const themeBtns = themeToggle.querySelectorAll('.theme-btn');
+const currentTheme = localStorage.getItem('theme') || 'light';
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  themeBtns.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === theme);
+  });
+}
+setTheme(currentTheme);
+
+themeBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    setTheme(btn.dataset.theme);
+  });
+});
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+// ===== Mobile Menu =====
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle.addEventListener('click', () => {
+  mobileNav.classList.toggle('open');
+  const icon = menuToggle.querySelector('i');
+  icon.classList.toggle('fa-bars');
+  icon.classList.toggle('fa-times');
+});
+
+// ===== Category Nav Active State =====
+const navLinks = document.querySelectorAll('.category-nav a, .mobile-nav a');
+navLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    navLinks.forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+    mobileNav.classList.remove('open');
+    const icon = menuToggle.querySelector('i');
+    if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+  });
+});
+
+// ===== Scroll Reveal (Intersection Observer) =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.scroll-reveal').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ===== Code Toggle =====
+function toggleCode(btn) {
+  const codeBlock = btn.nextElementSibling;
+  if (codeBlock && codeBlock.classList.contains('comp-code')) {
+    codeBlock.classList.toggle('open');
+    btn.innerHTML = codeBlock.classList.contains('open')
+      ? '<i class="fas fa-eye-slash"></i> مخفی کردن کد'
+      : '<i class="fas fa-code"></i> نمایش کد';
+  }
+}
+
+// ===== Modal Functions =====
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+// ===== Tab Switching =====
+function switchTab(btn, tabId) {
+  const tabs = btn.closest('.tabs');
+  tabs.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+  tabs.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ===== Accordion =====
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const isOpen = item.classList.contains('open');
+  // Close all siblings
+  const accordion = item.closest('.accordion');
+  accordion.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ===== Navbar Shadow on Scroll =====
+const header = document.getElementById('siteHeader');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > 50) {
+    header.style.borderBottomColor = 'var(--border-color)';
+  } else {
+    header.style.borderBottomColor = 'var(--border-color)';
+  }
+  lastScroll = scrollY;
+});
+
+// ===== Progress bars animation on scroll =====
+const progressObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fills = entry.target.querySelectorAll('.progress-fill');
+      fills.forEach(fill => {
+        const width = fill.style.width;
+        fill.style.width = '0%';
+        setTimeout(() => { fill.style.width = width; }, 100);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.progress-bar').forEach(el => {
+  progressObserver.observe(el);
+});
+
+// ===== Toast Close =====
+document.querySelectorAll('.toast-close').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.toast').style.display = 'none';
+  });
+});
+
+// ===== Active nav link on scroll =====
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 120;
+    if (window.scrollY >= top) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+// ===== Dynamic heading fix for stat card =====
+// Fix the h4>h4 typo in the stat card
+document.querySelectorAll('.stat-info h4').forEach(el => {
+  if(el.tagName === 'H4' && !el.textContent.trim()) {
+    el.innerHTML = '۰';
+  }
+});
+
+console.log('🇮🇷 کیت UI فارسی — کتابخانه جامع کامپوننت‌های ایرانی');
+console.log('✨ ویژگی‌ها: RTL | Dark/Light Mode | Vazirmatn Font | Responsive');
+console.log('📦 ۵۰+ کامپوننت در ۱۴ دسته‌بندی مختلف');
+</script>
+
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2b5d7edced697dd',t:'MTc4Njc3MjIwNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

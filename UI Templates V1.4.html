@@ -1,0 +1,2178 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Component Atlas - فایل مرجع HTML</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://v1.fontapi.ir" />
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css" rel="stylesheet" />
+    <link href="https://v1.fontapi.ir/css/Estedad" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7fb;
+        --panel: rgba(255, 255, 255, 0.78);
+        --card: #ffffff;
+        --soft: #f1f5f9;
+        --line: rgba(15, 23, 42, 0.08);
+        --text: #0f172a;
+        --muted: #526173;
+        --accent: #4f46e5;
+        --accent-2: #a855f7;
+        --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+        --glass: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+      }
+
+      .dark {
+        color-scheme: dark;
+        --bg: #020617;
+        --panel: rgba(15, 23, 42, 0.78);
+        --card: #0f172a;
+        --soft: #111c30;
+        --line: rgba(148, 163, 184, 0.16);
+        --text: #e7eefc;
+        --muted: #9eb0c8;
+        --accent: #8b5cf6;
+        --accent-2: #22d3ee;
+        --shadow: 0 24px 70px rgba(2, 6, 23, 0.45);
+        --glass: linear-gradient(180deg, rgba(15, 23, 42, 0.42), rgba(15, 23, 42, 0.2));
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 12% 10%, rgba(99, 102, 241, 0.12), transparent 26%),
+          radial-gradient(circle at 88% 12%, rgba(34, 211, 238, 0.1), transparent 20%),
+          radial-gradient(circle at 50% 90%, rgba(168, 85, 247, 0.07), transparent 24%),
+          var(--bg);
+        color: var(--text);
+        font-family: Vazirmatn, system-ui, sans-serif;
+        transition: background 0.25s ease, color 0.25s ease;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .container {
+        width: min(1380px, calc(100% - 32px));
+        margin-inline: auto;
+      }
+
+      .bg-orbs {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .sticky-shell {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+      }
+
+      .progress-line {
+        height: 4px;
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .dark .progress-line {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .progress-line > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #06b6d4, var(--accent), #ec4899);
+      }
+
+      .header-inner {
+        padding: 18px 0 16px;
+      }
+
+      .topbar {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .brand-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        color: white;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 18px 35px rgba(79, 70, 229, 0.24);
+        flex: 0 0 auto;
+      }
+
+      .eyebrow,
+      .meta,
+      .section-id {
+        font-size: 12px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .title {
+        margin: 0;
+        font-size: clamp(24px, 3vw, 36px);
+        font-weight: 800;
+        line-height: 1.08;
+      }
+
+      .subtitle {
+        margin: 8px 0 0;
+        max-width: 920px;
+        color: var(--muted);
+        line-height: 1.9;
+        font-size: 14px;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .searchbar {
+        min-width: min(100%, 360px);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 12px 14px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      }
+
+      .searchbar input {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+      }
+
+      .searchbar input::placeholder {
+        color: var(--muted);
+      }
+
+      .pill,
+      .chip,
+      .button,
+      .ghost,
+      .tone,
+      .small-btn {
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--text);
+      }
+
+      .pill,
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        background: var(--soft);
+      }
+
+      .small-btn {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .button,
+      .ghost,
+      .tone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 18px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+        transition: 0.2s ease;
+      }
+
+      .button {
+        background: var(--text);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .tone {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 16px 28px rgba(79, 70, 229, 0.2);
+      }
+
+      .ghost {
+        background: var(--card);
+      }
+
+      .filters {
+        margin-top: 14px;
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: thin;
+      }
+
+      .filter-btn {
+        border: 1px solid var(--line);
+        background: var(--soft);
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 10px 16px;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .filter-btn.active {
+        background: var(--text);
+        color: white;
+        border-color: transparent;
+      }
+
+      .hero {
+        padding: 34px 0 10px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .hero h2 {
+        margin: 16px 0 0;
+        font-size: clamp(34px, 6vw, 64px);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .hero p.lead {
+        margin: 16px 0 0;
+        max-width: 840px;
+        font-size: 18px;
+        line-height: 1.95;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        margin-top: 22px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .metrics {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .metric,
+      .surface,
+      .card,
+      .feature-card,
+      .table-wrap,
+      .glass,
+      .section-head,
+      .empty {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .metric {
+        padding: 16px;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 24px;
+        color: var(--text);
+      }
+
+      .visual-panel {
+        position: relative;
+        overflow: hidden;
+        padding: 18px;
+        background: var(--panel);
+      }
+
+      .visual-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .surface {
+        padding: 18px;
+      }
+
+      .icon-box {
+        width: 42px;
+        height: 42px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: rgba(99, 102, 241, 0.08);
+        color: var(--accent);
+      }
+
+      .summary-box {
+        margin-top: 26px;
+        padding: 20px;
+        background: var(--panel);
+      }
+
+      .section {
+        padding-top: 42px;
+        scroll-margin-top: 180px;
+      }
+
+      .section-head {
+        padding: 18px 20px;
+        background: var(--panel);
+        margin-bottom: 18px;
+      }
+
+      .section-head-flex {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        overflow: hidden;
+        background: var(--panel);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .card-head,
+      .card-body,
+      .card-foot {
+        padding: 20px;
+      }
+
+      .card-head {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .card-foot {
+        border-top: 1px solid var(--line);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .card h3 {
+        margin: 10px 0 0;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .desc {
+        margin: 10px 0 0;
+        color: var(--muted);
+        line-height: 1.95;
+        font-size: 14px;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .demo-grid-2,
+      .demo-grid-3,
+      .demo-grid-sidebar {
+        display: grid;
+        gap: 14px;
+      }
+
+      .demo-grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .demo-grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .demo-grid-sidebar {
+        grid-template-columns: 1.08fr 0.92fr;
+      }
+
+      .soft {
+        background: var(--soft);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 16px;
+      }
+
+      .stat-row,
+      .list-row,
+      .line-row,
+      .support-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .list-stack,
+      .faq-stack,
+      .timeline-stack,
+      .toast-stack,
+      .mini-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .input-fake,
+      .kbd-search,
+      .mini-card,
+      .inline-card,
+      .kanban-card,
+      .faq-card,
+      .quote-card,
+      .help-card,
+      .overlay-card,
+      .pricing-card,
+      .type-card,
+      .rtl-card,
+      .rating-card,
+      .notice,
+      .chat-bubble,
+      .chat-bubble-out,
+      .logo-item,
+      .option-chip,
+      .bar-wrap,
+      .heat-cell,
+      .channel,
+      .table-row,
+      .gallery-box {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 22px;
+      }
+
+      .kbd-search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--soft);
+        padding: 12px 14px;
+      }
+
+      .kbd {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 10px;
+        padding: 4px 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .metric-mini {
+        padding: 14px;
+      }
+
+      .metric-mini strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 20px;
+        color: var(--text);
+      }
+
+      .mini-card,
+      .inline-card,
+      .quote-card,
+      .help-card,
+      .faq-card,
+      .notice,
+      .logo-item,
+      .option-chip,
+      .type-card,
+      .rtl-card,
+      .rating-card,
+      .channel {
+        padding: 14px;
+      }
+
+      .notice {
+        background: var(--soft);
+      }
+
+      .hero-special {
+        position: relative;
+        overflow: hidden;
+        color: white;
+        background: linear-gradient(135deg, #0f172a 0%, #312e81 45%, #9333ea 100%);
+      }
+
+      .hero-special .desc,
+      .hero-special .eyebrow,
+      .hero-special .meta {
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .glass {
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        color: white;
+        border-radius: 28px;
+      }
+
+      .glass .desc,
+      .glass .meta,
+      .glass .eyebrow {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .floaty {
+        animation: float 7s ease-in-out infinite;
+      }
+
+      .floaty-2 {
+        animation: float 9s ease-in-out infinite 1.1s;
+      }
+
+      .shine {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shine::after {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.16), transparent 70%);
+        transform: translateX(-120%) rotate(12deg);
+        animation: shimmer 8s linear infinite;
+      }
+
+      .chart-box {
+        height: 180px;
+        background: var(--soft);
+        border-radius: 22px;
+        padding: 14px;
+      }
+
+      .chart-box svg,
+      .hero-chart svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero-chart {
+        height: 124px;
+        border-radius: 22px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .line-row {
+        padding: 12px 14px;
+        background: var(--soft);
+      }
+
+      .table-wrap {
+        overflow: hidden;
+      }
+
+      .table-head,
+      .table-row {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .table-head {
+        padding: 14px 16px;
+        background: var(--soft);
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .table-row {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        border-radius: 0;
+      }
+
+      .table-row:last-child {
+        border-bottom: 0;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .success { background: rgba(16, 185, 129, 0.12); color: #059669; }
+      .warn { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+      .danger { background: rgba(244, 63, 94, 0.12); color: #e11d48; }
+      .indigo { background: rgba(99, 102, 241, 0.12); color: var(--accent); }
+
+      .bars {
+        display: flex;
+        gap: 12px;
+        align-items: end;
+        height: 220px;
+        background: var(--soft);
+        border-radius: 24px;
+        padding: 18px;
+      }
+
+      .bar-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        height: 100%;
+      }
+
+      .bar-wrap {
+        width: 100%;
+        margin-top: auto;
+        border-radius: 18px 18px 0 0;
+        background: linear-gradient(180deg, #a5b4fc, var(--accent));
+        min-height: 24px;
+      }
+
+      .bar-wrap.green {
+        background: linear-gradient(180deg, #34d399, #10b981);
+      }
+
+      .heatmap {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .heat-cell {
+        height: 38px;
+      }
+
+      .heat-1 { background: #e0e7ff; }
+      .heat-2 { background: #c7d2fe; }
+      .heat-3 { background: #a5b4fc; }
+      .heat-4 { background: #818cf8; }
+      .heat-5 { background: #6366f1; }
+
+      .dark .heat-1 { background: #1e293b; }
+      .dark .heat-2 { background: #312e81; }
+      .dark .heat-3 { background: #3730a3; }
+      .dark .heat-4 { background: #4338ca; }
+      .dark .heat-5 { background: #4f46e5; }
+
+      .kanban-board {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .kanban-col {
+        background: var(--soft);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 14px;
+      }
+
+      .kanban-card {
+        padding: 14px;
+        margin-top: 12px;
+      }
+
+      .progress {
+        margin-top: 12px;
+        width: 100%;
+        height: 8px;
+        background: var(--soft);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress > span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(135deg, var(--accent), #22c55e);
+      }
+
+      .upload {
+        text-align: center;
+        border: 1px dashed var(--line);
+        background: var(--soft);
+        padding: 22px;
+        border-radius: 28px;
+      }
+
+      .upload .upload-icon {
+        width: 64px;
+        height: 64px;
+        display: grid;
+        place-items: center;
+        border-radius: 22px;
+        margin: 16px auto 0;
+        background: var(--card);
+        color: var(--accent);
+      }
+
+      .switch {
+        width: 58px;
+        height: 32px;
+        border-radius: 999px;
+        background: #10b981;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+      }
+
+      .switch span {
+        margin-right: auto;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: white;
+      }
+
+      .otp {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .otp span {
+        display: grid;
+        place-items: center;
+        height: 48px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: var(--soft);
+        font-weight: 800;
+        font-size: 18px;
+      }
+
+      .choice-grid,
+      .plans,
+      .logo-grid,
+      .pay-grid,
+      .type-grid,
+      .rtl-grid,
+      .cards-4 {
+        display: grid;
+        gap: 12px;
+      }
+
+      .choice-grid,
+      .plans,
+      .logo-grid,
+      .type-grid,
+      .cards-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pay-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .rtl-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .pricing-card.popular {
+        background: linear-gradient(180deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.02));
+        border-color: var(--accent);
+      }
+
+      .price {
+        margin-top: 18px;
+        display: flex;
+        align-items: end;
+        gap: 8px;
+      }
+
+      .price strong {
+        font-size: 46px;
+        line-height: 1;
+      }
+
+      .compare {
+        overflow: hidden;
+        border-radius: 28px;
+        border: 1px solid var(--line);
+        background: var(--card);
+      }
+
+      .compare .row,
+      .compare .head {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1fr 1fr;
+        gap: 10px;
+        padding: 14px 16px;
+      }
+
+      .compare .head {
+        background: var(--soft);
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .compare .row {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .compare .row:last-child {
+        border-bottom: 0;
+      }
+
+      .quote-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .stars {
+        color: #f59e0b;
+        font-size: 18px;
+      }
+
+      .overlay-scene {
+        position: relative;
+        min-height: 420px;
+        overflow: hidden;
+        border-radius: 30px;
+        border: 1px solid var(--line);
+        background: var(--soft);
+      }
+
+      .overlay-grid {
+        opacity: 0.4;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .gallery-box {
+        height: 110px;
+      }
+
+      .backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(2, 6, 23, 0.36);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+
+      .modal {
+        position: absolute;
+        inset-inline: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        width: min(92%, 520px);
+        z-index: 3;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.85);
+        padding: 22px;
+        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.2);
+        backdrop-filter: blur(18px);
+      }
+
+      .dark .modal {
+        background: rgba(15, 23, 42, 0.88);
+      }
+
+      .drawer {
+        position: absolute;
+        inset-block: 0;
+        left: 0;
+        width: min(100%, 340px);
+        z-index: 4;
+        padding: 18px;
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(2, 6, 23, 0.78);
+        color: white;
+        backdrop-filter: blur(18px);
+      }
+
+      .toast-stack {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 5;
+        width: min(100% - 32px, 280px);
+      }
+
+      .overlay-card {
+        color: white;
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(16px);
+      }
+
+      .marquee {
+        overflow: hidden;
+        white-space: nowrap;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 12px 0;
+      }
+
+      .marquee-track {
+        display: flex;
+        gap: 10px;
+        width: max-content;
+        animation: marquee 22s linear infinite;
+      }
+
+      .marquee-track span {
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.1);
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+
+      .motion-area {
+        position: relative;
+        min-height: 260px;
+      }
+
+      .float-card {
+        position: absolute;
+        width: 250px;
+        padding: 16px;
+      }
+
+      .float-a { right: 0; top: 6px; }
+      .float-b { left: 24px; top: 24px; }
+      .float-c { right: 56px; bottom: 0; }
+
+      .timeline-item {
+        position: relative;
+        display: flex;
+        gap: 14px;
+      }
+
+      .timeline-item:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        right: 18px;
+        top: 42px;
+        width: 1px;
+        height: calc(100% + 10px);
+        background: var(--line);
+      }
+
+      .bullet {
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: var(--text);
+        color: white;
+        flex: 0 0 auto;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .quote {
+        border-right: 4px solid var(--accent);
+        padding-right: 16px;
+        font-size: 22px;
+        line-height: 1.9;
+      }
+
+      pre {
+        margin: 0;
+        overflow: auto;
+        border-radius: 20px;
+        padding: 16px;
+        background: #020617;
+        color: #dbe7ff;
+        font-size: 13px;
+        line-height: 1.9;
+        direction: ltr;
+        text-align: left;
+      }
+
+      .font-vazir { font-family: Vazirmatn, sans-serif; }
+      .font-sahel { font-family: Sahel, sans-serif; }
+      .font-estedad { font-family: Estedad, sans-serif; }
+      .ltr { direction: ltr; text-align: left; }
+
+      .footer {
+        margin-top: 42px;
+        border-top: 1px solid var(--line);
+        background: var(--panel);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .footer .container {
+        padding: 20px 0 34px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .empty {
+        padding: 34px 18px;
+        text-align: center;
+        display: none;
+      }
+
+      .hide {
+        display: none !important;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-120%) rotate(12deg); }
+        100% { transform: translateX(120%) rotate(12deg); }
+      }
+
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      @media (max-width: 1180px) {
+        .hero-grid,
+        .demo-grid-sidebar,
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 960px) {
+        .metrics,
+        .mini-grid,
+        .kanban-board,
+        .plans,
+        .logo-grid,
+        .choice-grid,
+        .quote-grid,
+        .type-grid,
+        .rtl-grid,
+        .cards-4,
+        .demo-grid-3,
+        .demo-grid-2,
+        .pay-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .table-head,
+        .table-row,
+        .compare .head,
+        .compare .row {
+          grid-template-columns: 1fr;
+        }
+
+        .overlay-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .drawer {
+          width: min(100%, 280px);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .container {
+          width: min(100% - 20px, 1380px);
+        }
+
+        .header-inner {
+          padding-top: 12px;
+        }
+
+        .hero {
+          padding-top: 22px;
+        }
+
+        .card-head,
+        .card-body,
+        .card-foot,
+        .section-head,
+        .surface,
+        .metric,
+        .summary-box {
+          padding: 16px;
+        }
+
+        .modal {
+          width: calc(100% - 22px);
+        }
+
+        .overlay-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-orbs"></div>
+
+    <header class="sticky-shell">
+      <div class="progress-line"><span id="progressBar"></span></div>
+      <div class="container header-inner">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="pill">فایل مرجع HTML مستقل • Light / Dark / RTL</div>
+              <h1 class="title">UI Component Atlas</h1>
+              <p class="subtitle">
+                یک فایل تکی HTML برای جست‌وجو و برداشت کامپوننت‌ها در حوزه‌های مختلف وب: ناوبری، فرم، داشبورد، داده، فروش، بازخورد، اورلی، موشن و تایپوگرافی فارسی.
+              </p>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <label class="searchbar" aria-label="Search components">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m21 21-4.35-4.35"></path>
+                <circle cx="11" cy="11" r="7"></circle>
+              </svg>
+              <input id="searchInput" type="text" placeholder="جست‌وجو بر اساس دسته، نام، توضیح، برچسب یا کلمه کلیدی" />
+            </label>
+            <button id="themeToggle" class="ghost" type="button">حالت تیره</button>
+          </div>
+        </div>
+
+        <div class="filters" id="categoryFilters">
+          <button class="filter-btn active" data-category="all">همه دسته‌ها • 18</button>
+          <button class="filter-btn" data-category="navigation">Navigation & Discovery</button>
+          <button class="filter-btn" data-category="forms">Forms & Inputs</button>
+          <button class="filter-btn" data-category="dashboard">Dashboards & Admin</button>
+          <button class="filter-btn" data-category="data">Data & Analytics</button>
+          <button class="filter-btn" data-category="commerce">Commerce & Pricing</button>
+          <button class="filter-btn" data-category="feedback">Feedback & Content</button>
+          <button class="filter-btn" data-category="overlay">Overlays & Support</button>
+          <button class="filter-btn" data-category="motion">Motion & Appeal</button>
+          <button class="filter-btn" data-category="typography">Typography & Persian</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="pill">مرجع استخراج کد و ایده برای سایت‌ها</div>
+            <h2>مجموعه‌ای از معروف‌ترین و پرکاربردترین کامپوننت‌های صفحات وب در یک فایل واحد.</h2>
+            <p class="lead">
+              هر بلوک شامل نام، دسته موضوعی، توضیح کوتاه، کلمات کلیدی قابل جست‌وجو و دمو است تا بتوانی با سرچ مستقیم، قطعه مناسب را سریع پیدا کنی. در این فایل، نمونه‌های سخت‌تر مثل اورلی‌های چندلایه، کارت‌های شیشه‌ای، تایم‌لاین، جداول، قیمت‌گذاری، داشبورد، فرم پیشرفته و تایپوگرافی فارسی هم وجود دارد.
+            </p>
+            <div class="hero-actions">
+              <a href="#dashboard" class="button">رفتن به داشبوردها</a>
+              <a href="#typography" class="ghost">مشاهده تایپوگرافی فارسی</a>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <span class="eyebrow">Reference blocks</span>
+                <strong>18</strong>
+              </div>
+              <div class="metric">
+                <span class="eyebrow">Subject fields</span>
+                <strong>9</strong>
+              </div>
+              <div class="metric">
+                <span class="eyebrow">Persian fonts</span>
+                <strong>3</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="visual-panel surface">
+            <div class="visual-grid">
+              <div class="surface">
+                <div class="stat-row">
+                  <div>
+                    <div class="eyebrow">محتویات فایل</div>
+                    <div style="margin-top:6px;font-size:22px;font-weight:800;">چه چیزهایی داخل این فایل هست؟</div>
+                  </div>
+                  <div class="pill">Curated</div>
+                </div>
+                <div class="tag-row" style="margin-top:14px;">
+                  <span class="chip">Hero</span>
+                  <span class="chip">Navigation</span>
+                  <span class="chip">Dashboard</span>
+                  <span class="chip">Table</span>
+                  <span class="chip">Pricing</span>
+                  <span class="chip">Modal</span>
+                  <span class="chip">Timeline</span>
+                  <span class="chip">RTL</span>
+                </div>
+              </div>
+              <div class="mini-grid">
+                <div class="surface">
+                  <div class="icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 16V9m5 7V5m5 11v-4"></path></svg>
+                  </div>
+                  <div style="margin-top:12px;font-weight:800;">ادمین و آنالیتیکس</div>
+                  <div class="desc">KPI، نمودار، جدول، Heatmap</div>
+                </div>
+                <div class="surface">
+                  <div class="icon-box" style="background:rgba(16,185,129,.08);color:#10b981;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10M7 14h7m-9 7 2.5-3H19a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h0V21Z"></path></svg>
+                  </div>
+                  <div style="margin-top:12px;font-weight:800;">پشتیبانی و اورلی</div>
+                  <div class="desc">Toast، Modal، Drawer، Chat</div>
+                </div>
+                <div class="surface">
+                  <div class="icon-box" style="background:rgba(245,158,11,.08);color:#f59e0b;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M12 4v16M8 20h8"></path></svg>
+                  </div>
+                  <div style="margin-top:12px;font-weight:800;">تایپوگرافی و فارسی</div>
+                  <div class="desc">نمونه لاتین و RTL با فونت ایرانی</div>
+                </div>
+                <div class="surface">
+                  <div class="icon-box" style="background:rgba(236,72,153,.08);color:#ec4899;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Zm6 11l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9L18 14ZM5 14l1.1 2.4L8.5 17l-2.4 1.1L5 20.5l-1.1-2.4L1.5 17l2.4-1.1L5 14Z"></path></svg>
+                  </div>
+                  <div style="margin-top:12px;font-weight:800;">جذابیت بصری</div>
+                  <div class="desc">Glass، Glow، Floating، Marquee</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-box surface">
+          <div class="section-head-flex">
+            <div>
+              <div class="eyebrow">Search summary</div>
+              <div id="resultSummary" style="margin-top:8px;font-size:20px;font-weight:800;">نمایش 18 بلوک مرجع در همه دسته‌ها</div>
+              <div class="desc">هر کارت شامل دسته موضوعی، نام، توضیح کوتاه و برچسب‌های جست‌وجو است تا با اسکریپت یا جست‌وجوی دستی به‌راحتی کد را پیدا کنید.</div>
+            </div>
+            <div class="tag-row">
+              <span class="chip" id="queryInfo">بدون فیلتر متنی</span>
+              <span class="chip" id="themeInfo">حالت روشن</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="emptyState" class="empty">
+        <h3 style="margin:0;font-size:28px;">نتیجه‌ای پیدا نشد</h3>
+        <p class="desc" style="max-width:760px;margin:10px auto 0;">عبارت‌های کلی‌تری مثل dashboard، pricing، modal، typography، RTL یا hero را امتحان کن.</p>
+      </div>
+
+      <section id="navigation" class="section section-block" data-section="navigation">
+        <div class="section-head">
+          <div class="section-head-flex">
+            <div>
+              <div class="section-id">navigation</div>
+              <h2 style="margin:8px 0 0;font-size:34px;">Navigation & Discovery</h2>
+              <p class="desc">هدر چسبان، بردکرامب، جست‌وجوی فرمانی، فیلتر، فضای کاری و Heroهای ساختاریافته.</p>
+            </div>
+            <div class="pill">2 reference blocks</div>
+          </div>
+        </div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="navigation" data-search="navigation discovery breadcrumb command search header sticky workspace notification ui components nav command workspace searchable">
+            <div class="card-head">
+              <div class="card-top">
+                <div>
+                  <div class="meta">Subject category · Navigation & Discovery</div>
+                  <h3>Navigation Command Workspace</h3>
+                  <p class="desc">مرجع فشرده برای Breadcrumb، جست‌وجوی سریع، سوئیچ فضای کاری، اکشن‌بار و اعلان‌ها.</p>
+                </div>
+                <div class="pill">Reference ID · nav-command-workspace</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="surface">
+                <div class="stat-row">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="brand-icon" style="width:44px;height:44px;border-radius:16px;box-shadow:none;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"></path></svg>
+                    </div>
+                    <div>
+                      <div class="eyebrow">Workspace shell</div>
+                      <div style="font-weight:800;">Nova Suite</div>
+                    </div>
+                  </div>
+                  <div class="tag-row">
+                    <span class="pill">Live</span>
+                    <span class="small-btn">Invite</span>
+                    <span class="button" style="padding:10px 14px;">Publish</span>
+                  </div>
+                </div>
+                <div class="demo-grid-sidebar" style="margin-top:14px;">
+                  <div class="mini-stack">
+                    <div class="desc" style="margin-top:0;">Home › Templates › <span class="chip">Admin Shell</span></div>
+                    <div class="kbd-search">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.35-4.35"></path><circle cx="11" cy="11" r="7"></circle></svg>
+                      <span style="color:var(--muted);flex:1;">Search components, states, or keywords…</span>
+                      <span class="kbd">⌘K</span>
+                    </div>
+                    <div class="tag-row">
+                      <span class="chip">Sidebar</span>
+                      <span class="chip">Mega Menu</span>
+                      <span class="chip">Tabs</span>
+                      <span class="chip">Search</span>
+                      <span class="chip">Notifications</span>
+                    </div>
+                    <div class="demo-grid-3">
+                      <div class="metric-mini input-fake"><span class="eyebrow">Sections</span><strong>09</strong></div>
+                      <div class="metric-mini input-fake"><span class="eyebrow">Patterns</span><strong>18</strong></div>
+                      <div class="metric-mini input-fake"><span class="eyebrow">Searchable</span><strong>Yes</strong></div>
+                    </div>
+                  </div>
+                  <div class="soft">
+                    <div class="stat-row">
+                      <div>
+                        <div class="eyebrow">Notification center</div>
+                        <div style="margin-top:6px;font-size:20px;font-weight:800;">Pinned updates</div>
+                      </div>
+                      <span class="status success">3 new</span>
+                    </div>
+                    <div class="list-stack" style="margin-top:14px;">
+                      <div class="inline-card">
+                        <strong>Design tokens synced</strong>
+                        <div class="desc">Color, spacing, and radius updated 8m ago</div>
+                      </div>
+                      <div class="inline-card">
+                        <strong>New dashboard block</strong>
+                        <div class="desc">Revenue panel and KPI cards pushed to library</div>
+                      </div>
+                      <div class="inline-card">
+                        <strong>Theme preset added</strong>
+                        <div class="desc">Light / dark / RTL preview is now bundled</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#navigation</span><span class="chip">#breadcrumb</span><span class="chip">#command bar</span><span class="chip">#search</span><span class="chip">#header</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="navigation" data-search="hero bento landing marketing cta glassmorphism feature card trust stats navigation discovery appeal">
+            <div class="card-head">
+              <div class="card-top">
+                <div>
+                  <div class="meta">Subject category · Navigation & Discovery</div>
+                  <h3>Hero Bento Landing</h3>
+                  <p class="desc">یک Hero بصری و غنی با CTA، آمار، کارت‌های شناور شیشه‌ای و Bento grid برای صفحات معرفی.</p>
+                </div>
+                <div class="pill">Reference ID · hero-bento-landing</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="surface hero-special" style="padding:18px;">
+                <div class="demo-grid-sidebar">
+                  <div>
+                    <div class="pill" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.14);">Hero · CTA · Glassmorphism · Bento</div>
+                    <div style="margin-top:14px;font-size:36px;font-weight:800;line-height:1.18;">یک قهرمان بازاریابی که ساختار، جذابیت و اعتماد را با هم ترکیب می‌کند.</div>
+                    <p class="desc" style="font-size:15px;">مناسب برای صفحه اول SaaS، آژانس، ابزارهای هوش مصنوعی، قالب‌های محصول و هر صفحه‌ای که ورودی قوی نیاز دارد.</p>
+                    <div class="hero-actions">
+                      <span class="button" style="background:#fff;color:#020617;">Explore Blocks</span>
+                      <span class="ghost" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.16);">View Components</span>
+                    </div>
+                    <div class="demo-grid-3" style="margin-top:16px;">
+                      <div class="glass" style="padding:14px;"><div class="eyebrow">Conversion lift</div><div style="font-size:26px;font-weight:800;margin-top:8px;">+31%</div></div>
+                      <div class="glass" style="padding:14px;"><div class="eyebrow">Teams onboarded</div><div style="font-size:26px;font-weight:800;margin-top:8px;">4,200</div></div>
+                      <div class="glass" style="padding:14px;"><div class="eyebrow">NPS score</div><div style="font-size:26px;font-weight:800;margin-top:8px;">72</div></div>
+                    </div>
+                  </div>
+                  <div style="position:relative;min-height:310px;">
+                    <div class="glass floaty" style="position:absolute;right:0;top:0;width:min(100%,340px);padding:16px;">
+                      <div class="stat-row"><div><div class="eyebrow">Floating insight card</div><div style="margin-top:8px;font-size:21px;font-weight:800;">Weekly growth snapshot</div></div><span class="pill" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.12);">Live</span></div>
+                      <div class="hero-chart" style="margin-top:16px;">
+                        <svg viewBox="0 0 280 90" preserveAspectRatio="none">
+                          <defs><linearGradient id="hero-line-atlas" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#67e8f9"/><stop offset="100%" stop-color="#f9a8d4"/></linearGradient></defs>
+                          <path d="M0 70 C 40 60, 60 15, 100 28 S 160 80, 210 46 S 250 18, 280 20" fill="none" stroke="url(#hero-line-atlas)" stroke-width="6" stroke-linecap="round"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="glass" style="position:absolute;left:0;bottom:0;width:min(100%,390px);padding:14px;background:rgba(2,6,23,.52);">
+                      <div class="demo-grid-2">
+                        <div class="overlay-card"><strong>Bento Feature</strong><div class="desc">Layered cards and chip taxonomy</div></div>
+                        <div class="overlay-card"><strong>Review Block</strong><div class="desc">Ratings, logos, and proof clusters</div></div>
+                        <div class="overlay-card"><strong>Chart Panel</strong><div class="desc">Mini analytics in hero contexts</div></div>
+                        <div class="overlay-card"><strong>Feature CTA</strong><div class="desc">Action footer with subtle motion cues</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#hero</span><span class="chip">#landing page</span><span class="chip">#cta</span><span class="chip">#glassmorphism</span><span class="chip">#bento</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="forms" class="section section-block" data-section="forms">
+        <div class="section-head">
+          <div class="section-head-flex">
+            <div>
+              <div class="section-id">forms</div>
+              <h2 style="margin:8px 0 0;font-size:34px;">Forms & Input Systems</h2>
+              <p class="desc">فرم لاگین، OTP، آپلود، سویچ، تگ، اسلایدر، انتخاب‌گر و اجزای پیچیده ورود داده.</p>
+            </div>
+            <div class="pill">2 reference blocks</div>
+          </div>
+        </div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="forms" data-search="form sign in login authentication otp checkbox password social auth iranian persian ui inputs">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Forms & Input Systems</div><h3>Authentication Sign-in Flow</h3><p class="desc">ورودی استاندارد برای لاگین شامل پنل برند، فیلدها، دکمه‌های سوشال، Remember me و OTP.</p></div><div class="pill">Reference ID · auth-signin-flow</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="surface" style="background:linear-gradient(145deg,#0f172a,#1e293b);color:#fff;">
+                  <div class="pill" style="background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.1);">Authentication Shell</div>
+                  <div style="margin-top:16px;font-size:34px;font-weight:800;line-height:1.18;">ورود امن با لایه‌بندی بصری و متن اطمینان‌بخش</div>
+                  <p class="desc" style="color:rgba(255,255,255,.72);">این بلوک برای سیستم‌های واقعی مناسب است چون همزمان برندینگ، اعتمادسازی و فرم را نمایش می‌دهد.</p>
+                  <div class="list-stack" style="margin-top:16px;">
+                    <div class="overlay-card">Magic link یا Password authentication</div>
+                    <div class="overlay-card">Remember me، Forgot password و SSO</div>
+                    <div class="overlay-card">کد یکبارمصرف و لایه دوم احراز هویت</div>
+                  </div>
+                  <div class="demo-grid-2" style="margin-top:14px;">
+                    <div class="overlay-card" style="text-align:center;">Continue with Google</div>
+                    <div class="overlay-card" style="text-align:center;">Continue with GitHub</div>
+                  </div>
+                </div>
+                <div class="surface">
+                  <div class="stat-row"><div><div class="eyebrow">Sign in</div><div style="margin-top:6px;font-size:24px;font-weight:800;">Welcome back</div></div><span class="pill">2FA ready</span></div>
+                  <div class="list-stack" style="margin-top:14px;">
+                    <div class="input-fake" style="padding:14px;"><div class="eyebrow">Work email</div><div style="margin-top:8px;font-weight:700;">team@atlasui.dev</div></div>
+                    <div class="input-fake" style="padding:14px;"><div class="eyebrow">Password</div><div style="margin-top:8px;font-weight:700;">••••••••••••</div></div>
+                    <div class="stat-row" style="font-size:14px;"><div style="display:flex;align-items:center;gap:8px;color:var(--muted);"><span style="display:grid;place-items:center;width:20px;height:20px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--accent);font-size:12px;">✓</span> Remember me</div><strong style="color:var(--accent);">Forgot password?</strong></div>
+                    <div class="tone">Sign in to dashboard</div>
+                    <div class="stat-row"><span style="height:1px;flex:1;background:var(--line);"></span><span class="eyebrow" style="letter-spacing:.14em;">or verify with code</span><span style="height:1px;flex:1;background:var(--line);"></span></div>
+                    <div class="otp"><span>2</span><span>3</span><span>4</span><span>•</span><span>•</span><span>•</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#form</span><span class="chip">#authentication</span><span class="chip">#login</span><span class="chip">#otp</span><span class="chip">#social auth</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="forms" data-search="advanced form upload dropzone switch slider tags radio cards onboarding profile completion preferences">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Forms & Input Systems</div><h3>Advanced Form Builder</h3><p class="desc">شامل Dropzone، Progress، Switch، Choice Card، چیپ‌های انتخابی و اسلایدر تنظیمات.</p></div><div class="pill">Reference ID · advanced-form-builder</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="list-stack">
+                  <div class="upload">
+                    <div class="eyebrow">Upload zone</div>
+                    <div class="upload-icon">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"></path></svg>
+                    </div>
+                    <div style="margin-top:14px;font-size:22px;font-weight:800;">Drop assets, icons, or screenshots</div>
+                    <p class="desc">مناسب برای CMS، پروفایل کاربر و فرم‌های بارگذاری فایل.</p>
+                    <div style="margin-top:14px;"><span class="button">Select file</span></div>
+                  </div>
+                  <div class="demo-grid-2">
+                    <div class="surface"><div style="font-weight:800;">Profile completion</div><div class="progress"><span style="width:72%"></span></div><div class="desc">72% complete · avatar, bio, timezone, team tags</div></div>
+                    <div class="surface"><div style="font-weight:800;">Visibility switch</div><div class="line-row" style="margin-top:14px;"><div><strong>Public portfolio</strong><div class="desc">Share profile and links externally</div></div><div class="switch"><span></span></div></div></div>
+                  </div>
+                </div>
+                <div class="list-stack">
+                  <div class="surface">
+                    <div class="stat-row"><strong>Audience targeting</strong><span class="pill">Choice cards</span></div>
+                    <div class="choice-grid" style="margin-top:14px;">
+                      <div class="option-chip" style="border-color:var(--accent);background:rgba(99,102,241,.06);"><strong>Starter teams</strong><div class="desc">Simple onboarding, faster setup</div></div>
+                      <div class="option-chip"><strong>Enterprise ops</strong><div class="desc">Approvals, permissions, audit trails</div></div>
+                    </div>
+                  </div>
+                  <div class="surface">
+                    <div style="font-weight:800;">Tags, ranges, and preferences</div>
+                    <div class="tag-row" style="margin-top:14px;">
+                      <span class="chip">Dashboard</span>
+                      <span class="chip">E-commerce</span>
+                      <span class="chip" style="border-color:var(--accent);color:var(--accent);">RTL</span>
+                      <span class="chip">Charts</span>
+                      <span class="chip">Dark mode</span>
+                      <span class="chip">Animations</span>
+                    </div>
+                    <div style="margin-top:18px;">
+                      <div class="stat-row" style="font-size:14px;color:var(--muted);"><span>Density level</span><span>Medium / 64%</span></div>
+                      <div style="position:relative;height:12px;margin-top:10px;background:var(--soft);border-radius:999px;">
+                        <span style="display:block;height:12px;width:64%;border-radius:999px;background:linear-gradient(135deg,#06b6d4,var(--accent));"></span>
+                        <span style="position:absolute;right:36%;top:50%;transform:translate(50%,-50%);width:22px;height:22px;border-radius:50%;background:var(--accent);border:4px solid #fff;box-shadow:0 8px 16px rgba(0,0,0,.12);"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#upload</span><span class="chip">#dropzone</span><span class="chip">#switch</span><span class="chip">#slider</span><span class="chip">#tags</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="dashboard" class="section section-block" data-section="dashboard">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">dashboard</div><h2 style="margin:8px 0 0;font-size:34px;">Dashboards & Admin</h2><p class="desc">کارت KPI، نمودار سطحی، فید فعالیت، پروژه، Kanban و نمای ادمین فشرده.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="dashboard" data-search="dashboard admin kpi analytics chart stats trend feed activity summary ecommerce seller">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Dashboards & Admin</div><h3>KPI Admin Dashboard</h3><p class="desc">چیدمان فشرده برای پنل مدیریتی با کارت‌های آمار، نمودار درآمد، تب‌ها و فید فعالیت.</p></div><div class="pill">Reference ID · kpi-admin-dashboard</div></div></div>
+            <div class="card-body">
+              <div class="list-stack">
+                <div class="demo-grid-4 cards-4">
+                  <div class="surface"><div class="eyebrow">Monthly revenue</div><div style="margin-top:8px;font-size:26px;font-weight:800;">$128,420</div><div class="status success" style="margin-top:10px;display:inline-flex;">+12.4%</div></div>
+                  <div class="surface"><div class="eyebrow">Active users</div><div style="margin-top:8px;font-size:26px;font-weight:800;">18,904</div><div class="status success" style="margin-top:10px;display:inline-flex;">+6.1%</div></div>
+                  <div class="surface"><div class="eyebrow">Conversion</div><div style="margin-top:8px;font-size:26px;font-weight:800;">4.87%</div><div class="status success" style="margin-top:10px;display:inline-flex;">+0.4%</div></div>
+                  <div class="surface"><div class="eyebrow">Churn risk</div><div style="margin-top:8px;font-size:26px;font-weight:800;">1.3%</div><div class="status indigo" style="margin-top:10px;display:inline-flex;">Stable</div></div>
+                </div>
+                <div class="demo-grid-sidebar">
+                  <div class="surface">
+                    <div class="stat-row"><div><div class="eyebrow">Revenue analytics</div><div style="margin-top:6px;font-size:22px;font-weight:800;">Quarterly performance</div></div><div class="tag-row"><span class="small-btn" style="background:var(--text);color:#fff;border-color:transparent;">Overview</span><span class="small-btn">Sales</span><span class="small-btn">Traffic</span></div></div>
+                    <div class="chart-box" style="margin-top:14px;">
+                      <svg viewBox="0 0 700 260" preserveAspectRatio="none">
+                        <defs><linearGradient id="area-fill-html" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#818cf8" stop-opacity="0.45"/><stop offset="100%" stop-color="#818cf8" stop-opacity="0.02"/></linearGradient></defs>
+                        <path d="M40 210 C 90 180, 110 140, 160 138 S 240 180, 300 120 S 380 70, 440 95 S 530 200, 660 70" fill="none" stroke="#4f46e5" stroke-width="5" stroke-linecap="round"></path>
+                        <path d="M40 210 C 90 180, 110 140, 160 138 S 240 180, 300 120 S 380 70, 440 95 S 530 200, 660 70 L660 240 L40 240 Z" fill="url(#area-fill-html)"></path>
+                      </svg>
+                    </div>
+                    <div class="demo-grid-3" style="margin-top:14px;">
+                      <div class="metric-mini input-fake"><span class="eyebrow">MRR</span><strong>$63.8k</strong></div>
+                      <div class="metric-mini input-fake"><span class="eyebrow">Net growth</span><strong>+18.2%</strong></div>
+                      <div class="metric-mini input-fake"><span class="eyebrow">Avg. order</span><strong>$254</strong></div>
+                    </div>
+                  </div>
+                  <div class="surface">
+                    <div class="eyebrow">Activity feed</div>
+                    <div style="margin-top:6px;font-size:22px;font-weight:800;">Recent product events</div>
+                    <div class="list-stack" style="margin-top:14px;">
+                      <div class="notice"><strong>Billing upgraded</strong><div class="desc">Atlas Pro plan activated for Tehran team</div></div>
+                      <div class="notice"><strong>New export completed</strong><div class="desc">Quarterly analytics package delivered</div></div>
+                      <div class="notice"><strong>Team member invited</strong><div class="desc">Design reviewer added with read-only access</div></div>
+                      <div class="notice"><strong>Theme changed</strong><div class="desc">Workspace switched to dark mode</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#dashboard</span><span class="chip">#admin</span><span class="chip">#kpi</span><span class="chip">#chart</span><span class="chip">#activity feed</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="dashboard" data-search="kanban project board task management progress avatars labels swimlane dashboard admin">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Dashboards & Admin</div><h3>Kanban Project Board</h3><p class="desc">برد پروژه با ستون‌ها، کارت کار، آواتار، برچسب، درصد پیشرفت و ساختار مدیریت تسک.</p></div><div class="pill">Reference ID · kanban-project-board</div></div></div>
+            <div class="card-body">
+              <div class="kanban-board">
+                <div class="kanban-col"><div class="stat-row"><div><strong>Backlog</strong><div class="desc">6 tasks</div></div><span class="pill">6</span></div><div class="kanban-card"><strong>Refresh icon taxonomy</strong><div class="desc">UI library</div><div class="progress"><span style="width:58%"></span></div><div class="tag-row" style="margin-top:10px;"><span class="chip">58%</span><span class="chip">AM</span></div></div><div class="kanban-card"><strong>Persian RTL QA pass</strong><div class="desc">Typography</div><div class="progress"><span style="width:31%"></span></div><div class="tag-row" style="margin-top:10px;"><span class="chip">31%</span><span class="chip">SR</span></div></div></div>
+                <div class="kanban-col"><div class="stat-row"><div><strong>In Progress</strong><div class="desc">4 tasks</div></div><span class="pill">4</span></div><div class="kanban-card"><strong>Checkout side panel</strong><div class="desc">Commerce</div><div class="progress"><span style="width:74%"></span></div><div class="tag-row" style="margin-top:10px;"><span class="chip">74%</span><span class="chip">LE</span></div></div><div class="kanban-card"><strong>Sticky header filters</strong><div class="desc">Navigation</div><div class="progress"><span style="width:64%"></span></div><div class="tag-row" style="margin-top:10px;"><span class="chip">64%</span><span class="chip">MS</span></div></div></div>
+                <div class="kanban-col"><div class="stat-row"><div><strong>Review</strong><div class="desc">3 tasks</div></div><span class="pill">3</span></div><div class="kanban-card"><strong>Analytics heatmap</strong><div class="desc">Data</div><div class="progress"><span style="width:92%"></span></div><div class="tag-row" style="margin-top:10px;"><span class="chip">92%</span><span class="chip">QA</span></div></div><div class="kanban-card"><strong>Glass hero polish</strong><div class="desc">Motion</div><div class="progress"><span style="width:87%"></span></div><div class="tag-row" style="margin-top:10px;"><span class="chip">87%</span><span class="chip">UI</span></div></div></div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#kanban</span><span class="chip">#project board</span><span class="chip">#task card</span><span class="chip">#progress</span><span class="chip">#swimlane</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="data" class="section section-block" data-section="data">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">data</div><h2 style="margin:8px 0 0;font-size:34px;">Data Display & Analytics</h2><p class="desc">جدول‌های مدیریتی، Heatmap، نمودار میله‌ای، نمایش وضعیت و عناصر دیداری تحلیل داده.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="data" data-search="table status badges pagination filter list admin data display analytics rows actions">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Data Display & Analytics</div><h3>Data Table System</h3><p class="desc">مرجع جدول مدیریتی با فیلتر، ردیف متراکم، Badge وضعیت، Action و صفحه‌بندی.</p></div><div class="pill">Reference ID · data-table-system</div></div></div>
+            <div class="card-body">
+              <div class="list-stack">
+                <div class="stat-row"><div class="tag-row"><span class="small-btn" style="background:var(--text);color:#fff;border-color:transparent;">All</span><span class="small-btn">Paid</span><span class="small-btn">Pending</span><span class="small-btn">Failed</span><span class="small-btn">Exported</span></div><div class="tag-row"><span class="small-btn">Filter</span><span class="button" style="padding:10px 14px;">Export CSV</span></div></div>
+                <div class="table-wrap">
+                  <div class="table-head"><span>Customer</span><span>Plan</span><span>Status</span><span>Amount</span><span>Action</span></div>
+                  <div class="table-row"><div><strong>Ariana Studio</strong><div class="desc">Invoice reference and account email</div></div><div>Pro</div><div><span class="status success">Paid</span></div><div><strong>$249.00</strong></div><div>•••</div></div>
+                  <div class="table-row"><div><strong>Delta Commerce</strong><div class="desc">Invoice reference and account email</div></div><div>Team</div><div><span class="status warn">Pending</span></div><div><strong>$980.00</strong></div><div>•••</div></div>
+                  <div class="table-row"><div><strong>Pars Insight</strong><div class="desc">Invoice reference and account email</div></div><div>Basic</div><div><span class="status danger">Failed</span></div><div><strong>$49.00</strong></div><div>•••</div></div>
+                  <div class="table-row"><div><strong>Studio Nimbus</strong><div class="desc">Invoice reference and account email</div></div><div>Pro</div><div><span class="status success">Paid</span></div><div><strong>$249.00</strong></div><div>•••</div></div>
+                </div>
+                <div class="stat-row" style="font-size:14px;color:var(--muted);"><span>Showing 4 of 132 entries</span><div class="tag-row"><span class="small-btn">Prev</span><span class="small-btn" style="background:var(--text);color:#fff;border-color:transparent;">1</span><span class="small-btn">2</span><span class="small-btn">3</span><span class="small-btn">Next</span></div></div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#table</span><span class="chip">#status badge</span><span class="chip">#pagination</span><span class="chip">#filter</span><span class="chip">#row actions</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="data" data-search="analytics progress ring bar chart heatmap metrics reporting visualization data display suite">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Data Display & Analytics</div><h3>Analytics Visual Suite</h3><p class="desc">مجموعه تصویری آنالیتیکس با Progress Ring، Bar Chart، Heatmap و Metric Instrumentation.</p></div><div class="pill">Reference ID · analytics-visual-suite</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="demo-grid-2">
+                  <div class="surface" style="display:flex;align-items:center;gap:16px;">
+                    <svg width="96" height="96" viewBox="0 0 100 100" style="transform:rotate(-90deg);">
+                      <circle cx="50" cy="50" r="36" stroke="currentColor" stroke-width="10" fill="none" style="color:var(--soft);"></circle>
+                      <circle cx="50" cy="50" r="36" stroke="#6366f1" stroke-width="10" fill="none" stroke-dasharray="226.2" stroke-dashoffset="49.7" stroke-linecap="round"></circle>
+                    </svg>
+                    <div><div style="font-size:30px;font-weight:800;">78%</div><div class="eyebrow">Adoption health</div><div class="desc">Reusable radial progress</div></div>
+                  </div>
+                  <div class="surface" style="display:flex;align-items:center;gap:16px;">
+                    <svg width="96" height="96" viewBox="0 0 100 100" style="transform:rotate(-90deg);">
+                      <circle cx="50" cy="50" r="36" stroke="currentColor" stroke-width="10" fill="none" style="color:var(--soft);"></circle>
+                      <circle cx="50" cy="50" r="36" stroke="#10b981" stroke-width="10" fill="none" stroke-dasharray="226.2" stroke-dashoffset="18.1" stroke-linecap="round"></circle>
+                    </svg>
+                    <div><div style="font-size:30px;font-weight:800;">92%</div><div class="eyebrow">Performance score</div><div class="desc">Health indicators</div></div>
+                  </div>
+                </div>
+                <div class="list-stack">
+                  <div class="surface">
+                    <div class="stat-row"><div><strong>Bar chart overview</strong><div class="desc">Quarterly active sessions</div></div><span class="pill">SVG chart</span></div>
+                    <div class="bars" style="margin-top:16px;">
+                      <div class="bar-col"><div class="bar-wrap" style="height:48%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q1</span></div>
+                      <div class="bar-col"><div class="bar-wrap" style="height:72%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q2</span></div>
+                      <div class="bar-col"><div class="bar-wrap" style="height:58%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q3</span></div>
+                      <div class="bar-col"><div class="bar-wrap" style="height:92%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q4</span></div>
+                      <div class="bar-col"><div class="bar-wrap" style="height:66%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q5</span></div>
+                      <div class="bar-col"><div class="bar-wrap" style="height:84%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q6</span></div>
+                      <div class="bar-col"><div class="bar-wrap green" style="height:100%;"></div><span class="eyebrow" style="letter-spacing:.08em;">Q7</span></div>
+                    </div>
+                  </div>
+                  <div class="surface">
+                    <div class="stat-row"><div><strong>Heatmap intensity</strong><div class="desc">Weekly activity concentration</div></div><span class="pill">Heatmap</span></div>
+                    <div class="heatmap" style="margin-top:16px;">
+                      <div class="heat-cell heat-1"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div>
+                      <div class="heat-cell heat-2"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div>
+                      <div class="heat-cell heat-1"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div>
+                      <div class="heat-cell heat-1"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div><div class="heat-cell heat-4"></div>
+                      <div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#progress ring</span><span class="chip">#bar chart</span><span class="chip">#heatmap</span><span class="chip">#analytics</span><span class="chip">#metrics</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="commerce" class="section section-block" data-section="commerce">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">commerce</div><h2 style="margin:8px 0 0;font-size:34px;">Commerce & Pricing</h2><p class="desc">کارت محصول، خلاصه خرید، قیمت‌گذاری، مقایسه پلن‌ها و اجزای پرداخت.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="commerce" data-search="ecommerce product card rating swatches checkout coupon payment summary commerce product checkout">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Commerce & Pricing</div><h3>Product & Checkout Block</h3><p class="desc">مرجع فروشگاهی شامل کارت محصول، امتیاز، رنگ، سایز، خلاصه سبد خرید و روش پرداخت.</p></div><div class="pill">Reference ID · product-checkout-block</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="surface">
+                  <div class="demo-grid-sidebar" style="grid-template-columns:1fr .95fr;">
+                    <div style="background:linear-gradient(135deg,#eef2ff,#dbeafe,#cffafe);padding:18px;border-radius:24px;">
+                      <div style="height:230px;display:flex;align-items:center;justify-content:center;border-radius:28px;background:rgba(255,255,255,.62);box-shadow:0 18px 40px rgba(0,0,0,.08);">
+                        <div style="width:136px;height:136px;border-radius:30px;background:linear-gradient(135deg,#0f172a,#4f46e5);display:grid;place-items:center;color:white;font-size:60px;box-shadow:0 22px 40px rgba(0,0,0,.18);">⌘</div>
+                      </div>
+                      <div class="demo-grid-4 cards-4" style="margin-top:12px;grid-template-columns:repeat(4,minmax(0,1fr));">
+                        <div class="gallery-box"></div><div class="gallery-box"></div><div class="gallery-box"></div><div class="gallery-box"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="pill">E-commerce Product</div>
+                      <div style="margin-top:14px;font-size:28px;font-weight:800;">Command Deck Pro Keyboard</div>
+                      <p class="desc">یک سطح کامل محصول با گالری، ستاره، Swatch رنگ، انتخاب سایز و متن متقاعدکننده.</p>
+                      <div class="stars" style="margin-top:12px;">★★★★★ <span style="font-size:14px;color:var(--muted);">4.9 · 328 reviews</span></div>
+                      <div style="margin-top:16px;"><strong>Color</strong><div class="tag-row" style="margin-top:10px;"><span style="width:30px;height:30px;border-radius:50%;display:inline-block;background:#0f172a;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);"></span><span style="width:30px;height:30px;border-radius:50%;display:inline-block;background:#6366f1;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);"></span><span style="width:30px;height:30px;border-radius:50%;display:inline-block;background:#10b981;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);"></span><span style="width:30px;height:30px;border-radius:50%;display:inline-block;background:#f43f5e;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);"></span></div></div>
+                      <div style="margin-top:16px;"><strong>Size</strong><div class="tag-row" style="margin-top:10px;"><span class="small-btn" style="background:var(--text);color:#fff;border-color:transparent;">65%</span><span class="small-btn">75%</span><span class="small-btn">TKL</span><span class="small-btn">Full</span></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="surface">
+                  <div class="stat-row"><div><div class="eyebrow">Checkout summary</div><div style="margin-top:6px;font-size:22px;font-weight:800;">Order breakdown</div></div><span class="pill">Secure</span></div>
+                  <div class="list-stack" style="margin-top:14px;">
+                    <div class="line-row"><span>Keyboard</span><strong>$189.00</strong></div>
+                    <div class="line-row"><span>Wrist rest</span><strong>$39.00</strong></div>
+                    <div class="line-row"><span>Express shipping</span><strong>$18.00</strong></div>
+                    <div class="notice">Coupon code · SPRING-UI-20</div>
+                    <div class="pay-grid">
+                      <div class="channel">Visa</div><div class="channel">Apple Pay</div><div class="channel">PayPal</div>
+                    </div>
+                    <div class="stat-row" style="padding-top:6px;border-top:1px solid var(--line);"><span class="desc">Total</span><strong style="font-size:30px;">$246.00</strong></div>
+                    <div class="tone">Complete purchase</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#ecommerce</span><span class="chip">#product card</span><span class="chip">#rating</span><span class="chip">#checkout</span><span class="chip">#payment method</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="commerce" data-search="pricing comparison matrix plans toggle billing subscription feature matrix commerce pricing">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Commerce & Pricing</div><h3>Pricing Comparison Matrix</h3><p class="desc">پلن‌های تعاملی با تغییر ماهانه/سالانه، پلن شاخص و جدول مقایسه قابلیت‌ها.</p></div><div class="pill">Reference ID · pricing-comparison-matrix</div></div></div>
+            <div class="card-body">
+              <div class="list-stack">
+                <div class="stat-row"><div><strong>Interactive pricing selector</strong><div class="desc">Toggle billing modes and compare plans side by side.</div></div><div style="display:flex;background:var(--soft);padding:4px;border:1px solid var(--line);border-radius:999px;"><button class="small-btn pricing-toggle active" data-billing="monthly" style="background:var(--text);color:#fff;border-color:transparent;">Monthly</button><button class="small-btn pricing-toggle" data-billing="yearly">Yearly</button></div></div>
+                <div class="plans">
+                  <div class="pricing-card"><strong>Starter</strong><div class="desc">For simple projects and landing pages</div><div class="price"><strong data-monthly="$0" data-yearly="$0" class="price-value">$0</strong><span class="price-suffix">/mo</span></div><div class="list-stack" style="margin-top:14px;"><div class="desc">✓ Reusable sections and templates</div><div class="desc">✓ Light and dark mode surfaces</div><div class="desc">✓ Searchable metadata and tags</div><div class="desc">✓ Basic support components</div></div><div class="ghost" style="margin-top:16px;">Choose Starter</div></div>
+                  <div class="pricing-card popular"><div class="stat-row"><strong>Pro</strong><span class="pill" style="color:var(--accent);">Popular</span></div><div class="desc">Best for shipping polished dashboards and systems</div><div class="price"><strong data-monthly="$19" data-yearly="$16" class="price-value">$19</strong><span class="price-suffix">/mo</span></div><div class="list-stack" style="margin-top:14px;"><div class="desc">✓ Reusable sections and templates</div><div class="desc">✓ Light and dark mode surfaces</div><div class="desc">✓ Searchable metadata and tags</div><div class="desc">✓ Advanced analytics and overlays</div></div><div class="button" style="margin-top:16px;">Choose Pro</div></div>
+                  <div class="pricing-card"><strong>Scale</strong><div class="desc">For teams that need permissions, automation, and support</div><div class="price"><strong data-monthly="$59" data-yearly="$49" class="price-value">$59</strong><span class="price-suffix">/mo</span></div><div class="list-stack" style="margin-top:14px;"><div class="desc">✓ Reusable sections and templates</div><div class="desc">✓ Light and dark mode surfaces</div><div class="desc">✓ Searchable metadata and tags</div><div class="desc">✓ Advanced analytics and overlays</div></div><div class="ghost" style="margin-top:16px;">Choose Scale</div></div>
+                </div>
+                <div class="compare">
+                  <div class="head"><span>Feature</span><span>Starter</span><span>Pro</span><span>Scale</span></div>
+                  <div class="row"><span><strong>Component gallery</strong></span><span>✓</span><span>✓</span><span>✓</span></div>
+                  <div class="row"><span><strong>Interactive pricing toggle</strong></span><span>—</span><span>✓</span><span>✓</span></div>
+                  <div class="row"><span><strong>Dashboard analytics</strong></span><span>—</span><span>✓</span><span>✓</span></div>
+                  <div class="row"><span><strong>Priority support</strong></span><span>—</span><span>—</span><span>✓</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#pricing</span><span class="chip">#comparison</span><span class="chip">#toggle</span><span class="chip">#subscription</span><span class="chip">#feature matrix</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="feedback" class="section section-block" data-section="feedback">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">feedback</div><h2 style="margin:8px 0 0;font-size:34px;">Feedback, Reviews & Content</h2><p class="desc">FAQ، رتبه‌بندی، لوگوها، Testimonials، راهنمای اجرا و بلوک‌های اعتمادسازی.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="feedback" data-search="faq accordion steps ratings support guide feedback content onboarding documentation">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Feedback, Reviews & Content</div><h3>Feedback & FAQ Flow</h3><p class="desc">بلوک یکپارچه برای نمایش توزیع امتیاز، مراحل پیاده‌سازی و سوالات متداول.</p></div><div class="pill">Reference ID · feedback-faq-flow</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="surface">
+                  <div class="eyebrow">Ratings snapshot</div>
+                  <div class="stat-row" style="align-items:end;margin-top:8px;"><strong style="font-size:56px;line-height:1;">4.9</strong><span class="desc">Average across 1,284 reviews</span></div>
+                  <div class="list-stack" style="margin-top:16px;">
+                    <div><div class="stat-row" style="font-size:14px;color:var(--muted);"><span>5 stars</span><span>92%</span></div><div class="progress"><span style="width:92%;background:linear-gradient(135deg,#f59e0b,#f97316);"></span></div></div>
+                    <div><div class="stat-row" style="font-size:14px;color:var(--muted);"><span>4 stars</span><span>6%</span></div><div class="progress"><span style="width:6%;background:linear-gradient(135deg,#f59e0b,#f97316);"></span></div></div>
+                    <div><div class="stat-row" style="font-size:14px;color:var(--muted);"><span>3 stars</span><span>1%</span></div><div class="progress"><span style="width:1%;background:linear-gradient(135deg,#f59e0b,#f97316);"></span></div></div>
+                    <div><div class="stat-row" style="font-size:14px;color:var(--muted);"><span>2 stars</span><span>1%</span></div><div class="progress"><span style="width:1%;background:linear-gradient(135deg,#f59e0b,#f97316);"></span></div></div>
+                  </div>
+                  <div class="list-stack" style="margin-top:18px;">
+                    <div class="notice"><strong>01 · Discover</strong><div class="desc">Audit references and collect component candidates.</div></div>
+                    <div class="notice"><strong>02 · Assemble</strong><div class="desc">Group by category, difficulty, and search tags.</div></div>
+                    <div class="notice"><strong>03 · Ship</strong><div class="desc">Apply themes, RTL, and responsive testing.</div></div>
+                  </div>
+                </div>
+                <div class="faq-stack">
+                  <details class="faq-card" open><summary style="cursor:pointer;font-size:20px;font-weight:800;">How should search metadata be written?</summary><p class="desc">Use the subject category, component name, short description, and keywords so external scripts can discover the desired block quickly.</p></details>
+                  <details class="faq-card"><summary style="cursor:pointer;font-size:20px;font-weight:800;">Why include light and dark mode in a reference file?</summary><p class="desc">Because many copied snippets fail when theme surfaces change. Showing both modes makes the harvested block safer to reuse.</p></details>
+                  <details class="faq-card"><summary style="cursor:pointer;font-size:20px;font-weight:800;">Why add Persian and RTL examples?</summary><p class="desc">Typography, spacing, and alignment often break in RTL layouts. Dedicated specimens reduce integration surprises.</p></details>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#faq</span><span class="chip">#accordion</span><span class="chip">#rating</span><span class="chip">#steps</span><span class="chip">#documentation</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="feedback" data-search="testimonial reviews social proof logos quotes trust carousel feedback content">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Feedback, Reviews & Content</div><h3>Reviews & Social Proof</h3><p class="desc">نمونه‌هایی از لوگووال، کارت نظر کاربران، امتیاز کلی و نشانه‌های اسلایدری/کاروسل.</p></div><div class="pill">Reference ID · reviews-social-proof</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="quote-grid">
+                  <div class="quote-card"><div class="stars">★★★★★</div><p class="desc" style="font-size:16px;color:var(--text);">“Fastest UI harvesting workflow we’ve used.”</p><div class="desc">Amin · Product Lead</div></div>
+                  <div class="quote-card"><div class="stars">★★★★★</div><p class="desc" style="font-size:16px;color:var(--text);">“The categories and tags make code search much easier.”</p><div class="desc">Leyla · Design Ops</div></div>
+                  <div class="quote-card"><div class="stars">★★★★★</div><p class="desc" style="font-size:16px;color:var(--text);">“Dark mode and RTL saved us hours of patching.”</p><div class="desc">Reza · Frontend Engineer</div></div>
+                  <div class="quote-card"><div class="stars">★★★★★</div><p class="desc" style="font-size:16px;color:var(--text);">“Reference quality feels close to premium design systems.”</p><div class="desc">Sara · Founder</div></div>
+                </div>
+                <div class="list-stack">
+                  <div class="surface"><div class="eyebrow">Trust and adoption</div><div style="margin-top:6px;font-size:28px;font-weight:800;">Used across product, SaaS, admin, and content sites</div><div class="demo-grid-2" style="margin-top:14px;"><div class="metric-mini input-fake"><span class="eyebrow">Teams</span><strong>260+</strong></div><div class="metric-mini input-fake"><span class="eyebrow">Blocks reused</span><strong>1.8k</strong></div></div><div class="logo-grid" style="margin-top:16px;grid-template-columns:repeat(3,minmax(0,1fr));"><div class="logo-item">Framer</div><div class="logo-item">Figma</div><div class="logo-item">Notion</div><div class="logo-item">Shopify</div><div class="logo-item">Lottie</div><div class="logo-item">Uiverse</div></div></div>
+                  <div class="surface"><div class="stat-row"><div><strong>Carousel cues</strong><div class="desc">Dots, centered emphasis, and stacked review cards.</div></div><div class="tag-row"><span style="width:34px;height:10px;border-radius:999px;background:var(--text);display:inline-block;"></span><span style="width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block;"></span><span style="width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block;"></span></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#testimonial</span><span class="chip">#review</span><span class="chip">#logo wall</span><span class="chip">#social proof</span><span class="chip">#carousel</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="overlay" class="section section-block" data-section="overlay">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">overlay</div><h2 style="margin:8px 0 0;font-size:34px;">Overlays & Support</h2><p class="desc">مدال، دراور، توست، Command Palette، ویجت پشتیبانی و سناریوهای چندلایه سخت‌تر.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="overlay" data-search="modal drawer toast overlay backdrop dialog sheet multilayer difficult ui">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Overlays & Support</div><h3>Overlay Stack Preview</h3><p class="desc">ترکیب سخت‌تر و جذاب‌تر شامل Modal، Drawer، Toast و محتوای لایه‌پایین با بک‌دراپ Blur.</p></div><div class="pill">Reference ID · overlay-stack-preview</div></div></div>
+            <div class="card-body">
+              <div class="overlay-scene">
+                <div class="overlay-grid">
+                  <div class="gallery-box"></div><div class="gallery-box"></div><div class="gallery-box"></div><div class="gallery-box"></div><div class="gallery-box"></div><div class="gallery-box"></div>
+                </div>
+                <div class="toast-stack">
+                  <div class="overlay-card"><strong>Saved successfully</strong><div class="desc" style="color:rgba(255,255,255,.72);">Theme preferences synced</div></div>
+                  <div class="overlay-card"><strong>Invite sent</strong><div class="desc" style="color:rgba(255,255,255,.72);">Design reviewer added</div></div>
+                </div>
+                <div class="backdrop"></div>
+                <div class="modal">
+                  <div class="stat-row"><div><div class="eyebrow">Centered modal</div><div style="margin-top:6px;font-size:28px;font-weight:800;">Publish this component atlas?</div></div><span class="pill">Dialog</span></div>
+                  <p class="desc">این مدال روی محتوای تارشده نشسته و همزمان Toastها و Drawer هم حاضر هستند؛ پس برای تست اورلی‌ها عالی است.</p>
+                  <div class="hero-actions"><span class="ghost">Cancel</span><span class="button">Publish now</span></div>
+                </div>
+                <aside class="drawer">
+                  <div class="eyebrow" style="color:rgba(255,255,255,.56);">Right drawer</div>
+                  <div style="margin-top:6px;font-size:24px;font-weight:800;">Layer settings</div>
+                  <div class="list-stack" style="margin-top:16px;">
+                    <div class="overlay-card">Backdrop blur</div>
+                    <div class="overlay-card">Esc to close</div>
+                    <div class="overlay-card">Nested actions</div>
+                    <div class="overlay-card">Scrollable content</div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#modal</span><span class="chip">#drawer</span><span class="chip">#toast</span><span class="chip">#overlay</span><span class="chip">#backdrop</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="overlay" data-search="command palette support help center chat assistant overlay support command shortcuts">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Overlays & Support</div><h3>Support Command Center</h3><p class="desc">ترکیب Command Palette، شورتکات‌های سریع، ویجت چت و کارت‌های Help Center.</p></div><div class="pill">Reference ID · support-command-center</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="surface">
+                  <div class="kbd-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.35-4.35"></path><circle cx="11" cy="11" r="7"></circle></svg><span style="color:var(--muted);flex:1;">Jump to a component, category, or command…</span><span class="kbd">⌘K</span></div>
+                  <div class="list-stack" style="margin-top:14px;">
+                    <div class="line-row"><strong>Open pricing matrix</strong><span class="desc">Navigation</span></div>
+                    <div class="line-row"><strong>Search Persian typography</strong><span class="desc">Typography</span></div>
+                    <div class="line-row"><strong>Preview overlay stack</strong><span class="desc">Overlay</span></div>
+                    <div class="line-row"><strong>Filter dashboard blocks</strong><span class="desc">Dashboard</span></div>
+                  </div>
+                </div>
+                <div class="list-stack">
+                  <div class="surface">
+                    <div class="stat-row"><div><div class="eyebrow">Chat widget</div><div style="margin-top:6px;font-size:22px;font-weight:800;">Support conversation</div></div><span class="pill">Assistant</span></div>
+                    <div class="list-stack" style="margin-top:16px;">
+                      <div class="chat-bubble">Which reference block includes a sticky header and category search?</div>
+                      <div class="chat-bubble-out" style="margin-inline-start:auto;max-width:80%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;padding:14px;">Use the top app shell plus the Navigation Command Workspace card. It includes sticky navigation, chips, and search patterns.</div>
+                    </div>
+                  </div>
+                  <div class="surface">
+                    <strong>Help center shortcuts</strong>
+                    <div class="demo-grid-3" style="margin-top:14px;">
+                      <div class="help-card">Keyboard shortcuts</div>
+                      <div class="help-card">RTL implementation</div>
+                      <div class="help-card">Theming tokens</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#command palette</span><span class="chip">#chat widget</span><span class="chip">#support</span><span class="chip">#help center</span><span class="chip">#shortcut</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="motion" class="section section-block" data-section="motion">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">motion</div><h2 style="margin:8px 0 0;font-size:34px;">Motion & Special Appeal</h2><p class="desc">Glassmorphism، Marquee، کارت‌های شناور، تایم‌لاین روایی و جزئیات موشنی برای جذابیت بیشتر.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="motion" data-search="glassmorphism motion float marquee spotlight glow visual appeal layered cards effects">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Motion & Special Appeal</div><h3>Glass Motion Scene</h3><p class="desc">لابراتوار بصری با لایه‌های محو، Ribbon متحرک، کارت‌های شناور و افکت‌های ویژه.</p></div><div class="pill">Reference ID · glass-motion-scene</div></div></div>
+            <div class="card-body">
+              <div class="surface hero-special" style="padding:18px;">
+                <div class="marquee"><div class="marquee-track"><span>Glassmorphism</span><span>Backdrop Blur</span><span>Floating Widgets</span><span>Marquee Ribbon</span><span>Spotlight Surface</span><span>Animated Layers</span><span>Shimmer Shell</span><span>Narrative UI</span><span>Glassmorphism</span><span>Backdrop Blur</span><span>Floating Widgets</span><span>Marquee Ribbon</span><span>Spotlight Surface</span><span>Animated Layers</span><span>Shimmer Shell</span><span>Narrative UI</span></div></div>
+                <div class="demo-grid-sidebar" style="margin-top:16px;align-items:center;">
+                  <div class="glass shine" style="padding:18px;">
+                    <div class="pill" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.1);">Motion playground</div>
+                    <div style="margin-top:14px;font-size:32px;font-weight:800;line-height:1.2;">با چند Primitive ساده، جلوه‌های سخت‌تر و حرفه‌ای بساز.</div>
+                    <p class="desc">ترکیب Gradient، Blur، Glow، کارت شناور و Marquee در پروژه‌های مدرن بسیار رایج است.</p>
+                    <div class="hero-actions"><span class="button" style="background:#fff;color:#020617;">Try spotlight</span><span class="ghost" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#fff;">Preview glass cards</span></div>
+                  </div>
+                  <div class="motion-area">
+                    <div class="glass float-card float-b floaty"><strong>Floating KPI</strong><div style="margin-top:8px;font-size:34px;font-weight:800;">68%</div><div class="desc" style="color:rgba(255,255,255,.72);">Attention captured</div></div>
+                    <div class="glass float-card float-a floaty-2"><strong>Preview stack</strong><div class="mini-stack" style="margin-top:12px;"><div style="height:46px;border-radius:18px;background:rgba(255,255,255,.1);"></div><div style="height:46px;border-radius:18px;background:rgba(255,255,255,.1);"></div><div style="height:46px;border-radius:18px;background:rgba(255,255,255,.1);"></div></div></div>
+                    <div class="glass float-card float-c"><strong>Action rail</strong><div class="tag-row" style="margin-top:12px;"><span class="chip" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.12);">Play</span><span class="chip" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.12);">Pause</span><span class="chip" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.12);">Export</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#glassmorphism</span><span class="chip">#motion</span><span class="chip">#marquee</span><span class="chip">#floating card</span><span class="chip">#effects</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="motion" data-search="timeline storytelling milestones scroll process sticky section narrative motion">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Motion & Special Appeal</div><h3>Scroll Story Timeline</h3><p class="desc">چیدمان روایی برای فرآیند، Milestone، اجرای مرحله‌ای و محتواهای آموزشی/پرزنتیشنی.</p></div><div class="pill">Reference ID · scroll-story-timeline</div></div></div>
+            <div class="card-body">
+              <div class="demo-grid-sidebar">
+                <div class="surface">
+                  <div class="eyebrow">Narrative milestone rail</div>
+                  <div class="timeline-stack" style="margin-top:16px;">
+                    <div class="timeline-item"><div class="bullet">01</div><div><strong>Collect references</strong><div class="desc">Gather examples across navigation, dashboards, forms, and motion.</div></div></div>
+                    <div class="timeline-item"><div class="bullet">02</div><div><strong>Normalize metadata</strong><div class="desc">Add category, name, description, and keywords for external search.</div></div></div>
+                    <div class="timeline-item"><div class="bullet">03</div><div><strong>Apply themes</strong><div class="desc">Stress test every surface in light and dark mode.</div></div></div>
+                    <div class="timeline-item"><div class="bullet">04</div><div><strong>Add RTL typography</strong><div class="desc">Verify fonts, alignment, and spacing for Persian content.</div></div></div>
+                  </div>
+                </div>
+                <div class="list-stack">
+                  <div class="surface" style="background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(168,85,247,.06));"><span class="pill" style="color:var(--accent);">Sticky-feeling story panel</span><div style="margin-top:14px;font-size:28px;font-weight:800;">Use large process cards to narrate complex journeys.</div><p class="desc">مناسب برای Roadmap، مراحل استقرار، روند کار تیم یا آموزش چندمرحله‌ای.</p></div>
+                  <div class="demo-grid-2"><div class="surface"><strong>Implementation guide</strong><div class="desc">Checklist, rollout, and review prompts</div></div><div class="surface"><strong>Scroll section</strong><div class="desc">Milestones, copy blocks, and callouts</div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#timeline</span><span class="chip">#storytelling</span><span class="chip">#milestone</span><span class="chip">#process</span><span class="chip">#sticky section</span></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="typography" class="section section-block" data-section="typography">
+        <div class="section-head"><div class="section-head-flex"><div><div class="section-id">typography</div><h2 style="margin:8px 0 0;font-size:34px;">Typography & Persian Fonts</h2><p class="desc">نمونه‌های لاتین و فارسی برای تیتر، پاراگراف، نقل‌قول، کد و چیدمان RTL با فونت‌های متن‌باز ایرانی.</p></div><div class="pill">2 reference blocks</div></div></div>
+        <div class="cards-grid">
+          <article class="card component-card" data-category="typography" data-search="typography heading body quote code editorial latin hierarchy content layout type">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Typography & Persian Fonts</div><h3>Latin Editorial Typography</h3><p class="desc">نمونه واضحی از Display Type، متن لید، Pull Quote، کد، لیست و سلسله‌مراتب محتوایی.</p></div><div class="pill">Reference ID · latin-editorial-typography</div></div></div>
+            <div class="card-body ltr">
+              <div class="list-stack">
+                <div class="surface"><div class="eyebrow">Editorial hierarchy</div><div style="margin-top:10px;font-size:46px;font-weight:800;line-height:1.08;letter-spacing:-.04em;">Display headline, lead paragraph, and supporting narrative.</div><p class="desc" style="font-size:18px;max-width:850px;">This specimen helps you compare heading rhythm, paragraph density, spacing, and content hierarchy across blocks that mix editorial and product UI.</p></div>
+                <div class="demo-grid-3">
+                  <div class="surface"><strong>Pull quote</strong><div class="quote" style="margin-top:14px;">“Great typography makes complex interfaces easier to trust before a single interaction happens.”</div></div>
+                  <div class="surface"><strong>Code specimen</strong><div style="margin-top:14px;"><pre><code>&lt;ReferenceCard
+  category="Typography"
+  name="Editorial Hero"
+  description="Display type + lead copy"
+/&gt;</code></pre></div></div>
+                  <div class="surface"><strong>Content anatomy</strong><ul class="desc" style="margin:14px 0 0;padding-left:18px;"><li>Eyebrow label and category marker</li><li>Headline, subheadline, and lead paragraph</li><li>Supporting lists, code, quote, and callout panels</li></ul></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#typography</span><span class="chip">#heading</span><span class="chip">#quote</span><span class="chip">#code block</span><span class="chip">#editorial</span></div></div>
+          </article>
+
+          <article class="card component-card" data-category="typography" data-search="rtl persian fonts vazirmatn sahel estedad iranian typography فونت فارسی تایپوگرافی RTL ایرانی">
+            <div class="card-head"><div class="card-top"><div><div class="meta">Subject category · Typography & Persian Fonts</div><h3>Persian Open-Source Typography</h3><p class="desc">نمونه‌های RTL با Vazirmatn، Sahel و Estedad برای تیتر، متن بدنه، برچسب، کپشن و کارت‌های فارسی.</p></div><div class="pill">Reference ID · persian-open-source-typography</div></div></div>
+            <div class="card-body">
+              <div class="rtl-grid">
+                <div class="rtl-card font-vazir"><div class="eyebrow">Vazirmatn</div><div style="margin-top:10px;font-size:32px;font-weight:800;line-height:1.4;">نمونه تایپوگرافی رابط کاربری فارسی</div><p class="desc">وزیرمتن برای تیتر، متن بدنه، رابط‌های مدیریتی و صفحات محتوایی خوانا و متعادل است.</p><div class="tag-row" style="margin-top:12px;"><span class="chip">RTL</span><span class="chip">فونت متن</span></div></div>
+                <div class="rtl-card font-sahel"><div class="eyebrow">Sahel</div><div style="margin-top:10px;font-size:32px;font-weight:800;line-height:1.4;">نمونه تیتر و کارت‌های معرفی محصول</div><p class="desc">ساحل برای کارت‌ها، بخش‌های معرفی، توضیحات خلاصه و چیدمان‌های نرم و دوستانه بسیار مناسب است.</p><div class="tag-row" style="margin-top:12px;"><span class="chip">فونت فارسی</span><span class="chip">کارت محصول</span></div></div>
+                <div class="rtl-card font-estedad"><div class="eyebrow">Estedad</div><div style="margin-top:10px;font-size:32px;font-weight:800;line-height:1.4;">نمونه برچسب‌ها، آمار و تیترهای پرقدرت</div><p class="desc">استعداد برای تیترهای شاخص، آمار برجسته و کارت‌های داشبوردی با حس مدرن و محکم کاربردی است.</p><div class="tag-row" style="margin-top:12px;"><span class="chip">آمار</span><span class="chip">تیتر برجسته</span></div></div>
+              </div>
+              <div class="surface font-vazir" style="margin-top:14px;">
+                <div class="demo-grid-sidebar" style="grid-template-columns:1.2fr .8fr;">
+                  <div>
+                    <div class="eyebrow">راهنمای استفاده</div>
+                    <div style="margin-top:10px;font-size:30px;font-weight:800;line-height:1.55;">عنوان، توضیح کوتاه، برچسب، عدد و دکمه را در متن راست‌به‌چپ کنار هم ببینید.</div>
+                    <p class="desc" style="font-size:17px;line-height:2.1;">این نمونه برای بررسی فاصله‌ها، ترازبندی، وزن فونت، اعداد فارسی و سازگاری با حالت روشن و تیره طراحی شده است.</p>
+                  </div>
+                  <div class="list-stack">
+                    <div class="notice"><div class="desc">تاریخ بروزرسانی</div><div style="margin-top:6px;font-size:24px;font-weight:800;color:var(--text);">۱۴۰۵/۰۵/۲۱</div></div>
+                    <div class="notice"><div class="desc">وضعیت پروژه</div><div style="margin-top:6px;font-size:24px;font-weight:800;color:var(--text);">آماده استفاده</div></div>
+                    <div class="button">مشاهده کد این بخش</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><div class="tag-row"><span class="chip">#فونت فارسی</span><span class="chip">#RTL</span><span class="chip">#Vazirmatn</span><span class="chip">#Sahel</span><span class="chip">#Estedad</span></div></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="desc">UI Component Atlas · فایل مرجع تک‌صفحه‌ای HTML برای ناوبری، فرم، داشبورد، داده، فروش، اورلی، موشن و تایپوگرافی فارسی.</div>
+        <div class="tag-row"><span class="chip">Vazirmatn</span><span class="chip">Sahel</span><span class="chip">Estedad</span></div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const root = document.documentElement;
+        const searchInput = document.getElementById('searchInput');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeInfo = document.getElementById('themeInfo');
+        const queryInfo = document.getElementById('queryInfo');
+        const resultSummary = document.getElementById('resultSummary');
+        const progressBar = document.getElementById('progressBar');
+        const cards = Array.from(document.querySelectorAll('.component-card'));
+        const sections = Array.from(document.querySelectorAll('.section-block'));
+        const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+        const emptyState = document.getElementById('emptyState');
+        const pricingToggles = Array.from(document.querySelectorAll('.pricing-toggle'));
+        let activeCategory = 'all';
+
+        const savedTheme = localStorage.getItem('ui-component-atlas-theme');
+        const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (preferredDark ? 'dark' : 'light');
+
+        if (currentTheme === 'dark') {
+          root.classList.add('dark');
+          themeToggle.textContent = 'حالت روشن';
+          themeInfo.textContent = 'حالت تیره';
+        } else {
+          root.classList.remove('dark');
+          themeToggle.textContent = 'حالت تیره';
+          themeInfo.textContent = 'حالت روشن';
+        }
+
+        function setTheme(theme) {
+          root.classList.toggle('dark', theme === 'dark');
+          localStorage.setItem('ui-component-atlas-theme', theme);
+          themeToggle.textContent = theme === 'dark' ? 'حالت روشن' : 'حالت تیره';
+          themeInfo.textContent = theme === 'dark' ? 'حالت تیره' : 'حالت روشن';
+        }
+
+        function updateProgress() {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+          progressBar.style.width = percent + '%';
+        }
+
+        function updatePricing(mode) {
+          pricingToggles.forEach((btn) => {
+            const active = btn.dataset.billing === mode;
+            btn.classList.toggle('active', active);
+            btn.style.background = active ? 'var(--text)' : 'var(--card)';
+            btn.style.color = active ? '#fff' : 'var(--text)';
+            btn.style.borderColor = active ? 'transparent' : 'var(--line)';
+          });
+
+          document.querySelectorAll('.price-value').forEach((node) => {
+            node.textContent = mode === 'yearly' ? node.dataset.yearly : node.dataset.monthly;
+          });
+
+          document.querySelectorAll('.price-suffix').forEach((node) => {
+            node.textContent = mode === 'yearly' ? '/mo billed yearly' : '/mo';
+          });
+        }
+
+        function applyFilter(scrollToSection) {
+          const query = searchInput.value.trim().toLowerCase();
+          let visibleCount = 0;
+
+          cards.forEach((card) => {
+            const category = card.dataset.category || '';
+            const haystack = (card.dataset.search || '').toLowerCase();
+            const categoryMatch = activeCategory === 'all' || category === activeCategory;
+            const queryMatch = !query || haystack.includes(query);
+            const visible = categoryMatch && queryMatch;
+            card.classList.toggle('hide', !visible);
+            if (visible) visibleCount += 1;
+          });
+
+          sections.forEach((section) => {
+            const sectionCards = Array.from(section.querySelectorAll('.component-card'));
+            const anyVisible = sectionCards.some((card) => !card.classList.contains('hide'));
+            section.classList.toggle('hide', !anyVisible);
+          });
+
+          if (emptyState) {
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+          }
+
+          const activeLabel = activeCategory === 'all'
+            ? 'همه دسته‌ها'
+            : (document.querySelector('.filter-btn.active')?.textContent || activeCategory);
+
+          resultSummary.textContent = `نمایش ${visibleCount} بلوک مرجع در ${activeLabel}`;
+          queryInfo.textContent = query ? `Query · ${query}` : 'بدون فیلتر متنی';
+
+          filterButtons.forEach((btn) => btn.classList.toggle('active', btn.dataset.category === activeCategory));
+
+          if (scrollToSection && activeCategory !== 'all') {
+            const target = document.getElementById(activeCategory);
+            if (target && !target.classList.contains('hide')) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        }
+
+        themeToggle.addEventListener('click', () => {
+          setTheme(root.classList.contains('dark') ? 'light' : 'dark');
+        });
+
+        searchInput.addEventListener('input', () => applyFilter(false));
+
+        filterButtons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            activeCategory = btn.dataset.category || 'all';
+            applyFilter(true);
+            if (activeCategory === 'all') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          });
+        });
+
+        pricingToggles.forEach((btn) => {
+          btn.addEventListener('click', () => updatePricing(btn.dataset.billing || 'monthly'));
+        });
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress);
+
+        updatePricing('monthly');
+        applyFilter(false);
+        updateProgress();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,4422 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کتابخانه کامپوننت‌های پرشین | Persian UI Components Library</title>
+<meta name="description" content="کتابخانه جامع کامپوننت‌های وب RTL فارسی با حالت تاریک و روشن">
+
+<!-- Persian Fonts -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/estedad-font@v7.0.1/dist/font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/samim-font@v4.0.5/dist/font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/parastoo-font@v2.2.2/dist/font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/gandom-font@v1.0.2/dist/font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-code-sans-font@v1.1.2/dist/font-face.css">
+
+<style>
+/* ========== THEME VARIABLES ========== */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-code: #0f172a;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-code: #e2e8f0;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-light: #eef2ff;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --font-primary: 'Vazirmatn', system-ui, sans-serif;
+  --font-alt: 'Estedad', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  --bg-card: #151b2e;
+  --bg-code: #020617;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-code: #e2e8f0;
+  --border: #334155;
+  --border-strong: #475569;
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-light: #1e1b4b;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.7);
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* ========== SCROLL PROGRESS ========== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform-origin: right;
+  transform: scaleX(0);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+  border: 2px solid var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-hover); }
+
+/* ========== HEADER ========== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(10,14,26,0.85);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 900;
+  box-shadow: var(--shadow-md);
+}
+
+.nav-categories {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  flex: 1;
+  scrollbar-width: none;
+  padding: 0.25rem 0;
+}
+
+.nav-categories::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background: var(--bg-tertiary);
+  color: var(--accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.search-box {
+  position: relative;
+  width: 240px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  background: var(--bg-tertiary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg-card);
+}
+
+.search-input::placeholder { color: var(--text-tertiary); }
+
+.search-icon {
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.icon-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.menu-toggle { display: none; }
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(236,72,153,0.15) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--accent);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: var(--font-alt);
+}
+
+.hero-stat-label {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+
+/* ========== LAYOUT ========== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.0625rem;
+}
+
+/* ========== COMPONENT CARD ========== */
+.component-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-sm);
+}
+
+.component-wrapper:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.component-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.component-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.component-title .cat-badge {
+  font-size: 0.7rem;
+  padding: 0.125rem 0.5rem;
+  background: var(--accent);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.component-desc {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  max-width: 600px;
+}
+
+.component-preview {
+  padding: 2.5rem 1.5rem;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      var(--bg-tertiary) 10px,
+      var(--bg-tertiary) 20px
+    );
+  background-color: var(--bg-secondary);
+  min-height: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.component-code {
+  background: var(--bg-code);
+  color: var(--text-code);
+  padding: 1.25rem;
+  font-family: 'Vazir Code Sans', 'Courier New', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  position: relative;
+  direction: ltr;
+  text-align: left;
+  max-height: 400px;
+}
+
+.code-copy {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.code-copy:hover { background: var(--accent); border-color: var(--accent); }
+
+.code-preview-toggle {
+  padding: 0.5rem 1rem;
+  background: var(--bg-tertiary);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.code-preview-toggle:hover { color: var(--accent); }
+
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.4);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.5);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover { background: var(--border); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline:hover { background: var(--accent); color: white; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover { background: var(--bg-tertiary); color: var(--accent); }
+
+.btn-gradient {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.4);
+}
+
+.btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(236,72,153,0.5); }
+
+.btn-loading {
+  background: var(--accent);
+  color: white;
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-loading::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.btn-sm { padding: 0.375rem 0.875rem; font-size: 0.75rem; }
+.btn-lg { padding: 0.875rem 2rem; font-size: 1rem; }
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* ========== CARDS ========== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--accent);
+}
+
+.card-image {
+  height: 160px;
+  background: var(--gradient-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.3), transparent 50%);
+}
+
+.card-body { padding: 1.25rem; }
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.card-footer {
+  padding: 0.875rem 1.25rem;
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+}
+
+/* Pricing Card */
+.pricing-card {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  position: relative;
+  transition: all 0.3s;
+}
+
+.pricing-card.featured {
+  border-color: var(--accent);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-xl);
+}
+
+.pricing-card.featured::before {
+  content: 'پرفروش‌ترین';
+  position: absolute;
+  top: -12px;
+  right: 50%;
+  transform: translateX(50%);
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pricing-plan { font-size: 0.875rem; color: var(--text-tertiary); font-weight: 600; }
+
+.pricing-price {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+  font-family: var(--font-alt);
+}
+
+.pricing-price span { font-size: 1rem; color: var(--text-tertiary); font-weight: 400; }
+
+.pricing-features { list-style: none; margin: 1.5rem 0; }
+
+.pricing-features li {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.pricing-features li::before {
+  content: '✓';
+  color: var(--success);
+  font-weight: bold;
+}
+
+.pricing-features li.disabled { opacity: 0.4; text-decoration: line-through; }
+.pricing-features li.disabled::before { content: '✕'; color: var(--danger); }
+
+/* ========== FORMS ========== */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-input, .form-select, .form-textarea {
+  padding: 0.625rem 0.875rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.form-hint { font-size: 0.75rem; color: var(--text-tertiary); }
+
+.form-input.error { border-color: var(--danger); }
+.form-input.error + .form-hint { color: var(--danger); }
+
+/* Checkbox & Radio */
+.checkbox-group, .radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.custom-checkbox, .custom-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  user-select: none;
+}
+
+.custom-checkbox input, .custom-radio input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-strong);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  margin: 0;
+}
+
+.custom-radio input { border-radius: 50%; }
+
+.custom-checkbox input:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.custom-checkbox input:checked::after {
+  content: '✓';
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.custom-radio input:checked {
+  border-color: var(--accent);
+}
+
+.custom-radio input:checked::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Toggle Switch */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-strong);
+  border-radius: 999px;
+  transition: all 0.3s;
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  right: 2px;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle input { display: none; }
+.toggle input:checked + .toggle-switch { background: var(--accent); border-color: var(--accent); }
+.toggle input:checked + .toggle-switch::after { right: 24px; }
+
+/* Range Slider */
+.range-slider {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 999px;
+  outline: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(99,102,241,0.4);
+}
+
+/* ========== MODAL ========== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s;
+  border: 1px solid var(--border);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title { font-size: 1.125rem; font-weight: 700; }
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-close:hover { color: var(--danger); }
+
+.modal-body { padding: 1.5rem; }
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+/* ========== ALERTS ========== */
+.alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border-right: 4px solid;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.alert-info { background: #eff6ff; border-color: var(--info); color: #1e40af; }
+.alert-success { background: #f0fdf4; border-color: var(--success); color: #166534; }
+.alert-warning { background: #fffbeb; border-color: var(--warning); color: #92400e; }
+.alert-danger { background: #fef2f2; border-color: var(--danger); color: #991b1b; }
+
+[data-theme="dark"] .alert-info { background: #1e3a8a33; color: #93c5fd; }
+[data-theme="dark"] .alert-success { background: #065f4633; color: #86efac; }
+[data-theme="dark"] .alert-warning { background: #78350f33; color: #fcd34d; }
+[data-theme="dark"] .alert-danger { background: #7f1d1d33; color: #fca5a5; }
+
+/* ========== ACCORDION ========== */
+.accordion { width: 100%; max-width: 700px; }
+
+.accordion-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.accordion-header:hover { background: var(--bg-tertiary); color: var(--accent); }
+
+.accordion-icon {
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.accordion-item.open .accordion-icon { transform: rotate(180deg); }
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-item.open .accordion-content { max-height: 500px; }
+
+.accordion-body {
+  padding: 0 1.25rem 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ========== TABS ========== */
+.tabs {
+  width: 100%;
+  max-width: 700px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.tabs-header {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs-header::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.875rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover { color: var(--accent); }
+
+.tab-btn.active { color: var(--accent); font-weight: 600; }
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+.tab-panel {
+  display: none;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s;
+}
+
+.tab-panel.active { display: block; }
+
+/* ========== PROGRESS ========== */
+.progress {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 999px;
+  transition: width 1s ease;
+  animation: progressAnim 2s ease forwards;
+}
+
+@keyframes progressAnim { from { width: 0; } }
+
+.circular-progress {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.circular-progress svg { transform: rotate(-90deg); }
+
+.circular-progress circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.circular-progress .track { stroke: var(--bg-tertiary); }
+.circular-progress .bar {
+  stroke: url(#grad);
+  stroke-dasharray: 314;
+  stroke-dashoffset: 314;
+  animation: circAnim 2s ease forwards;
+}
+
+@keyframes circAnim { to { stroke-dashoffset: 75; } }
+
+.circular-progress-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ========== TABLE ========== */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th {
+  background: var(--bg-tertiary);
+  padding: 0.875rem 1rem;
+  text-align: right;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: var(--bg-tertiary); }
+
+.table-status {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.table-status.success { background: #dcfce7; color: #166534; }
+.table-status.warning { background: #fef3c7; color: #92400e; }
+.table-status.danger { background: #fee2e2; color: #991b1b; }
+
+[data-theme="dark"] .table-status.success { background: #065f4633; color: #86efac; }
+[data-theme="dark"] .table-status.warning { background: #78350f33; color: #fcd34d; }
+[data-theme="dark"] .table-status.danger { background: #7f1d1d33; color: #fca5a5; }
+
+/* ========== BADGES ========== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.badge-primary { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+.badge-success { background: #dcfce7; color: #166534; border-color: var(--success); }
+.badge-warning { background: #fef3c7; color: #92400e; border-color: var(--warning); }
+.badge-danger { background: #fee2e2; color: #991b1b; border-color: var(--danger); }
+.badge-ghost { background: transparent; color: var(--text-secondary); border-color: var(--border); }
+
+/* ========== AVATARS ========== */
+.avatar-group { display: flex; align-items: center; }
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-card);
+  background: var(--gradient-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-left: -10px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.avatar:first-child { margin-left: 0; }
+.avatar:hover { transform: translateY(-4px) scale(1.1); z-index: 10; }
+
+.avatar.avatar-lg { width: 64px; height: 64px; font-size: 1.125rem; }
+
+.avatar-img {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%236366f1" width="100" height="100"/><text x="50" y="60" font-family="sans-serif" font-size="40" text-anchor="middle" fill="white">A</text></svg>');
+  background-size: cover;
+}
+
+/* ========== TIMELINE ========== */
+.timeline {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-right: 50px;
+  margin-bottom: 2rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 3px solid var(--accent);
+}
+
+.timeline-date {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title { font-weight: 600; margin-bottom: 0.25rem; }
+.timeline-desc { color: var(--text-secondary); font-size: 0.875rem; }
+
+/* ========== TESTIMONIALS ========== */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.testimonial {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.testimonial::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  font-size: 5rem;
+  color: var(--accent);
+  font-family: serif;
+  line-height: 1;
+  opacity: 0.2;
+}
+
+.testimonial-stars {
+  color: var(--warning);
+  margin-bottom: 0.75rem;
+}
+
+.testimonial-text {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.testimonial-name { font-weight: 600; font-size: 0.875rem; }
+.testimonial-role { font-size: 0.75rem; color: var(--text-tertiary); }
+
+/* ========== TYPOGRAPHY ========== */
+.font-demo {
+  padding: 1.5rem;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.font-demo-title {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.font-demo-sample {
+  font-size: 2.5rem;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.font-demo-sample-sm {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ========== GRADIENT TEXT ========== */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+/* ========== GLASSMORPHISM ========== */
+.glass-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  color: white;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .glass-card {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.glass-preview {
+  background: var(--gradient-primary);
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ========== NEUMORPHISM ========== */
+.neu-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 8px 8px 16px rgba(0,0,0,0.1), -8px -8px 16px rgba(255,255,255,0.7);
+  width: 280px;
+  text-align: center;
+}
+
+[data-theme="dark"] .neu-card {
+  box-shadow: 8px 8px 16px rgba(0,0,0,0.5), -8px -8px 16px rgba(255,255,255,0.05);
+}
+
+.neu-btn {
+  background: var(--bg-secondary);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.1), -4px -4px 8px rgba(255,255,255,0.7);
+  color: var(--text-primary);
+  font-family: inherit;
+  cursor: pointer;
+  margin: 0.25rem;
+}
+
+.neu-btn:active {
+  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.7);
+}
+
+/* ========== 3D TILT CARD ========== */
+.tilt-card {
+  width: 280px;
+  height: 360px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  color: white;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tilt-card:hover { transform: perspective(1000px) rotateY(10deg) rotateX(-5deg) translateZ(20px); }
+
+.tilt-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.3), transparent 50%);
+  pointer-events: none;
+}
+
+.tilt-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  transform: translateZ(50px);
+}
+
+.tilt-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; transform: translateZ(30px); }
+.tilt-text { font-size: 0.875rem; opacity: 0.9; transform: translateZ(20px); }
+
+/* ========== MARQUEE ========== */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.marquee-item::before {
+  content: '●';
+  color: var(--accent);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+
+/* ========== LOADERS ========== */
+.loaders-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-1 {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--bg-tertiary);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader-2 {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  gap: 4px;
+}
+
+.loader-2 span {
+  width: 8px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 4px;
+  animation: barAnim 1s ease-in-out infinite;
+}
+
+.loader-2 span:nth-child(2) { animation-delay: 0.1s; }
+.loader-2 span:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes barAnim {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+.loader-3 {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.loader-3 span {
+  background: var(--accent);
+  border-radius: 2px;
+  animation: gridAnim 1s ease-in-out infinite;
+}
+
+.loader-3 span:nth-child(1) { animation-delay: 0s; }
+.loader-3 span:nth-child(2) { animation-delay: 0.1s; }
+.loader-3 span:nth-child(3) { animation-delay: 0.2s; }
+.loader-3 span:nth-child(4) { animation-delay: 0.1s; }
+.loader-3 span:nth-child(5) { animation-delay: 0.2s; }
+.loader-3 span:nth-child(6) { animation-delay: 0.3s; }
+.loader-3 span:nth-child(7) { animation-delay: 0.2s; }
+.loader-3 span:nth-child(8) { animation-delay: 0.3s; }
+.loader-3 span:nth-child(9) { animation-delay: 0.4s; }
+
+@keyframes gridAnim {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.loader-4 {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.loader-4::before, .loader-4::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 4px solid transparent;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+.loader-4::after { inset: 6px; border-top-color: var(--accent-hover); animation-duration: 0.8s; }
+
+/* ========== SKELETON ========== */
+.skeleton {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: skeleton 1.5s infinite;
+}
+
+@keyframes skeleton {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.skeleton-card {
+  width: 280px;
+  padding: 1rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+/* ========== COUNTERS ========== */
+.counters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.counter {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.counter-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: var(--font-alt);
+  margin-bottom: 0.25rem;
+}
+
+.counter-label {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+/* ========== PAGINATION ========== */
+.pagination {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover { background: var(--bg-tertiary); color: var(--accent); }
+
+.page-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* ========== BREADCRUMB ========== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  list-style: none;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover { color: var(--accent); }
+
+.breadcrumb-sep { color: var(--text-tertiary); }
+.breadcrumb-current { color: var(--text-primary); font-weight: 500; }
+
+/* ========== TOOLTIPS ========== */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s;
+  margin-bottom: 6px;
+  z-index: 100;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--text-primary);
+}
+
+.tooltip-wrapper:hover .tooltip { opacity: 1; margin-bottom: 10px; }
+
+/* ========== DROPDOWN ========== */
+.dropdown { position: relative; display: inline-block; }
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  padding: 0.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all 0.2s;
+  z-index: 100;
+}
+
+.dropdown.open .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover { background: var(--bg-tertiary); color: var(--accent); }
+
+.dropdown-divider { height: 1px; background: var(--border); margin: 0.25rem 0; }
+
+/* ========== TOAST ========== */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.875rem 1rem;
+  box-shadow: var(--shadow-lg);
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: slideIn 0.3s, slideOut 0.3s 2.7s forwards;
+  border-right: 4px solid var(--accent);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+.toast-title { font-weight: 600; font-size: 0.875rem; }
+.toast-msg { font-size: 0.8125rem; color: var(--text-secondary); }
+
+/* ========== KBD ========== */
+kbd {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-family: 'Vazir Code Sans', monospace;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+}
+
+/* ========== DIVIDERS ========== */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  width: 100%;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-fancy::before {
+  background: linear-gradient(to left, var(--border), transparent);
+}
+
+.divider-fancy::after {
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ========== BACK TO TOP ========== */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  z-index: 500;
+  font-family: inherit;
+}
+
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { background: var(--accent-hover); transform: translateY(-4px); }
+
+/* ========== FEATURES ========== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.feature {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title { font-weight: 700; margin-bottom: 0.5rem; }
+.feature-text { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ========== CODE BLOCKS ========== */
+.code-block {
+  background: var(--bg-code);
+  color: var(--text-code);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  font-family: 'Vazir Code Sans', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  direction: ltr;
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+
+.code-block .kw { color: #c792ea; }
+.code-block .str { color: #c3e88d; }
+.code-block .num { color: #f78c6c; }
+.code-block .com { color: #546e7a; font-style: italic; }
+.code-block .fn { color: #82aaff; }
+
+/* ========== FOOTER ========== */
+.site-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  padding: 3rem 1.5rem 1.5rem;
+  margin-top: 4rem;
+}
+
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  max-width: 320px;
+}
+
+.footer-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 968px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  html { font-size: 15px; }
+  .nav-categories { display: none; }
+  .search-box { display: none; }
+  .menu-toggle { display: flex; }
+  .hero { padding: 4rem 1.5rem 3rem; }
+  .hero-stats { gap: 2rem; }
+  .section { padding: 3rem 0; }
+  .component-header { flex-direction: column; }
+  .pricing-card.featured { transform: scale(1); }
+  .footer-grid { grid-template-columns: 1fr; }
+  .toast-container { left: 1rem; right: 1rem; }
+  .toast { min-width: auto; }
+  .back-to-top { bottom: 1rem; left: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .header-inner { padding: 0.5rem 1rem; }
+  .component-preview { padding: 1.5rem 1rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .hero-stat-value { font-size: 2rem; }
+}
+
+/* ========== MOBILE MENU ========== */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 1500;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+.mobile-menu.open { display: block; animation: slideRight 0.3s; }
+
+@keyframes slideRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-menu-links a {
+  padding: 0.875rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.mobile-menu-links a:hover { background: var(--bg-tertiary); color: var(--accent); }
+
+/* Hidden */
+.hidden { display: none !important; }
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-icon">پ</span>
+      <span>پرشین UI</span>
+    </a>
+
+    <nav class="nav-categories">
+      <a href="#typography" class="nav-link">تایپوگرافی</a>
+      <a href="#buttons" class="nav-link">دکمه‌ها</a>
+      <a href="#cards" class="nav-link">کارت‌ها</a>
+      <a href="#forms" class="nav-link">فرم‌ها</a>
+      <a href="#feedback" class="nav-link">بازخورد</a>
+      <a href="#navigation" class="nav-link">ناوبری</a>
+      <a href="#data" class="nav-link">نمایش داده</a>
+      <a href="#effects" class="nav-link">افکت‌ها</a>
+      <a href="#layout" class="nav-link">چیدمان</a>
+      <a href="#media" class="nav-link">چندرسانه‌ای</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="جستجو در کامپوننت‌ها..." id="searchInput">
+        <span class="search-icon">🔍</span>
+      </div>
+      <button class="icon-btn" id="themeToggle" aria-label="تغییر تم">
+        <span id="themeIcon">🌙</span>
+      </button>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="منو">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <a href="#top" class="logo"><span class="logo-icon">پ</span><span>پرشین UI</span></a>
+    <button class="icon-btn" onclick="toggleMobileMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="#typography" onclick="toggleMobileMenu()">تایپوگرافی</a>
+    <a href="#buttons" onclick="toggleMobileMenu()">دکمه‌ها</a>
+    <a href="#cards" onclick="toggleMobileMenu()">کارت‌ها</a>
+    <a href="#forms" onclick="toggleMobileMenu()">فرم‌ها</a>
+    <a href="#feedback" onclick="toggleMobileMenu()">بازخورد</a>
+    <a href="#navigation" onclick="toggleMobileMenu()">ناوبری</a>
+    <a href="#data" onclick="toggleMobileMenu()">نمایش داده</a>
+    <a href="#effects" onclick="toggleMobileMenu()">افکت‌ها</a>
+    <a href="#layout" onclick="toggleMobileMenu()">چیدمان</a>
+    <a href="#media" onclick="toggleMobileMenu()">چندرسانه‌ای</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-badge">✨ نسخه ۱.۰ - کتابخانه جامع RTL</div>
+    <h1>کتابخانه کامپوننت‌های<br>وب فارسی</h1>
+    <p>بزرگ‌ترین مجموعه کامپوننت‌های آماده برای توسعه‌دهندگان وب فارسی‌زبان — با بیش از ۵۰ کامپوننت مدرن، حالت تاریک/روشن، انیمیشن‌های پیشرفته و طراحی ریسپانسیو کامل</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value" data-count="52">0</div>
+        <div class="hero-stat-label">کامپوننت</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" data-count="7">0</div>
+        <div class="hero-stat-label">فونت فارسی</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" data-count="100">0</div>
+        <div class="hero-stat-label">ریسپانسیو ٪</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" data-count="2">0</div>
+        <div class="hero-stat-label">حالت تم</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+
+<!-- ============================================ -->
+<!-- =============  TYPOGRAPHY  ================ -->
+<!-- ============================================ -->
+<section class="section reveal" id="typography">
+  <div class="section-header">
+    <span class="section-tag">دسته: تایپوگرافی</span>
+    <h2 class="section-title">فونت‌های فارسی متن‌باز</h2>
+    <p class="section-desc">نمونه‌هایی از پرکاربردترین فونت‌های فارسی متن‌باز برای استفاده در پروژه‌های وب</p>
+  </div>
+
+  <!-- Vazirmatn -->
+  <div class="component-wrapper" data-search="vazirmatn وزیر متن">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Vazirmatn وزیرمتن <span class="cat-badge">محبوب‌ترین</span></h3>
+        <p class="component-desc">فونت مدرن و خوانا برای متون عمومی، UI و محتوای وب - پرکاربردترین فونت فارسی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Vazirmatn', sans-serif; width: 100%;">
+        <div class="font-demo-title">Vazirmatn — وزن‌های مختلف</div>
+        <div class="font-demo-sample">سلام دنیا! The quick brown fox</div>
+        <div class="font-demo-sample-sm" style="margin-bottom: 0.5rem;">
+          این یک پاراگراف نمونه با فونت وزیرمتن است. این فونت توسط صابر راستی‌کردار طراحی شده و از محبوب‌ترین فونت‌های فارسی در وب می‌باشد.
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-weight: 600;">
+          <span style="font-weight: 100;">۱۰۰ نازک</span>
+          <span style="font-weight: 400;">۴۰۰ معمولی</span>
+          <span style="font-weight: 700;">۷۰۰ پررنگ</span>
+          <span style="font-weight: 900;">۹۰۰ سیاه</span>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"&gt;
+
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+}
+
+/* وزن‌ها: 100, 200, 300, 400, 500, 600, 700, 800, 900 */</code></pre>
+  </div>
+
+  <!-- Estedad -->
+  <div class="component-wrapper" data-search="estedad استعداد">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Estedad استعداد</h3>
+        <p class="component-desc">فونت رسمی با ظاهر سنتی‌تر، مناسب برای اسناد رسمی، مجلات و محتوای جدی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Estedad', sans-serif; width: 100%;">
+        <div class="font-demo-title">Estedad — فونت کلاسیک مدرن</div>
+        <div class="font-demo-sample">بسم الله الرحمن الرحیم</div>
+        <div class="font-demo-sample-sm">
+          استعداد یک فونت فارسی با طراحی سنتی و ظاهر حرفه‌ای است که برای متون طولانی و رسمی بسیار مناسب می‌باشد.
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>body { font-family: 'Estedad', sans-serif; }</code></pre>
+  </div>
+
+  <!-- Samim -->
+  <div class="component-wrapper" data-search="samim صمیم">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Samim صمیم</h3>
+        <p class="component-desc">فونت گرم و دوستانه با حس صمیمیت، مناسب برای وبلاگ‌ها و محتوای شخصی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Samim', sans-serif; width: 100%;">
+        <div class="font-demo-title">Samim — حس صمیمی</div>
+        <div class="font-demo-sample">یک لبخند زیبا برای روز خوب</div>
+        <div class="font-demo-sample-sm">صمیم فونتی است که حس دوستانه و صمیمی به کاربر منتقل می‌کند و برای سایت‌های شخصی و وبلاگ عالی است.</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>body { font-family: 'Samim', sans-serif; }</code></pre>
+  </div>
+
+  <!-- Sahel -->
+  <div class="component-wrapper" data-search="sahel ساحل">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Sahel ساحل</h3>
+        <p class="component-desc">فونت خوانا و مناسب برای عناوین، پوسترها و محتوای تبلیغاتی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Sahel', sans-serif; width: 100%;">
+        <div class="font-demo-title">Sahel — مناسب برای عناوین</div>
+        <div class="font-demo-sample">عنوان جذاب و تاثیرگذار</div>
+        <div class="font-demo-sample-sm">فونت ساحل دارای شخصیتی قوی است که در طراحی‌های تبلیغاتی و عناوین بزرگ بسیار خوب می‌نشیند.</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>body { font-family: 'Sahel', sans-serif; }</code></pre>
+  </div>
+
+  <!-- Parastoo -->
+  <div class="component-wrapper" data-search="parastoo پرستو">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Parastoo پرستو</h3>
+        <p class="component-desc">فونت با ظاهری نرم و گرد، مناسب برای طراحی‌های مدرن و دوستانه</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Parastoo', sans-serif; width: 100%;">
+        <div class="font-demo-title">Parastoo — نرم و گرد</div>
+        <div class="font-demo-sample">طراحی زیبا با گوشه‌های نرم</div>
+        <div class="font-demo-sample-sm">پرستو فونتی با شخصیت ملایم و دوستانه که در طراحی‌های کودکانه و نرم کاربرد دارد.</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>body { font-family: 'Parastoo', sans-serif; }</code></pre>
+  </div>
+
+  <!-- Gandom -->
+  <div class="component-wrapper" data-search="gandom گندم">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Gandom گندم</h3>
+        <p class="component-desc">فونت دست‌نویس‌گونه و صمیمی، مناسب برای محتوای گرم و خلاقانه</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Gandom', sans-serif; width: 100%;">
+        <div class="font-demo-title">Gandom — حس دست‌نویس</div>
+        <div class="font-demo-sample">سلام بر دنیای زیبا</div>
+        <div class="font-demo-sample-sm">فونت گندم حس دست‌نویس و شخصی بودن را به مخاطب منتقل می‌کند.</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>body { font-family: 'Gandom', sans-serif; }</code></pre>
+  </div>
+
+  <!-- Vazir Code Sans -->
+  <div class="component-wrapper" data-search="vazir code وزیر کد">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Vazir Code Sans وزیرکد</h3>
+        <p class="component-desc">فونت مونواسپیس با پشتیبانی فارسی برای نمایش کد و متون فنی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start;">
+      <div class="font-demo" style="font-family: 'Vazir Code Sans', monospace; width: 100%;">
+        <div class="font-demo-title">Vazir Code Sans — مونواسپیس</div>
+        <div class="font-demo-sample" style="font-size: 1.5rem;">const سلام = "Hello";</div>
+        <pre class="code-block" style="margin-top: 0.75rem;"><code><span class="kw">function</span> <span class="fn">greet</span>(<span class="str">name</span>) {
+  <span class="com">// چاپ سلام به زبان فارسی</span>
+  <span class="kw">return</span> <span class="str">`سلام ${name}!`</span>;
+}</code></pre>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>pre, code {
+  font-family: 'Vazir Code Sans', 'Courier New', monospace;
+  direction: ltr;
+  text-align: left;
+}</code></pre>
+  </div>
+
+  <!-- Gradient Text -->
+  <div class="component-wrapper" data-search="gradient text متن گرادیان">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">متن با گرادیان <span class="cat-badge">افکت</span></h3>
+        <p class="component-desc">متن با پس‌زمینه گرادیانی و افکت جذاب - مناسب برای عناوین</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="gradient-text">طراحی وب مدرن با پرشین UI</div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  BUTTONS  ==================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="buttons">
+  <div class="section-header">
+    <span class="section-tag">دسته: تعامل</span>
+    <h2 class="section-title">دکمه‌ها و اکشن‌ها</h2>
+    <p class="section-desc">مجموعه کامل دکمه‌ها در استایل‌های مختلف برای تعامل با کاربر</p>
+  </div>
+
+  <div class="component-wrapper" data-search="button دکمه">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">دکمه‌های پایه</h3>
+        <p class="component-desc">دکمه‌های اصلی شامل Primary, Secondary, Outline, Ghost</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <button class="btn btn-primary">اصلی</button>
+      <button class="btn btn-secondary">ثانویه</button>
+      <button class="btn btn-outline">حاشیه‌دار</button>
+      <button class="btn btn-ghost">شبح</button>
+      <button class="btn btn-gradient">گرادیان</button>
+      <button class="btn btn-primary btn-sm">کوچک</button>
+      <button class="btn btn-primary btn-lg">بزرگ</button>
+      <button class="btn btn-loading">در حال بارگذاری</button>
+      <button class="btn btn-primary btn-icon">⭐</button>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;button class="btn btn-primary"&gt;اصلی&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;ثانویه&lt;/button&gt;
+&lt;button class="btn btn-outline"&gt;حاشیه‌دار&lt;/button&gt;
+&lt;button class="btn btn-gradient"&gt;گرادیان&lt;/button&gt;
+&lt;button class="btn btn-primary btn-loading"&gt;در حال بارگذاری&lt;/button&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="icon button دکمه آیکون">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">دکمه‌های آیکونی</h3>
+        <p class="component-desc">دکمه‌های دایره‌ای با آیکون برای اکشن‌های فوری</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <button class="btn btn-primary btn-icon">❤</button>
+      <button class="btn btn-outline btn-icon">⭐</button>
+      <button class="btn btn-secondary btn-icon">🔔</button>
+      <button class="btn btn-gradient btn-icon">➕</button>
+      <button class="btn btn-ghost btn-icon">⚙</button>
+      <button class="btn btn-secondary btn-icon">🔍</button>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;button class="btn btn-primary btn-icon"&gt;❤&lt;/button&gt;
+&lt;button class="btn btn-outline btn-icon"&gt;⭐&lt;/button&gt;
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="social button شبکه اجتماعی">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">دکمه‌های شبکه اجتماعی</h3>
+        <p class="component-desc">ورود با شبکه‌های اجتماعی و اشتراک‌گذاری</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <button class="btn btn-secondary" style="color: #1877F2; border-color: #1877F2;">
+        <span>f</span> ورود با فیسبوک
+      </button>
+      <button class="btn btn-secondary" style="color: #1DA1F2; border-color: #1DA1F2;">
+        🐦 توییتر
+      </button>
+      <button class="btn btn-secondary" style="color: #EA4335; border-color: #EA4335;">
+        📧 ورود با گوگل
+      </button>
+      <button class="btn btn-secondary" style="color: #333; border-color: #333;">
+        ⚫ گیت‌هاب
+      </button>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;button class="btn" style="color: #1877F2; border-color: #1877F2;"&gt;
+  &lt;svg&gt;...&lt;/svg&gt; ورود با فیسبوک
+&lt;/button&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  CARDS  ====================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="cards">
+  <div class="section-header">
+    <span class="section-tag">دسته: نمایش</span>
+    <h2 class="section-title">کارت‌ها و کانتینرها</h2>
+    <p class="section-desc">انواع کارت‌های اطلاعاتی برای نمایش محتوا به شیوه‌ای زیبا</p>
+  </div>
+
+  <div class="component-wrapper" data-search="product card کارت محصول">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">کارت محصول</h3>
+        <p class="component-desc">کارت‌های فروشگاه برای نمایش محصولات با تصویر، عنوان و قیمت</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <h3 class="card-title">هدفون بی‌سیم</h3>
+            <p class="card-text">کیفیت صدای حرفه‌ای با قابلیت حذف نویز</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--accent); font-weight: 700; font-size: 1.125rem;">۱,۲۵۰,۰۰۰ ﷼</span>
+              <button class="btn btn-primary btn-sm">افزودن</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: var(--gradient-warm);"></div>
+          <div class="card-body">
+            <h3 class="card-title">ساعت هوشمند</h3>
+            <p class="card-text">مانیتورینگ سلامت و ردیابی فعالیت روزانه</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--accent); font-weight: 700; font-size: 1.125rem;">۲,۴۰۰,۰۰۰ ﷼</span>
+              <button class="btn btn-primary btn-sm">افزودن</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: var(--gradient-success);"></div>
+          <div class="card-body">
+            <h3 class="card-title">کیبورد مکانیکی</h3>
+            <p class="card-text">برای گیمینگ و برنامه‌نویسی حرفه‌ای</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--accent); font-weight: 700; font-size: 1.125rem;">۸۵۰,۰۰۰ ﷼</span>
+              <button class="btn btn-primary btn-sm">افزودن</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="card"&gt;
+  &lt;div class="card-image"&gt;&lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h3 class="card-title"&gt;عنوان محصول&lt;/h3&gt;
+    &lt;p class="card-text"&gt;توضیحات کوتاه&lt;/p&gt;
+    &lt;span class="price"&gt;۱,۲۵۰,۰۰۰ ﷼&lt;/span&gt;
+    &lt;button class="btn btn-primary"&gt;افزودن&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="profile card کارت پروفایل">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">کارت پروفایل</h3>
+        <p class="component-desc">نمایش اطلاعات کاربر با آمار دنبال‌کننده و دکمه‌های اکشن</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="card" style="max-width: 320px; text-align: center;">
+        <div class="card-image" style="height: 100px;"></div>
+        <div class="card-body" style="padding-top: 0;">
+          <div class="avatar avatar-lg avatar-img" style="margin: -40px auto 1rem; display: flex; font-size: 1.5rem;">ع</div>
+          <h3 class="card-title">علی احمدی</h3>
+          <p class="card-text">توسعه‌دهنده فول‌استک</p>
+          <div style="display: flex; justify-content: space-around; margin: 1rem 0; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+            <div><strong>۱۲۵</strong><br><small style="color: var(--text-tertiary);">پست</small></div>
+            <div><strong>۳.۲K</strong><br><small style="color: var(--text-tertiary);">دنبال‌کننده</small></div>
+            <div><strong>۴۸۹</strong><br><small style="color: var(--text-tertiary);">دنبال‌شونده</small></div>
+          </div>
+          <button class="btn btn-primary" style="width: 100%;">دنبال کردن</button>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="card"&gt;
+  &lt;div class="card-image"&gt;&lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;img src="avatar.jpg" style="margin-top: -40px;" /&gt;
+    &lt;h3&gt;نام کاربر&lt;/h3&gt;
+    &lt;p&gt;بیوگرافی&lt;/p&gt;
+    &lt;div class="stats"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="pricing card کارت قیمت">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">کارت قیمت‌گذاری</h3>
+        <p class="component-desc">جدول قیمت‌های پلن‌های اشتراک با قابلیت برجسته‌سازی پلن ویژه</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="cards-grid">
+        <div class="pricing-card">
+          <div class="pricing-plan">پایه</div>
+          <div class="pricing-price">۹۹<span>/ماه</span></div>
+          <p style="color: var(--text-secondary); font-size: 0.875rem;">برای کاربران تازه‌کار</p>
+          <ul class="pricing-features">
+            <li>۵ پروژه فعال</li>
+            <li>۱ گیگابایت فضا</li>
+            <li>پشتیبانی ایمیل</li>
+            <li class="disabled">API اختصاصی</li>
+            <li class="disabled">پشتیبانی ۲۴/۷</li>
+          </ul>
+          <button class="btn btn-outline" style="width: 100%;">انتخاب پلن</button>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-plan">حرفه‌ای</div>
+          <div class="pricing-price">۲۴۹<span>/ماه</span></div>
+          <p style="color: var(--text-secondary); font-size: 0.875rem;">محبوب‌ترین انتخاب</p>
+          <ul class="pricing-features">
+            <li>۵۰ پروژه فعال</li>
+            <li>۱۰ گیگابایت فضا</li>
+            <li>پشتیبانی اولویت‌دار</li>
+            <li>API اختصاصی</li>
+            <li class="disabled">پشتیبانی ۲۴/۷</li>
+          </ul>
+          <button class="btn btn-gradient" style="width: 100%;">شروع کنید</button>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-plan">سازمانی</div>
+          <div class="pricing-price">۹۹۹<span>/ماه</span></div>
+          <p style="color: var(--text-secondary); font-size: 0.875rem;">برای تیم‌های بزرگ</p>
+          <ul class="pricing-features">
+            <li>پروژه نامحدود</li>
+            <li>فضای نامحدود</li>
+            <li>پشتیبانی اختصاصی</li>
+            <li>API اختصاصی</li>
+            <li>پشتیبانی ۲۴/۷</li>
+          </ul>
+          <button class="btn btn-outline" style="width: 100%;">تماس بگیرید</button>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="pricing-card featured"&gt;
+  &lt;div class="pricing-plan"&gt;حرفه‌ای&lt;/div&gt;
+  &lt;div class="pricing-price"&gt;۲۴۹&lt;span&gt;/ماه&lt;/span&gt;&lt;/div&gt;
+  &lt;ul class="pricing-features"&gt;
+    &lt;li&gt;ویژگی ۱&lt;/li&gt;
+    &lt;li class="disabled"&gt;ویژگی محدود&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class="btn btn-gradient"&gt;شروع کنید&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="glass card کارت شیشه glassmorphism">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">کارت گلس‌مورفیسم</h3>
+        <p class="component-desc">افکت شیشه‌ای مدرن با بلور پس‌زمینه - ترند طراحی ۲۰۲۴</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="glass-preview">
+        <div class="glass-card">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">طراحی گلس‌مورفیسم</h3>
+          <p style="opacity: 0.9; font-size: 0.875rem;">پس‌زمینه شیشه‌ای با blur و شفافیت برای ظاهری مدرن و جذاب</p>
+          <button class="btn btn-secondary" style="margin-top: 1rem;">کلیک کنید</button>
+        </div>
+        <div class="glass-card">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">کارت دوم</h3>
+          <p style="opacity: 0.9; font-size: 0.875rem;">سایه‌های نرم و حاشیه‌های شفاف ویژگی‌های کلیدی این استایل هستند</p>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="neumorphism نیومورفیسم">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">کارت نیومورفیسم</h3>
+        <p class="component-desc">استایل نرم با سایه‌های داخلی و خارجی - ظاهری دکمه‌ای و برجسته</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="neu-card">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+        <h3 style="margin-bottom: 0.5rem;">نیومورفیسم</h3>
+        <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">سبک طراحی با سایه‌های نرم و برجستگی ظریف</p>
+        <button class="neu-btn">کلیک ۱</button>
+        <button class="neu-btn">کلیک ۲</button>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>.neu-card {
+  background: #f0f0f3;
+  border-radius: 20px;
+  box-shadow: 8px 8px 16px rgba(0,0,0,0.1),
+              -8px -8px 16px rgba(255,255,255,0.7);
+}
+
+.neu-btn:active {
+  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1),
+              inset -4px -4px 8px rgba(255,255,255,0.7);
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="tilt card 3d سه بعدی">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">کارت ۳D Tilt</h3>
+        <p class="component-desc">کارت با افکت چرخش سه‌بعدی هنگام hover - انیمیشن GSAP-like</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="tilt-card">
+        <div class="tilt-icon">🚀</div>
+        <h3 class="tilt-title">پروژه ویژه</h3>
+        <p class="tilt-text">ماوس را روی کارت حرکت دهید تا افکت چرخش سه‌بعدی را مشاهده کنید. این افکت از تکنیک‌های GSAP و transform-style 3D استفاده می‌کند.</p>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.tilt-card:hover {
+  transform: perspective(1000px) rotateY(10deg) rotateX(-5deg) translateZ(20px);
+}
+
+/* با JS برای افکت بهتر: */
+card.addEventListener('mousemove', (e) => {
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const rotateX = (y - rect.height/2) / 10;
+  const rotateY = (rect.width/2 - x) / 10;
+  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  FORMS  ====================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="forms">
+  <div class="section-header">
+    <span class="section-tag">دسته: ورودی</span>
+    <h2 class="section-title">فرم‌ها و ورودی‌ها</h2>
+    <p class="section-desc">مجموعه کامل فیلدهای فرم برای دریافت داده از کاربر</p>
+  </div>
+
+  <div class="component-wrapper" data-search="input text field فیلد متنی">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">فیلدهای متنی</h3>
+        <p class="component-desc">انواع ورودی‌های متنی با حالت‌های مختلف</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: stretch; max-width: 600px; width: 100%;">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">نام کامل</label>
+          <input type="text" class="form-input" placeholder="مثلاً: علی محمدی">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ایمیل</label>
+          <input type="email" class="form-input" placeholder="email@example.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">رمز عبور</label>
+        <input type="password" class="form-input" placeholder="••••••••">
+        <span class="form-hint">حداقل ۸ کاراکتر شامل حرف و عدد</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">خطا در ورودی</label>
+        <input type="text" class="form-input error" value="abc">
+        <span class="form-hint">این مقدار معتبر نیست!</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">پیام</label>
+        <textarea class="form-textarea" placeholder="پیام خود را بنویسید..."></textarea>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;نام کامل&lt;/label&gt;
+  &lt;input type="text" class="form-input" placeholder="..."&gt;
+  &lt;span class="form-hint"&gt;راهنما&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="checkbox radio toggle چک باکس رادیو">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">چک‌باکس، رادیو و سوییچ</h3>
+        <p class="component-desc">کنترل‌های انتخاب برای گزینه‌های متعدد</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: flex-start; gap: 1.5rem;">
+      <div>
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">چک‌باکس:</div>
+        <div class="checkbox-group">
+          <label class="custom-checkbox">
+            <input type="checkbox" checked> <span>گزینه اول</span>
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox"> <span>گزینه دوم</span>
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox"> <span>گزینه سوم</span>
+          </label>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">رادیو:</div>
+        <div class="radio-group">
+          <label class="custom-radio">
+            <input type="radio" name="demo" checked> <span>مرد</span>
+          </label>
+          <label class="custom-radio">
+            <input type="radio" name="demo"> <span>زن</span>
+          </label>
+          <label class="custom-radio">
+            <input type="radio" name="demo"> <span>ترجیح نمی‌دهم بگویم</span>
+          </label>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight: 600; margin-bottom: 0.5rem;">سوییچ Toggle:</div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-switch"></span>
+            <span>نوتیفیکیشن‌ها</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox">
+            <span class="toggle-switch"></span>
+            <span>حالت تاریک</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-switch"></span>
+            <span>به‌روزرسانی خودکار</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;label class="custom-checkbox"&gt;
+  &lt;input type="checkbox"&gt; &lt;span&gt;گزینه&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;label class="toggle"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="toggle-switch"&gt;&lt;/span&gt;
+  &lt;span&gt;برچسب&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="select dropdown slider">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">سلکت، اسلایدر و تاریخ</h3>
+        <p class="component-desc">انتخابگرها برای داده‌های مختلف</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: stretch; max-width: 600px; width: 100%; gap: 1.5rem;">
+      <div class="form-group">
+        <label class="form-label">کشور</label>
+        <select class="form-select">
+          <option>ایران</option>
+          <option>افغانستان</option>
+          <option>تاجیکستان</option>
+          <option>ترکیه</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">میزان رضایت: <span id="rangeValue">50</span>%</label>
+        <input type="range" class="range-slider" min="0" max="100" value="50" oninput="document.getElementById('rangeValue').textContent=this.value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">تاریخ تولد</label>
+        <input type="date" class="form-input">
+      </div>
+      <div class="form-group">
+        <label class="form-label">انتخاب رنگ</label>
+        <input type="color" class="form-input" style="height: 50px;" value="#6366f1">
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;select class="form-select"&gt;...&lt;/select&gt;
+&lt;input type="range" class="range-slider" min="0" max="100"&gt;
+&lt;input type="date" class="form-input"&gt;
+&lt;input type="color" class="form-input"&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="login form فرم ورود">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">فرم ورود کامل</h3>
+        <p class="component-desc">فرم ورود با شبکه‌های اجتماعی و لینک بازیابی رمز</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="card" style="max-width: 420px; width: 100%; padding: 2rem;">
+        <h2 style="text-align: center; margin-bottom: 0.5rem;">ورود به حساب</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem;">خوش آمدید! لطفاً وارد شوید</p>
+        <div style="display: grid; gap: 1rem;">
+          <button class="btn btn-secondary" style="justify-content: center;">📧 ورود با گوگل</button>
+          <div class="divider">یا</div>
+          <div class="form-group">
+            <label class="form-label">ایمیل</label>
+            <input type="email" class="form-input" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">رمز عبور</label>
+            <input type="password" class="form-input" placeholder="••••••••">
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem;">
+            <label class="custom-checkbox"><input type="checkbox"><span>مرا به خاطر بسپار</span></label>
+            <a href="#" style="color: var(--accent); text-decoration: none;">فراموشی رمز؟</a>
+          </div>
+          <button class="btn btn-primary" style="width: 100%;">ورود</button>
+          <p style="text-align: center; font-size: 0.875rem; color: var(--text-secondary);">
+            حساب ندارید؟ <a href="#" style="color: var(--accent); text-decoration: none;">ثبت‌نام کنید</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;form&gt;
+  &lt;button class="btn"&gt;📧 گوگل&lt;/button&gt;
+  &lt;div class="divider"&gt;یا&lt;/div&gt;
+  &lt;input type="email"&gt;
+  &lt;input type="password"&gt;
+  &lt;button class="btn btn-primary"&gt;ورود&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  FEEDBACK  =================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="feedback">
+  <div class="section-header">
+    <span class="section-tag">دسته: بازخورد</span>
+    <h2 class="section-title">بازخورد و وضعیت‌ها</h2>
+    <p class="section-desc">اجزایی برای نمایش پیام‌ها، هشدارها و وضعیت‌های مختلف به کاربر</p>
+  </div>
+
+  <div class="component-wrapper" data-search="alert notification اخطار پیام">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">پیام‌های سیستمی (Alert)</h3>
+        <p class="component-desc">چهار نوع پیام اصلی: موفقیت، اطلاعات، هشدار و خطا</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; align-items: stretch; max-width: 700px; width: 100%;">
+      <div class="alert alert-info">
+        <span>ℹ️</span>
+        <div>
+          <strong>نکته اطلاعاتی:</strong> این یک پیام اطلاعاتی است که جزئیات مفیدی را نمایش می‌دهد.
+        </div>
+      </div>
+      <div class="alert alert-success">
+        <span>✓</span>
+        <div>
+          <strong>موفقیت‌آمیز:</strong> عملیات با موفقیت انجام شد.
+        </div>
+      </div>
+      <div class="alert alert-warning">
+        <span>⚠</span>
+        <div>
+          <strong>هشدار:</strong> توجه کنید، ممکن است مشکلی پیش بیاید.
+        </div>
+      </div>
+      <div class="alert alert-danger">
+        <span>✕</span>
+        <div>
+          <strong>خطا:</strong> خطایی رخ داده است. لطفاً دوباره تلاش کنید.
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="alert alert-success"&gt;
+  &lt;span&gt;✓&lt;/span&gt;
+  &lt;div&gt;
+    &lt;strong&gt;موفقیت:&lt;/strong&gt; پیام شما
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="toast notification اعلان">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Toast اعلان شناور</h3>
+        <p class="component-desc">اعلان‌های کوچک در گوشه صفحه که خودکار محو می‌شوند</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column;">
+      <button class="btn btn-primary" onclick="showToast('پیام موفقیت', 'عملیات با موفقیت انجام شد')">
+        نمایش Toast موفقیت
+      </button>
+      <button class="btn btn-outline" onclick="showToast('پیام خطا', 'خطایی رخ داد!', 'danger')">
+        نمایش Toast خطا
+      </button>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>function showToast(title, msg, type='success') {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `&lt;div&gt;&lt;div class="toast-title"&gt;${title}&lt;/div&gt;&lt;div class="toast-msg"&gt;${msg}&lt;/div&gt;&lt;/div&gt;`;
+  document.querySelector('.toast-container').appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="modal dialog پنجره">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">مودال (Dialog)</h3>
+        <p class="component-desc">پنجره‌های گفتگو برای تایید، فرم یا نمایش اطلاعات</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('active')">
+        باز کردن مودال
+      </button>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="modal-overlay" id="modal"&gt;
+  &lt;div class="modal"&gt;
+    &lt;div class="modal-header"&gt;
+      &lt;h3 class="modal-title"&gt;عنوان&lt;/h3&gt;
+      &lt;button class="modal-close"&gt;×&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal-body"&gt;محتوا&lt;/div&gt;
+    &lt;div class="modal-footer"&gt;
+      &lt;button class="btn btn-primary"&gt;تایید&lt;/button&gt;
+      &lt;button class="btn btn-ghost"&gt;لغو&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="progress loader بارگذاری">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">نوار پیشرفت</h3>
+        <p class="component-desc">نمایش پیشرفت عملیات به صورت خطی و دایره‌ای</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; gap: 2rem; max-width: 500px; width: 100%;">
+      <div style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>دانلود فایل</span>
+          <span style="font-weight: 600; color: var(--accent);">۷۵%</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+      </div>
+      <div style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>آپلود ویدیو</span>
+          <span style="font-weight: 600; color: var(--accent);">۴۵%</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" style="width: 45%; background: var(--gradient-success);"></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 2rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <div class="circular-progress">
+          <svg width="120" height="120">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#6366f1"/>
+                <stop offset="100%" style="stop-color:#ec4899"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="60" cy="60" r="50"/>
+            <circle class="bar" cx="60" cy="60" r="50"/>
+          </svg>
+          <div class="circular-progress-label">۷۶%</div>
+        </div>
+        <div class="circular-progress">
+          <svg width="120" height="120">
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#10b981"/>
+                <stop offset="100%" style="stop-color:#06b6d4"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="60" cy="60" r="50"/>
+            <circle cx="60" cy="60" r="50" style="stroke: url(#grad2); stroke-dasharray: 314; stroke-dashoffset: 157;" fill="none" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+          <div class="circular-progress-label">۵۰%</div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="progress"&gt;
+  &lt;div class="progress-bar" style="width: 75%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="circular-progress"&gt;
+  &lt;svg&gt;&lt;circle r="50" /&gt;&lt;circle class="bar" r="50"/&gt;&lt;/svg&gt;
+  &lt;div class="label"&gt;۷۶%&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="loader spinner بارگذاری">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">اسپینرها و لودرها</h3>
+        <p class="component-desc">انیمیشن‌های بارگذاری در حالت‌های مختلف</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="loaders-grid">
+        <div class="loader-1"></div>
+        <div class="loader-2"><span></span><span></span><span></span></div>
+        <div class="loader-3"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="loader-4"></div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="loader-1"&gt;&lt;/div&gt;  /* spinner ساده */
+&lt;div class="loader-2"&gt;&lt;span&gt;&lt;/span&gt;...&lt;/div&gt; /* میله‌ها */
+&lt;div class="loader-3"&gt;&lt;span&gt;&lt;/span&gt;...&lt;/div&gt; /* گرید 3x3 */
+&lt;div class="loader-4"&gt;&lt;/div&gt;  /* spinner دوگانه */</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="skeleton اسکلت">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">Skeleton Screen</h3>
+        <p class="component-desc">نمایش ساختار محتوا قبل از بارگذاری کامل - UX بهتر</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="skeleton-card">
+        <div class="skeleton" style="height: 120px; margin-bottom: 1rem;"></div>
+        <div class="skeleton" style="height: 20px; width: 70%; margin-bottom: 0.5rem;"></div>
+        <div class="skeleton" style="height: 14px; width: 100%; margin-bottom: 0.5rem;"></div>
+        <div class="skeleton" style="height: 14px; width: 90%; margin-bottom: 1rem;"></div>
+        <div class="skeleton" style="height: 36px; width: 120px;"></div>
+      </div>
+      <div class="skeleton-card" style="display: flex; gap: 1rem; padding: 1rem;">
+        <div class="skeleton" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;"></div>
+        <div style="flex: 1;">
+          <div class="skeleton" style="height: 16px; width: 60%; margin-bottom: 0.5rem;"></div>
+          <div class="skeleton" style="height: 12px; width: 100%; margin-bottom: 0.25rem;"></div>
+          <div class="skeleton" style="height: 12px; width: 80%;"></div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>.skeleton {
+  background: #e2e8f0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: skeleton 1.5s infinite;
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  NAVIGATION  ================ -->
+<!-- ============================================ -->
+<section class="section reveal" id="navigation">
+  <div class="section-header">
+    <span class="section-tag">دسته: ناوبری</span>
+    <h2 class="section-title">ناوبری و مسیر</h2>
+    <p class="section-desc">کامپوننت‌های کمک‌کننده برای حرکت بین صفحات و بخش‌ها</p>
+  </div>
+
+  <div class="component-wrapper" data-search="breadcrumb مسیر">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">مسیرنما (Breadcrumb)</h3>
+        <p class="component-desc">نمایش مسیر کاربر در سایت</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <ul class="breadcrumb">
+        <li><a href="#">خانه</a></li>
+        <li class="breadcrumb-sep">/</li>
+        <li><a href="#">محصولات</a></li>
+        <li class="breadcrumb-sep">/</li>
+        <li><a href="#">الکترونیک</a></li>
+        <li class="breadcrumb-sep">/</li>
+        <li class="breadcrumb-current">هدفون بی‌سیم</li>
+      </ul>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;ul class="breadcrumb"&gt;
+  &lt;li&gt;&lt;a href="#"&gt;خانه&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="breadcrumb-sep"&gt;/&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;دسته&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="breadcrumb-current"&gt;صفحه فعلی&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="pagination صفحات">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">صفحه‌بندی (Pagination)</h3>
+        <p class="component-desc">ناوبری بین صفحات لیست</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="pagination">
+        <button class="page-btn">«</button>
+        <button class="page-btn">۱</button>
+        <button class="page-btn active">۲</button>
+        <button class="page-btn">۳</button>
+        <button class="page-btn">۴</button>
+        <button class="page-btn">...</button>
+        <button class="page-btn">۱۰</button>
+        <button class="page-btn">»</button>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="pagination"&gt;
+  &lt;button class="page-btn"&gt;«&lt;/button&gt;
+  &lt;button class="page-btn"&gt;۱&lt;/button&gt;
+  &lt;button class="page-btn active"&gt;۲&lt;/button&gt;
+  &lt;button class="page-btn"&gt;۳&lt;/button&gt;
+  &lt;button class="page-btn"&gt;»&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="tabs زبانه">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">تب‌ها (Tabs)</h3>
+        <p class="component-desc">سازماندهی محتوا در چند بخش قابل تعویض</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" onclick="switchTab(event, 'tab1')">نمای کلی</button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab2')">ویژگی‌ها</button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab3')">نظرات</button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab4')">سوالات</button>
+        </div>
+        <div class="tab-panel active" id="tab1">
+          <h3>نمای کلی محصول</h3>
+          <p style="color: var(--text-secondary); margin-top: 0.5rem;">این بخش نمای کلی محصول را نشان می‌دهد. می‌توانید روی تب‌های دیگر کلیک کنید.</p>
+        </div>
+        <div class="tab-panel" id="tab2">
+          <h3>ویژگی‌های کلیدی</h3>
+          <ul style="color: var(--text-secondary); margin-top: 0.5rem; padding-right: 1.5rem;">
+            <li>ویژگی شماره ۱</li>
+            <li>ویژگی شماره ۲</li>
+            <li>ویژگی شماره ۳</li>
+          </ul>
+        </div>
+        <div class="tab-panel" id="tab3">
+          <h3>نظرات کاربران</h3>
+          <p style="color: var(--text-secondary); margin-top: 0.5rem;">نظرات و امتیازات سایر کاربران در این بخش قرار می‌گیرد.</p>
+        </div>
+        <div class="tab-panel" id="tab4">
+          <h3>سوالات متداول</h3>
+          <p style="color: var(--text-secondary); margin-top: 0.5rem;">پاسخ به رایج‌ترین سوالات درباره محصول.</p>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="tabs"&gt;
+  &lt;div class="tabs-header"&gt;
+    &lt;button class="tab-btn active"&gt;تب ۱&lt;/button&gt;
+    &lt;button class="tab-btn"&gt;تب ۲&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel active"&gt;محتوای تب ۱&lt;/div&gt;
+  &lt;div class="tab-panel"&gt;محتوای تب ۲&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="accordion اکاردئون">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">اکاردئون (FAQ)</h3>
+        <p class="component-desc">نمایش سوالات و پاسخ‌ها به صورت جمع‌شونده - مناسب برای FAQ</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="accordion">
+        <div class="accordion-item open">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span>چگونه حساب کاربری بسازم؟</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              برای ساخت حساب کاربری کافیست روی دکمه "ثبت‌نام" در بالای صفحه کلیک کنید، ایمیل و رمز عبور خود را وارد کرده و کد تاییدی که به ایمیلتان ارسال می‌شود را وارد نمایید.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span>آیا امکان لغو اشتراک وجود دارد؟</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              بله، شما می‌توانید هر زمان که خواستید اشتراک خود را لغو کنید. این کار از طریق بخش "حساب کاربری" قابل انجام است.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            <span>پشتیبانی ۲۴ ساعته داریم؟</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              بله، تیم پشتیبانی ما ۲۴ ساعته و در ۷ روز هفته آماده پاسخگویی به سوالات شما است.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="accordion-item"&gt;
+  &lt;button class="accordion-header"&gt;
+    سوال؟
+    &lt;span class="accordion-icon"&gt;▼&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="accordion-content"&gt;
+    &lt;div class="accordion-body"&gt;پاسخ...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="dropdown منو">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">منوی کشویی (Dropdown)</h3>
+        <p class="component-desc">منوی بازشونده برای گزینه‌های متعدد</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="dropdown" id="demoDropdown">
+        <button class="btn btn-secondary" onclick="document.getElementById('demoDropdown').classList.toggle('open')">
+          گزینه‌ها ▼
+        </button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">👤 پروفایل</a>
+          <a href="#" class="dropdown-item">⚙ تنظیمات</a>
+          <a href="#" class="dropdown-item">📦 سفارشات من</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item" style="color: var(--danger);">🚪 خروج</a>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="dropdown"&gt;
+  &lt;button&gt;گزینه‌ها&lt;/button&gt;
+  &lt;div class="dropdown-menu"&gt;
+    &lt;a class="dropdown-item"&gt;گزینه ۱&lt;/a&gt;
+    &lt;div class="dropdown-divider"&gt;&lt;/div&gt;
+    &lt;a class="dropdown-item"&gt;گزینه ۲&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  DATA DISPLAY  ============== -->
+<!-- ============================================ -->
+<section class="section reveal" id="data">
+  <div class="section-header">
+    <span class="section-tag">دسته: نمایش داده</span>
+    <h2 class="section-title">جداول، لیست‌ها و آمار</h2>
+    <p class="section-desc">اجزای نمایش داده‌های ساختاریافته</p>
+  </div>
+
+  <div class="component-wrapper" data-search="table جدول">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">جدول داده‌ها</h3>
+        <p class="component-desc">جدول کامل با هدر، سطرها و وضعیت‌های مختلف</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>شناسه</th>
+              <th>نام</th>
+              <th>ایمیل</th>
+              <th>وضعیت</th>
+              <th>تاریخ عضویت</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#۱۰۰۱</td>
+              <td><strong>علی احمدی</strong></td>
+              <td>ali@example.com</td>
+              <td><span class="table-status success">فعال</span></td>
+              <td>۱۴۰۳/۰۵/۱۰</td>
+              <td><button class="btn btn-ghost btn-sm">ویرایش</button></td>
+            </tr>
+            <tr>
+              <td>#۱۰۰۲</td>
+              <td><strong>زهرا محمدی</strong></td>
+              <td>zahra@example.com</td>
+              <td><span class="table-status warning">در انتظار</span></td>
+              <td>۱۴۰۳/۰۶/۱۵</td>
+              <td><button class="btn btn-ghost btn-sm">ویرایش</button></td>
+            </tr>
+            <tr>
+              <td>#۱۰۰۳</td>
+              <td><strong>رضا کریمی</strong></td>
+              <td>reza@example.com</td>
+              <td><span class="table-status danger">غیرفعال</span></td>
+              <td>۱۴۰۳/۰۷/۰۲</td>
+              <td><button class="btn btn-ghost btn-sm">ویرایش</button></td>
+            </tr>
+            <tr>
+              <td>#۱۰۰۴</td>
+              <td><strong>مریم رضایی</strong></td>
+              <td>maryam@example.com</td>
+              <td><span class="table-status success">فعال</span></td>
+              <td>۱۴۰۳/۰۸/۲۰</td>
+              <td><button class="btn btn-ghost btn-sm">ویرایش</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;table class="table"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;...&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;...&lt;/td&gt;
+      &lt;td&gt;&lt;span class="table-status success"&gt;فعال&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="timeline خط زمان">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">خط زمان (Timeline)</h3>
+        <p class="component-desc">نمایش رویدادها به ترتیب زمانی</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">خرداد ۱۴۰۳</div>
+          <div class="timeline-title">راه‌اندازی نسخه ۱.۰</div>
+          <div class="timeline-desc">اولین نسخه عمومی کتابخانه منتشر شد.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">تیر ۱۴۰۳</div>
+          <div class="timeline-title">افزودن حالت تاریک</div>
+          <div class="timeline-desc">پشتیبانی کامل از حالت تاریک و روشن اضافه شد.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">مرداد ۱۴۰۳</div>
+          <div class="timeline-title">۵۰ کامپوننت</div>
+          <div class="timeline-desc">تعداد کامپوننت‌ها به ۵۰ رسید.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">شهریور ۱۴۰۳</div>
+          <div class="timeline-title">پشتیبانی کامل RTL</div>
+          <div class="timeline-desc">تمام کامپوننت‌ها برای زبان فارسی بهینه شدند.</div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="timeline"&gt;
+  &lt;div class="timeline-item"&gt;
+    &lt;div class="timeline-dot"&gt;&lt;/div&gt;
+    &lt;div class="timeline-date"&gt;تاریخ&lt;/div&gt;
+    &lt;div class="timeline-title"&gt;عنوان&lt;/div&gt;
+    &lt;div class="timeline-desc"&gt;توضیحات&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="counter شمارنده آمار">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">شمارنده‌های متحرک</h3>
+        <p class="component-desc">نمایش آمار با انیمیشن شمارش - مناسب برای صفحات لندینگ</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div class="counters-grid">
+        <div class="counter">
+          <div class="counter-value" data-count="1250">0</div>
+          <div class="counter-label">مشتریان</div>
+        </div>
+        <div class="counter">
+          <div class="counter-value" data-count="98">0</div>
+          <div class="counter-label">رضایت (٪)</div>
+        </div>
+        <div class="counter">
+          <div class="counter-value" data-count="52">0</div>
+          <div class="counter-label">کامپوننت</div>
+        </div>
+        <div class="counter">
+          <div class="counter-value" data-count="24">0</div>
+          <div class="counter-label">پشتیبانی (ساعت)</div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>function animateCounter(el) {
+  const target = +el.dataset.count;
+  const duration = 2000;
+  const start = performance.now();
+  
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    el.textContent = Math.floor(progress * target).toLocaleString('fa-IR');
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  
+  requestAnimationFrame(update);
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="avatar آواتار">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">آواتارها</h3>
+        <p class="component-desc">تصاویر کاربری در اندازه‌های مختلف</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; gap: 1.5rem;">
+      <div class="avatar-group">
+        <div class="avatar" style="background: #6366f1;">ع</div>
+        <div class="avatar" style="background: #ec4899;">ز</div>
+        <div class="avatar" style="background: #10b981;">ر</div>
+        <div class="avatar" style="background: #f59e0b;">م</div>
+        <div class="avatar" style="background: #8b5cf6;">ح</div>
+        <div class="avatar" style="background: var(--bg-tertiary); color: var(--text-primary);">+۸</div>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <div class="avatar" style="width: 32px; height: 32px; font-size: 0.75rem;">ع</div>
+        <div class="avatar">ع</div>
+        <div class="avatar avatar-lg">ع</div>
+        <div class="avatar" style="width: 80px; height: 80px; font-size: 1.5rem;">ع</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="avatar-group"&gt;
+  &lt;div class="avatar" style="background: #6366f1;"&gt;ع&lt;/div&gt;
+  &lt;div class="avatar" style="background: #ec4899;"&gt;ز&lt;/div&gt;
+  &lt;div class="avatar" style="background: var(--bg-tertiary);"&gt;+۸&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="badge tag برچسب">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">برچسب‌ها (Badges)</h3>
+        <p class="component-desc">نشان‌های کوچک برای وضعیت‌ها و دسته‌بندی‌ها</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <span class="badge badge-primary">اصلی</span>
+      <span class="badge badge-success">موفقیت</span>
+      <span class="badge badge-warning">هشدار</span>
+      <span class="badge badge-danger">خطر</span>
+      <span class="badge badge-ghost">خنثی</span>
+      <span class="badge badge-primary">● آنلاین</span>
+      <span class="badge badge-danger">● آفلاین</span>
+      <span class="badge badge-warning">⚠ مهم</span>
+      <span class="badge badge-success">✓ تایید شده</span>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;span class="badge badge-primary"&gt;اصلی&lt;/span&gt;
+&lt;span class="badge badge-success"&gt;● آنلاین&lt;/span&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="tooltip راهنما">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">تولتیپ (Tooltip)</h3>
+        <p class="component-desc">راهنماهای کوچک هنگام hover روی المان</p>
+      </div>
+    </div>
+    <div class="component-preview" style="gap: 2rem;">
+      <div class="tooltip-wrapper">
+        <button class="btn btn-primary">دکمه با تولتیپ</button>
+        <div class="tooltip">این یک راهنما است</div>
+      </div>
+      <div class="tooltip-wrapper">
+        <button class="btn btn-secondary">دکمه دوم</button>
+        <div class="tooltip">راهنمای بیشتر</div>
+      </div>
+      <div class="tooltip-wrapper">
+        <span style="font-size: 1.5rem; cursor: help;">ℹ️</span>
+        <div class="tooltip">اطلاعات تکمیلی</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="tooltip-wrapper"&gt;
+  &lt;button&gt;دکمه&lt;/button&gt;
+  &lt;div class="tooltip"&gt;متن راهنما&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="kbd keyboard کیبرد">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">میانبرهای کیبورد (KBD)</h3>
+        <p class="component-desc">نمایش کلیدها و میانبرهای صفحه‌کلید</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; gap: 1rem;">
+      <div>
+        برای جستجو: <kbd>Ctrl</kbd> + <kbd>K</kbd>
+      </div>
+      <div>
+        برای ذخیره: <kbd>Ctrl</kbd> + <kbd>S</kbd>
+      </div>
+      <div>
+        برای کپی: <kbd>Ctrl</kbd> + <kbd>C</kbd>
+      </div>
+      <div>
+        بستن مودال: <kbd>Esc</kbd>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;K&lt;/kbd&gt;
+
+kbd {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-family: monospace;
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  EFFECTS  ==================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="effects">
+  <div class="section-header">
+    <span class="section-tag">دسته: افکت‌های بصری</span>
+    <h2 class="section-title">انیمیشن‌ها و افکت‌ها</h2>
+    <p class="section-desc">انیمیشن‌های پیشرفته و افکت‌های بصری GSAP-style و scroll-driven</p>
+  </div>
+
+  <div class="component-wrapper" data-search="marquee ticker حرکتی">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">مارکی (Marquee)</h3>
+        <p class="component-desc">نوار متحرک برای لوگوها یا متن‌های تبلیغاتی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; width: 100%; padding: 0;">
+      <div class="marquee">
+        <div class="marquee-track">
+          <div class="marquee-item">React</div>
+          <div class="marquee-item">Vue.js</div>
+          <div class="marquee-item">Angular</div>
+          <div class="marquee-item">Svelte</div>
+          <div class="marquee-item">Next.js</div>
+          <div class="marquee-item">Tailwind</div>
+          <div class="marquee-item">GSAP</div>
+          <div class="marquee-item">Framer</div>
+          <div class="marquee-item">React</div>
+          <div class="marquee-item">Vue.js</div>
+          <div class="marquee-item">Angular</div>
+          <div class="marquee-item">Svelte</div>
+          <div class="marquee-item">Next.js</div>
+          <div class="marquee-item">Tailwind</div>
+          <div class="marquee-item">GSAP</div>
+          <div class="marquee-item">Framer</div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="marquee"&gt;
+  &lt;div class="marquee-track"&gt;
+    &lt;div class="marquee-item"&gt;React&lt;/div&gt;
+    &lt;div class="marquee-item"&gt;Vue.js&lt;/div&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+
+.marquee { overflow: hidden; }
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="divider جداکننده">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">جداکننده‌های فانتزی</h3>
+        <p class="component-desc">خطوط جداکننده با افکت‌های گرادیانی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; gap: 1.5rem; width: 100%; max-width: 500px;">
+      <div class="divider">ساده</div>
+      <div class="divider divider-fancy">فانتزی</div>
+      <div class="divider">● ● ●</div>
+      <div class="divider">★</div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="divider divider-fancy"&gt;متن وسط&lt;/div&gt;
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="reveal scroll animation">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">انیمیشن Reveal on Scroll</h3>
+        <p class="component-desc">نمایش تدریجی المان‌ها هنگام اسکرول - GSAP-style</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column; gap: 1rem; width: 100%;">
+      <div class="reveal visible" style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border);">
+        این کارت هنگام ورود به viewport انیمیشن می‌شود
+      </div>
+      <div class="reveal visible" style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border); transition-delay: 0.1s;">
+        انیمیشن با تاخیر ۰.۱ ثانیه
+      </div>
+      <div class="reveal visible" style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border); transition-delay: 0.2s;">
+        انیمیشن با تاخیر ۰.۲ ثانیه
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>/* CSS */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* JavaScript */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
+});</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="parallax scroll driven">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">افکت پارالاکس</h3>
+        <p class="component-desc">حرکت متفاوت لایه‌ها هنگام اسکرول - Scroll-Driven</p>
+      </div>
+    </div>
+    <div class="component-preview" style="flex-direction: column;">
+      <div style="position: relative; height: 200px; border-radius: var(--radius-md); overflow: hidden; background: var(--gradient-primary); width: 100%;">
+        <div style="position: absolute; top: 20px; right: 20px; font-size: 3rem; animation: float 3s ease-in-out infinite;">🌟</div>
+        <div style="position: absolute; top: 50%; right: 30%; font-size: 4rem; animation: float 4s ease-in-out infinite; color: white; opacity: 0.6;">☁</div>
+        <div style="position: absolute; bottom: 20px; left: 20px; font-size: 2.5rem; animation: float 3.5s ease-in-out infinite;">⛰</div>
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700;">پارالاکس لایه‌ای</div>
+      </div>
+      <p style="color: var(--text-secondary); margin-top: 1rem; text-align: center;">در پروژه‌های واقعی با scroll، هر لایه با سرعت متفاوتی حرکت می‌کند</p>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  document.querySelector('.layer-1').style.transform = `translateY(${scrollY * 0.2}px)`;
+  document.querySelector('.layer-2').style.transform = `translateY(${scrollY * 0.5}px)`;
+  document.querySelector('.layer-3').style.transform = `translateY(${scrollY * 0.8}px)`;
+});
+
+/* Scroll-Driven Animations (CSS جدید): */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.element {
+  animation: fade-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  LAYOUT  ===================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="layout">
+  <div class="section-header">
+    <span class="section-tag">دسته: چیدمان</span>
+    <h2 class="section-title">بخش‌های چیدمان</h2>
+    <p class="section-desc">بخش‌های کامل صفحه مانند Features، Testimonials و CTA</p>
+  </div>
+
+  <div class="component-wrapper" data-search="features grid ویژگی‌ها">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">بخش ویژگی‌ها</h3>
+        <p class="component-desc">نمایش ویژگی‌های محصول به صورت گرید</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%;">
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">سرعت بالا</h3>
+          <p class="feature-text">بارگذاری صفحات در کمتر از ۱ ثانیه با بهینه‌سازی پیشرفته و CDN جهانی.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <h3 class="feature-title">امنیت قوی</h3>
+          <p class="feature-text">رمزنگاری AES-256 و احراز هویت دو مرحله‌ای برای محافظت از داده‌های شما.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <h3 class="feature-title">طراحی زیبا</h3>
+          <p class="feature-text">رابط کاربری مدرن و ریسپانسیو که در تمام دستگاه‌ها به خوبی نمایش داده می‌شود.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🌍</div>
+          <h3 class="feature-title">پشتیبانی چند زبانه</h3>
+          <p class="feature-text">پشتیبانی کامل از RTL و بیش از ۵۰ زبان برای کاربران جهانی.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📱</div>
+          <h3 class="feature-title">ریسپانسیو</h3>
+          <p class="feature-text">طراحی کاملاً واکنش‌گرا برای موبایل، تبلت و دسکتاپ.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💬</div>
+          <h3 class="feature-title">پشتیبانی ۲۴/۷</h3>
+          <p class="feature-text">تیم پشتیبانی حرفه‌ای در تمام ساعات روز آماده پاسخگویی.</p>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="features-grid"&gt;
+  &lt;div class="feature"&gt;
+    &lt;div class="feature-icon"&gt;⚡&lt;/div&gt;
+    &lt;h3&gt;سرعت بالا&lt;/h3&gt;
+    &lt;p&gt;توضیحات...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="testimonials review نظر مشتریان">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">نظرات مشتریان</h3>
+        <p class="component-desc">بخش نمایش نظر و امتیاز مشتریان</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%;">
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">این بهترین ابزار برای توسعه‌دهندگان فارسی‌زبان است. کیفیت کامپوننت‌ها فوق‌العاده است!</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background: #6366f1;">م</div>
+            <div>
+              <div class="testimonial-name">محمد رضایی</div>
+              <div class="testimonial-role">مدیر فنی شرکت X</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">پشتیبانی از RTL در این کتابخانه بی‌نقص است. تمام کامپوننت‌ها به خوبی کار می‌کنند.</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background: #ec4899;">ز</div>
+            <div>
+              <div class="testimonial-name">زهرا احمدی</div>
+              <div class="testimonial-role">طراح UI/UX</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">حالت تاریک و روشن به خوبی پیاده‌سازی شده. انیمیشن‌ها نرم و زیبا هستند.</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background: #10b981;">ع</div>
+            <div>
+              <div class="testimonial-name">علی کریمی</div>
+              <div class="testimonial-role">برنامه‌نویس فرانت</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="testimonial"&gt;
+  &lt;div class="testimonial-stars"&gt;★★★★★&lt;/div&gt;
+  &lt;p class="testimonial-text"&gt;نظر مشتری&lt;/p&gt;
+  &lt;div class="testimonial-author"&gt;
+    &lt;div class="avatar"&gt;...&lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="testimonial-name"&gt;نام&lt;/div&gt;
+      &lt;div class="testimonial-role"&gt;شغل&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="newsletter subscribe خبرنامه">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">عضویت در خبرنامه</h3>
+        <p class="component-desc">فرم دریافت ایمیل برای خبرنامه</p>
+      </div>
+    </div>
+    <div class="component-preview">
+      <div style="max-width: 600px; width: 100%; background: var(--gradient-primary); border-radius: var(--radius-lg); padding: 3rem 2rem; text-align: center; color: white;">
+        <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">📬 عضو خبرنامه شوید</h2>
+        <p style="margin-bottom: 1.5rem; opacity: 0.9;">آخرین اخبار و به‌روزرسانی‌ها را دریافت کنید</p>
+        <form style="display: flex; gap: 0.5rem; max-width: 400px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
+          <input type="email" class="form-input" placeholder="email@example.com" style="flex: 1; min-width: 200px;">
+          <button type="button" class="btn btn-secondary" style="background: white; color: var(--accent);">عضویت</button>
+        </form>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="newsletter"&gt;
+  &lt;h2&gt;عضو خبرنامه شوید&lt;/h2&gt;
+  &lt;form&gt;
+    &lt;input type="email" placeholder="ایمیل شما"&gt;
+    &lt;button&gt;عضویت&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="blog posts پست وبلاگ">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">پست‌های وبلاگ</h3>
+        <p class="component-desc">کارت‌های پست وبلاگ با تصویر و خلاصه</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%;">
+      <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <article class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"></div>
+          <div class="card-body">
+            <span class="badge badge-primary" style="margin-bottom: 0.75rem;">تکنولوژی</span>
+            <h3 class="card-title">آینده طراحی وب در ۲۰۲۵</h3>
+            <p class="card-text">نگاهی به ترندهای طراحی وب در سال آینده و ابزارهای جدید.</p>
+            <div class="card-footer" style="padding: 0; border: none; background: none; margin-top: 1rem; justify-content: space-between;">
+              <small style="color: var(--text-tertiary);">۱۵ مرداد ۱۴۰۳</small>
+              <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.875rem;">ادامه مطلب ←</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #ec4899, #f59e0b);"></div>
+          <div class="card-body">
+            <span class="badge badge-warning" style="margin-bottom: 0.75rem;">طراحی</span>
+            <h3 class="card-title">راهنمای کامل Glassmorphism</h3>
+            <p class="card-text">آموزش کامل طراحی شیشه‌ای مدرن در وب و موبایل.</p>
+            <div class="card-footer" style="padding: 0; border: none; background: none; margin-top: 1rem; justify-content: space-between;">
+              <small style="color: var(--text-tertiary);">۱۰ مرداد ۱۴۰۳</small>
+              <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.875rem;">ادامه مطلب ←</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #10b981, #06b6d4);"></div>
+          <div class="card-body">
+            <span class="badge badge-success" style="margin-bottom: 0.75rem;">آموزش</span>
+            <h3 class="card-title">RTL در طراحی مدرن</h3>
+            <p class="card-text">چالش‌ها و راه‌حل‌های طراحی راست‌چین برای زبان‌های فارسی و عربی.</p>
+            <div class="card-footer" style="padding: 0; border: none; background: none; margin-top: 1rem; justify-content: space-between;">
+              <small style="color: var(--text-tertiary);">۵ مرداد ۱۴۰۳</small>
+              <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.875rem;">ادامه مطلب ←</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;article class="card"&gt;
+  &lt;div class="card-image"&gt;&lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;span class="badge"&gt;دسته&lt;/span&gt;
+    &lt;h3&gt;عنوان پست&lt;/h3&gt;
+    &lt;p&gt;خلاصه...&lt;/p&gt;
+    &lt;small&gt;تاریخ&lt;/small&gt;
+    &lt;a href="#"&gt;ادامه مطلب&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="code block syntax highlight">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">بلوک کد با Syntax Highlight</h3>
+        <p class="component-desc">نمایش کد با رنگ‌بندی سینتکس و دکمه کپی</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%;">
+      <pre class="code-block" style="width: 100%;"><button class="code-copy" onclick="copyCode(this)">کپی</button><code><span class="com">// کامپوننت دکمه در React</span>
+<span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">export function</span> <span class="fn">Button</span>({ children, variant = <span class="str">'primary'</span> }) {
+  <span class="kw">const</span> [loading, setLoading] = React.<span class="fn">useState</span>(<span class="kw">false</span>);
+
+  <span class="kw">const</span> <span class="fn">handleClick</span> = <span class="kw">async</span> () =&gt; {
+    setLoading(<span class="kw">true</span>);
+    <span class="kw">await</span> <span class="fn">someAsyncOperation</span>();
+    setLoading(<span class="kw">false</span>);
+  };
+
+  <span class="kw">return</span> (
+    &lt;<span class="fn">button</span> className={<span class="str">`btn btn-${variant}`</span>} onClick={handleClick}&gt;
+      {loading ? <span class="str">'...'</span> : children}
+    &lt;/<span class="fn">button</span>&gt;
+  );
+}</code></pre>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;pre class="code-block"&gt;&lt;code&gt;
+  &lt;span class="kw"&gt;import&lt;/span&gt; React &lt;span class="kw"&gt;from&lt;/span&gt; &lt;span class="str"&gt;'react'&lt;/span&gt;;
+  &lt;span class="fn"&gt;function&lt;/span&gt; &lt;span class="fn"&gt;hello&lt;/span&gt;() { ... }
+&lt;/code&gt;&lt;/pre&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- =============  MEDIA  ====================== -->
+<!-- ============================================ -->
+<section class="section reveal" id="media">
+  <div class="section-header">
+    <span class="section-tag">دسته: چندرسانه‌ای</span>
+    <h2 class="section-title">ویدیو، تصویر و صدا</h2>
+    <p class="section-desc">کامپوننت‌های چندرسانه‌ای برای نمایش محتوا</p>
+  </div>
+
+  <div class="component-wrapper" data-search="video embed ویدیو">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">پخش ویدیو Responsive</h3>
+        <p class="component-desc">Embed ویدیو با نسبت تصویر ۱۶:۹ و ریسپانسیو</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%; max-width: 700px;">
+      <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: var(--radius-lg); overflow: hidden;">
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; background: linear-gradient(135deg, #000, #1f2937);">
+          ▶
+        </div>
+        <div style="position: absolute; bottom: 1rem; right: 1rem; left: 1rem; display: flex; gap: 0.5rem; align-items: center;">
+          <button class="btn btn-primary btn-sm">▶ پخش</button>
+          <div class="progress" style="flex: 1; height: 4px;">
+            <div class="progress-bar" style="width: 30%;"></div>
+          </div>
+          <small style="color: white;">۲:۳۴ / ۸:۱۲</small>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div style="position: relative; width: 100%; padding-bottom: 56.25%;"&gt;
+  &lt;iframe 
+    style="position: absolute; inset: 0; width: 100%; height: 100%;"
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    frameborder="0" 
+    allowfullscreen&gt;
+  &lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="audio player پخش صدا">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">پخش‌کننده صدا</h3>
+        <p class="component-desc">پلیر سفارشی برای پادکست و موزیک</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%; max-width: 500px;">
+      <div class="card" style="width: 100%; padding: 1.5rem;">
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+          <div style="width: 80px; height: 80px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; flex-shrink: 0;">🎵</div>
+          <div>
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.25rem;">اپیزود ۴۲: طراحی مدرن</h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">پادکست طراحی وب</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <button class="btn btn-primary btn-icon">▶</button>
+          <div class="progress" style="flex: 1;">
+            <div class="progress-bar" style="width: 45%;"></div>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-secondary);">۱۵:۳۰ / ۳۴:۲۱</span>
+        </div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  مرورگر شما از تگ audio پشتیبانی نمی‌کند.
+&lt;/audio&gt;</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="image gallery گالری تصویر">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">گالری تصاویر</h3>
+        <p class="component-desc">نمایش تصاویر در گرید با افکت hover</p>
+      </div>
+    </div>
+    <div class="component-preview" style="width: 100%;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.5rem; width: 100%;">
+        <div style="aspect-ratio: 1; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🌅</div>
+        <div style="aspect-ratio: 1; background: var(--gradient-warm); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🏔</div>
+        <div style="aspect-ratio: 1; background: var(--gradient-success); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🌊</div>
+        <div style="aspect-ratio: 1; background: linear-gradient(135deg, #8b5cf6, #ec4899); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🌸</div>
+        <div style="aspect-ratio: 1; background: linear-gradient(135deg, #06b6d4, #3b82f6); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">⭐</div>
+        <div style="aspect-ratio: 1; background: linear-gradient(135deg, #f59e0b, #ef4444); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🔥</div>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;div class="gallery"&gt;
+  &lt;img src="img1.jpg" class="gallery-item" /&gt;
+  &lt;img src="img2.jpg" class="gallery-item" /&gt;
+&lt;/div&gt;
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.gallery-item:hover { transform: scale(1.05); }</code></pre>
+  </div>
+
+  <div class="component-wrapper" data-search="charts نمودار">
+    <div class="component-header">
+      <div>
+        <h3 class="component-title">نمودارهای ساده (SVG)</h3>
+        <p class="component-desc">نمودارهای میله‌ای و دایره‌ای با SVG خالص</p>
+      </div>
+    </div>
+    <div class="component-preview" style="gap: 2rem;">
+      <div>
+        <div style="font-weight: 600; margin-bottom: 1rem; text-align: center;">نمودار میله‌ای</div>
+        <svg width="240" height="160" viewBox="0 0 240 160" style="background: var(--bg-card); border-radius: var(--radius-md); padding: 10px;">
+          <rect x="20" y="100" width="30" height="50" fill="#6366f1" rx="4"/>
+          <rect x="60" y="70" width="30" height="80" fill="#8b5cf6" rx="4"/>
+          <rect x="100" y="40" width="30" height="110" fill="#ec4899" rx="4"/>
+          <rect x="140" y="80" width="30" height="70" fill="#f59e0b" rx="4"/>
+          <rect x="180" y="60" width="30" height="90" fill="#10b981" rx="4"/>
+          <line x1="10" y1="150" x2="230" y2="150" stroke="#94a3b8" stroke-width="1"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-weight: 600; margin-bottom: 1rem; text-align: center;">نمودار دایره‌ای</div>
+        <svg width="160" height="160" viewBox="0 0 160 160" style="background: var(--bg-card); border-radius: var(--radius-md); padding: 10px;">
+          <circle cx="80" cy="80" r="50" fill="none" stroke="#e2e8f0" stroke-width="20"/>
+          <circle cx="80" cy="80" r="50" fill="none" stroke="#6366f1" stroke-width="20" stroke-dasharray="125 314" transform="rotate(-90 80 80)"/>
+          <circle cx="80" cy="80" r="50" fill="none" stroke="#ec4899" stroke-width="20" stroke-dasharray="94 314" stroke-dashoffset="-125" transform="rotate(-90 80 80)"/>
+          <circle cx="80" cy="80" r="50" fill="none" stroke="#10b981" stroke-width="20" stroke-dasharray="94 314" stroke-dashoffset="-219" transform="rotate(-90 80 80)"/>
+          <text x="80" y="85" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">۱۰۰%</text>
+        </svg>
+      </div>
+    </div>
+    <pre class="component-code"><button class="code-copy" onclick="copyCode(this)">کپی</button><code>&lt;svg&gt;
+  &lt;rect x="20" y="100" width="30" height="50" fill="#6366f1" rx="4"/&gt;
+  &lt;rect x="60" y="70" width="30" height="80" fill="#8b5cf6" rx="4"/&gt;
+  ...
+&lt;/svg&gt;
+
+&lt;svg&gt;
+  &lt;circle cx="80" cy="80" r="50" fill="none" stroke="#e2e8f0" stroke-width="20"/&gt;
+  &lt;circle cx="80" cy="80" r="50" fill="none" stroke="#6366f1" 
+    stroke-width="20" stroke-dasharray="125 314" transform="rotate(-90 80 80)"/&gt;
+&lt;/svg&gt;</code></pre>
+  </div>
+</section>
+
+<!-- FINAL DEMO -->
+<section class="section reveal">
+  <div style="background: var(--gradient-primary); border-radius: var(--radius-xl); padding: 4rem 2rem; text-align: center; color: white;">
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2.5rem); margin-bottom: 1rem; font-weight: 800;">🚀 آماده ساخت پروژه بعدی خود هستید؟</h2>
+    <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.95;">با این کتابخانه، توسعه پروژه‌های فارسی‌زبان دیگر وقت‌گیر نخواهد بود. تمام کامپوننت‌های مورد نیاز شما در یک فایل در دسترس است.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <button class="btn btn-secondary" style="background: white; color: var(--accent);">دانلود فایل</button>
+      <button class="btn btn-ghost" style="color: white; border-color: white;">مشاهده سورس</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">
+        <span class="logo-icon">پ</span>
+        <span>پرشین UI</span>
+      </a>
+      <p>بزرگ‌ترین مجموعه کامپوننت‌های وب برای توسعه‌دهندگان فارسی‌زبان. ساخته شده با ❤ در ایران</p>
+    </div>
+    <div>
+      <h4 class="footer-title">کتابخانه</h4>
+      <ul class="footer-links">
+        <li><a href="#typography">تایپوگرافی</a></li>
+        <li><a href="#buttons">دکمه‌ها</a></li>
+        <li><a href="#cards">کارت‌ها</a></li>
+        <li><a href="#forms">فرم‌ها</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">منابع</h4>
+      <ul class="footer-links">
+        <li><a href="https://gsap.com" target="_blank">GSAP</a></li>
+        <li><a href="https://ui.shadcn.com" target="_blank">Shadcn UI</a></li>
+        <li><a href="https://readymadeui.com" target="_blank">ReadyMadeUI</a></li>
+        <li><a href="https://motion.dev" target="_blank">Motion</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">ارتباط</h4>
+      <ul class="footer-links">
+        <li><a href="#">گیت‌هاب</a></li>
+        <li><a href="#">توییتر</a></li>
+        <li><a href="#">لینکدین</a></li>
+        <li><a href="#">ایمیل</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © ۱۴۰۳ پرشین UI — تمام حقوق محفوظ است | ساخته شده با عشق برای جامعه فارسی‌زبان
+  </div>
+</footer>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- DEMO MODAL -->
+<div class="modal-overlay" id="demoModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">تایید عملیات</h3>
+      <button class="modal-close" onclick="document.getElementById('demoModal').classList.remove('active')">×</button>
+    </div>
+    <div class="modal-body">
+      <p>آیا از انجام این عملیات اطمینان دارید؟ این اقدام قابل بازگشت نیست.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.remove('active'); showToast('تایید شد', 'عملیات با موفقیت انجام شد');">تایید</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('demoModal').classList.remove('active')">لغو</button>
+    </div>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+<script>
+// ========== THEME TOGGLE ==========
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const html = document.documentElement;
+
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', theme);
+}
+
+themeToggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+setTheme(savedTheme);
+
+// ========== SCROLL PROGRESS ==========
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  scrollProgress.style.transform = `scaleX(${scrolled / 100})`;
+  
+  // Back to top visibility
+  const backToTop = document.getElementById('backToTop');
+  if (window.scrollY > 500) backToTop.classList.add('show');
+  else backToTop.classList.remove('show');
+});
+
+// ========== MOBILE MENU ==========
+const mobileMenu = document.getElementById('mobileMenu');
+document.getElementById('menuToggle').addEventListener('click', () => mobileMenu.classList.add('open'));
+function toggleMobileMenu() { mobileMenu.classList.toggle('open'); }
+
+// ========== ACCORDION ==========
+function toggleAccordion(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // Close all in same accordion
+  item.parentElement.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ========== TABS ==========
+function switchTab(e, id) {
+  const tabs = e.target.closest('.tabs');
+  tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  tabs.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// ========== COPY CODE ==========
+function copyCode(btn) {
+  const code = btn.nextElementSibling.textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ کپی شد!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+// ========== TOAST ==========
+function showToast(title, msg, type='success') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  const color = type === 'danger' ? 'var(--danger)' : 'var(--accent)';
+  toast.style.borderRightColor = color;
+  toast.innerHTML = `
+    <div style="font-size: 1.5rem;">${type === 'danger' ? '⚠' : '✓'}</div>
+    <div>
+      <div class="toast-title">${title}</div>
+      <div class="toast-msg">${msg}</div>
+    </div>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ========== COUNTER ANIMATION ==========
+function animateCounter(el) {
+  const target = +el.dataset.count;
+  const duration = 2000;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target).toLocaleString('fa-IR');
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target.toLocaleString('fa-IR');
+  }
+  requestAnimationFrame(update);
+}
+
+// ========== REVEAL ON SCROLL ==========
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate counters
+      entry.target.querySelectorAll('[data-count]').forEach(el => {
+        if (!el.dataset.animated) {
+          animateCounter(el);
+          el.dataset.animated = 'true';
+        }
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, .section').forEach(el => revealObserver.observe(el));
+
+// Animate hero counters on load
+setTimeout(() => {
+  document.querySelectorAll('.hero-stat-value').forEach(animateCounter);
+}, 300);
+
+// ========== SEARCH ==========
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.component-wrapper').forEach(wrapper => {
+    const text = wrapper.dataset.search + ' ' + wrapper.textContent;
+    wrapper.style.display = !q || text.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+
+// ========== 3D TILT CARD ==========
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--x', x + '%');
+    card.style.setProperty('--y', y + '%');
+    const rotateX = (y - 50) / 5;
+    const rotateY = (50 - x) / 5;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// Close dropdowns on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dropdown')) {
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Ctrl/Cmd + K for search
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  // Escape to close modal
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+    mobileMenu.classList.remove('open');
+  }
+});
+
+console.log('🎨 پرشین UI - کتابخانه کامپوننت‌های وب فارسی');
+console.log('📚 ۵۲ کامپوننت، ۷ فونت، RTL، Dark Mode، Responsive');
+console.log('⌨️ میانبرها: Ctrl+K (جستجو)، Esc (بستن مودال)');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>انیمیشن و موشن — کیت UI فارسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg: #0d0f17; --bg2: #151821; --bg3: #1c1f2e;
+  --card: #1a1d2b; --text: #e8eaf0; --text2: #9ea0b0; --text3: #5f6278;
+  --border: #252839;
+  --accent: #6c5ce7; --accent2: #fd79a8; --accent3: #00cec9;
+  --success: #00b894; --danger: #e17055; --warning: #fdcb6e; --info: #0984e3;
+  --font: 'Vazirmatn', sans-serif;
+  --radius: 12px; --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  line-height: 1.8; overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; }
+::selection { background: var(--accent); color: white; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.sticky-header {
+  position: sticky; top:0; z-index:1000;
+  background: rgba(13,15,23,0.92); backdrop-filter: blur(20px);
+  border-bottom:1px solid var(--border); padding:0 24px;
+}
+.header-inner {
+  max-width:1200px; margin:0 auto; height:64px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { font-weight:800; color:var(--accent); display:flex; align-items:center; gap:8px; }
+.nav-links { display:flex; gap:4px; overflow-x:auto; }
+.nav-links a {
+  padding:6px 14px; border-radius:20px; font-size:0.78rem; font-weight:500;
+  color:var(--text2); white-space:nowrap; transition:var(--transition); border:1px solid transparent;
+}
+.nav-links a:hover, .nav-links a.active { background:rgba(108,92,231,0.15); color:var(--accent); border-color:var(--accent); }
+
+.section { padding:80px 0; border-bottom:1px solid var(--border); }
+.section-title { text-align:center; margin-bottom:48px; }
+.section-title .tag {
+  display:inline-block; background:rgba(108,92,231,0.15); color:var(--accent);
+  padding:4px 16px; border-radius:20px; font-size:0.75rem; font-weight:600; margin-bottom:12px;
+}
+.section-title h2 { font-size:2rem; font-weight:800; margin-bottom:8px; }
+.section-title p { color:var(--text2); font-size:0.9rem; max-width:500px; margin:0 auto; }
+
+/* ================== ANIMATION BOXES ================== */
+.anim-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:32px;
+}
+.anim-box {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:32px 24px;
+  text-align:center;
+}
+.anim-box .anim-visual {
+  width:100px; height:100px; margin:0 auto 20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius:var(--radius); display:flex; align-items:center; justify-content:center;
+  color:white; font-size:2rem; cursor:pointer;
+}
+.anim-box .anim-visual.circle { border-radius:50%; }
+.anim-box h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+.anim-box p { font-size:0.82rem; color:var(--text2); margin-bottom:16px; }
+
+/* ================== KEYFRAMES ================== */
+@keyframes bounce {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-30px); }
+}
+@keyframes pulse {
+  0% { box-shadow:0 0 0 0 rgba(108,92,231,0.5); }
+  100% { box-shadow:0 0 0 30px rgba(108,92,231,0); }
+}
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  20%,60% { transform:translateX(-8px); }
+  40%,80% { transform:translateX(8px); }
+}
+@keyframes flip {
+  0% { transform:perspective(400px) rotateY(0); }
+  100% { transform:perspective(400px) rotateY(180deg); }
+}
+@keyframes spin3d {
+  0% { transform:rotate(0deg) scale(1); }
+  50% { transform:rotate(180deg) scale(1.2); }
+  100% { transform:rotate(360deg) scale(1); }
+}
+@keyframes swing {
+  0%,100% { transform:rotate(0deg); }
+  25% { transform:rotate(15deg); }
+  75% { transform:rotate(-15deg); }
+}
+@keyframes jello {
+  0%,100% { transform:scale(1,1); }
+  25% { transform:scale(0.9,1.1); }
+  50% { transform:scale(1.1,0.9); }
+  75% { transform:scale(0.95,1.05); }
+}
+@keyframes fadeSlideUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes morph {
+  0% { border-radius:var(--radius); }
+  50% { border-radius:50%; }
+  100% { border-radius:var(--radius); }
+}
+@keyframes glow {
+  0%,100% { box-shadow:0 0 5px var(--accent); }
+  50% { box-shadow:0 0 30px var(--accent), 0 0 60px var(--accent2); }
+}
+@keyframes marquee {
+  0% { transform:translateX(100%); }
+  100% { transform:translateX(-100%); }
+}
+@keyframes spinner {
+  to { transform:rotate(360deg); }
+}
+@keyframes wiggle {
+  0%,100% { transform:rotate(0deg); }
+  20% { transform:rotate(10deg); }
+  40% { transform:rotate(-10deg); }
+  60% { transform:rotate(5deg); }
+  80% { transform:rotate(-5deg); }
+}
+@keyframes float-up {
+  0% { transform:translateY(0) scale(1); opacity:1; }
+  100% { transform:translateY(-100px) scale(0.5); opacity:0; }
+}
+@keyframes morph-blob {
+  0% { border-radius:60% 40% 30% 70%/60% 30% 70% 40%; }
+  50% { border-radius:30% 60% 70% 40%/50% 60% 30% 60%; }
+  100% { border-radius:60% 40% 30% 70%/60% 30% 70% 40%; }
+}
+@keyframes gradient-shift {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+
+/* ================== HOVER PRESETS ================== */
+.hover-lift { transition:var(--transition); }
+.hover-lift:hover { transform:translateY(-8px); box-shadow:0 16px 40px rgba(0,0,0,0.3); }
+.hover-scale { transition:var(--transition); }
+.hover-scale:hover { transform:scale(1.12); }
+.hover-rotate { transition:var(--transition); }
+.hover-rotate:hover { transform:rotate(10deg); }
+.hover-skew { transition:var(--transition); }
+.hover-skew:hover { transform:skew(-5deg); }
+.hover-glow { transition:var(--transition); }
+.hover-glow:hover { box-shadow:0 0 30px var(--accent), 0 0 60px rgba(108,92,231,0.2); }
+.hover-border { transition:var(--transition); position:relative; overflow:hidden; }
+.hover-border::after {
+  content:''; position:absolute; inset:0;
+  border:2px solid var(--accent); border-radius:inherit;
+  opacity:0; transition:var(--transition);
+}
+.hover-border:hover::after { opacity:1; }
+.hover-shine { transition:var(--transition); overflow:hidden; position:relative; }
+.hover-shine::before {
+  content:''; position:absolute; top:0; left:-75%; width:50%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition:left 0.5s ease;
+}
+.hover-shine:hover::before { left:125%; }
+
+/* ================== TRANSITION PRESETS ================== */
+.trans-demo {
+  display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
+}
+.trans-item {
+  width:100px; height:100px; border-radius:var(--radius);
+  background:linear-gradient(135deg, var(--accent), var(--accent2));
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-size:0.75rem; font-weight:600; cursor:pointer;
+}
+.trans-item.t1 { transition:transform 0.3s ease; }
+.trans-item.t1:hover { transform:translateY(-10px); }
+.trans-item.t2 { transition:transform 0.5s cubic-bezier(0.68,-0.55,0.27,1.55); }
+.trans-item.t2:hover { transform:rotate(360deg); }
+.trans-item.t3 { transition:all 0.4s ease; }
+.trans-item.t3:hover { border-radius:50%; transform:scale(1.1); background:linear-gradient(135deg, var(--success), var(--accent3)); }
+.trans-item.t4 { transition:all 0.3s ease; }
+.trans-item.t4:hover { transform:perspective(400px) rotateY(20deg); box-shadow:-10px 0 20px rgba(0,0,0,0.3); }
+
+/* ================== TEXT ANIMATIONS ================== */
+.text-anim {
+  text-align:center; padding:40px 24px;
+}
+.text-anim .typewriter {
+  display:inline-block; overflow:hidden; white-space:nowrap;
+  border-left:3px solid var(--accent); font-size:1.8rem; font-weight:800;
+  animation: typing 3s steps(20) infinite alternate, blink 0.8s step-end infinite;
+}
+@keyframes typing {
+  0% { width:0; }
+  50% { width:100%; }
+  100% { width:100%; }
+}
+@keyframes blink {
+  50% { border-color:transparent; }
+}
+
+.text-anim .wave-text span {
+  display:inline-block; font-size:2rem; font-weight:800;
+  animation: wave 1.5s ease infinite;
+}
+.text-anim .wave-text span:nth-child(2) { animation-delay:0.1s; }
+.text-anim .wave-text span:nth-child(3) { animation-delay:0.2s; }
+.text-anim .wave-text span:nth-child(4) { animation-delay:0.3s; }
+.text-anim .wave-text span:nth-child(5) { animation-delay:0.4s; }
+.text-anim .wave-text span:nth-child(6) { animation-delay:0.5s; }
+.text-anim .wave-text span:nth-child(7) { animation-delay:0.6s; }
+.text-anim .wave-text span:nth-child(8) { animation-delay:0.7s; }
+.text-anim .wave-text span:nth-child(9) { animation-delay:0.8s; }
+@keyframes wave {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-20px); }
+}
+
+/* ================== LOADER DEMOS ================== */
+.loaders {
+  display:flex; gap:32px; flex-wrap:wrap; justify-content:center; align-items:center;
+}
+.loader {
+  width:48px; height:48px; border:4px solid var(--bg3);
+  border-top:4px solid var(--accent); border-radius:50%;
+  animation:spinner 0.8s linear infinite;
+}
+.loader.ring { width:48px; height:48px; border:4px solid transparent; border-top:4px solid var(--accent);
+  border-right:4px solid var(--accent2); border-radius:50%;
+  animation:spinner 0.6s linear infinite;
+}
+.loader.dual {
+  width:48px; height:48px; border-radius:50%; position:relative;
+  animation:spinner 1s linear infinite;
+}
+.loader.dual::before, .loader.dual::after {
+  content:''; position:absolute; border-radius:50%;
+}
+.loader.heart { width:48px; height:48px; position:relative; }
+.loader.heart::before, .loader.heart::after {
+  content:''; position:absolute; left:24px; top:0; width:24px; height:36px;
+  background:var(--danger); border-radius:24px 24px 0 0;
+  transform-origin:50% 100%;
+  animation:heartBeat 1s ease-in-out infinite;
+}
+.loader.heart::before { left:24px; transform:rotate(-45deg); }
+.loader.heart::after { left:0; transform:rotate(45deg); }
+@keyframes heartBeat {
+  0%,100% { transform:scale(1) rotate(-45deg); }
+  50% { transform:scale(1.2) rotate(-45deg); }
+}
+.loader.dots { display:flex; gap:6px; }
+.loader.dots span {
+  width:12px; height:12px; border-radius:50%;
+  background:var(--accent); animation:dots 1s ease infinite;
+}
+.loader.dots span:nth-child(2) { animation-delay:0.2s; }
+.loader.dots span:nth-child(3) { animation-delay:0.4s; }
+@keyframes dots {
+  0%,100% { transform:scale(0.5); opacity:0.5; }
+  50% { transform:scale(1); opacity:1; }
+}
+
+/* ================== PARTICLE / CONFETTI ================== */
+.particle-demo {
+  height:200px; position:relative; overflow:hidden;
+  background:var(--bg2); border-radius:var(--radius-lg);
+  display:flex; align-items:center; justify-content:center;
+}
+.particle-demo .particle-btn {
+  z-index:2; position:relative;
+}
+.particle {
+  position:absolute; width:8px; height:8px; border-radius:50%;
+  pointer-events:none;
+  animation: float-up 1.5s ease forwards;
+}
+
+/* ================== COUNTDOWN ================== */
+.countdown {
+  display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
+}
+.countdown-item {
+  text-align:center; background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:20px 24px; min-width:80px;
+}
+.countdown-item .num { font-size:2rem; font-weight:900; color:var(--accent); }
+.countdown-item .label { font-size:0.72rem; color:var(--text3); text-transform:uppercase; }
+
+/* ================== MORPHING BLOB ================== */
+.blob {
+  width:200px; height:200px; margin:0 auto;
+  background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+  animation: morph-blob 8s ease-in-out infinite;
+  background-size:200% 200%;
+  animation: morph-blob 8s ease-in-out infinite, gradient-shift 4s ease infinite;
+}
+
+/* ================== SAWTOOTH / RIPPLE ================== */
+.ripple-btn {
+  position:relative; overflow:hidden;
+}
+.ripple-btn .ripple-effect {
+  position:absolute; border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  transform:scale(0);
+  animation:ripple 0.6s ease-out;
+  pointer-events:none;
+}
+@keyframes ripple {
+  to { transform:scale(4); opacity:0; }
+}
+
+/* ================== RESPONSIVE ================== */
+@media(max-width:768px) {
+  .anim-grid { grid-template-columns:1fr; }
+  .text-anim .typewriter { font-size:1.2rem; }
+  .blob { width:140px; height:140px; }
+}
+</style>
+</head>
+<body>
+
+<header class="sticky-header">
+  <div class="header-inner">
+    <div class="logo"><i class="fas fa-magic"></i> انیمیشن و موشن</div>
+    <nav class="nav-links">
+      <a href="#keyframes" class="active">کی‌فریم</a>
+      <a href="#hovers">هاور افکت</a>
+      <a href="#transitions">ترنزیشن</a>
+      <a href="#loaders">لودر</a>
+      <a href="#text">متن متحرک</a>
+      <a href="#blob">بلاب</a>
+      <a href="#countdown">کاونت‌دان</a>
+      <a href="#particles">پارتیکل</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== KEYFRAMES ===== -->
+<section class="section" id="keyframes">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">انیمیشن‌های کی‌فریم</span>
+      <h2>انیمیشن‌های CSS</h2>
+      <p>مجموعه‌ای از پرکاربردترین keyframe animations</p>
+    </div>
+    <div class="anim-grid">
+      <div class="anim-box" data-anim="bounce">
+        <div class="anim-visual" style="animation:bounce 1.5s ease infinite;">⚡</div>
+        <h4>Bounce (جهش)</h4>
+        <p>جهش عمودی پیوسته — مناسب برای دکمه‌ها و نشانگرها</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: bounce 1.5s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="pulse">
+        <div class="anim-visual circle" style="animation:pulse 1.5s ease infinite;">💜</div>
+        <h4>Pulse (نبض)</h4>
+        <p>حالت ضربان‌دار — مناسب برای نشان دادن وضعیت فعال</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: pulse 1.5s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="shake">
+        <div class="anim-visual" style="animation:shake 0.5s ease infinite;">📱</div>
+        <h4>Shake (لرزش)</h4>
+        <p>لرزش افقی — مناسب برای هشدارها و خطاها</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: shake 0.5s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="swing">
+        <div class="anim-visual" style="animation:swing 1.5s ease infinite;transform-origin:top center;">🎵</div>
+        <h4>Swing (نوسان)</h4>
+        <p>نوسان آونگ‌وار — مناسب برای آیکون‌های اعلان</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: swing 1.5s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="jello">
+        <div class="anim-visual" style="animation:jello 1.2s ease infinite;">🎯</div>
+        <h4>Jello (ژله)</h4>
+        <p>تغییر شکل ژله‌ای — افکت جذاب و چشمگیر</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: jello 1.2s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="glow">
+        <div class="anim-visual" style="animation:glow 2s ease infinite;background:var(--accent);">✨</div>
+        <h4>Glow (درخشش)</h4>
+        <p>نورپردازی متغیر — مناسب برای دکمه‌های ویژه</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: glow 2s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="spin3d">
+        <div class="anim-visual" style="animation:spin3d 2s ease infinite;">🔄</div>
+        <h4>۳D Spin</h4>
+        <p>چرخش سه‌بعدی با تغییر اندازه</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: spin3d 2s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="wiggle">
+        <div class="anim-visual" style="animation:wiggle 1s ease infinite;">🐶</div>
+        <h4>Wiggle (تکان)</h4>
+        <p>تکان سریع و بامزه — افکت سرزنده و شاد</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: wiggle 1s ease infinite;</code>
+      </div>
+      <div class="anim-box" data-anim="morph">
+        <div class="anim-visual" style="animation:morph 3s ease infinite;">🌀</div>
+        <h4>Morph (دگردیسی)</h4>
+        <p>تغییر شکل از مربع به دایره و برگشت</p>
+        <code style="font-size:0.7rem;color:var(--text3);">animation: morph 3s ease infinite;</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOVER EFFECTS ===== -->
+<section class="section" id="hovers">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">افکت‌های هاور</span>
+      <h2>جلوه‌های هاور و حرکت موس</h2>
+      <p>انواع افکت‌های بصری هنگام بردن موس روی المان‌ها</p>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">
+      <div class="hover-lift anim-visual" style="width:120px;height:120px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;cursor:pointer;">
+        <i class="fas fa-arrow-up"></i>
+      </div>
+      <div class="hover-scale anim-visual" style="width:120px;height:120px;background:linear-gradient(135deg,var(--success),var(--accent3));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;cursor:pointer;">
+        <i class="fas fa-expand"></i>
+      </div>
+      <div class="hover-rotate anim-visual" style="width:120px;height:120px;background:linear-gradient(135deg,var(--info),var(--accent));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;cursor:pointer;">
+        <i class="fas fa-redo"></i>
+      </div>
+      <div class="hover-skew anim-visual" style="width:120px;height:120px;background:linear-gradient(135deg,var(--danger),var(--warning));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;cursor:pointer;">
+        <i class="fas fa-sliders-h"></i>
+      </div>
+      <div class="hover-glow anim-visual" style="width:120px;height:120px;background:var(--accent);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;cursor:pointer;">
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="hover-border anim-visual" style="width:120px;height:120px;background:var(--card);border:2px solid var(--border);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--text);font-size:2rem;cursor:pointer;">
+        <i class="fas fa-square"></i>
+      </div>
+      <div class="hover-shine anim-visual" style="width:120px;height:120px;background:linear-gradient(135deg,var(--accent2),var(--danger));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;cursor:pointer;">
+        <i class="fas fa-bolt"></i>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;font-size:0.85rem;color:var(--text2);">
+      <p><i class="fas fa-arrow-up"></i> lift — <i class="fas fa-expand"></i> scale — <i class="fas fa-redo"></i> rotate — <i class="fas fa-sliders-h"></i> skew — <i class="fas fa-star"></i> glow — <i class="fas fa-square"></i> border — <i class="fas fa-bolt"></i> shine</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRANSITIONS ===== -->
+<section class="section" id="transitions">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">ترنزیشن</span>
+      <h2>ترنزیشن‌های حرفه‌ای</h2>
+      <p>تغییرات نرم با easing functions مختلف</p>
+    </div>
+    <div class="trans-demo">
+      <div class="trans-item t1">ease</div>
+      <div class="trans-item t2">bounce</div>
+      <div class="trans-item t3">morph</div>
+      <div class="trans-item t4">3D</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOADERS ===== -->
+<section class="section" id="loaders">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">لودر و اسپینر</span>
+      <h2>لودرهای متنوع</h2>
+      <p>انواع نشانگرهای بارگذاری برای هر سلیقه</p>
+    </div>
+    <div class="loaders">
+      <div style="text-align:center;"><div class="loader"></div><p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Spinner</p></div>
+      <div style="text-align:center;"><div class="loader ring"></div><p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Ring</p></div>
+      <div style="text-align:center;"><div class="loader dual"></div><p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Dual</p></div>
+      <div style="text-align:center;"><div class="loader heart"></div><p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Heart</p></div>
+      <div style="text-align:center;"><div class="loader dots"><span></span><span></span><span></span></div><p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Dots</p></div>
+      <div style="text-align:center;">
+        <div style="width:40px;height:40px;border:3px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spinner 0.8s linear infinite;"></div>
+        <p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Minimal</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:40px;height:4px;background:var(--bg3);border-radius:4px;overflow:hidden;">
+          <div style="width:40%;height:100%;background:var(--accent);border-radius:4px;animation:spinner 1s ease-in-out infinite;"></div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text3);margin-top:8px;">Line</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEXT ANIMATIONS ===== -->
+<section class="section" id="text">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">متن متحرک</span>
+      <h2>انیمیشن‌های متنی</h2>
+      <p>جلوه‌های زیبا برای نمایش متون</p>
+    </div>
+    <div class="text-anim">
+      <div style="margin-bottom:48px;">
+        <h3 style="font-size:0.9rem;color:var(--text3);margin-bottom:16px;">تایپ‌رایتر (Typewriter)</h3>
+        <div class="typewriter">کیت جامع UI فارسی 🇮🇷</div>
+      </div>
+      <div style="margin-bottom:48px;">
+        <h3 style="font-size:0.9rem;color:var(--text3);margin-bottom:16px;">متن موجی (Wave)</h3>
+        <div class="wave-text">
+          <span>ک</span><span>ی</span><span>ت</span><span> </span><span>U</span><span>I</span><span> </span><span>ف</span><span>ا</span><span>ر</span><span>س</span><span>ی</span>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;">
+        <h3 style="font-size:0.9rem;color:var(--text3);margin-bottom:16px;">متن گرادینت متحرک</h3>
+        <span style="font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent));background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient-shift 3s ease infinite;">
+          کیت UI فارسی
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOB ===== -->
+<section class="section" id="blob">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">اشکال نرم</span>
+      <h2>بلاب (Blob Morphing)</h2>
+      <p>اشکال نرم و ارگانیک با تغییر شکل مداوم</p>
+    </div>
+    <div class="blob"></div>
+  </div>
+</section>
+
+<!-- ===== COUNTDOWN ===== -->
+<section class="section" id="countdown">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">شمارش معکوس</span>
+      <h2>کاونت‌دان</h2>
+      <p>شمارشگر معکوس برای رویدادها و فروش ویژه</p>
+    </div>
+    <div class="countdown">
+      <div class="countdown-item"><div class="num" id="cd-days">۰۷</div><div class="label">روز</div></div>
+      <div class="countdown-item"><div class="num" id="cd-hours">۱۴</div><div class="label">ساعت</div></div>
+      <div class="countdown-item"><div class="num" id="cd-mins">۳۲</div><div class="label">دقیقه</div></div>
+      <div class="countdown-item"><div class="num" id="cd-secs">۱۸</div><div class="label">ثانیه</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTICLES ===== -->
+<section class="section" id="particles">
+  <div class="container">
+    <div class="section-title">
+      <span class="tag">پارتیکل</span>
+      <h2>افکت پارتیکل و کانفتی</h2>
+      <p>با کلیک دکمه، پارتیکل‌های رنگی منتشر می‌شوند</p>
+    </div>
+    <div class="particle-demo" id="particleContainer">
+      <button class="btn" style="background:var(--accent);color:white;border:none;padding:14px 36px;border-radius:var(--radius);font-family:var(--font);font-weight:600;font-size:1rem;cursor:pointer;" onclick="createParticles(event)">
+        <i class="fas fa-hand-pointer"></i> کلیک کنید 🎉
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<section class="section" style="padding:40px 0;border:none;">
+  <div style="overflow:hidden;background:var(--bg2);padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div style="white-space:nowrap;overflow:hidden;">
+      <span style="display:inline-block;animation:marquee 20s linear infinite;font-size:1.1rem;font-weight:600;color:var(--accent);">
+        <i class="fas fa-star"></i> کیت UI فارسی — مجموعه کامل کامپوننت‌های ایرانی <i class="fas fa-star"></i> کاملاً واکنش‌گرا و RTL <i class="fas fa-star"></i> پشتیبانی از تم تاریک و روشن <i class="fas fa-star"></i> 
+        <i class="fas fa-star"></i> کیت UI فارسی — مجموعه کامل کامپوننت‌های ایرانی <i class="fas fa-star"></i> کاملاً واکنش‌گرا و RTL <i class="fas fa-star"></i> پشتیبانی از تم تاریک و روشن <i class="fas fa-star"></i>
+      </span>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===== Countdown =====
+function updateCountdown() {
+  const end = new Date();
+  end.setDate(end.getDate() + 7);
+  end.setHours(23, 59, 59);
+  
+  function tick() {
+    const now = new Date();
+    const diff = end - now;
+    if (diff <= 0) return;
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+updateCountdown();
+
+// ===== Particles =====
+function createParticles(e) {
+  const container = document.getElementById('particleContainer');
+  const rect = container.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const colors = ['#6c5ce7', '#fd79a8', '#00cec9', '#fdcb6e', '#00b894', '#e17055', '#0984e3'];
+  
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size = Math.random() * 10 + 4;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 120 + 60;
+    const dx = Math.cos(angle) * velocity;
+    const dy = Math.sin(angle) * velocity;
+    
+    particle.style.cssText = `
+      width:${size}px; height:${size}px; background:${color};
+      left:${x}px; top:${y}px;
+      --dx:${dx}px; --dy:${dy}px;
+      animation: particle-fly 1s ease-out forwards;
+    `;
+    container.appendChild(particle);
+    setTimeout(() => particle.remove(), 1000);
+  }
+}
+
+// Add particle fly keyframe
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+  @keyframes particle-fly {
+    0% { transform:translate(0,0) scale(1); opacity:1; }
+    100% { transform:translate(var(--dx), var(--dy)) scale(0); opacity:0; }
+  }
+`;
+document.head.appendChild(styleSheet);
+
+// ===== Nav active state =====
+const secs = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+});
+
+console.log('🇮🇷 کیت UI فارسی — Animations & Motion Effects');
+console.log('✨ ۹ انیمیشن کی‌فریم + ۷ هاورافکت + ۴ ترنزیشن + ۷ لودر + متن متحرک + بلاب + کانفتی');
+</script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2b5d7c30fee97dd',t:'MTc4Njc3MjE5OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
